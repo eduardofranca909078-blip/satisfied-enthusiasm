@@ -1,4 +1,4 @@
---// LOST HUB
+--// LOST HUB - COMPLETO COM GERENCIADOR DE CARGOS
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -24,14 +24,10 @@ end)
 local BOT_TOKEN=""
 local BOT_CANAL=""
 local USAR_BOT=false
--- WEBHOOK PRINCIPAL: Logs automáticos + Keys
 local WEBHOOK="https://discord.com/api/webhooks/1559481604387246170/aAs30L9QQbfX0ZWA92jKpD6PZ_F5IOZT1424WNqaHluyZ-QuNGbbO36pVf-Fe3Ti9Fe4"
--- WEBHOOK DO TERMO: Termo de responsabilidade
 local WEBHOOK_TERMO="https://discord.com/api/webhooks/1559505901507973197/ySCrPBvol1fS3HSf2TNoxLczboSG0PzT1GuW_ZYDs2rBPoMDMMSrfq2Boh5WBlZNkY8X"
--- WEBHOOK DO HUB: Embeds personalizados + Comunicados
 local WEBHOOK_HUB="https://discord.com/api/webhooks/1559521915377553489/hyrbUV39Fey47KJBDDXcTOFFJA78sQaRltvWEv0vYRkXwj1_ZHfOT0DUCuJohf30kGbV"
 --==========================================
---=========== FUNÇÃO EMBED DE TERMO (vai pro TERMO) ===========
 local function enviarTermo(nick,id)
     if WEBHOOK_TERMO==""then return end
     local embedTermo={
@@ -77,7 +73,6 @@ local function enviarTermo(nick,id)
         })
     end)
 end
---=========== FUNÇÃO EMBED PERSONALIZADO (vai pro HUB) ===========
 local function enviarEmbedCustom(titulo,descricao,cor,imagemUrl)
     if WEBHOOK_HUB==""then return end
     local embed={
@@ -100,7 +95,6 @@ local function enviarEmbedCustom(titulo,descricao,cor,imagemUrl)
     end)
     reg("📤 Embed enviado: "..titulo)
 end
---==========================================
 local filaDiscord={}
 local enviandoFila=false
 local function processarFila()
@@ -157,6 +151,8 @@ local ADM={[OID]="PROPRIETÁRIO"}
 local CG=ADM[LP.UserId]or"JOGADOR"
 local AD=CG=="PROPRIETÁRIO"or CG=="ADMIN"
 getgenv().LH_AP={}
+getgenv().LH_CARGOS={}
+getgenv().LH_CARGOS[OID]="PROPRIETÁRIO"
 for _,n in ipairs(WL)do getgenv().LH_AP[n:lower()]=true end
 
 --========= GUI =========
@@ -453,7 +449,8 @@ task.wait(.3)c:Destroy()end)end
 local ro=reg
 reg=function(a)ro(a)
 local tp="info"local al=a:lower()
-if al:find("on")or al:find("aprov")or al:find("aberto")or al:find("entrou")or al:find("gerada")then tp="ok"
+if al:find("cargo")then tp="ok"
+elseif al:find("on")or al:find("aprov")or al:find("aberto")or al:find("entrou")or al:find("gerada")then tp="ok"
 elseif al:find("erro")or al:find("falh")or al:find("sem")then tp="err"
 elseif al:find("off")or al:find("fechou")or al:find("parou")or al:find("minimizou")then tp="warn"end
 toast(a,tp)end
@@ -514,7 +511,6 @@ T:Create(th,TweenInfo.new(.2),{Position=UDim2.new(1,-20,.5,-9)}):Play()
 else T:Create(trk,TweenInfo.new(.2),{BackgroundColor3=Color3.fromRGB(50,55,65)}):Play()
 T:Create(th,TweenInfo.new(.2),{Position=UDim2.new(0,2,.5,-9)}):Play()end
 reg(tx.." "..(a and"ON"or"OFF"))cb(a)end)return h end
-
 local sec={}
 for _,n in ipairs(cs)do local sc=Instance.new("ScrollingFrame",ct)
 sc.Size=UDim2.new(1,0,1,0)sc.BackgroundTransparency=1
@@ -552,8 +548,9 @@ Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)return b end
 local mB2=hB(-170,"−")local pB=hB(-138,"+")
 local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")
 
---===== APROVAÇÕES =====
+--===== APROVAÇÕES + GERENCIADOR DE CARGOS =====
 if AD then
+-- Card Aprovações
 local cA=card("APROVAÇÕES",sec["Adm"],Color3.fromRGB(80,255,140))
 local iA=Instance.new("TextBox",cA)iA.Size=UDim2.new(1,0,0,34)
 iA.BackgroundColor3=Color3.fromRGB(20,24,32)iA.TextColor3=Color3.fromRGB(255,255,255)
@@ -569,6 +566,131 @@ bt(cA,"❌ REPROVAR",function()
 local n=iA.Text:gsub("%s+","")if n==""then return end
 getgenv().LH_AP[n:lower()]=nil reg("Reprovado: "..n)
 iA.Text=""end)
+
+-- Card Gerenciador de Cargos
+local cCargo=card("👑 GERENCIAR CARGOS",sec["Adm"],Color3.fromRGB(255,200,80))
+
+local txtC=Instance.new("TextLabel",cCargo)
+txtC.Size=UDim2.new(1,0,0,28)
+txtC.BackgroundTransparency=1
+txtC.Text="👤 Selecione um jogador na lista lateral\ne escolha o cargo:"
+txtC.TextColor3=Color3.fromRGB(180,190,210)
+txtC.TextSize=9
+txtC.Font=Enum.Font.Gotham
+txtC.TextXAlignment=Enum.TextXAlignment.Left
+txtC.TextWrapped=true
+
+local selCargo=Instance.new("TextLabel",cCargo)
+selCargo.Size=UDim2.new(1,0,0,20)
+selCargo.BackgroundColor3=Color3.fromRGB(20,24,32)
+selCargo.Text="  🎯 Nenhum jogador selecionado"
+selCargo.TextColor3=Color3.fromRGB(255,200,80)
+selCargo.TextSize=10
+selCargo.Font=Enum.Font.GothamBold
+selCargo.TextXAlignment=Enum.TextXAlignment.Left
+Instance.new("UICorner",selCargo).CornerRadius=UDim.new(0,6)
+
+task.spawn(function()
+    while selCargo.Parent do
+        if S.sel then
+            selCargo.Text="  🎯 Selecionado: "..S.sel.Name
+            selCargo.TextColor3=Color3.fromRGB(255,255,255)
+        else
+            selCargo.Text="  🎯 Nenhum jogador selecionado"
+            selCargo.TextColor3=Color3.fromRGB(255,200,80)
+        end
+        task.wait(0.3)
+    end
+end)
+
+local function setCargo(novoCargo)
+    if not S.sel then
+        reg("❌ Cargo: nenhum selecionado")
+        return
+    end
+    local alvo=S.sel
+    local id=tostring(alvo.UserId)
+    local nome=alvo.Name
+    if not getgenv().LH_CARGOS then getgenv().LH_CARGOS={} end
+    getgenv().LH_CARGOS[id]=novoCargo
+    getgenv().LH_CARGOS[nome]=novoCargo
+    reg("👑 Cargo: "..nome.." → "..novoCargo)
+    if WEBHOOK~="" then
+        task.spawn(function()
+            local embed={
+                title="👑 CARGO ATUALIZADO",
+                description=
+                    "**Jogador:** `"..nome.."`\n"..
+                    "**ID:** `"..id.."`\n"..
+                    "**Novo Cargo:** `"..novoCargo.."`\n"..
+                    "**Definido por:** `"..LP.Name.."`",
+                color=16766720,
+                footer={text="LOST HUB • "..os.date("%d/%m/%Y %H:%M:%S")},
+                timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")
+            }
+            pcall(function()
+                game:GetService("HttpService"):RequestAsync({
+                    Url=WEBHOOK,Method="POST",
+                    Headers={["Content-Type"]="application/json"},
+                    Body=game:GetService("HttpService"):JSONEncode({
+                        username="LOST HUB",
+                        embeds={embed}
+                    })
+                })
+            end)
+        end)
+    end
+end
+
+local cargos={
+    {n="👑 PROPRIETÁRIO", c=Color3.fromRGB(255,200,50), t="PROPRIETÁRIO"},
+    {n="🛡️ ADMIN", c=Color3.fromRGB(255,80,80), t="ADMIN"},
+    {n="⚔️ MOD", c=Color3.fromRGB(100,150,255), t="MOD"},
+    {n="⭐ VIP", c=Color3.fromRGB(180,100,255), t="VIP"},
+    {n="👤 JOGADOR", c=Color3.fromRGB(150,160,180), t="JOGADOR"},
+}
+for _,cargo in ipairs(cargos)do
+    local btn=Instance.new("TextButton",cCargo)
+    btn.Size=UDim2.new(1,0,0,32)
+    btn.BackgroundColor3=Color3.fromRGB(28,33,44)
+    btn.Text="  "..cargo.n
+    btn.TextColor3=cargo.c
+    btn.TextSize=10
+    btn.Font=Enum.Font.GothamBold
+    btn.TextXAlignment=Enum.TextXAlignment.Left
+    btn.AutoButtonColor=false
+    Instance.new("UICorner",btn).CornerRadius=UDim.new(0,6)
+    btn.MouseEnter:Connect(function()
+        T:Create(btn,TweenInfo.new(0.15),{BackgroundColor3=cargo.c}):Play()
+        T:Create(btn,TweenInfo.new(0.15),{TextColor3=Color3.fromRGB(15,18,24)}):Play()
+    end)
+    btn.MouseLeave:Connect(function()
+        T:Create(btn,TweenInfo.new(0.15),{BackgroundColor3=Color3.fromRGB(28,33,44)}):Play()
+        T:Create(btn,TweenInfo.new(0.15),{TextColor3=cargo.c}):Play()
+    end)
+    btn.MouseButton1Click:Connect(function()
+        setCargo(cargo.t)
+    end)
+end
+
+local btnRem=Instance.new("TextButton",cCargo)
+btnRem.Size=UDim2.new(1,0,0,28)
+btnRem.BackgroundColor3=Color3.fromRGB(60,30,40)
+btnRem.Text="  🗑️  REMOVER CARGO"
+btnRem.TextColor3=Color3.fromRGB(255,150,150)
+btnRem.TextSize=10
+btnRem.Font=Enum.Font.GothamBold
+btnRem.TextXAlignment=Enum.TextXAlignment.Left
+btnRem.AutoButtonColor=false
+Instance.new("UICorner",btnRem).CornerRadius=UDim.new(0,6)
+btnRem.MouseButton1Click:Connect(function()
+    if not S.sel then reg("❌ Nenhum selecionado")return end
+    if getgenv().LH_CARGOS then
+        getgenv().LH_CARGOS[tostring(S.sel.UserId)]=nil
+        getgenv().LH_CARGOS[S.sel.Name]=nil
+    end
+    reg("🗑️ Cargo removido: "..S.sel.Name)
+end)
 end
 
 --===== GERADOR DE KEYS =====
@@ -859,9 +981,8 @@ T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,t.w,0,t.h)}):Play()reg("Tam: "..t
 bt(cI2,"📌 Centralizar",function()local vp=workspace.CurrentCamera.ViewportSize
 T:Create(w,TweenInfo.new(.2),{Position=UDim2.new(0,vp.X/2-w.Size.X.Offset/2,0,vp.Y/2-w.Size.Y.Offset/2)}):Play()reg("Central")end)
 
---===== EMBEDS PERSONALIZADOS (vão pro HUB) =====
+--===== EMBEDS PERSONALIZADOS =====
 local cEmb=card("EMBEDS DISCORD",sec["Config"],Color3.fromRGB(114,137,218))
-
 local embTitulo=Instance.new("TextBox",cEmb)
 embTitulo.Size=UDim2.new(1,0,0,32)
 embTitulo.BackgroundColor3=Color3.fromRGB(20,24,32)
@@ -872,7 +993,6 @@ embTitulo.Text=""
 embTitulo.TextSize=11 embTitulo.Font=Enum.Font.GothamBold
 embTitulo.ClearTextOnFocus=false
 Instance.new("UICorner",embTitulo).CornerRadius=UDim.new(0,6)
-
 local embDesc=Instance.new("TextBox",cEmb)
 embDesc.Size=UDim2.new(1,0,0,60)
 embDesc.BackgroundColor3=Color3.fromRGB(20,24,32)
@@ -884,7 +1004,6 @@ embDesc.TextSize=11 embDesc.Font=Enum.Font.Gotham
 embDesc.ClearTextOnFocus=false
 embDesc.TextWrapped=true embDesc.MultiLine=true
 Instance.new("UICorner",embDesc).CornerRadius=UDim.new(0,6)
-
 local embImg=Instance.new("TextBox",cEmb)
 embImg.Size=UDim2.new(1,0,0,32)
 embImg.BackgroundColor3=Color3.fromRGB(20,24,32)
@@ -895,7 +1014,6 @@ embImg.Text=""
 embImg.TextSize=11 embImg.Font=Enum.Font.Gotham
 embImg.ClearTextOnFocus=false
 Instance.new("UICorner",embImg).CornerRadius=UDim.new(0,6)
-
 local embCores={
     {n="🔴 Vermelho",c=16711680},
     {n="🟢 Verde",c=65280},
@@ -912,7 +1030,6 @@ local embCorBtn=bt(cEmb,"🎨 Cor: 🔵 Azul",function()
     if embCorBtn then embCorBtn.Text="🎨 Cor: "..cor.n end
     reg("Cor do embed: "..cor.n)
 end,true)
-
 bt(cEmb,"📤 ENVIAR EMBED",function()
     local tit=embTitulo.Text
     local desc=embDesc.Text
@@ -924,7 +1041,6 @@ bt(cEmb,"📤 ENVIAR EMBED",function()
         enviarEmbedCustom(tit,desc,cor,img)
     end)
 end)
-
 bt(cEmb,"📢 Comunicado Padrão",function()
     local desc=
         "📌 **ATENÇÃO A TODOS OS USUÁRIOS!**\n\n"..
@@ -944,7 +1060,6 @@ bt(cEmb,"📢 Comunicado Padrão",function()
         enviarEmbedCustom("📢 COMUNICADO OFICIAL",desc,3447003,"")
     end)
 end,true)
-
 bt(cEmb,"🧪 Teste Rápido",function()
     task.spawn(function()
         enviarEmbedCustom(
@@ -1044,8 +1159,6 @@ end)
 flt.MouseButton1Click:Connect(function()
     w.Visible=true flt.Visible=false
 end)
-
---===== BOTÕES DE TAMANHO (+ e −) =====
 mB2.MouseButton1Click:Connect(function()
     local tamAtual=w.Size.X.Offset
     local novoTam=math.max(400,tamAtual-50)
@@ -1068,3 +1181,4 @@ pB.MouseButton1Click:Connect(function()
 end)
 
 sel("Config")
+print("[LOST HUB] Carregado com sucesso! Gerenciador de Cargos ativo.")
