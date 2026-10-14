@@ -1,4 +1,4 @@
---// LOST HUB - COMPLETO
+--// LOST HUB - COMPLETO COM INTRO CORRIGIDA
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -52,186 +52,90 @@ w.Position=UDim2.new(.5,-350,.5,-220)w.BackgroundColor3=Color3.fromRGB(8,10,14)
 w.BorderSizePixel=0 Instance.new("UICorner",w).CornerRadius=UDim.new(0,10)w.Visible=false
 local wg=Instance.new("UIGradient",w)wg.Color=ColorSequence.new(Color3.fromRGB(30,35,45),Color3.fromRGB(15,18,24))wg.Rotation=90
 
---========= INTRO =========
+--========= INTRO CORRIGIDA =========
 local bg,fg,fStroke,glow,gl,lgo,sub,cd,cStroke,tt,inp,keyInp,keyBtn,sts,closeBtn
 local function abrirHub()
     if bg then
         T:Create(bg,TweenInfo.new(.4),{BackgroundTransparency=1}):Play()
         T:Create(fg,TweenInfo.new(.4),{BackgroundTransparency=1}):Play()
-        task.wait(.5)bg.Visible=false fg.Visible=false
+        task.wait(.5) bg.Visible=false fg.Visible=false
     end
     w.Visible=true
     reg("✅ Painel ABERTO por "..LP.Name)
 end
 if not AD then
-    bg=Instance.new("Frame",gui)bg.Size=UDim2.new(1,0,1,0)
-    bg.BackgroundColor3=Color3.fromRGB(0,0,0)bg.BackgroundTransparency=0.6 bg.ZIndex=50 bg.BorderSizePixel=0
-    fg=Instance.new("Frame",gui)fg.Size=UDim2.new(0,780,0,400)
-    fg.Position=UDim2.new(0.5,-390,0.5,-200)fg.BackgroundColor3=Color3.fromRGB(15,18,28)
-    fg.BackgroundTransparency=0 fg.ZIndex=51 fg.BorderSizePixel=0
+    bg=Instance.new("Frame",gui) bg.Size=UDim2.new(1,0,1,0) bg.BackgroundColor3=Color3.fromRGB(0,0,0) bg.BackgroundTransparency=0.6 bg.ZIndex=50 bg.BorderSizePixel=0
+    fg=Instance.new("Frame",gui) fg.Size=UDim2.new(0,780,0,400) fg.Position=UDim2.new(0.5,-390,0.5,-200) fg.BackgroundColor3=Color3.fromRGB(15,18,28) fg.BackgroundTransparency=0 fg.ZIndex=51 fg.BorderSizePixel=0
     Instance.new("UICorner",fg).CornerRadius=UDim.new(0,22)
-    fStroke=Instance.new("UIStroke",fg)fStroke.Color=Color3.fromRGB(120,180,255)
-    fStroke.Thickness=2 fStroke.Transparency=0.15
+    fStroke=Instance.new("UIStroke",fg) fStroke.Color=Color3.fromRGB(120,180,255) fStroke.Thickness=2 fStroke.Transparency=0.15
     local gradStroke=Instance.new("UIGradient",fStroke)
-    gradStroke.Color=ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(100,160,255)),ColorSequenceKeypoint.new(0.5,Color3.fromRGB(200,120,255)),ColorSequenceKeypoint.new(1,Color3.fromRGB(100,160,255))}
-    gradStroke.Rotation=45
+    gradStroke.Color=ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(100,160,255)),ColorSequenceKeypoint.new(0.5,Color3.fromRGB(200,120,255)),ColorSequenceKeypoint.new(1,Color3.fromRGB(100,160,255))} gradStroke.Rotation=45
     local fgGrad=Instance.new("UIGradient",fg)
-    fgGrad.Color=ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(22,28,45)),ColorSequenceKeypoint.new(1,Color3.fromRGB(12,15,24))}
-    fgGrad.Rotation=135
-    glow=Instance.new("ImageLabel",fg)glow.Size=UDim2.new(0,400,0,400)
-    glow.Position=UDim2.new(0,-150,0.5,-200)glow.BackgroundTransparency=1
-    glow.Image="rbxassetid://5028857084"glow.ImageColor3=Color3.fromRGB(100,160,255)
-    glow.ImageTransparency=0.75 glow.ZIndex=51 glow.ScaleType=Enum.ScaleType.Slice
-    local ladoEsq=Instance.new("Frame",fg)ladoEsq.Size=UDim2.new(0,300,1,0)
-    ladoEsq.Position=UDim2.new(0,0,0,0)ladoEsq.BackgroundColor3=Color3.fromRGB(18,24,38)
-    ladoEsq.BackgroundTransparency=0 ladoEsq.ZIndex=52 ladoEsq.BorderSizePixel=0
+    fgGrad.Color=ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(22,28,45)),ColorSequenceKeypoint.new(1,Color3.fromRGB(12,15,24))} fgGrad.Rotation=135
+    glow=Instance.new("ImageLabel",fg) glow.Size=UDim2.new(0,400,0,400) glow.Position=UDim2.new(0,-150,0.5,-200) glow.BackgroundTransparency=1 glow.Image="rbxassetid://5028857084" glow.ImageColor3=Color3.fromRGB(100,160,255) glow.ImageTransparency=0.75 glow.ZIndex=51 glow.ScaleType=Enum.ScaleType.Slice
+    local ladoEsq=Instance.new("Frame",fg) ladoEsq.Size=UDim2.new(0,300,1,0) ladoEsq.Position=UDim2.new(0,0,0,0) ladoEsq.BackgroundColor3=Color3.fromRGB(18,24,38) ladoEsq.BackgroundTransparency=0 ladoEsq.ZIndex=52 ladoEsq.BorderSizePixel=0
     Instance.new("UICorner",ladoEsq).CornerRadius=UDim.new(0,22)
-    local divEsq=Instance.new("Frame",ladoEsq)divEsq.Size=UDim2.new(0,1,1,-40)
-    divEsq.Position=UDim2.new(1,-1,0,20)divEsq.BackgroundColor3=Color3.fromRGB(60,80,130)
-    divEsq.BackgroundTransparency=0.6 divEsq.BorderSizePixel=0
-    local logoFrame=Instance.new("Frame",ladoEsq)logoFrame.Size=UDim2.new(0,110,0,110)
-    logoFrame.Position=UDim2.new(0.5,-55,0,70)logoFrame.BackgroundColor3=Color3.fromRGB(25,32,50)
-    logoFrame.BackgroundTransparency=0 logoFrame.ZIndex=53 logoFrame.BorderSizePixel=0
+    local divEsq=Instance.new("Frame",ladoEsq) divEsq.Size=UDim2.new(0,1,1,-40) divEsq.Position=UDim2.new(1,-1,0,20) divEsq.BackgroundColor3=Color3.fromRGB(60,80,130) divEsq.BackgroundTransparency=0.6 divEsq.BorderSizePixel=0
+    local logoFrame=Instance.new("Frame",ladoEsq) logoFrame.Size=UDim2.new(0,110,0,110) logoFrame.Position=UDim2.new(0.5,-55,0,70) logoFrame.BackgroundColor3=Color3.fromRGB(25,32,50) logoFrame.BackgroundTransparency=0 logoFrame.ZIndex=53 logoFrame.BorderSizePixel=0
     Instance.new("UICorner",logoFrame).CornerRadius=UDim.new(1,0)
-    local logoStroke=Instance.new("UIStroke",logoFrame)logoStroke.Color=Color3.fromRGB(120,180,255)
-    logoStroke.Thickness=2 logoStroke.Transparency=0.3
-    gl=Instance.new("ImageLabel",logoFrame)gl.Size=UDim2.new(1,-15,1,-15)
-    gl.Position=UDim2.new(0,7,0,7)gl.BackgroundTransparency=1
-    gl.Image="rbxassetid://5028857084"gl.ImageColor3=Color3.fromRGB(140,190,255)
-    gl.ImageTransparency=0.1 gl.ScaleType=Enum.ScaleType.Slice gl.ZIndex=54
-    lgo=Instance.new("TextLabel",ladoEsq)lgo.Size=UDim2.new(1,0,0,42)
-    lgo.Position=UDim2.new(0,0,0,200)lgo.BackgroundTransparency=1
-    lgo.Text="LOST HUB"lgo.TextColor3=Color3.fromRGB(255,255,255)
-    lgo.TextSize=32 lgo.Font=Enum.Font.GothamBlack lgo.TextTransparency=0 lgo.ZIndex=52
-    sub=Instance.new("TextLabel",ladoEsq)sub.Size=UDim2.new(1,0,0,16)
-    sub.Position=UDim2.new(0,0,0,245)sub.BackgroundTransparency=1
-    sub.Text="─ ACESSO AO SISTEMA ─"sub.TextColor3=Color3.fromRGB(120,140,180)
-    sub.TextSize=10 sub.Font=Enum.Font.Gotham sub.TextTransparency=0 sub.ZIndex=52
-    local versao=Instance.new("TextLabel",ladoEsq)versao.Size=UDim2.new(1,0,0,16)
-    versao.Position=UDim2.new(0,0,1,-40)versao.BackgroundTransparency=1
-    versao.Text="v1.0 • by LOST"versao.TextColor3=Color3.fromRGB(80,95,130)
-    versao.TextSize=9 versao.Font=Enum.Font.Gotham versao.TextTransparency=0 versao.ZIndex=52
-    local ladoDir=Instance.new("Frame",fg)ladoDir.Size=UDim2.new(1,-300,1,0)
-    ladoDir.Position=UDim2.new(0,300,0,0)ladoDir.BackgroundTransparency=1 ladoDir.ZIndex=52
-    cd=Instance.new("Frame",ladoDir)cd.Size=UDim2.new(1,-60,0,300)
-    cd.Position=UDim2.new(0,30,0.5,-150)cd.BackgroundColor3=Color3.fromRGB(12,16,26)
-    cd.BackgroundTransparency=0 cd.ZIndex=53 cd.BorderSizePixel=0
+    local logoStroke=Instance.new("UIStroke",logoFrame) logoStroke.Color=Color3.fromRGB(120,180,255) logoStroke.Thickness=2 logoStroke.Transparency=0.3
+    gl=Instance.new("ImageLabel",logoFrame) gl.Size=UDim2.new(1,-15,1,-15) gl.Position=UDim2.new(0,7,0,7) gl.BackgroundTransparency=1 gl.Image="rbxassetid://5028857084" gl.ImageColor3=Color3.fromRGB(140,190,255) gl.ImageTransparency=0.1 gl.ScaleType=Enum.ScaleType.Slice gl.ZIndex=54
+    lgo=Instance.new("TextLabel",ladoEsq) lgo.Size=UDim2.new(1,0,0,42) lgo.Position=UDim2.new(0,0,0,200) lgo.BackgroundTransparency=1 lgo.Text="LOST HUB" lgo.TextColor3=Color3.fromRGB(255,255,255) lgo.TextSize=32 lgo.Font=Enum.Font.GothamBlack lgo.TextTransparency=0 lgo.ZIndex=52
+    sub=Instance.new("TextLabel",ladoEsq) sub.Size=UDim2.new(1,0,0,16) sub.Position=UDim2.new(0,0,0,245) sub.BackgroundTransparency=1 sub.Text="─ ACESSO AO SISTEMA ─" sub.TextColor3=Color3.fromRGB(120,140,180) sub.TextSize=10 sub.Font=Enum.Font.Gotham sub.TextTransparency=0 sub.ZIndex=52
+    local versao=Instance.new("TextLabel",ladoEsq) versao.Size=UDim2.new(1,0,0,16) versao.Position=UDim2.new(0,0,1,-40) versao.BackgroundTransparency=1 versao.Text="v1.0 • by LOST" versao.TextColor3=Color3.fromRGB(80,95,130) versao.TextSize=9 versao.Font=Enum.Font.Gotham versao.TextTransparency=0 versao.ZIndex=52
+    local ladoDir=Instance.new("Frame",fg) ladoDir.Size=UDim2.new(1,-300,1,0) ladoDir.Position=UDim2.new(0,300,0,0) ladoDir.BackgroundTransparency=1 ladoDir.ZIndex=52
+    cd=Instance.new("Frame",ladoDir) cd.Size=UDim2.new(1,-60,0,300) cd.Position=UDim2.new(0,30,0.5,-150) cd.BackgroundColor3=Color3.fromRGB(12,16,26) cd.BackgroundTransparency=0 cd.ZIndex=53 cd.BorderSizePixel=0
     Instance.new("UICorner",cd).CornerRadius=UDim.new(0,16)
-    local cdStroke=Instance.new("UIStroke",cd)cdStroke.Color=Color3.fromRGB(80,120,200)
-    cdStroke.Thickness=1 cdStroke.Transparency=0.5
-    tt=Instance.new("TextLabel",cd)tt.Size=UDim2.new(1,0,0,20)
-    tt.Position=UDim2.new(0,0,0,14)tt.BackgroundTransparency=1
-    tt.Text="🔐  ACESSO RESTRITO"tt.TextColor3=Color3.fromRGB(200,215,240)
-    tt.TextSize=12 tt.Font=Enum.Font.GothamBold tt.TextTransparency=0
-    local nickLabel=Instance.new("TextLabel",cd)nickLabel.Size=UDim2.new(1,-20,0,14)
-    nickLabel.Position=UDim2.new(0,10,0,46)nickLabel.BackgroundTransparency=1
-    nickLabel.Text="👤  NICK DO JOGADOR"nickLabel.TextColor3=Color3.fromRGB(150,170,210)
-    nickLabel.TextSize=9 nickLabel.Font=Enum.Font.GothamBold
-    nickLabel.TextXAlignment=Enum.TextXAlignment.Left nickLabel.TextTransparency=0
-    inp=Instance.new("TextBox",cd)inp.Size=UDim2.new(1,-20,0,38)
-    inp.Position=UDim2.new(0,10,0,64)inp.BackgroundColor3=Color3.fromRGB(8,12,20)
-    inp.TextColor3=Color3.fromRGB(255,255,255)inp.PlaceholderText="Digite seu nick..."
-    inp.PlaceholderColor3=Color3.fromRGB(90,100,125)inp.Text=LP.Name
-    inp.TextSize=12 inp.Font=Enum.Font.GothamBold inp.BorderSizePixel=0
-    inp.ClearTextOnFocus=false inp.BackgroundTransparency=0
-    inp.TextXAlignment=Enum.TextXAlignment.Left
+    local cdStroke=Instance.new("UIStroke",cd) cdStroke.Color=Color3.fromRGB(80,120,200) cdStroke.Thickness=1 cdStroke.Transparency=0.5
+    tt=Instance.new("TextLabel",cd) tt.Size=UDim2.new(1,0,0,20) tt.Position=UDim2.new(0,0,0,14) tt.BackgroundTransparency=1 tt.Text="🔐  ACESSO RESTRITO" tt.TextColor3=Color3.fromRGB(200,215,240) tt.TextSize=12 tt.Font=Enum.Font.GothamBold tt.TextTransparency=0
+    local nickLabel=Instance.new("TextLabel",cd) nickLabel.Size=UDim2.new(1,-20,0,14) nickLabel.Position=UDim2.new(0,10,0,46) nickLabel.BackgroundTransparency=1 nickLabel.Text="👤  NICK DO JOGADOR" nickLabel.TextColor3=Color3.fromRGB(150,170,210) nickLabel.TextSize=9 nickLabel.Font=Enum.Font.GothamBold nickLabel.TextXAlignment=Enum.TextXAlignment.Left nickLabel.TextTransparency=0
+    inp=Instance.new("TextBox",cd) inp.Size=UDim2.new(1,-20,0,38) inp.Position=UDim2.new(0,10,0,64) inp.BackgroundColor3=Color3.fromRGB(8,12,20) inp.TextColor3=Color3.fromRGB(255,255,255) inp.PlaceholderText="Digite seu nick..." inp.PlaceholderColor3=Color3.fromRGB(90,100,125) inp.Text=LP.Name inp.TextSize=12 inp.Font=Enum.Font.GothamBold inp.BorderSizePixel=0 inp.ClearTextOnFocus=false inp.BackgroundTransparency=0 inp.TextXAlignment=Enum.TextXAlignment.Left
     Instance.new("UICorner",inp).CornerRadius=UDim.new(0,10)
-    local inpPad=Instance.new("UIPadding",inp)inpPad.PaddingLeft=UDim.new(0,12)inpPad.PaddingRight=UDim.new(0,12)
-    local inpStroke=Instance.new("UIStroke",inp)inpStroke.Color=Color3.fromRGB(60,80,130)
-    inpStroke.Thickness=1.5 inpStroke.Transparency=0.4
-    local keyLabel=Instance.new("TextLabel",cd)keyLabel.Size=UDim2.new(1,-20,0,14)
-    keyLabel.Position=UDim2.new(0,10,0,112)keyLabel.BackgroundTransparency=1
-    keyLabel.Text="🔑  CHAVE DE ACESSO"keyLabel.TextColor3=Color3.fromRGB(255,200,80)
-    keyLabel.TextSize=9 keyLabel.Font=Enum.Font.GothamBold
-    keyLabel.TextXAlignment=Enum.TextXAlignment.Left keyLabel.TextTransparency=0
-    keyInp=Instance.new("TextBox",cd)keyInp.Size=UDim2.new(1,-20,0,38)
-    keyInp.Position=UDim2.new(0,10,0,130)keyInp.BackgroundColor3=Color3.fromRGB(8,12,20)
-    keyInp.TextColor3=Color3.fromRGB(255,220,100)keyInp.PlaceholderText="Digite sua KEY..."
-    keyInp.PlaceholderColor3=Color3.fromRGB(90,100,125)keyInp.Text=""
-    keyInp.TextSize=12 keyInp.Font=Enum.Font.GothamBold keyInp.BorderSizePixel=0
-    keyInp.ClearTextOnFocus=false keyInp.BackgroundTransparency=0
-    keyInp.TextXAlignment=Enum.TextXAlignment.Left
+    local inpPad=Instance.new("UIPadding",inp) inpPad.PaddingLeft=UDim.new(0,12) inpPad.PaddingRight=UDim.new(0,12)
+    local inpStroke=Instance.new("UIStroke",inp) inpStroke.Color=Color3.fromRGB(60,80,130) inpStroke.Thickness=1.5 inpStroke.Transparency=0.4
+    local keyLabel=Instance.new("TextLabel",cd) keyLabel.Size=UDim2.new(1,-20,0,14) keyLabel.Position=UDim2.new(0,10,0,112) keyLabel.BackgroundTransparency=1 keyLabel.Text="🔑  CHAVE DE ACESSO" keyLabel.TextColor3=Color3.fromRGB(255,200,80) keyLabel.TextSize=9 keyLabel.Font=Enum.Font.GothamBold keyLabel.TextXAlignment=Enum.TextXAlignment.Left keyLabel.TextTransparency=0
+    keyInp=Instance.new("TextBox",cd) keyInp.Size=UDim2.new(1,-20,0,38) keyInp.Position=UDim2.new(0,10,0,130) keyInp.BackgroundColor3=Color3.fromRGB(8,12,20) keyInp.TextColor3=Color3.fromRGB(255,220,100) keyInp.PlaceholderText="Digite sua KEY..." keyInp.PlaceholderColor3=Color3.fromRGB(90,100,125) keyInp.Text="" keyInp.TextSize=12 keyInp.Font=Enum.Font.GothamBold keyInp.BorderSizePixel=0 keyInp.ClearTextOnFocus=false keyInp.BackgroundTransparency=0 keyInp.TextXAlignment=Enum.TextXAlignment.Left
     Instance.new("UICorner",keyInp).CornerRadius=UDim.new(0,10)
-    local keyPad=Instance.new("UIPadding",keyInp)keyPad.PaddingLeft=UDim.new(0,12)keyPad.PaddingRight=UDim.new(0,12)
-    local keyStroke=Instance.new("UIStroke",keyInp)keyStroke.Color=Color3.fromRGB(150,120,40)
-    keyStroke.Thickness=1.5 keyStroke.Transparency=0.4
-    keyBtn=Instance.new("TextButton",cd)keyBtn.Size=UDim2.new(1,-20,0,42)
-    keyBtn.Position=UDim2.new(0,10,0,180)keyBtn.BackgroundColor3=Color3.fromRGB(60,180,100)
-    keyBtn.Text="✅   VALIDAR KEY"keyBtn.TextColor3=Color3.fromRGB(255,255,255)
-    keyBtn.TextSize=12 keyBtn.Font=Enum.Font.GothamBold keyBtn.BackgroundTransparency=0
-    keyBtn.AutoButtonColor=false keyBtn.BorderSizePixel=0
+    local keyPad=Instance.new("UIPadding",keyInp) keyPad.PaddingLeft=UDim.new(0,12) keyPad.PaddingRight=UDim.new(0,12)
+    local keyStroke=Instance.new("UIStroke",keyInp) keyStroke.Color=Color3.fromRGB(150,120,40) keyStroke.Thickness=1.5 keyStroke.Transparency=0.4
+    keyBtn=Instance.new("TextButton",cd) keyBtn.Size=UDim2.new(1,-20,0,42) keyBtn.Position=UDim2.new(0,10,0,180) keyBtn.BackgroundColor3=Color3.fromRGB(60,180,100) keyBtn.Text="✅   VALIDAR KEY" keyBtn.TextColor3=Color3.fromRGB(255,255,255) keyBtn.TextSize=12 keyBtn.Font=Enum.Font.GothamBold keyBtn.BackgroundTransparency=0 keyBtn.AutoButtonColor=false keyBtn.BorderSizePixel=0
     Instance.new("UICorner",keyBtn).CornerRadius=UDim.new(0,10)
-    local keyBtnGrad=Instance.new("UIGradient",keyBtn)
-    keyBtnGrad.Color=ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(60,180,100)),ColorSequenceKeypoint.new(1,Color3.fromRGB(80,220,130))}
-    keyBtnGrad.Rotation=90
-    bt1=Instance.new("TextButton",cd)bt1.Size=UDim2.new(1,-20,0,36)
-    bt1.Position=UDim2.new(0,10,0,230)bt1.BackgroundColor3=Color3.fromRGB(40,70,140)
-    bt1.Text="📨   SOLICITAR ACESSO"bt1.TextColor3=Color3.fromRGB(255,255,255)
-    bt1.TextSize=11 bt1.Font=Enum.Font.GothamBold bt1.BackgroundTransparency=0
-    bt1.AutoButtonColor=false bt1.BorderSizePixel=0
+    local keyBtnGrad=Instance.new("UIGradient",keyBtn) keyBtnGrad.Color=ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(60,180,100)),ColorSequenceKeypoint.new(1,Color3.fromRGB(80,220,130))} keyBtnGrad.Rotation=90
+    bt1=Instance.new("TextButton",cd) bt1.Size=UDim2.new(1,-20,0,36) bt1.Position=UDim2.new(0,10,0,230) bt1.BackgroundColor3=Color3.fromRGB(40,70,140) bt1.Text="📨   SOLICITAR ACESSO" bt1.TextColor3=Color3.fromRGB(255,255,255) bt1.TextSize=11 bt1.Font=Enum.Font.GothamBold bt1.BackgroundTransparency=0 bt1.AutoButtonColor=false bt1.BorderSizePixel=0
     Instance.new("UICorner",bt1).CornerRadius=UDim.new(0,10)
-    sts=Instance.new("TextLabel",ladoDir)sts.Size=UDim2.new(1,0,0,18)
-    sts.Position=UDim2.new(0,0,1,-30)sts.BackgroundTransparency=1
-    sts.Text=""sts.TextColor3=Color3.fromRGB(255,200,80)
-    sts.TextSize=10 sts.Font=Enum.Font.GothamBold sts.TextTransparency=0 sts.ZIndex=54
-    closeBtn=Instance.new("TextButton",fg)closeBtn.Size=UDim2.new(0,32,0,32)
-    closeBtn.Position=UDim2.new(1,-44,0,16)closeBtn.BackgroundColor3=Color3.fromRGB(60,30,40)
-    closeBtn.Text="✕"closeBtn.TextColor3=Color3.fromRGB(255,130,130)closeBtn.TextSize=16
-    closeBtn.Font=Enum.Font.GothamBold closeBtn.BorderSizePixel=0 closeBtn.AutoButtonColor=false
-    closeBtn.BackgroundTransparency=0 closeBtn.TextTransparency=0 closeBtn.ZIndex=55
+    sts=Instance.new("TextLabel",ladoDir) sts.Size=UDim2.new(1,0,0,18) sts.Position=UDim2.new(0,0,1,-30) sts.BackgroundTransparency=1 sts.Text="" sts.TextColor3=Color3.fromRGB(255,200,80) sts.TextSize=10 sts.Font=Enum.Font.GothamBold sts.TextTransparency=0 sts.ZIndex=54
+    closeBtn=Instance.new("TextButton",fg) closeBtn.Size=UDim2.new(0,32,0,32) closeBtn.Position=UDim2.new(1,-44,0,16) closeBtn.BackgroundColor3=Color3.fromRGB(60,30,40) closeBtn.Text="✕" closeBtn.TextColor3=Color3.fromRGB(255,130,130) closeBtn.TextSize=16 closeBtn.Font=Enum.Font.GothamBold closeBtn.BorderSizePixel=0 closeBtn.AutoButtonColor=false closeBtn.BackgroundTransparency=0 closeBtn.TextTransparency=0 closeBtn.ZIndex=55
     Instance.new("UICorner",closeBtn).CornerRadius=UDim.new(0,10)
-    fg.Size=UDim2.new(0,600,0,300)fg.Position=UDim2.new(0.5,-300,0.5,-150)
+    fg.Size=UDim2.new(0,600,0,300) fg.Position=UDim2.new(0.5,-300,0.5,-150)
     T:Create(fg,TweenInfo.new(.6,EasingStyle.Quint,Enum.EasingDirection.Out),{Size=UDim2.new(0,780,0,400),Position=UDim2.new(0.5,-390,0.5,-200)}):Play()
-    task.spawn(function()while glow.Parent do
-        T:Create(glow,TweenInfo.new(1.5),{ImageTransparency=0.6}):Play()
-        task.wait(1.5)
-        T:Create(glow,TweenInfo.new(1.5),{ImageTransparency=0.8}):Play()
-        task.wait(1.5)end end)
-    task.spawn(function()while fStroke.Parent do
-        T:Create(gradStroke,TweenInfo.new(3),{Rotation=45+360}):Play()
-        task.wait(3)end end)
-    local function addHover(btn,cn,ch)
-        btn.MouseEnter:Connect(function()T:Create(btn,TweenInfo.new(.15),{BackgroundColor3=ch}):Play()end)
-        btn.MouseLeave:Connect(function()T:Create(btn,TweenInfo.new(.15),{BackgroundColor3=cn}):Play()end)
-    end
-    addHover(keyBtn,Color3.fromRGB(60,180,100),Color3.fromRGB(80,220,130))
-    addHover(bt1,Color3.fromRGB(40,70,140),Color3.fromRGB(70,110,200))
-    closeBtn.MouseEnter:Connect(function()T:Create(closeBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(200,50,70),TextColor3=Color3.fromRGB(255,255,255)}):Play()end)
-    closeBtn.MouseLeave:Connect(function()T:Create(closeBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(60,30,40),TextColor3=Color3.fromRGB(255,130,130)}):Play()end)
-    inp.Focused:Connect(function()T:Create(inpStroke,TweenInfo.new(.2),{Color=Color3.fromRGB(120,180,255),Transparency=0}):Play()end)
-    inp.FocusLost:Connect(function()T:Create(inpStroke,TweenInfo.new(.2),{Color=Color3.fromRGB(60,80,130),Transparency=0.4}):Play()end)
-    keyInp.Focused:Connect(function()T:Create(keyStroke,TweenInfo.new(.2),{Color=Color3.fromRGB(255,200,80),Transparency=0}):Play()end)
-    keyInp.FocusLost:Connect(function()T:Create(keyStroke,TweenInfo.new(.2),{Color=Color3.fromRGB(150,120,40),Transparency=0.4}):Play()end)
-    closeBtn.MouseButton1Click:Connect(function()reg("❌ Fechou a intro")gui:Destroy()end)
+    task.spawn(function() while glow.Parent do T:Create(glow,TweenInfo.new(1.5),{ImageTransparency=0.6}):Play() task.wait(1.5) T:Create(glow,TweenInfo.new(1.5),{ImageTransparency=0.8}):Play() task.wait(1.5) end end)
+    task.spawn(function() while fStroke.Parent do T:Create(gradStroke,TweenInfo.new(3),{Rotation=45+360}):Play() task.wait(3) end end)
+    keyBtn.MouseEnter:Connect(function() T:Create(keyBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(80,220,130)}):Play() end)
+    keyBtn.MouseLeave:Connect(function() T:Create(keyBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(60,180,100)}):Play() end)
+    bt1.MouseEnter:Connect(function() T:Create(bt1,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(70,110,200)}):Play() end)
+    bt1.MouseLeave:Connect(function() T:Create(bt1,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(40,70,140)}):Play() end)
+    closeBtn.MouseEnter:Connect(function() T:Create(closeBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(200,50,70),TextColor3=Color3.fromRGB(255,255,255)}):Play() end)
+    closeBtn.MouseLeave:Connect(function() T:Create(closeBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(60,30,40),TextColor3=Color3.fromRGB(255,130,130)}):Play() end)
+    closeBtn.MouseButton1Click:Connect(function() reg("❌ Fechou a intro") gui:Destroy() end)
     keyBtn.MouseButton1Click:Connect(function()
         local k=keyInp.Text:gsub("%s+","")
-        if k==""then sts.Text="❌ Digite uma KEY!"sts.TextColor3=Color3.fromRGB(255,80,80)return end
-        if KEYS_VALIDAS[k]then
-            sts.Text="✅ KEY VÁLIDA! Entrando..."sts.TextColor3=Color3.fromRGB(80,255,140)
-            reg("🔑 Key válida usada: "..k)
-            task.wait(.8)abrirHub()
+        if k=="" then sts.Text="❌ Digite uma KEY!" sts.TextColor3=Color3.fromRGB(255,80,80) return end
+        if KEYS_VALIDAS[k] then
+            sts.Text="✅ KEY VÁLIDA! Entrando..." sts.TextColor3=Color3.fromRGB(80,255,140)
+            reg("🔑 Key válida usada: "..k) task.wait(.8) abrirHub()
         else
-            sts.Text="❌ KEY inválida!"sts.TextColor3=Color3.fromRGB(255,80,80)
+            sts.Text="❌ KEY inválida!" sts.TextColor3=Color3.fromRGB(255,80,80)
             reg("❌ Key inválida tentada: "..k)
-            local posOrig=keyInp.Position
-            for i=1,3 do
-                keyInp.Position=posOrig+UDim2.new(0,8,0,0)task.wait(.05)
-                keyInp.Position=posOrig-UDim2.new(0,8,0,0)task.wait(.05)
-            end
-            keyInp.Position=posOrig
         end
     end)
     bt1.MouseButton1Click:Connect(function()
         local n=inp.Text:gsub("%s+","")
-        if n==""then sts.Text="❌ Digite seu nick!"sts.TextColor3=Color3.fromRGB(255,80,80)return end
-        sts.Text="⏳ Enviando solicitação..."sts.TextColor3=Color3.fromRGB(255,200,80)
-        reg("📨 Solicitação de acesso: "..n)
-        enviarTermo(n,LP.UserId)
-        task.wait(1.5)
-        sts.Text="📨 Aguardando aprovação..."
+        if n=="" then sts.Text="❌ Digite seu nick!" sts.TextColor3=Color3.fromRGB(255,80,80) return end
+        sts.Text="⏳ Enviando solicitação..." sts.TextColor3=Color3.fromRGB(255,200,80)
+        reg("📨 Solicitação de acesso: "..n) enviarTermo(n,LP.UserId) task.wait(1.5) sts.Text="📨 Aguardando aprovação..."
     end)
 end
-if AD then task.wait(.2)reg("👑 Proprietário entrou: "..LP.Name)abrirHub()end--========= ESTRUTURA =========
+if AD then task.wait(.2) reg("👑 Proprietário entrou: "..LP.Name) abrirHub() end--========= ESTRUTURA =========
 local sb=Instance.new("Frame",w)sb.Size=UDim2.new(0,180,1,0)
 sb.BackgroundColor3=Color3.fromRGB(12,14,20)
 Instance.new("UICorner",sb).CornerRadius=UDim.new(0,10)
@@ -284,7 +188,6 @@ cat("Config")if AD then cat("Adm")end
 if AD then cat("Keys")end
 if AD then cat("Log")end
 
---===== JOGADORES + AVATAR =====
 local jT=Instance.new("TextLabel",sb)jT.Size=UDim2.new(1,-24,0,14)
 jT.Position=UDim2.new(0,12,1,-206)jT.BackgroundTransparency=1
 jT.Text="JOGADORES (0)"jT.TextColor3=Color3.fromRGB(150,160,180)
@@ -335,7 +238,6 @@ task.spawn(function()
     end
 end)
 
---===== TOAST =====
 local tg=Instance.new("ScreenGui",game:GetService("CoreGui"))
 tg.Name="LHToast"tg.ResetOnSpawn=false tg.IgnoreGuiInset=true tg.DisplayOrder=99998
 local tc=Instance.new("Frame",tg)tc.Size=UDim2.new(0,320,1,-40)
@@ -380,7 +282,6 @@ elseif al:find("erro")or al:find("falh")or al:find("sem")then tp="err"
 elseif al:find("off")or al:find("fechou")or al:find("parou")or al:find("minimizou")then tp="warn"end
 toast(a,tp)end
 
---===== FUNÇÕES BASE =====
 local function card(ti,p,cr)local c=Instance.new("Frame",p)
 c.Size=UDim2.new(1,0,0,0)c.AutomaticSize=Enum.AutomaticSize.Y
 c.BackgroundColor3=Color3.fromRGB(22,26,34)
@@ -448,7 +349,6 @@ else b.BackgroundColor3=Color3.fromRGB(22,26,34)b.TextColor3=cr end end
 for nn,s in pairs(sec)do s.Visible=(nn==n)end end
 for n,b in pairs(mB)do b.MouseButton1Click:Connect(function()sel(n)end)end
 
---===== HEADER =====
 local mh=Instance.new("TextLabel",mn)mh.Size=UDim2.new(1,-180,0,18)
 mh.Position=UDim2.new(0,18,0,14)mh.BackgroundTransparency=1
 mh.Text="LOST HUB"mh.TextColor3=Color3.fromRGB(255,255,255)
@@ -471,7 +371,7 @@ b.TextColor3=Color3.fromRGB(200,210,230)b.TextSize=12
 b.Font=Enum.Font.GothamBold b.AutoButtonColor=false
 Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)return b end
 local mB2=hB(-170,"−")local pB=hB(-138,"+")
-local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")--===== ABAS ADM/CARGOS/KEYS =====
+local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")--===== APROVAÇÕES + CARGOS + KEYS =====
 if AD then
 local cA=card("APROVAÇÕES",sec["Adm"],Color3.fromRGB(80,255,140))
 local iA=Instance.new("TextBox",cA)iA.Size=UDim2.new(1,0,0,34)
@@ -602,10 +502,7 @@ local cE=card("ESP",sec["ESP"],Color3.fromRGB(120,255,180))
 local eF=Instance.new("Folder",gui)eF.Name="LHEsp"
 local eA=false local eC=Color3.fromRGB(0,255,140)
 local eD=500 local eS=true
-local CE={{n="Verde",c=Color3.fromRGB(0,255,140)},{n="Vermelho",c=Color3.fromRGB(255,60,60)},
-{n="Azul",c=Color3.fromRGB(60,150,255)},{n="Roxo",c=Color3.fromRGB(180,100,255)},
-{n="Rosa",c=Color3.fromRGB(255,120,200)},{n="Amarelo",c=Color3.fromRGB(255,220,60)},
-{n="Branco",c=Color3.fromRGB(255,255,255)}}
+local CE={{n="Verde",c=Color3.fromRGB(0,255,140)},{n="Vermelho",c=Color3.fromRGB(255,60,60)},{n="Azul",c=Color3.fromRGB(60,150,255)},{n="Roxo",c=Color3.fromRGB(180,100,255)},{n="Rosa",c=Color3.fromRGB(255,120,200)},{n="Amarelo",c=Color3.fromRGB(255,220,60)},{n="Branco",c=Color3.fromRGB(255,255,255)}}
 local cI=1 local AL={100,250,500,1000,5000,999999}local aI=3
 local function limE()for _,c in ipairs(eF:GetChildren())do c:Destroy()end end
 local function cP(p)if p==LP or not p.Character then return end
@@ -665,8 +562,6 @@ task.spawn(function()while ncA do task.wait(.15)if ncA then aplN()end end end)
 else reg("Noclip OFF")
 if LP.Character then for _,o in ipairs(LP.Character:GetDescendants())do
 if o:IsA("BasePart")then pcall(function()o.CanCollide=true end)end end end end end,Color3.fromRGB(80,80,120))
-
---===== MOVIMENTOS EXTRAS =====
 local spdAtivo=false local spdValor=16
 btT(cM,"⚡ Speed Hack",function(v)
     spdAtivo=v
@@ -768,7 +663,9 @@ btT(cM,"🕊️ Fly",function(v)
         if flyBV then flyBV:Destroy() flyBV=nil end
         if flyBG then flyBG:Destroy() flyBG=nil end
     end
-end,Color3.fromRGB(90,90,140))--===== TELECINESE =====
+end,Color3.fromRGB(90,90,140))
+
+--===== TELECINESE =====
 local cT=card("TELECINESE",sec["Tele"],Color3.fromRGB(180,150,255))
 local function acC()if not LP.Character then return nil end
 local m=LP.Character:FindFirstChild("HumanoidRootPart")
@@ -959,8 +856,6 @@ bt(cI2,"📐 Tamanho",function()tI=tI%3+1 local t=tms[tI]
 T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,t.w,0,t.h)}):Play()reg("Tam: "..t.n)end)
 bt(cI2,"📌 Centralizar",function()local vp=workspace.CurrentCamera.ViewportSize
 T:Create(w,TweenInfo.new(.2),{Position=UDim2.new(0,vp.X/2-w.Size.X.Offset/2,0,vp.Y/2-w.Size.Y.Offset/2)}):Play()reg("Central")end)
-
---===== VISUAL EXTRAS =====
 local fbAtivo=false
 btT(cI2,"💡 Fullbright",function(v)
     fbAtivo=v
@@ -1016,55 +911,14 @@ bt(cI2,"🌐 Server Hop",function()
         end
     end)
 end)
-local clickTpAtivo=false
-btT(cI2,"🖱️ Click TP",function(v)
-    clickTpAtivo=v
-    reg("Click TP "..(v and "ON" or "OFF"))
-end,Color3.fromRGB(80,80,120))
-U.InputBegan:Connect(function(input)
-    if clickTpAtivo and input.UserInputType==Enum.UserInputType.MouseButton1 then
-        if LP.Character then
-            local hrp=LP.Character:FindFirstChild("HumanoidRootPart")
-            if hrp then
-                local mouse=LP:GetMouse()
-                hrp.CFrame=CFrame.new(mouse.Hit.Position+Vector3.new(0,3,0))
-            end
-        end
-    end
-end)
 
---===== EMBEDS PERSONALIZADOS =====
+--===== EMBEDS =====
 local cEmb=card("EMBEDS DISCORD",sec["Config"],Color3.fromRGB(114,137,218))
-local embTitulo=Instance.new("TextBox",cEmb)
-embTitulo.Size=UDim2.new(1,0,0,32)
-embTitulo.BackgroundColor3=Color3.fromRGB(20,24,32)
-embTitulo.TextColor3=Color3.fromRGB(255,255,255)
-embTitulo.PlaceholderText="📌 Título do embed..."
-embTitulo.PlaceholderColor3=Color3.fromRGB(100,110,130)
-embTitulo.Text=""
-embTitulo.TextSize=11 embTitulo.Font=Enum.Font.GothamBold
-embTitulo.ClearTextOnFocus=false
+local embTitulo=Instance.new("TextBox",cEmb)embTitulo.Size=UDim2.new(1,0,0,32)embTitulo.BackgroundColor3=Color3.fromRGB(20,24,32)embTitulo.TextColor3=Color3.fromRGB(255,255,255)embTitulo.PlaceholderText="📌 Título do embed..."embTitulo.PlaceholderColor3=Color3.fromRGB(100,110,130)embTitulo.Text=""embTitulo.TextSize=11 embTitulo.Font=Enum.Font.GothamBold embTitulo.ClearTextOnFocus=false
 Instance.new("UICorner",embTitulo).CornerRadius=UDim.new(0,6)
-local embDesc=Instance.new("TextBox",cEmb)
-embDesc.Size=UDim2.new(1,0,0,60)
-embDesc.BackgroundColor3=Color3.fromRGB(20,24,32)
-embDesc.TextColor3=Color3.fromRGB(255,255,255)
-embDesc.PlaceholderText="📝 Descrição do embed..."
-embDesc.PlaceholderColor3=Color3.fromRGB(100,110,130)
-embDesc.Text=""
-embDesc.TextSize=11 embDesc.Font=Enum.Font.Gotham
-embDesc.ClearTextOnFocus=false
-embDesc.TextWrapped=true embDesc.MultiLine=true
+local embDesc=Instance.new("TextBox",cEmb)embDesc.Size=UDim2.new(1,0,0,60)embDesc.BackgroundColor3=Color3.fromRGB(20,24,32)embDesc.TextColor3=Color3.fromRGB(255,255,255)embDesc.PlaceholderText="📝 Descrição do embed..."embDesc.PlaceholderColor3=Color3.fromRGB(100,110,130)embDesc.Text=""embDesc.TextSize=11 embDesc.Font=Enum.Font.Gotham embDesc.ClearTextOnFocus=false embDesc.TextWrapped=true embDesc.MultiLine=true
 Instance.new("UICorner",embDesc).CornerRadius=UDim.new(0,6)
-local embImg=Instance.new("TextBox",cEmb)
-embImg.Size=UDim2.new(1,0,0,32)
-embImg.BackgroundColor3=Color3.fromRGB(20,24,32)
-embImg.TextColor3=Color3.fromRGB(255,255,255)
-embImg.PlaceholderText="🖼️ URL da imagem..."
-embImg.PlaceholderColor3=Color3.fromRGB(100,110,130)
-embImg.Text=""
-embImg.TextSize=11 embImg.Font=Enum.Font.Gotham
-embImg.ClearTextOnFocus=false
+local embImg=Instance.new("TextBox",cEmb)embImg.Size=UDim2.new(1,0,0,32)embImg.BackgroundColor3=Color3.fromRGB(20,24,32)embImg.TextColor3=Color3.fromRGB(255,255,255)embImg.PlaceholderText="🖼️ URL da imagem..."embImg.PlaceholderColor3=Color3.fromRGB(100,110,130)embImg.Text=""embImg.TextSize=11 embImg.Font=Enum.Font.Gotham embImg.ClearTextOnFocus=false
 Instance.new("UICorner",embImg).CornerRadius=UDim.new(0,6)
 local embCores={{n="🔴 Vermelho",c=16711680},{n="🟢 Verde",c=65280},{n="🔵 Azul",c=3447003},{n="🟡 Amarelo",c=16776960},{n="🟣 Roxo",c=10181046},{n="🟠 Laranja",c=15105570},{n="⚪ Branco",c=16777215}}
 local embCorIdx=3
