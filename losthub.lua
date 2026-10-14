@@ -1,4 +1,4 @@
---// LOST HUB - COMPLETO COM INTRO CORRIGIDA
+--// LOST HUB - COMPLETO COM PERSONALIZAÇÃO
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -451,7 +451,6 @@ btnRem.MouseButton1Click:Connect(function()
     reg("🗑️ Cargo removido: "..S.sel.Name)
 end)
 end
-
 --===== GERADOR DE KEYS =====
 if AD then
 local cK=card("GERADOR DE KEYS",sec["Keys"],Color3.fromRGB(255,200,50))
@@ -496,7 +495,6 @@ local k="LOST-HUB-"..math.random(100000,999999)
 KEYS_VALIDAS[k]=true salvarKeys() reg("🎲 Key: "..k)
 iK.Text=k end,true)
 end
-
 --===== ESP =====
 local cE=card("ESP",sec["ESP"],Color3.fromRGB(120,255,180))
 local eF=Instance.new("Folder",gui)eF.Name="LHEsp"
@@ -533,7 +531,6 @@ reg("Alcance: "..(eD==999999 and"∞"or tostring(eD).."m"))
 if eA then limE()for _,p in ipairs(P:GetPlayers())do if p~=LP then cP(p)end end end end,true)
 btT(cE,"❤ Só Vivos",function(v)eS=v reg("Só Vivos "..(v and"ON"or"OFF"))end,Color3.fromRGB(40,60,50))
 P.PlayerAdded:Connect(function(p)if eA then task.wait(1)if p.Character then cP(p)end end end)
-
 --===== MOVIMENTOS =====
 local cM=card("MOVIMENTOS",sec["Mov"],Color3.fromRGB(120,255,120))
 bt(cM,"🎯 TP Para Alvo",function()
@@ -664,7 +661,6 @@ btT(cM,"🕊️ Fly",function(v)
         if flyBG then flyBG:Destroy() flyBG=nil end
     end
 end,Color3.fromRGB(90,90,140))
-
 --===== TELECINESE =====
 local cT=card("TELECINESE",sec["Tele"],Color3.fromRGB(180,150,255))
 local function acC()if not LP.Character then return nil end
@@ -730,8 +726,7 @@ local bv2=d:FindFirstChild("LH_Lan")
 if bv1 then bv1:Destroy()end
 if bv2 then bv2:Destroy()end end end end end
 reg("Soltar Tudo")end)
-
---===== TROLL =====
+--===== TROLL + PERSONALIZAÇÃO =====
 local cTr=card("TROLL",sec["Troll"],Color3.fromRGB(255,150,200))
 local flingAtivo=false
 local flingBlocos={}
@@ -820,21 +815,49 @@ if not S.sel or not S.sel.Character then reg("Sem alvo")return end
 local hum=S.sel.Character:FindFirstChildOfClass("Humanoid")
 if hum then hum.Health=0 reg("Matou: "..S.sel.Name)end
 end,true)
-bt(cTr,"🧊 Congelar Alvo",function()
-if not S.sel or not S.sel.Character then reg("Sem alvo")return end
-local hrp=S.sel.Character:FindFirstChild("HumanoidRootPart")
-if hrp then
-hrp.Anchored=true reg("Congelou: "..S.sel.Name)
-task.wait(3)hrp.Anchored=false
-end end,true)
-bt(cTr,"💨 Chutar Alvo",function()
-if not S.sel or not S.sel.Character then reg("Sem alvo")return end
-local hrp=S.sel.Character:FindFirstChild("HumanoidRootPart")
-if hrp then
-hrp.Velocity=Vector3.new(math.random(-500,500),300,math.random(-500,500))
-reg("Chutou: "..S.sel.Name)
-end end,true)
-
+--===== PERSONALIZAÇÃO =====
+local cP=card("PERSONALIZAÇÃO",sec["Troll"],Color3.fromRGB(100,255,200))
+local corIdx=1
+local cores={{n="🔴 Vermelho",c=Color3.fromRGB(255,0,0)},{n="🟢 Verde",c=Color3.fromRGB(0,255,0)},{n="🔵 Azul",c=Color3.fromRGB(0,100,255)},{n="🟡 Amarelo",c=Color3.fromRGB(255,255,0)},{n="🟣 Roxo",c=Color3.fromRGB(160,0,255)},{n="🟠 Laranja",c=Color3.fromRGB(255,120,0)},{n="⚫ Preto",c=Color3.fromRGB(0,0,0)},{n="⚪ Branco",c=Color3.fromRGB(255,255,255)},{n="🩷 Rosa",c=Color3.fromRGB(255,105,180)},{n="🩵 Ciano",c=Color3.fromRGB(0,255,255)},{n="🟤 Marrom",c=Color3.fromRGB(100,50,20)},{n="💚 Neon",c=Color3.fromRGB(57,255,20)}}
+local matIdx=1
+local materiais={"Plastic","Neon","Glass","ForceField","Ice","Marble","Slate","Concrete","Metal","Wood","Granite","Foil"}
+local tamIdx=1
+local tamanhos={1,1.5,2,3,5}
+local function aplicarCor()if not LP.Character then return end
+for _,p in ipairs(LP.Character:GetDescendants())do if p:IsA("BasePart")then p.Color=cores[corIdx].c end end end
+local function aplicarMaterial()if not LP.Character then return end
+local ok,mat=pcall(function() return Enum.Material[materiais[matIdx]] end)
+if not ok then return end
+for _,p in ipairs(LP.Character:GetDescendants())do if p:IsA("BasePart")then p.Material=mat end end end
+local function aplicarTamanho()if not LP.Character then return end
+local esc=tamanhos[tamIdx]
+local hum=LP.Character:FindFirstChildOfClass("Humanoid")
+if hum then pcall(function()
+for _,tag in ipairs({"BodyHeightScale","BodyWidthScale","BodyDepthScale","HeadScale"})do
+local s=hum:FindFirstChild(tag)if s then s.Value=esc end end
+hum.HipHeight=esc*2 end)end end
+bt(cP,"🎨 Mudar Cor",function()corIdx=corIdx%#cores+1 aplicarCor() reg("Cor: "..cores[corIdx].n)end)
+bt(cP,"✨ Mudar Material",function()matIdx=matIdx%#materiais+1 aplicarMaterial() reg("Material: "..materiais[matIdx])end)
+bt(cP,"📏 Mudar Tamanho",function()tamIdx=tamIdx%#tamanhos+1 aplicarTamanho() reg("Tamanho: "..tamanhos[tamIdx].."x")end)
+bt(cP,"🔄 Resetar",function()
+if not LP.Character then return end
+for _,p in ipairs(LP.Character:GetDescendants())do if p:IsA("BasePart")then p.Material=Enum.Material.Plastic p.Color=Color3.fromRGB(255,255,0)end end
+local hum=LP.Character:FindFirstChildOfClass("Humanoid")
+if hum then pcall(function()
+for _,tag in ipairs({"BodyHeightScale","BodyWidthScale","BodyDepthScale","HeadScale"})do
+local s=hum:FindFirstChild(tag)if s then s.Value=1 end end
+hum.HipHeight=2 end)end
+reg("Resetou personagem")
+end)
+bt(cP,"👑 Cor do Cargo",function()
+if not LP.Character then return end
+local cor=Color3.fromRGB(255,200,50)
+if CG=="ADMIN"then cor=Color3.fromRGB(255,80,80)
+elseif CG=="PROPRIETÁRIO"then cor=Color3.fromRGB(255,200,50)
+else cor=Color3.fromRGB(150,160,180)end
+for _,p in ipairs(LP.Character:GetDescendants())do if p:IsA("BasePart")then p.Color=cor end end
+reg("Cor do cargo: "..CG)
+end)
 --===== ANTI-LAG =====
 local cL=card("ANTI-LAG",sec["Config"],Color3.fromRGB(120,255,120))
 local aA=false
@@ -846,7 +869,6 @@ if o:IsA("ParticleEmitter")or o:IsA("Trail")or o:IsA("Smoke")or o:IsA("Fire")or 
 if o:IsA("BasePart")then pcall(function()o.CastShadow=false end)end end
 task.wait(3)end end)
 else reg("Anti-Lag OFF")end end,Color3.fromRGB(40,80,40))
-
 --===== INTERFACE =====
 local cI2=card("INTERFACE",sec["Config"],Color3.fromRGB(150,200,255))
 bt(cI2,"📊 FPS",function()fL.Visible=not fL.Visible reg("FPS "..(fL.Visible and"ON"or"OFF"))end)
@@ -864,10 +886,7 @@ btT(cI2,"💡 Fullbright",function(v)
             while fbAtivo do
                 pcall(function()
                     local l=game:GetService("Lighting")
-                    l.Brightness=2
-                    l.ClockTime=14
-                    l.FogEnd=100000
-                    l.GlobalShadows=false
+                    l.Brightness=2 l.ClockTime=14 l.FogEnd=100000 l.GlobalShadows=false
                 end)
                 task.wait(2)
             end
@@ -890,12 +909,7 @@ btT(cI2,"🚫 Anti-AFK",function(v)
         end)
     else reg("Anti-AFK OFF") end
 end,Color3.fromRGB(60,60,80))
-bt(cI2,"🔄 Rejoin",function()
-    reg("Rejoin")
-    pcall(function()
-        game:GetService("TeleportService"):Teleport(game.PlaceId,LP)
-    end)
-end)
+bt(cI2,"🔄 Rejoin",function()reg("Rejoin") pcall(function()game:GetService("TeleportService"):Teleport(game.PlaceId,LP)end)end)
 bt(cI2,"🌐 Server Hop",function()
     reg("Server Hop")
     pcall(function()
@@ -911,7 +925,6 @@ bt(cI2,"🌐 Server Hop",function()
         end
     end)
 end)
-
 --===== EMBEDS =====
 local cEmb=card("EMBEDS DISCORD",sec["Config"],Color3.fromRGB(114,137,218))
 local embTitulo=Instance.new("TextBox",cEmb)embTitulo.Size=UDim2.new(1,0,0,32)embTitulo.BackgroundColor3=Color3.fromRGB(20,24,32)embTitulo.TextColor3=Color3.fromRGB(255,255,255)embTitulo.PlaceholderText="📌 Título do embed..."embTitulo.PlaceholderColor3=Color3.fromRGB(100,110,130)embTitulo.Text=""embTitulo.TextSize=11 embTitulo.Font=Enum.Font.GothamBold embTitulo.ClearTextOnFocus=false
@@ -922,16 +935,9 @@ local embImg=Instance.new("TextBox",cEmb)embImg.Size=UDim2.new(1,0,0,32)embImg.B
 Instance.new("UICorner",embImg).CornerRadius=UDim.new(0,6)
 local embCores={{n="🔴 Vermelho",c=16711680},{n="🟢 Verde",c=65280},{n="🔵 Azul",c=3447003},{n="🟡 Amarelo",c=16776960},{n="🟣 Roxo",c=10181046},{n="🟠 Laranja",c=15105570},{n="⚪ Branco",c=16777215}}
 local embCorIdx=3
-local embCorBtn=bt(cEmb,"🎨 Cor: 🔵 Azul",function()
-    embCorIdx=embCorIdx%#embCores+1
-    local cor=embCores[embCorIdx]
-    if embCorBtn then embCorBtn.Text="🎨 Cor: "..cor.n end
-    reg("Cor do embed: "..cor.n)
-end,true)
+local embCorBtn=bt(cEmb,"🎨 Cor: 🔵 Azul",function()embCorIdx=embCorIdx%#embCores+1 local cor=embCores[embCorIdx]if embCorBtn then embCorBtn.Text="🎨 Cor: "..cor.n end reg("Cor do embed: "..cor.n)end,true)
 bt(cEmb,"📤 ENVIAR EMBED",function()
-    local tit=embTitulo.Text
-    local desc=embDesc.Text
-    local img=embImg.Text
+    local tit=embTitulo.Text local desc=embDesc.Text local img=embImg.Text
     if tit==""then tit="📢 AVISO LOST HUB" end
     if desc==""then desc="Nenhuma descrição." end
     local cor=embCores[embCorIdx].c
@@ -941,52 +947,27 @@ bt(cEmb,"📢 Comunicado Padrão",function()
     local desc="📌 **ATENÇÃO A TODOS OS USUÁRIOS!**\n\nInformamos que o painel **LOST HUB** está online e funcionando perfeitamente.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🔔 **NOVIDADES:**\n✅ Sistema de KEY mais seguro\n✅ Logs automáticos no Discord\n✅ Fling de Blocos\n✅ Avatar com cargo no painel\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n⚠️ **AVISOS:**\n🔴 Compartilhar o painel = **BAN**\n🔴 Mantenha sua KEY em sigilo\n\n💙 **Equipe LOST HUB**"
     task.spawn(function() enviarEmbedCustom("📢 COMUNICADO OFICIAL",desc,3447003,"") end)
 end,true)
-
 --===== CRÉDITO =====
-local cc=Instance.new("Frame",sec["Config"])cc.Size=UDim2.new(1,0,0,60)
-cc.BackgroundColor3=Color3.fromRGB(20,24,32)
+local cc=Instance.new("Frame",sec["Config"])cc.Size=UDim2.new(1,0,0,60)cc.BackgroundColor3=Color3.fromRGB(20,24,32)
 Instance.new("UICorner",cc).CornerRadius=UDim.new(0,10)
-local cT2=Instance.new("TextLabel",cc)cT2.Size=UDim2.new(1,0,0,20)
-cT2.Position=UDim2.new(0,0,0,12)cT2.BackgroundTransparency=1
-cT2.Text="✦ LOST HUB ✦"cT2.TextColor3=Color3.fromRGB(255,255,255)
-cT2.Font=Enum.Font.GothamBold cT2.TextSize=14
-local cN=Instance.new("TextLabel",cc)cN.Size=UDim2.new(1,0,0,22)
-cN.Position=UDim2.new(0,0,0,32)cN.BackgroundTransparency=1
-cN.Text="by LOST"cN.TextColor3=Color3.fromRGB(180,190,210)
-cN.Font=Enum.Font.GothamBold cN.TextSize=12
+local cT2=Instance.new("TextLabel",cc)cT2.Size=UDim2.new(1,0,0,20)cT2.Position=UDim2.new(0,0,0,12)cT2.BackgroundTransparency=1 cT2.Text="✦ LOST HUB ✦"cT2.TextColor3=Color3.fromRGB(255,255,255)cT2.Font=Enum.Font.GothamBold cT2.TextSize=14
+local cN=Instance.new("TextLabel",cc)cN.Size=UDim2.new(1,0,0,22)cN.Position=UDim2.new(0,0,0,32)cN.BackgroundTransparency=1 cN.Text="by LOST"cN.TextColor3=Color3.fromRGB(180,190,210)cN.Font=Enum.Font.GothamBold cN.TextSize=12
 bt(cI2,"🗑️ Fechar",function()reg("🚪 Painel FECHADO por "..LP.Name)task.wait(.1)gui:Destroy()end)
-
 --===== LOG =====
 if AD then
 local c5=card("REGISTRO",sec["Log"],Color3.fromRGB(88,140,255))
-local tL=Instance.new("TextLabel",c5)tL.Size=UDim2.new(1,0,0,14)
-tL.BackgroundTransparency=1 tL.Text="Total: 0"
-tL.TextColor3=Color3.fromRGB(150,165,190)tL.TextSize=10
-tL.Font=Enum.Font.Gotham tL.TextXAlignment=Enum.TextXAlignment.Left
-local sL2=Instance.new("ScrollingFrame",c5)sL2.Size=UDim2.new(1,0,0,160)
-sL2.BackgroundColor3=Color3.fromRGB(15,18,24)
-sL2.ScrollBarThickness=4 sL2.AutomaticCanvasSize=Enum.AutomaticSize.Y
-Instance.new("UICorner",sL2).CornerRadius=UDim.new(0,6)
-Instance.new("UIListLayout",sL2).Padding=UDim.new(0,3)
+local tL=Instance.new("TextLabel",c5)tL.Size=UDim2.new(1,0,0,14)tL.BackgroundTransparency=1 tL.Text="Total: 0"tL.TextColor3=Color3.fromRGB(150,165,190)tL.TextSize=10 tL.Font=Enum.Font.Gotham tL.TextXAlignment=Enum.TextXAlignment.Left
+local sL2=Instance.new("ScrollingFrame",c5)sL2.Size=UDim2.new(1,0,0,160)sL2.BackgroundColor3=Color3.fromRGB(15,18,24)sL2.ScrollBarThickness=4 sL2.AutomaticCanvasSize=Enum.AutomaticSize.Y
+Instance.new("UICorner",sL2).CornerRadius=UDim.new(0,6)Instance.new("UIListLayout",sL2).Padding=UDim.new(0,3)
 local uT=-1
 local function upL()if #lg==uT then return end uT=#lg
 for _,c in ipairs(sL2:GetChildren())do if c:IsA("Frame")then c:Destroy()end end
 for i=#lg,1,-1 do local L=lg[i]
-local f=Instance.new("Frame",sL2)f.Size=UDim2.new(1,-2,0,22)
-f.BackgroundColor3=Color3.fromRGB(22,26,34)
+local f=Instance.new("Frame",sL2)f.Size=UDim2.new(1,-2,0,22)f.BackgroundColor3=Color3.fromRGB(22,26,34)
 Instance.new("UICorner",f).CornerRadius=UDim.new(0,5)
-local l1=Instance.new("TextLabel",f)l1.Size=UDim2.new(0,120,1,0)
-l1.Position=UDim2.new(0,4,0,0)l1.BackgroundTransparency=1
-l1.Text=L.h l1.TextColor3=Color3.fromRGB(130,150,180)l1.TextSize=8
-l1.Font=Enum.Font.Gotham l1.TextXAlignment=Enum.TextXAlignment.Left
-local l2=Instance.new("TextLabel",f)l2.Size=UDim2.new(0,80,1,0)
-l2.Position=UDim2.new(0,128,0,0)l2.BackgroundTransparency=1
-l2.Text="["..L.j.."]"l2.TextColor3=Color3.fromRGB(88,180,255)
-l2.TextSize=9 l2.Font=Enum.Font.GothamBold l2.TextXAlignment=Enum.TextXAlignment.Left
-local l3=Instance.new("TextLabel",f)l3.Size=UDim2.new(1,-210,1,0)
-l3.Position=UDim2.new(0,210,0,0)l3.BackgroundTransparency=1
-l3.Text=L.a l3.TextColor3=Color3.fromRGB(220,230,245)l3.TextSize=9
-l3.Font=Enum.Font.Gotham l3.TextXAlignment=Enum.TextXAlignment.Left end
+local l1=Instance.new("TextLabel",f)l1.Size=UDim2.new(0,120,1,0)l1.Position=UDim2.new(0,4,0,0)l1.BackgroundTransparency=1 l1.Text=L.h l1.TextColor3=Color3.fromRGB(130,150,180)l1.TextSize=8 l1.Font=Enum.Font.Gotham l1.TextXAlignment=Enum.TextXAlignment.Left
+local l2=Instance.new("TextLabel",f)l2.Size=UDim2.new(0,80,1,0)l2.Position=UDim2.new(0,128,0,0)l2.BackgroundTransparency=1 l2.Text="["..L.j.."]"l2.TextColor3=Color3.fromRGB(88,180,255)l2.TextSize=9 l2.Font=Enum.Font.GothamBold l2.TextXAlignment=Enum.TextXAlignment.Left
+local l3=Instance.new("TextLabel",f)l3.Size=UDim2.new(1,-210,1,0)l3.Position=UDim2.new(0,210,0,0)l3.BackgroundTransparency=1 l3.Text=L.a l3.TextColor3=Color3.fromRGB(220,230,245)l3.TextSize=9 l3.Font=Enum.Font.Gotham l3.TextXAlignment=Enum.TextXAlignment.Left end
 tL.Text="Total: "..#lg end
 reg("🟢 Painel carregado - "..LP.Name.." ("..CG..")")
 upL()
@@ -994,18 +975,11 @@ task.spawn(function()while tL.Parent do task.wait(.5)pcall(upL)end end)
 bt(c5,"💾 Salvar Arquivo",function()
     local t="=== LOG LOST HUB ===\n"..LP.Name.."\n\n"
     for _,L in ipairs(lg)do t=t..L.h.." | ["..L.j.."] | "..L.a.."\n" end
-    pcall(function()writefile(LOGFILE,t)end)
-    reg("💾 Log salvo")
+    pcall(function()writefile(LOGFILE,t)end)reg("💾 Log salvo")
 end)
-bt(c5,"🗑️ Limpar",function()
-    lg={}uT=-1
-    pcall(function()writefile(LOGFILE,"")end)
-    reg("🗑️ Log limpo")
-    upL()
-end)
+bt(c5,"🗑️ Limpar",function()lg={}uT=-1 pcall(function()writefile(LOGFILE,"")end)reg("🗑️ Log limpo")upL()end)
 end
-
---===== DRAG DA JANELA =====
+--===== DRAG + REFRESH =====
 local dragging,dragInput,dragStart,startPos
 local function updateDrag(input)
     local delta=input.Position-dragStart
@@ -1023,8 +997,6 @@ end)
 U.InputChanged:Connect(function(input)
     if input==dragInput and dragging then updateDrag(input) end
 end)
-
---===== REFRESH =====
 local function rf()
 for _,c in ipairs(pl:GetChildren())do if c:IsA("TextButton")then c:Destroy()end end
 for _,p in ipairs(P:GetPlayers())do local b=Instance.new("TextButton",pl)
@@ -1038,33 +1010,12 @@ b.MouseButton1Click:Connect(function()S.sel=p reg("Sel: "..p.Name)rf()end)end
 upC()end
 rf()P.PlayerAdded:Connect(rf)
 P.PlayerRemoving:Connect(function()task.wait(.1)rf()end)
-cB2.MouseButton1Click:Connect(function()
-    reg("❌ Painel FECHADO (X) por "..LP.Name)
-    gui:Destroy()
-end)
-hB2.MouseButton1Click:Connect(function()
-    reg("👁️ Painel MINIMIZADO por "..LP.Name)
-    w.Visible=false flt.Visible=true
-end)
-flt.MouseButton1Click:Connect(function()
-    w.Visible=true flt.Visible=false
-end)
-mB2.MouseButton1Click:Connect(function()
-    local tamAtual=w.Size.X.Offset
-    local novoTam=math.max(400,tamAtual-50)
-    if novoTam==tamAtual then return end
-    local proporcao=novoTam/tamAtual
-    T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,novoTam,0,w.Size.Y.Offset*proporcao)}):Play()
-    reg("Tamanho: "..novoTam)
-end)
-pB.MouseButton1Click:Connect(function()
-    local tamAtual=w.Size.X.Offset
-    local novoTam=math.min(1200,tamAtual+50)
-    if novoTam==tamAtual then return end
-    local proporcao=novoTam/tamAtual
-    T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,novoTam,0,w.Size.Y.Offset*proporcao)}):Play()
-    reg("Tamanho: "..novoTam)
-end)
-
+cB2.MouseButton1Click:Connect(function()reg("❌ Painel FECHADO (X) por "..LP.Name)gui:Destroy()end)
+hB2.MouseButton1Click:Connect(function()reg("👁️ Painel MINIMIZADO por "..LP.Name)w.Visible=false flt.Visible=true end)
+flt.MouseButton1Click:Connect(function()w.Visible=true flt.Visible=false end)
+mB2.MouseButton1Click:Connect(function()local tamAtual=w.Size.X.Offset local novoTam=math.max(400,tamAtual-50)if novoTam==tamAtual then return end local proporcao=novoTam/tamAtual
+T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,novoTam,0,w.Size.Y.Offset*proporcao)}):Play()reg("Tamanho: "..novoTam)end)
+pB.MouseButton1Click:Connect(function()local tamAtual=w.Size.X.Offset local novoTam=math.min(1200,tamAtual+50)if novoTam==tamAtual then return end local proporcao=novoTam/tamAtual
+T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,novoTam,0,w.Size.Y.Offset*proporcao)}):Play()reg("Tamanho: "..novoTam)end)
 sel("Config")
-print("[LOST HUB] Carregado com sucesso! Todas as funções ativas.")
+print("[LOST HUB] Carregado com sucesso! Personalização ativa.")
