@@ -1,4 +1,4 @@
---// LOST HUB v2.1
+--// LOST HUB v2.2 - SEM INTRO
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -49,165 +49,9 @@ Instance.new("UICorner",flt).CornerRadius=UDim.new(0,14)
 local w=Instance.new("Frame",gui)w.Size=UDim2.new(0,700,0,440)
 w.Position=UDim2.new(.5,-350,.5,-220)w.BackgroundColor3=Color3.fromRGB(8,10,14)
 w.BorderSizePixel=0 Instance.new("UICorner",w).CornerRadius=UDim.new(0,10)w.Visible=false
-local wg=Instance.new("UIGradient",w)wg.Color=ColorSequence.new(Color3.fromRGB(30,35,45),Color3.fromRGB(15,18,24))wg.Rotation=90--========= INTRO =========
-local bg,fg,fStroke,glow,gl,lgo,sub,cd,cStroke,tt,inp,bt1,keyInp,keyBtn,sts,closeBtn
-local function abrirHub()
-    if bg then
-        T:Create(bg,TweenInfo.new(.4),{BackgroundTransparency=1}):Play()
-        T:Create(fg,TweenInfo.new(.4),{BackgroundTransparency=1}):Play()
-        task.wait(.5)bg.Visible=false fg.Visible=false
-    end
-    w.Visible=true
-    reg("✅ Painel ABERTO por "..LP.Name)
-end
-if not AD then
-    bg=Instance.new("Frame",gui)bg.Size=UDim2.new(1,0,1,0)
-    bg.BackgroundColor3=Color3.fromRGB(0,0,0)bg.BackgroundTransparency=0.7 bg.ZIndex=50 bg.BorderSizePixel=0
-    fg=Instance.new("Frame",gui)fg.Size=UDim2.new(0,780,0,420)
-    fg.Position=UDim2.new(0.5,-390,0.5,-210)fg.BackgroundColor3=Color3.fromRGB(13,17,26)
-    fg.BackgroundTransparency=0 fg.ZIndex=51 fg.BorderSizePixel=0
-    Instance.new("UICorner",fg).CornerRadius=UDim.new(0,24)
-    fStroke=Instance.new("UIStroke",fg)fStroke.Color=Color3.fromRGB(120,180,255)
-    fStroke.Thickness=2 fStroke.Transparency=0.15
-    local gradStroke=Instance.new("UIGradient",fStroke)
-    gradStroke.Color=ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(100,160,255)),ColorSequenceKeypoint.new(0.5,Color3.fromRGB(200,120,255)),ColorSequenceKeypoint.new(1,Color3.fromRGB(100,160,255))}
-    gradStroke.Rotation=45
-    local fgGrad=Instance.new("UIGradient",fg)
-    fgGrad.Color=ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(22,28,45)),ColorSequenceKeypoint.new(1,Color3.fromRGB(10,13,22))}
-    fgGrad.Rotation=135
-    glow=Instance.new("ImageLabel",fg)glow.Size=UDim2.new(0,500,0,500)
-    glow.Position=UDim2.new(0,-200,0.5,-250)glow.BackgroundTransparency=1
-    glow.Image="rbxassetid://5028857084"glow.ImageColor3=Color3.fromRGB(100,160,255)
-    glow.ImageTransparency=0.7 glow.ZIndex=51 glow.ScaleType=Enum.ScaleType.Slice
-    local ladoEsq=Instance.new("Frame",fg)ladoEsq.Size=UDim2.new(0,320,1,0)
-    ladoEsq.Position=UDim2.new(0,0,0,0)ladoEsq.BackgroundColor3=Color3.fromRGB(16,22,36)
-    ladoEsq.BackgroundTransparency=0 ladoEsq.ZIndex=52 ladoEsq.BorderSizePixel=0
-    Instance.new("UICorner",ladoEsq).CornerRadius=UDim.new(0,24)
-    local divEsq=Instance.new("Frame",ladoEsq)divEsq.Size=UDim2.new(0,1,1,-40)
-    divEsq.Position=UDim2.new(1,-1,0,20)divEsq.BackgroundColor3=Color3.fromRGB(60,80,130)
-    divEsq.BackgroundTransparency=0.6 divEsq.BorderSizePixel=0
-    local logoFrame=Instance.new("Frame",ladoEsq)logoFrame.Size=UDim2.new(0,120,0,120)
-    logoFrame.Position=UDim2.new(0.5,-60,0,60)logoFrame.BackgroundColor3=Color3.fromRGB(25,32,50)
-    logoFrame.BackgroundTransparency=0 logoFrame.ZIndex=53 logoFrame.BorderSizePixel=0
-    Instance.new("UICorner",logoFrame).CornerRadius=UDim.new(1,0)
-    local logoStroke=Instance.new("UIStroke",logoFrame)logoStroke.Color=Color3.fromRGB(120,180,255)
-    logoStroke.Thickness=2 logoStroke.Transparency=0.3
-    gl=Instance.new("ImageLabel",logoFrame)gl.Size=UDim2.new(1,-20,1,-20)
-    gl.Position=UDim2.new(0,10,0,10)gl.BackgroundTransparency=1
-    gl.Image="rbxassetid://5028857084"gl.ImageColor3=Color3.fromRGB(140,190,255)
-    gl.ImageTransparency=0.1 gl.ScaleType=Enum.ScaleType.Slice gl.ZIndex=54
-    local emojiLogo=Instance.new("TextLabel",logoFrame)emojiLogo.Size=UDim2.new(1,0,1,0)
-    emojiLogo.BackgroundTransparency=1 emojiLogo.Text="✦"
-    emojiLogo.TextColor3=Color3.fromRGB(140,190,255)emojiLogo.TextSize=48
-    emojiLogo.Font=Enum.Font.GothamBold emojiLogo.ZIndex=55
-    lgo=Instance.new("TextLabel",ladoEsq)lgo.Size=UDim2.new(1,0,0,42)
-    lgo.Position=UDim2.new(0,0,0,195)lgo.BackgroundTransparency=1
-    lgo.Text="LOST HUB"lgo.TextColor3=Color3.fromRGB(255,255,255)
-    lgo.TextSize=32 lgo.Font=Enum.Font.GothamBlack lgo.TextTransparency=0 lgo.ZIndex=52
-    sub=Instance.new("TextLabel",ladoEsq)sub.Size=UDim2.new(1,0,0,16)
-    sub.Position=UDim2.new(0,0,0,240)sub.BackgroundTransparency=1
-    sub.Text="─ ACESSO AO SISTEMA ─"sub.TextColor3=Color3.fromRGB(120,140,180)
-    sub.TextSize=10 sub.Font=Enum.Font.Gotham sub.TextTransparency=0 sub.ZIndex=52
-    local versao=Instance.new("TextLabel",ladoEsq)versao.Size=UDim2.new(1,0,0,16)
-    versao.Position=UDim2.new(0,0,1,-40)versao.BackgroundTransparency=1
-    versao.Text="v2.1 • by LOST"versao.TextColor3=Color3.fromRGB(80,95,130)
-    versao.TextSize=9 versao.Font=Enum.Font.Gotham versao.TextTransparency=0 versao.ZIndex=52
-    local ladoDir=Instance.new("Frame",fg)ladoDir.Size=UDim2.new(1,-320,1,0)
-    ladoDir.Position=UDim2.new(0,320,0,0)ladoDir.BackgroundTransparency=1 ladoDir.ZIndex=52
-    cd=Instance.new("Frame",ladoDir)cd.Size=UDim2.new(1,-60,0,330)
-    cd.Position=UDim2.new(0,30,0.5,-165)cd.BackgroundColor3=Color3.fromRGB(11,15,25)
-    cd.BackgroundTransparency=0 cd.ZIndex=53 cd.BorderSizePixel=0
-    Instance.new("UICorner",cd).CornerRadius=UDim.new(0,18)
-    local cdStroke=Instance.new("UIStroke",cd)cdStroke.Color=Color3.fromRGB(80,120,200)
-    cdStroke.Thickness=1 cdStroke.Transparency=0.5
-    tt=Instance.new("TextLabel",cd)tt.Size=UDim2.new(1,0,0,22)
-    tt.Position=UDim2.new(0,0,0,16)tt.BackgroundTransparency=1
-    tt.Text="🔐  ACESSO RESTRITO"tt.TextColor3=Color3.fromRGB(200,215,240)
-    tt.TextSize=13 tt.Font=Enum.Font.GothamBold tt.TextTransparency=0
-    local nickLabel=Instance.new("TextLabel",cd)nickLabel.Size=UDim2.new(1,-20,0,14)
-    nickLabel.Position=UDim2.new(0,10,0,52)nickLabel.BackgroundTransparency=1
-    nickLabel.Text="👤  NICK DO JOGADOR"nickLabel.TextColor3=Color3.fromRGB(150,170,210)
-    nickLabel.TextSize=9 nickLabel.Font=Enum.Font.GothamBold
-    nickLabel.TextXAlignment=Enum.TextXAlignment.Left nickLabel.TextTransparency=0
-    inp=Instance.new("TextBox",cd)inp.Size=UDim2.new(1,-20,0,40)
-    inp.Position=UDim2.new(0,10,0,72)inp.BackgroundColor3=Color3.fromRGB(6,10,18)
-    inp.TextColor3=Color3.fromRGB(255,255,255)inp.PlaceholderText="Digite seu nick..."
-    inp.PlaceholderColor3=Color3.fromRGB(90,100,125)inp.Text=LP.Name
-    inp.TextSize=12 inp.Font=Enum.Font.GothamBold inp.BorderSizePixel=0
-    inp.ClearTextOnFocus=false inp.BackgroundTransparency=0 inp.TextXAlignment=Enum.TextXAlignment.Left
-    Instance.new("UICorner",inp).CornerRadius=UDim.new(0,10)
-    local inpPad=Instance.new("UIPadding",inp)inpPad.PaddingLeft=UDim.new(0,14)inpPad.PaddingRight=UDim.new(0,14)
-    local inpStroke=Instance.new("UIStroke",inp)inpStroke.Color=Color3.fromRGB(60,80,130)
-    inpStroke.Thickness=1.5 inpStroke.Transparency=0.4
-    local keyLabel=Instance.new("TextLabel",cd)keyLabel.Size=UDim2.new(1,-20,0,14)
-    keyLabel.Position=UDim2.new(0,10,0,124)keyLabel.BackgroundTransparency=1
-    keyLabel.Text="🔑  CHAVE DE ACESSO"keyLabel.TextColor3=Color3.fromRGB(255,200,80)
-    keyLabel.TextSize=9 keyLabel.Font=Enum.Font.GothamBold
-    keyLabel.TextXAlignment=Enum.TextXAlignment.Left keyLabel.TextTransparency=0
-    keyInp=Instance.new("TextBox",cd)keyInp.Size=UDim2.new(1,-20,0,40)
-    keyInp.Position=UDim2.new(0,10,0,144)keyInp.BackgroundColor3=Color3.fromRGB(6,10,18)
-    keyInp.TextColor3=Color3.fromRGB(255,220,100)keyInp.PlaceholderText="Digite sua KEY..."
-    keyInp.PlaceholderColor3=Color3.fromRGB(90,100,125)keyInp.Text=""
-    keyInp.TextSize=12 keyInp.Font=Enum.Font.GothamBold keyInp.BorderSizePixel=0
-    keyInp.ClearTextOnFocus=false keyInp.BackgroundTransparency=0 keyInp.TextXAlignment=Enum.TextXAlignment.Left
-    Instance.new("UICorner",keyInp).CornerRadius=UDim.new(0,10)
-    local keyPad=Instance.new("UIPadding",keyInp)keyPad.PaddingLeft=UDim.new(0,14)keyPad.PaddingRight=UDim.new(0,14)
-    local keyStroke=Instance.new("UIStroke",keyInp)keyStroke.Color=Color3.fromRGB(150,120,40)
-    keyStroke.Thickness=1.5 keyStroke.Transparency=0.4
-    keyBtn=Instance.new("TextButton",cd)keyBtn.Size=UDim2.new(1,-20,0,46)
-    keyBtn.Position=UDim2.new(0,10,0,200)keyBtn.BackgroundColor3=Color3.fromRGB(60,180,100)
-    keyBtn.Text="✅   VALIDAR KEY"keyBtn.TextColor3=Color3.fromRGB(255,255,255)
-    keyBtn.TextSize=13 keyBtn.Font=Enum.Font.GothamBold keyBtn.BackgroundTransparency=0
-    keyBtn.AutoButtonColor=false keyBtn.BorderSizePixel=0
-    Instance.new("UICorner",keyBtn).CornerRadius=UDim.new(0,12)
-    local keyBtnGrad=Instance.new("UIGradient",keyBtn)
-    keyBtnGrad.Color=ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(60,180,100)),ColorSequenceKeypoint.new(1,Color3.fromRGB(80,220,130))}
-    keyBtnGrad.Rotation=90
-    bt1=Instance.new("TextButton",cd)bt1.Size=UDim2.new(1,-20,0,38)
-    bt1.Position=UDim2.new(0,10,0,256)bt1.BackgroundColor3=Color3.fromRGB(40,70,140)
-    bt1.Text="📨   SOLICITAR ACESSO"bt1.TextColor3=Color3.fromRGB(255,255,255)
-    bt1.TextSize=11 bt1.Font=Enum.Font.GothamBold bt1.BackgroundTransparency=0
-    bt1.AutoButtonColor=false bt1.BorderSizePixel=0
-    Instance.new("UICorner",bt1).CornerRadius=UDim.new(0,12)
-    sts=Instance.new("TextLabel",ladoDir)sts.Size=UDim2.new(1,0,0,18)
-    sts.Position=UDim2.new(0,0,1,-30)sts.BackgroundTransparency=1
-    sts.Text=""sts.TextColor3=Color3.fromRGB(255,200,80)
-    sts.TextSize=10 sts.Font=Enum.Font.GothamBold sts.TextTransparency=0 sts.ZIndex=54
-    closeBtn=Instance.new("TextButton",fg)closeBtn.Size=UDim2.new(0,34,0,34)
-    closeBtn.Position=UDim2.new(1,-46,0,16)closeBtn.BackgroundColor3=Color3.fromRGB(60,30,40)
-    closeBtn.Text="✕"closeBtn.TextColor3=Color3.fromRGB(255,130,130)closeBtn.TextSize=16
-    closeBtn.Font=Enum.Font.GothamBold closeBtn.BorderSizePixel=0 closeBtn.AutoButtonColor=false
-    closeBtn.BackgroundTransparency=0 closeBtn.TextTransparency=0 closeBtn.ZIndex=55
-    Instance.new("UICorner",closeBtn).CornerRadius=UDim.new(0,10)
-    fg.Size=UDim2.new(0,600,0,300)fg.Position=UDim2.new(0.5,-300,0.5,-150)
-    T:Create(fg,TweenInfo.new(.7,EasingStyle.Quint,Enum.EasingDirection.Out),{Size=UDim2.new(0,780,0,420),Position=UDim2.new(0.5,-390,0.5,-210)}):Play()
-    task.spawn(function()while glow.Parent do T:Create(glow,TweenInfo.new(1.5),{ImageTransparency=0.6}):Play()task.wait(1.5)T:Create(glow,TweenInfo.new(1.5),{ImageTransparency=0.8}):Play()task.wait(1.5)end end)
-    task.spawn(function()while fStroke.Parent do T:Create(gradStroke,TweenInfo.new(3),{Rotation=45+360}):Play()task.wait(3)end end)
-    keyBtn.MouseEnter:Connect(function()T:Create(keyBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(80,220,130)}):Play()end)
-    keyBtn.MouseLeave:Connect(function()T:Create(keyBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(60,180,100)}):Play()end)
-    bt1.MouseEnter:Connect(function()T:Create(bt1,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(70,110,200)}):Play()end)
-    bt1.MouseLeave:Connect(function()T:Create(bt1,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(40,70,140)}):Play()end)
-    closeBtn.MouseEnter:Connect(function()T:Create(closeBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(200,50,70),TextColor3=Color3.fromRGB(255,255,255)}):Play()end)
-    closeBtn.MouseLeave:Connect(function()T:Create(closeBtn,TweenInfo.new(.15),{BackgroundColor3=Color3.fromRGB(60,30,40),TextColor3=Color3.fromRGB(255,130,130)}):Play()end)
-    inp.Focused:Connect(function()T:Create(inpStroke,TweenInfo.new(.2),{Color=Color3.fromRGB(120,180,255),Transparency=0}):Play()end)
-    inp.FocusLost:Connect(function()T:Create(inpStroke,TweenInfo.new(.2),{Color=Color3.fromRGB(60,80,130),Transparency=0.4}):Play()end)
-    keyInp.Focused:Connect(function()T:Create(keyStroke,TweenInfo.new(.2),{Color=Color3.fromRGB(255,200,80),Transparency=0}):Play()end)
-    keyInp.FocusLost:Connect(function()T:Create(keyStroke,TweenInfo.new(.2),{Color=Color3.fromRGB(150,120,40),Transparency=0.4}):Play()end)
-    closeBtn.MouseButton1Click:Connect(function()reg("❌ Fechou a intro")gui:Destroy()end)
-    keyBtn.MouseButton1Click:Connect(function()
-        local k=keyInp.Text:gsub("%s+","")
-        if k==""then sts.Text="❌ Digite uma KEY!"sts.TextColor3=Color3.fromRGB(255,80,80)return end
-        if KEYS_VALIDAS[k]then sts.Text="✅ KEY VÁLIDA! Entrando..."sts.TextColor3=Color3.fromRGB(80,255,140)reg("🔑 Key válida usada: "..k)task.wait(.8)abrirHub()
-        else sts.Text="❌ KEY inválida!"sts.TextColor3=Color3.fromRGB(255,80,80)reg("❌ Key inválida tentada: "..k)end
-    end)
-    bt1.MouseButton1Click:Connect(function()
-        local n=inp.Text:gsub("%s+","")
-        if n==""then sts.Text="❌ Digite seu nick!"sts.TextColor3=Color3.fromRGB(255,80,80)return end
-        sts.Text="⏳ Enviando solicitação..."sts.TextColor3=Color3.fromRGB(255,200,80)
-        reg("📨 Solicitação de acesso: "..n)enviarTermo(n,LP.UserId)task.wait(1.5)sts.Text="📨 Aguardando aprovação..."
-    end)
-end
-if AD then task.wait(.2)reg("👑 Proprietário entrou: "..LP.Name)abrirHub()end--========= ESTRUTURA =========
+local wg=Instance.new("UIGradient",w)wg.Color=ColorSequence.new(Color3.fromRGB(30,35,45),Color3.fromRGB(15,18,24))wg.Rotation=90
+w.Visible=true
+reg("✅ Painel ABERTO por "..LP.Name)--========= ESTRUTURA =========
 local sb=Instance.new("Frame",w)sb.Size=UDim2.new(0,180,1,0)
 sb.BackgroundColor3=Color3.fromRGB(12,14,20)
 Instance.new("UICorner",sb).CornerRadius=UDim.new(0,10)
@@ -304,8 +148,7 @@ task.spawn(function()
         if ok and r then local ok2,d=pcall(function()return game:GetService("HttpService"):JSONDecode(r)end)
         if ok2 and d and d.data and d.data[1]then ai.Image=d.data[1].imageUrl end end
     end
-end)
---===== TOAST =====
+end)--===== TOAST =====
 local tg=Instance.new("ScreenGui",game:GetService("CoreGui"))
 tg.Name="LHToast"tg.ResetOnSpawn=false tg.IgnoreGuiInset=true tg.DisplayOrder=99998
 local tc=Instance.new("Frame",tg)tc.Size=UDim2.new(0,320,1,-40)
@@ -775,7 +618,7 @@ btT(cM,"🕊️ Fly",function(v)
         if flyBG then flyBG:Destroy() flyBG=nil end
     end
 end,Color3.fromRGB(90,90,140))
---===== COMBATE (AIMBOT + TEAM CHECK) =====
+--===== COMBATE =====
 local cCb=card("COMBATE",sec["Combate"],Color3.fromRGB(255,100,100))
 local aimAtivo=false
 local aimFov=150
@@ -1191,7 +1034,7 @@ bt(cPer,"🔄 Resetar Tema",function()
     end
     reg("Tema resetado")
 end)
---===== ANTI-LAG =====
+--===== ANTI-LAG + INTERFACE =====
 local cL=card("ANTI-LAG",sec["Config"],Color3.fromRGB(120,255,120))
 local aA=false
 btT(cL,"⚡ Anti-Lag",function(v)
@@ -1210,7 +1053,7 @@ btT(cL,"⚡ Anti-Lag",function(v)
     else
         reg("Anti-Lag OFF")
     end
-end,Color3.fromRGB(40,80,40))--===== INTERFACE =====
+end,Color3.fromRGB(40,80,40))
 local cI2=card("INTERFACE",sec["Config"],Color3.fromRGB(150,200,255))
 bt(cI2,"📊 FPS",function()fL.Visible=not fL.Visible reg("FPS "..(fL.Visible and"ON"or"OFF"))end)
 local tms={{n="Pequeno",w=500,h=320},{n="Médio",w=700,h=440},{n="Grande",w=1000,h=600}}
@@ -1448,7 +1291,7 @@ bt(c5,"🗑️ Limpar",function()
     upL()
 end)
 end
---===== DRAG DA JANELA =====
+--===== DRAG =====
 local dragging,dragInput,dragStart,startPos
 local function updateDrag(input)
     local delta=input.Position-dragStart
@@ -1532,4 +1375,4 @@ pB.MouseButton1Click:Connect(function()
     reg("Tamanho: "..novoTam)
 end)
 sel("Config")
-print("[LOST HUB] Carregado! Intro + ESP respawn + Aimbot Mouse + Team Check.")
+print("[LOST HUB] Carregado SEM INTRO! Painel abre direto.")
