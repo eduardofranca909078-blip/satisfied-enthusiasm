@@ -1,4 +1,4 @@
---// LOST HUB v2.2 - SEM INTRO
+--// LOST HUB v2.3 - SEM INTRO + WALL CHECK
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -460,33 +460,19 @@ if eA then limE()for _,p in ipairs(P:GetPlayers())do if p~=LP then cP(p)end end 
 btT(cE,"❤ Só Vivos",function(v)eS=v reg("Só Vivos "..(v and"ON"or"OFF"))end,Color3.fromRGB(40,60,50))
 P.PlayerAdded:Connect(function(p)
     p.CharacterAdded:Connect(function()
-        if eA then
-            task.wait(1)
-            local ex=eF:FindFirstChild("P_"..p.Name)
-            if ex then ex:Destroy()end
-            cP(p)
-        end
+        if eA then task.wait(1) local ex=eF:FindFirstChild("P_"..p.Name) if ex then ex:Destroy()end cP(p) end
     end)
     if eA then task.wait(1)if p.Character then cP(p)end end
 end)
 for _,p in ipairs(P:GetPlayers())do
     if p~=LP then
         p.CharacterAdded:Connect(function()
-            if eA then
-                task.wait(1)
-                local ex=eF:FindFirstChild("P_"..p.Name)
-                if ex then ex:Destroy()end
-                cP(p)
-            end
+            if eA then task.wait(1) local ex=eF:FindFirstChild("P_"..p.Name) if ex then ex:Destroy()end cP(p) end
         end)
     end
 end
 LP.CharacterAdded:Connect(function()
-    if eA then
-        task.wait(1.5)
-        limE()
-        for _,p in ipairs(P:GetPlayers())do if p~=LP then cP(p)end end
-    end
+    if eA then task.wait(1.5) limE() for _,p in ipairs(P:GetPlayers())do if p~=LP then cP(p)end end end
 end)
 --===== MOVIMENTOS =====
 local cM=card("MOVIMENTOS",sec["Mov"],Color3.fromRGB(120,255,120))
@@ -618,14 +604,37 @@ btT(cM,"🕊️ Fly",function(v)
         if flyBG then flyBG:Destroy() flyBG=nil end
     end
 end,Color3.fromRGB(90,90,140))
---===== COMBATE =====
+--===== COMBATE (AIMBOT + TEAM CHECK + WALL CHECK) =====
 local cCb=card("COMBATE",sec["Combate"],Color3.fromRGB(255,100,100))
 local aimAtivo=false
 local aimFov=150
 local aimSuave=1
 local aimPart="Head"
 local teamCheck=false
+local wallCheck=true
 local aimMouseAtivo=false
+
+local function temParede(alvo)
+    if not wallCheck then return false end
+    local hrp=LP.Character and LP.Character:FindFirstChild("HumanoidRootPart")
+    if not hrp then return true end
+    local alvoHrp=alvo.Character and (alvo.Character:FindFirstChild("Head") or alvo.Character:FindFirstChild("HumanoidRootPart"))
+    if not alvoHrp then return true end
+    local origem=C.CFrame.Position
+    local direcao=alvoHrp.Position-origem
+    local params=RaycastParams.new()
+    params.FilterType=Enum.RaycastFilterType.Exclude
+    params.FilterDescendantsInstances={LP.Character,alvo.Character,workspace.CurrentCamera}
+    local resultado=workspace:Raycast(origem,direcao,params)
+    if resultado and resultado.Instance then
+        local parte=resultado.Instance
+        if parte.Transparency>=0.9 or parte.CanCollide==false then return false end
+        if parte.Material==Enum.Material.Water then return false end
+        return true
+    end
+    return false
+end
+
 local function isTeamMate(alvo)
     if not teamCheck then return false end
     local meuTime=LP.Team
@@ -633,6 +642,7 @@ local function isTeamMate(alvo)
     if meuTime and timeAlvo and meuTime==timeAlvo then return true end
     return false
 end
+
 btT(cCb,"🎯 Aimbot Toggle",function(v)
     aimAtivo=v
     if v then
@@ -644,7 +654,7 @@ btT(cCb,"🎯 Aimbot Toggle",function(v)
                     local menorDist=math.huge
                     local centro=Vector2.new(C.ViewportSize.X/2,C.ViewportSize.Y/2)
                     for _,p in ipairs(P:GetPlayers())do
-                        if p~=LP and p.Character and not isTeamMate(p)then
+                        if p~=LP and p.Character and not isTeamMate(p)and not temParede(p)then
                             local h=p.Character:FindFirstChild(aimPart) or p.Character:FindFirstChild("HumanoidRootPart")
                             if h then
                                 local tp,ot=C:WorldToViewportPoint(h.Position)
@@ -671,9 +681,11 @@ btT(cCb,"🎯 Aimbot Toggle",function(v)
         reg("Aimbot OFF")
     end
 end,Color3.fromRGB(90,30,30))
+
 bt(cCb,"👁️ Mirar Alvo",function()
     if not S.sel or not S.sel.Character then reg("Sem alvo")return end
     if isTeamMate(S.sel)then reg("❌ É do seu time!")return end
+    if temParede(S.sel)then reg("❌ Alvo atrás da parede!")return end
     local alvo=S.sel.Character:FindFirstChild("Head") or S.sel.Character:FindFirstChild("HumanoidRootPart")
     if not alvo then return end
     reg("Mira → "..S.sel.Name)
@@ -687,6 +699,7 @@ bt(cCb,"👁️ Mirar Alvo",function()
         end
     end)
 end,true)
+
 bt(cCb,"🔫 Atirar no Alvo",function()
     if not S.sel then return end
     pcall(function()
@@ -696,30 +709,41 @@ bt(cCb,"🔫 Atirar no Alvo",function()
     end)
     reg("Atirou: "..S.sel.Name)
 end,true)
+
 bt(cCb,"📏 FOV: 150",function()
     aimFov=aimFov+100
     if aimFov>500 then aimFov=100 end
     reg("FOV: "..aimFov)
 end)
+
 bt(cCb,"🎯 Parte: Head",function()
     if aimPart=="Head"then aimPart="HumanoidRootPart"
     elseif aimPart=="HumanoidRootPart"then aimPart="UpperTorso"
     else aimPart="Head"end
     reg("Parte: "..aimPart)
 end)
+
 bt(cCb,"⚡ Suavidade: 1x",function()
     aimSuave=aimSuave+1
     if aimSuave>10 then aimSuave=1 end
     reg("Suavidade: "..aimSuave.."x")
 end)
+
 btT(cCb,"👥 Team Check",function(v)
     teamCheck=v
     reg("Team Check "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(60,60,90))
+
+btT(cCb,"🧱 Wall Check",function(v)
+    wallCheck=v
+    reg("Wall Check "..(v and"ON"or"OFF"))
+end,Color3.fromRGB(70,50,90))
+
 btT(cCb,"🖱️ Aim no Mouse",function(v)
     aimMouseAtivo=v
     reg("AimMouse "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(90,30,30))
+
 R.RenderStepped:Connect(function()
     if not aimMouseAtivo then return end
     pcall(function()
@@ -1375,4 +1399,4 @@ pB.MouseButton1Click:Connect(function()
     reg("Tamanho: "..novoTam)
 end)
 sel("Config")
-print("[LOST HUB] Carregado SEM INTRO! Painel abre direto.")
+print("[LOST HUB] Carregado! Sem intro + Wall Check + ESP respawn + Team Check.")
