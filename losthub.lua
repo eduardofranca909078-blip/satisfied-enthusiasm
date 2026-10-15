@@ -1,4 +1,4 @@
---// LOST HUB v2.6 - COM CATEGORIA KAT
+--// LOST HUB v2.7 - KAT CORRIGIDO
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -1316,7 +1316,7 @@ bt(c5,"🗑️ Limpar",function()
     upL()
 end)
 end
---===== CATEGORIA KAT =====
+--===== CATEGORIA KAT (CORRIGIDA) =====
 local cKAT=card("KAT SILENT AIM",sec["KAT"],Color3.fromRGB(255,50,50))
 
 getgenv().KAT_SilentAim=false
@@ -1347,39 +1347,34 @@ local function GetClosestKAT()
     return closest
 end
 
-if hookmetamethod then
-    local oldNamecall=hookmetamethod(game,"__namecall",function(self,...)
+-- HOOK SEGURO: só intercepta Raycast quando Silent Aim tá ligado
+if hookmetamethod and getnamecallmethod then
+    local oldNamecall
+    oldNamecall=hookmetamethod(game,"__namecall",function(self,...)
         local method=getnamecallmethod()
-        local args={...}
-        if getgenv().KAT_SilentAim and (method=="FindPartOnRayWithIgnoreList" or method=="Raycast")then
+        if getgenv().KAT_SilentAim and method=="Raycast" then
+            local args={...}
             local target=GetClosestKAT()
             if target and target.Character then
                 local targetPart=target.Character:FindFirstChild(getgenv().KAT_Hitbox)
-                if targetPart then
-                    local origin
-                    if method=="Raycast" and type(args[1])=="table" then
-                        origin=args[1].Origin
-                    elseif type(args[1])=="userdata" then
-                        origin=args[1].Origin
-                    end
-                    if origin then
+                if targetPart and type(args[1])=="table" then
+                    local ok,origin=pcall(function()return args[1].Origin end)
+                    if ok and origin then
                         local direction=(targetPart.Position-origin).Unit*1000
-                        if method=="Raycast" and type(args[1])=="table" then
-                            args[1]=RaycastParams.new()
-                            args[1].FilterType=Enum.RaycastFilterType.Exclude
-                            args[1].FilterDescendantsInstances={LP.Character}
-                            args[1].IgnoreWater=true
-                        end
-                        args[2]=direction
+                        local newParams=RaycastParams.new()
+                        newParams.FilterType=Enum.RaycastFilterType.Exclude
+                        newParams.FilterDescendantsInstances={LP.Character}
+                        newParams.IgnoreWater=true
+                        return oldNamecall(self,newParams,direction,unpack(args,3))
                     end
                 end
             end
         end
-        return oldNamecall(self,unpack(args))
+        return oldNamecall(self,...)
     end)
 end
 
-btT(cKAT,"🎯 Silent Aim (Faca na Cabeça)",function(v)
+btT(cKAT,"🎯 Silent Aim",function(v)
     getgenv().KAT_SilentAim=v
     reg("KAT Silent Aim "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(90,20,20))
@@ -1411,7 +1406,7 @@ btT(cKAT,"🚀 Auto Lançar Faca",function(v)
                         mouse1click()
                     end)
                 end
-                task.wait(0.5)
+                task.wait(1)
             end
         end)
     end
@@ -1542,4 +1537,4 @@ pB.MouseButton1Click:Connect(function()
     reg("Tamanho: "..novoTam)
 end)
 sel("Config")
-print("[LOST HUB] Carregado! Sem intro + Wall Check + Fling antigo + Categoria KAT.")
+print("[LOST HUB] Carregado! Sem intro + Wall Check + Fling antigo + KAT corrigido.")
