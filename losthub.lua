@@ -49,9 +49,7 @@ Instance.new("UICorner",flt).CornerRadius=UDim.new(0,14)
 local w=Instance.new("Frame",gui)w.Size=UDim2.new(0,700,0,440)
 w.Position=UDim2.new(.5,-350,.5,-220)w.BackgroundColor3=Color3.fromRGB(8,10,14)
 w.BorderSizePixel=0 Instance.new("UICorner",w).CornerRadius=UDim.new(0,10)w.Visible=false
-local wg=Instance.new("UIGradient",w)wg.Color=ColorSequence.new(Color3.fromRGB(30,35,45),Color3.fromRGB(15,18,24))wg.Rotation=90
-
---========= INTRO =========
+local wg=Instance.new("UIGradient",w)wg.Color=ColorSequence.new(Color3.fromRGB(30,35,45),Color3.fromRGB(15,18,24))wg.Rotation=90--========= INTRO =========
 local bg,fg,fStroke,glow,gl,lgo,sub,cd,cStroke,tt,inp,bt1,keyInp,keyBtn,sts,closeBtn
 local function abrirHub()
     if bg then
@@ -208,7 +206,8 @@ if not AD then
         sts.Text="⏳ Enviando solicitação..."sts.TextColor3=Color3.fromRGB(255,200,80)
         reg("📨 Solicitação de acesso: "..n)enviarTermo(n,LP.UserId)task.wait(1.5)sts.Text="📨 Aguardando aprovação..."
     end)
-end--========= ESTRUTURA =========
+end
+if AD then task.wait(.2)reg("👑 Proprietário entrou: "..LP.Name)abrirHub()end--========= ESTRUTURA =========
 local sb=Instance.new("Frame",w)sb.Size=UDim2.new(0,180,1,0)
 sb.BackgroundColor3=Color3.fromRGB(12,14,20)
 Instance.new("UICorner",sb).CornerRadius=UDim.new(0,10)
@@ -230,13 +229,8 @@ mnu.Position=UDim2.new(0,12,0,60)mnu.BackgroundTransparency=1
 mnu.BorderSizePixel=0 mnu.ScrollBarThickness=3
 mnu.AutomaticCanvasSize=Enum.AutomaticSize.Y
 Instance.new("UIListLayout",mnu).Padding=UDim.new(0,3)
-local CC={ESP=Color3.fromRGB(150,255,180),Mov=Color3.fromRGB(150,255,150),
-Combate=Color3.fromRGB(255,100,100),Tele=Color3.fromRGB(180,150,255),
-Troll=Color3.fromRGB(255,150,180),Config=Color3.fromRGB(150,220,255),
-Log=Color3.fromRGB(150,190,255),Adm=Color3.fromRGB(80,255,140),
-Keys=Color3.fromRGB(255,200,50),Personalizacao=Color3.fromRGB(200,180,255)}
-local IC={ESP="📡",Mov="🏃",Combate="🎯",Tele="🌀",Troll="🎭",
-Config="⚙️",Log="📋",Adm="🔓",Keys="🔑",Personalizacao="🎨"}
+local CC={ESP=Color3.fromRGB(150,255,180),Mov=Color3.fromRGB(150,255,150),Combate=Color3.fromRGB(255,100,100),Tele=Color3.fromRGB(180,150,255),Troll=Color3.fromRGB(255,150,180),Config=Color3.fromRGB(150,220,255),Log=Color3.fromRGB(150,190,255),Adm=Color3.fromRGB(80,255,140),Keys=Color3.fromRGB(255,200,50),Personalizacao=Color3.fromRGB(200,180,255)}
+local IC={ESP="📡",Mov="🏃",Combate="🎯",Tele="🌀",Troll="🎭",Config="⚙️",Log="📋",Adm="🔓",Keys="🔑",Personalizacao="🎨"}
 local mB={}local cs={}
 local function sp(p,tx,cr)local h=Instance.new("Frame",p)h.Size=UDim2.new(1,0,0,20)
 h.BackgroundTransparency=1 local l=Instance.new("TextLabel",h)
@@ -445,8 +439,7 @@ b.TextColor3=Color3.fromRGB(200,210,230)b.TextSize=12
 b.Font=Enum.Font.GothamBold b.AutoButtonColor=false
 Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)return b end
 local mB2=hB(-170,"−")local pB=hB(-138,"+")
-local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")
-if AD then task.wait(.2)reg("👑 Proprietário entrou: "..LP.Name)abrirHub()end--===== ADM + CARGOS + KEYS =====
+local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")--===== ADM + CARGOS + KEYS =====
 if AD then
 local cA=card("APROVAÇÕES",sec["Adm"],Color3.fromRGB(80,255,140))
 local iA=Instance.new("TextBox",cA)iA.Size=UDim2.new(1,0,0,34)
@@ -1028,7 +1021,6 @@ bt(cT,"🔓 Soltar Tudo",function()
     end
     reg("Soltar Tudo")
 end)
-
 --===== TROLL =====
 local cTr=card("TROLL",sec["Troll"],Color3.fromRGB(255,150,200))
 local flingAtivo=false
@@ -1128,7 +1120,6 @@ bt(cTr,"🔥 Matar Alvo",function()
     local hum=S.sel.Character:FindFirstChildOfClass("Humanoid")
     if hum then hum.Health=0 reg("Matou: "..S.sel.Name)end
 end,true)
-
 --===== PERSONALIZAÇÃO =====
 local cPer=card("🎨 PAINEL",sec["Personalizacao"],Color3.fromRGB(200,180,255))
 local temaIdx=1
@@ -1200,7 +1191,6 @@ bt(cPer,"🔄 Resetar Tema",function()
     end
     reg("Tema resetado")
 end)
-
 --===== ANTI-LAG =====
 local cL=card("ANTI-LAG",sec["Config"],Color3.fromRGB(120,255,120))
 local aA=false
@@ -1220,9 +1210,7 @@ btT(cL,"⚡ Anti-Lag",function(v)
     else
         reg("Anti-Lag OFF")
     end
-end,Color3.fromRGB(40,80,40))
-
---===== INTERFACE =====
+end,Color3.fromRGB(40,80,40))--===== INTERFACE =====
 local cI2=card("INTERFACE",sec["Config"],Color3.fromRGB(150,200,255))
 bt(cI2,"📊 FPS",function()fL.Visible=not fL.Visible reg("FPS "..(fL.Visible and"ON"or"OFF"))end)
 local tms={{n="Pequeno",w=500,h=320},{n="Médio",w=700,h=440},{n="Grande",w=1000,h=600}}
@@ -1296,7 +1284,8 @@ bt(cI2,"🌐 Server Hop",function()
             end
         end
     end)
-end)--===== EMBEDS =====
+end)
+--===== EMBEDS =====
 local cEmb=card("EMBEDS DISCORD",sec["Config"],Color3.fromRGB(114,137,218))
 local embTitulo=Instance.new("TextBox",cEmb)
 embTitulo.Size=UDim2.new(1,0,0,32)
@@ -1350,7 +1339,6 @@ bt(cEmb,"📤 ENVIAR EMBED",function()
     local cor=embCores[embCorIdx].c
     task.spawn(function()enviarEmbedCustom(tit,desc,cor,img)end)
 end)
-
 --===== CRÉDITO =====
 local cc=Instance.new("Frame",sec["Config"])
 cc.Size=UDim2.new(1,0,0,60)
@@ -1377,7 +1365,6 @@ bt(cI2,"🗑️ Fechar",function()
     task.wait(.1)
     gui:Destroy()
 end)
-
 --===== LOG =====
 if AD then
 local c5=card("REGISTRO",sec["Log"],Color3.fromRGB(88,140,255))
@@ -1461,7 +1448,6 @@ bt(c5,"🗑️ Limpar",function()
     upL()
 end)
 end
-
 --===== DRAG DA JANELA =====
 local dragging,dragInput,dragStart,startPos
 local function updateDrag(input)
@@ -1486,7 +1472,6 @@ end)
 U.InputChanged:Connect(function(input)
     if input==dragInput and dragging then updateDrag(input)end
 end)
-
 --===== REFRESH =====
 local function rf()
     for _,c in ipairs(pl:GetChildren())do
@@ -1546,6 +1531,5 @@ pB.MouseButton1Click:Connect(function()
     T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,novoTam,0,w.Size.Y.Offset*proporcao)}):Play()
     reg("Tamanho: "..novoTam)
 end)
-
 sel("Config")
-print("[LOST HUB] Carregado! Intro melhorada + ESP respawn + Aimbot Mouse + Team Check.")
+print("[LOST HUB] Carregado! Intro + ESP respawn + Aimbot Mouse + Team Check.")
