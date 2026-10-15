@@ -1,4 +1,4 @@
---// LOST HUB v2.1 - COMPLETO COM INTRO MELHORADA + TEAM CHECK
+--// LOST HUB v2.1
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -11,18 +11,17 @@ local WEBHOOK="https://discord.com/api/webhooks/1559481604387246170/aAs30L9QQbfX
 local WEBHOOK_TERMO="https://discord.com/api/webhooks/1559505901507973197/ySCrPBvol1fS3HSf2TNoxLczboSG0PzT1GuW_ZYDs2rBPoMDMMSrfq2Boh5WBlZNkY8X"
 local WEBHOOK_HUB="https://discord.com/api/webhooks/1559521915377553489/hyrbUV39Fey47KJBDDXcTOFFJA78sQaRltvWEv0vYRkXwj1_ZHfOT0DUCuJohf30kGbV"
 local function enviarTermo(nick,id)if WEBHOOK_TERMO==""then return end
-local e={title="📋 TERMO DE USO E RESPONSABILIDADE",description="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n⚠️ **ATENÇÃO: LEIA COM ATENÇÃO ANTES DE USAR QUALQUER FERRAMENTA.**\n\nAo obter, instalar, rodar ou fazer uso de qualquer recurso, sistema ou software fornecido pela **LOST HUB**, você confirma que entende que toda a responsabilidade pelo uso é **sua**, e concorda com as cláusulas listadas abaixo.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n📌 **01. SOBRE O USO**\nA **LOST HUB** não se responsabiliza por qualquer uso inadequado, irregular, proibido ou não permitido de suas ferramentas.\n\n📌 **02. SOBRE POSSÍVEIS PREJUÍZOS**\nDentro do que a lei permite, não nos responsabilizamos por qualquer prejuízo, perda de dados, falhas em aparelhos, punições, bloqueios de conta ou outras situações decorrentes do uso dos softwares.\n\n📌 **03. SOBRE LEGALIDADE**\nÉ dever do usuário assegurar que o uso das ferramentas esteja em conformidade com as leis em vigor.\n\n📌 **04. SOBRE PRÁTICAS NÃO PERMITIDAS**\nFica expressamente proibido utilizar nossos recursos para causar dano a terceiros.\n\n📌 **05. SOBRE VERSÕES ALTERADAS**\nNão nos responsabilizamos por problemas causados por versões modificadas.\n\n📌 **06. SOBRE A ACEITAÇÃO**\nAo fazer uso de qualquer software fornecido pela **LOST HUB**, o usuário assume total responsabilidade por seus atos.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n🚨 **COMUNICADO FINAL**\nCada pessoa é responsável por suas escolhas.\n\n🔒 **OBSERVAÇÃO:** Este documento não anula nem reduz responsabilidades que, por lei, não podem ser afastadas.\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n👤 **Solicitante:** `"..nick.."`\n🆔 **ID:** `"..id.."`\n📅 **Data:** "..os.date("%d/%m/%Y às %H:%M:%S"),color=16711680,footer={text="LOST HUB • Documento de Uso"},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
+local e={title="📋 TERMO DE USO",description="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n⚠️ LEIA COM ATENÇÃO\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n👤 "..nick.."\n🆔 "..id.."\n📅 "..os.date("%d/%m/%Y às %H:%M:%S"),color=16711680,footer={text="LOST HUB"},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
 pcall(function()game:GetService("HttpService"):RequestAsync({Url=WEBHOOK_TERMO,Method="POST",Headers={["Content-Type"]="application/json"},Body=game:GetService("HttpService"):JSONEncode({username="LOST HUB",embeds={e}})})end)end
 local function enviarEmbedCustom(titulo,descricao,cor,imagemUrl)if WEBHOOK_HUB==""then return end
-local e={title=titulo or "📢 AVISO LOST HUB",description=descricao or "Sem descrição.",color=cor or 3447003,image={url=imagemUrl or ""},footer={text="LOST HUB • "..os.date("%d/%m/%Y %H:%M:%S")},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
-pcall(function()game:GetService("HttpService"):RequestAsync({Url=WEBHOOK_HUB,Method="POST",Headers={["Content-Type"]="application/json"},Body=game:GetService("HttpService"):JSONEncode({username="LOST HUB",embeds={e}})})end)
-reg("📤 Embed enviado: "..titulo)end
+local e={title=titulo or "📢 AVISO",description=descricao or "-",color=cor or 3447003,image={url=imagemUrl or ""},footer={text="LOST HUB • "..os.date("%d/%m/%Y %H:%M:%S")},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
+pcall(function()game:GetService("HttpService"):RequestAsync({Url=WEBHOOK_HUB,Method="POST",Headers={["Content-Type"]="application/json"},Body=game:GetService("HttpService"):JSONEncode({username="LOST HUB",embeds={e}})})end)end
 local filaDiscord={}local enviandoFila=false
 local function processarFila()if enviandoFila then return end enviandoFila=true
 task.spawn(function()while #filaDiscord>0 do local lote={}local cont=0
 while #filaDiscord>0 and cont<20 do table.insert(lote,table.remove(filaDiscord,1))cont=cont+1 end
 local desc=""for _,l in ipairs(lote)do desc=desc.."`"..l.."`\n" end
-local e={title="📋 LOG LOST HUB",description=desc,color=3447003,footer={text="🕐 "..os.date("%d/%m/%Y %H:%M:%S").." • "..LP.Name},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
+local e={title="📋 LOG",description=desc,color=3447003,footer={text="🕐 "..os.date("%d/%m/%Y %H:%M:%S")},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
 if WEBHOOK~=""then pcall(function()game:GetService("HttpService"):RequestAsync({Url=WEBHOOK,Method="POST",Headers={["Content-Type"]="application/json"},Body=game:GetService("HttpService"):JSONEncode({username="LOST HUB",embeds={e}})})end)end
 task.wait(1.5)end enviandoFila=false end)end
 local function reg(a)local h=os.date("%d/%m/%Y %H:%M:%S")
@@ -52,7 +51,7 @@ w.Position=UDim2.new(.5,-350,.5,-220)w.BackgroundColor3=Color3.fromRGB(8,10,14)
 w.BorderSizePixel=0 Instance.new("UICorner",w).CornerRadius=UDim.new(0,10)w.Visible=false
 local wg=Instance.new("UIGradient",w)wg.Color=ColorSequence.new(Color3.fromRGB(30,35,45),Color3.fromRGB(15,18,24))wg.Rotation=90
 
---========= INTRO MELHORADA =========
+--========= INTRO =========
 local bg,fg,fStroke,glow,gl,lgo,sub,cd,cStroke,tt,inp,bt1,keyInp,keyBtn,sts,closeBtn
 local function abrirHub()
     if bg then
@@ -209,8 +208,7 @@ if not AD then
         sts.Text="⏳ Enviando solicitação..."sts.TextColor3=Color3.fromRGB(255,200,80)
         reg("📨 Solicitação de acesso: "..n)enviarTermo(n,LP.UserId)task.wait(1.5)sts.Text="📨 Aguardando aprovação..."
     end)
-end
-if AD then task.wait(.2)reg("👑 Proprietário entrou: "..LP.Name)abrirHub()end--========= ESTRUTURA =========
+end--========= ESTRUTURA =========
 local sb=Instance.new("Frame",w)sb.Size=UDim2.new(0,180,1,0)
 sb.BackgroundColor3=Color3.fromRGB(12,14,20)
 Instance.new("UICorner",sb).CornerRadius=UDim.new(0,10)
@@ -357,7 +355,7 @@ elseif al:find("on")or al:find("aprov")or al:find("aberto")or al:find("entrou")o
 elseif al:find("erro")or al:find("falh")or al:find("sem")then tp="err"
 elseif al:find("off")or al:find("fechou")or al:find("parou")or al:find("minimizou")then tp="warn"end
 toast(a,tp)end
---===== FUNÇÕES =====
+--===== FUNÇÕES BASE =====
 local function card(ti,p,cr)local c=Instance.new("Frame",p)
 c.Size=UDim2.new(1,0,0,0)c.AutomaticSize=Enum.AutomaticSize.Y
 c.BackgroundColor3=Color3.fromRGB(22,26,34)
@@ -447,7 +445,8 @@ b.TextColor3=Color3.fromRGB(200,210,230)b.TextSize=12
 b.Font=Enum.Font.GothamBold b.AutoButtonColor=false
 Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)return b end
 local mB2=hB(-170,"−")local pB=hB(-138,"+")
-local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")--===== ADM + CARGOS + KEYS =====
+local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")
+if AD then task.wait(.2)reg("👑 Proprietário entrou: "..LP.Name)abrirHub()end--===== ADM + CARGOS + KEYS =====
 if AD then
 local cA=card("APROVAÇÕES",sec["Adm"],Color3.fromRGB(80,255,140))
 local iA=Instance.new("TextBox",cA)iA.Size=UDim2.new(1,0,0,34)
@@ -570,7 +569,7 @@ local k="LOST-HUB-"..math.random(100000,999999)
 KEYS_VALIDAS[k]=true salvarKeys() reg("🎲 Key: "..k)
 iK.Text=k end,true)
 end
---===== ESP MELHORADO (RESPAWN) =====
+--===== ESP =====
 local cE=card("ESP",sec["ESP"],Color3.fromRGB(120,255,180))
 local eF=Instance.new("Folder",gui)eF.Name="LHEsp"
 local eA=false local eC=Color3.fromRGB(0,255,140)
@@ -791,7 +790,6 @@ local aimSuave=1
 local aimPart="Head"
 local teamCheck=false
 local aimMouseAtivo=false
-
 local function isTeamMate(alvo)
     if not teamCheck then return false end
     local meuTime=LP.Team
@@ -799,7 +797,6 @@ local function isTeamMate(alvo)
     if meuTime and timeAlvo and meuTime==timeAlvo then return true end
     return false
 end
-
 btT(cCb,"🎯 Aimbot Toggle",function(v)
     aimAtivo=v
     if v then
@@ -838,7 +835,6 @@ btT(cCb,"🎯 Aimbot Toggle",function(v)
         reg("Aimbot OFF")
     end
 end,Color3.fromRGB(90,30,30))
-
 bt(cCb,"👁️ Mirar Alvo",function()
     if not S.sel or not S.sel.Character then reg("Sem alvo")return end
     if isTeamMate(S.sel)then reg("❌ É do seu time!")return end
@@ -855,7 +851,6 @@ bt(cCb,"👁️ Mirar Alvo",function()
         end
     end)
 end,true)
-
 bt(cCb,"🔫 Atirar no Alvo",function()
     if not S.sel then return end
     pcall(function()
@@ -865,36 +860,30 @@ bt(cCb,"🔫 Atirar no Alvo",function()
     end)
     reg("Atirou: "..S.sel.Name)
 end,true)
-
 bt(cCb,"📏 FOV: 150",function()
     aimFov=aimFov+100
     if aimFov>500 then aimFov=100 end
     reg("FOV: "..aimFov)
 end)
-
 bt(cCb,"🎯 Parte: Head",function()
     if aimPart=="Head"then aimPart="HumanoidRootPart"
     elseif aimPart=="HumanoidRootPart"then aimPart="UpperTorso"
     else aimPart="Head"end
     reg("Parte: "..aimPart)
 end)
-
 bt(cCb,"⚡ Suavidade: 1x",function()
     aimSuave=aimSuave+1
     if aimSuave>10 then aimSuave=1 end
     reg("Suavidade: "..aimSuave.."x")
 end)
-
 btT(cCb,"👥 Team Check",function(v)
     teamCheck=v
     reg("Team Check "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(60,60,90))
-
 btT(cCb,"🖱️ Aim no Mouse",function(v)
     aimMouseAtivo=v
     reg("AimMouse "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(90,30,30))
-
 R.RenderStepped:Connect(function()
     if not aimMouseAtivo then return end
     pcall(function()
@@ -1307,9 +1296,7 @@ bt(cI2,"🌐 Server Hop",function()
             end
         end
     end)
-end)
-
---===== EMBEDS =====
+end)--===== EMBEDS =====
 local cEmb=card("EMBEDS DISCORD",sec["Config"],Color3.fromRGB(114,137,218))
 local embTitulo=Instance.new("TextBox",cEmb)
 embTitulo.Size=UDim2.new(1,0,0,32)
@@ -1561,4 +1548,4 @@ pB.MouseButton1Click:Connect(function()
 end)
 
 sel("Config")
-print("[LOST HUB] Carregado! Intro melhorada + ESP respawn + Aimbot Mouse + Team Check ativos.")
+print("[LOST HUB] Carregado! Intro melhorada + ESP respawn + Aimbot Mouse + Team Check.")
