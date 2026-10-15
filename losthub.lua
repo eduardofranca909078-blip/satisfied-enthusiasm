@@ -1,4 +1,4 @@
---// LOST HUB v2.7 - KAT CORRIGIDO
+--// LOST HUB v2.8 - SILENT AIM NO COMBATE
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -73,8 +73,8 @@ mnu.Position=UDim2.new(0,12,0,60)mnu.BackgroundTransparency=1
 mnu.BorderSizePixel=0 mnu.ScrollBarThickness=3
 mnu.AutomaticCanvasSize=Enum.AutomaticSize.Y
 Instance.new("UIListLayout",mnu).Padding=UDim.new(0,3)
-local CC={ESP=Color3.fromRGB(150,255,180),Mov=Color3.fromRGB(150,255,150),Combate=Color3.fromRGB(255,100,100),Tele=Color3.fromRGB(180,150,255),Troll=Color3.fromRGB(255,150,180),Config=Color3.fromRGB(150,220,255),Log=Color3.fromRGB(150,190,255),Adm=Color3.fromRGB(80,255,140),Keys=Color3.fromRGB(255,200,50),Personalizacao=Color3.fromRGB(200,180,255),KAT=Color3.fromRGB(255,50,50)}
-local IC={ESP="📡",Mov="🏃",Combate="🎯",Tele="🌀",Troll="🎭",Config="⚙️",Log="📋",Adm="🔓",Keys="🔑",Personalizacao="🎨",KAT="🔪"}
+local CC={ESP=Color3.fromRGB(150,255,180),Mov=Color3.fromRGB(150,255,150),Combate=Color3.fromRGB(255,100,100),Tele=Color3.fromRGB(180,150,255),Troll=Color3.fromRGB(255,150,180),Config=Color3.fromRGB(150,220,255),Log=Color3.fromRGB(150,190,255),Adm=Color3.fromRGB(80,255,140),Keys=Color3.fromRGB(255,200,50),Personalizacao=Color3.fromRGB(200,180,255)}
+local IC={ESP="📡",Mov="🏃",Combate="🎯",Tele="🌀",Troll="🎭",Config="⚙️",Log="📋",Adm="🔓",Keys="🔑",Personalizacao="🎨"}
 local mB={}local cs={}
 local function sp(p,tx,cr)local h=Instance.new("Frame",p)h.Size=UDim2.new(1,0,0,20)
 h.BackgroundTransparency=1 local l=Instance.new("TextLabel",h)
@@ -98,8 +98,6 @@ sp(mnu,"AÇÕES",Color3.fromRGB(180,120,180))
 cat("Combate")cat("Tele")cat("Troll")
 sp(mnu,"CUSTOM",Color3.fromRGB(200,180,255))
 cat("Personalizacao")
-sp(mnu,"KAT",Color3.fromRGB(255,50,50))
-cat("KAT")
 sp(mnu,"SISTEMA",Color3.fromRGB(100,150,200))
 cat("Config")if AD then cat("Adm")end if AD then cat("Keys")end if AD then cat("Log")end
 local jT=Instance.new("TextLabel",sb)jT.Size=UDim2.new(1,-24,0,14)
@@ -243,48 +241,7 @@ Instance.new("UICorner",th).CornerRadius=UDim.new(1,0)
 local btn=Instance.new("TextButton",h)btn.Size=UDim2.new(1,0,1,0)
 btn.BackgroundTransparency=1 btn.Text=""
 local a=false
-btn.MouseButton1Click:Connect(function()
-a=not a
-if a then T:Create(trk,TweenInfo.new(.2),{BackgroundColor3=Color3.fromRGB(80,200,120)}):Play()
-T:Create(th,TweenInfo.new(.2),{Position=UDim2.new(1,-20,.5,-9)}):Play()
-else T:Create(trk,TweenInfo.new(.2),{BackgroundColor3=Color3.fromRGB(50,55,65)}):Play()
-T:Create(th,TweenInfo.new(.2),{Position=UDim2.new(0,2,.5,-9)}):Play()end
-reg(tx.." "..(a and"ON"or"OFF"))cb(a)end)return h end
-local sec={}
-for _,n in ipairs(cs)do local sc=Instance.new("ScrollingFrame",ct)
-sc.Size=UDim2.new(1,0,1,0)sc.BackgroundTransparency=1
-sc.ScrollBarThickness=4 sc.AutomaticCanvasSize=Enum.AutomaticSize.Y
-sc.Visible=false
-Instance.new("UIListLayout",sc).Padding=UDim.new(0,8)sec[n]=sc end
-local function sel(n)for nn,b in pairs(mB)do local cr=CC[nn]or Color3.fromRGB(150,160,180)
-if nn==n then b.BackgroundColor3=cr b.TextColor3=Color3.fromRGB(15,18,24)
-else b.BackgroundColor3=Color3.fromRGB(22,26,34)b.TextColor3=cr end end
-for nn,s in pairs(sec)do s.Visible=(nn==n)end end
-for n,b in pairs(mB)do b.MouseButton1Click:Connect(function()sel(n)end)end
---===== HEADER =====
-local mh=Instance.new("TextLabel",mn)mh.Size=UDim2.new(1,-180,0,18)
-mh.Position=UDim2.new(0,18,0,14)mh.BackgroundTransparency=1
-mh.Text="LOST HUB"mh.TextColor3=Color3.fromRGB(255,255,255)
-mh.TextSize=13 mh.Font=Enum.Font.GothamBold mh.TextXAlignment=Enum.TextXAlignment.Left
-local fL=Instance.new("TextLabel",mn)fL.Size=UDim2.new(0,150,0,18)
-fL.Position=UDim2.new(0,180,0,14)fL.BackgroundTransparency=1
-fL.Text="FPS: -- | --ms"fL.TextColor3=Color3.fromRGB(120,255,150)
-fL.TextSize=12 fL.Font=Enum.Font.GothamBold
-local fr=0 local ti=tick()
-task.spawn(function()while fL.Parent do
-fr=fr+1 local a=tick()
-if a-ti>=1 then local f=math.floor(fr/(a-ti))fr=0 ti=a
-local p=0 pcall(function()p=math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())end)
-fL.Text="FPS: "..f.." | "..p.."ms"end
-R.RenderStepped:Wait()end end)
-local function hB(x,tx)local b=Instance.new("TextButton",mn)
-b.Size=UDim2.new(0,28,0,28)b.Position=UDim2.new(1,x,0,14)
-b.BackgroundColor3=Color3.fromRGB(22,26,34)b.Text=tx
-b.TextColor3=Color3.fromRGB(200,210,230)b.TextSize=12
-b.Font=Enum.Font.GothamBold b.AutoButtonColor=false
-Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)return b end
-local mB2=hB(-170,"−")local pB=hB(-138,"+")
-local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")--===== ADM + CARGOS + KEYS =====
+btn.MouseButton1Click:Connect(function()--===== ADM + CARGOS + KEYS =====
 if AD then
 local cA=card("APROVAÇÕES",sec["Adm"],Color3.fromRGB(80,255,140))
 local iA=Instance.new("TextBox",cA)iA.Size=UDim2.new(1,0,0,34)
@@ -606,7 +563,7 @@ btT(cM,"🕊️ Fly",function(v)
         if flyBG then flyBG:Destroy() flyBG=nil end
     end
 end,Color3.fromRGB(90,90,140))
---===== COMBATE =====
+--===== COMBATE + SILENT AIM =====
 local cCb=card("COMBATE",sec["Combate"],Color3.fromRGB(255,100,100))
 local aimAtivo=false
 local aimFov=150
@@ -615,6 +572,8 @@ local aimPart="Head"
 local teamCheck=false
 local wallCheck=true
 local aimMouseAtivo=false
+local silentAtivo=false
+
 local function temParede(alvo)
     if not wallCheck then return false end
     local minhaChar=LP.Character
@@ -642,6 +601,7 @@ local function temParede(alvo)
     end
     return false
 end
+
 local function isTeamMate(alvo)
     if not teamCheck then return false end
     local meuTime=LP.Team
@@ -649,6 +609,7 @@ local function isTeamMate(alvo)
     if meuTime and timeAlvo and meuTime==timeAlvo then return true end
     return false
 end
+
 btT(cCb,"🎯 Aimbot Toggle",function(v)
     aimAtivo=v
     if v then
@@ -691,6 +652,48 @@ btT(cCb,"🎯 Aimbot Toggle",function(v)
         reg("Aimbot OFF")
     end
 end,Color3.fromRGB(90,30,30))
+
+btT(cCb,"🎯 Silent Aim (Mouse Lock)",function(v)
+    silentAtivo=v
+    reg("Silent Aim "..(v and"ON"or"OFF"))
+    if v then
+        task.spawn(function()
+            while silentAtivo do
+                pcall(function()
+                    local myChar=LP.Character
+                    if myChar then
+                        local myHrp=myChar:FindFirstChild("HumanoidRootPart")
+                        if myHrp then
+                            local melhor=nil
+                            local menorDist=getgenv().KAT_FOV or 400
+                            for _,p in ipairs(P:GetPlayers())do
+                                if p~=LP and p.Character then
+                                    if not isTeamMate(p)then
+                                        local targetPart=p.Character:FindFirstChild(aimPart) or p.Character:FindFirstChild("HumanoidRootPart")
+                                        if targetPart then
+                                            local dist=(targetPart.Position-myHrp.Position).Magnitude
+                                            if dist<menorDist then
+                                                menorDist=dist
+                                                melhor=targetPart
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                            if melhor then
+                                local camPos=C.CFrame.Position
+                                local dir=(melhor.Position-camPos).Unit
+                                C.CFrame=CFrame.new(camPos,camPos+dir)
+                            end
+                        end
+                    end
+                end)
+                R.RenderStepped:Wait()
+            end
+        end)
+    end
+end,Color3.fromRGB(90,30,30))
+
 bt(cCb,"👁️ Mirar Alvo",function()
     if not S.sel or not S.sel.Character then reg("Sem alvo")return end
     if isTeamMate(S.sel)then reg("❌ É do seu time!")return end
@@ -708,6 +711,7 @@ bt(cCb,"👁️ Mirar Alvo",function()
         end
     end)
 end,true)
+
 bt(cCb,"🔫 Atirar no Alvo",function()
     if not S.sel then return end
     pcall(function()
@@ -717,34 +721,41 @@ bt(cCb,"🔫 Atirar no Alvo",function()
     end)
     reg("Atirou: "..S.sel.Name)
 end,true)
+
 bt(cCb,"📏 FOV: 150",function()
     aimFov=aimFov+100
     if aimFov>500 then aimFov=100 end
     reg("FOV: "..aimFov)
 end)
+
 bt(cCb,"🎯 Parte: Head",function()
     if aimPart=="Head"then aimPart="HumanoidRootPart"
     elseif aimPart=="HumanoidRootPart"then aimPart="UpperTorso"
     else aimPart="Head"end
     reg("Parte: "..aimPart)
 end)
+
 bt(cCb,"⚡ Suavidade: 1x",function()
     aimSuave=aimSuave+1
     if aimSuave>10 then aimSuave=1 end
     reg("Suavidade: "..aimSuave.."x")
 end)
+
 btT(cCb,"👥 Team Check",function(v)
     teamCheck=v
     reg("Team Check "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(60,60,90))
+
 btT(cCb,"🧱 Wall Check",function(v)
     wallCheck=v
     reg("Wall Check "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(70,50,90))
+
 btT(cCb,"🖱️ Aim no Mouse",function(v)
     aimMouseAtivo=v
     reg("AimMouse "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(90,30,30))
+
 R.RenderStepped:Connect(function()
     if not aimMouseAtivo then return end
     pcall(function()
@@ -757,8 +768,7 @@ R.RenderStepped:Connect(function()
             end
         end
     end)
-end)
---===== TELECINESE =====
+end)--===== TELECINESE =====
 local cT=card("TELECINESE",sec["Tele"],Color3.fromRGB(180,150,255))
 local function acC()
     if not LP.Character then return nil end
@@ -1059,7 +1069,8 @@ bt(cPer,"🔄 Resetar Tema",function()
         pcall(function()T:Create(b,TweenInfo.new(.3),{TextColor3=cr}):Play()end)
     end
     reg("Tema resetado")
-end)--===== ANTI-LAG + INTERFACE =====
+end)
+--===== ANTI-LAG + INTERFACE =====
 local cL=card("ANTI-LAG",sec["Config"],Color3.fromRGB(120,255,120))
 local aA=false
 btT(cL,"⚡ Anti-Lag",function(v)
@@ -1316,143 +1327,6 @@ bt(c5,"🗑️ Limpar",function()
     upL()
 end)
 end
---===== CATEGORIA KAT (CORRIGIDA) =====
-local cKAT=card("KAT SILENT AIM",sec["KAT"],Color3.fromRGB(255,50,50))
-
-getgenv().KAT_SilentAim=false
-getgenv().KAT_FOV=400
-getgenv().KAT_Hitbox="Head"
-getgenv().KAT_AutoThrow=false
-
-local function GetClosestKAT()
-    local closest=nil
-    local shortest=getgenv().KAT_FOV
-    local myChar=LP.Character
-    if not myChar then return nil end
-    local myHrp=myChar:FindFirstChild("HumanoidRootPart")
-    if not myHrp then return nil end
-    for _,player in ipairs(P:GetPlayers())do
-        if player~=LP and player.Character then
-            local targetPart=player.Character:FindFirstChild(getgenv().KAT_Hitbox)
-            local targetHrp=player.Character:FindFirstChild("HumanoidRootPart")
-            if targetPart and targetHrp then
-                local dist=(targetHrp.Position-myHrp.Position).Magnitude
-                if dist<shortest then
-                    shortest=dist
-                    closest=player
-                end
-            end
-        end
-    end
-    return closest
-end
-
--- HOOK SEGURO: só intercepta Raycast quando Silent Aim tá ligado
-if hookmetamethod and getnamecallmethod then
-    local oldNamecall
-    oldNamecall=hookmetamethod(game,"__namecall",function(self,...)
-        local method=getnamecallmethod()
-        if getgenv().KAT_SilentAim and method=="Raycast" then
-            local args={...}
-            local target=GetClosestKAT()
-            if target and target.Character then
-                local targetPart=target.Character:FindFirstChild(getgenv().KAT_Hitbox)
-                if targetPart and type(args[1])=="table" then
-                    local ok,origin=pcall(function()return args[1].Origin end)
-                    if ok and origin then
-                        local direction=(targetPart.Position-origin).Unit*1000
-                        local newParams=RaycastParams.new()
-                        newParams.FilterType=Enum.RaycastFilterType.Exclude
-                        newParams.FilterDescendantsInstances={LP.Character}
-                        newParams.IgnoreWater=true
-                        return oldNamecall(self,newParams,direction,unpack(args,3))
-                    end
-                end
-            end
-        end
-        return oldNamecall(self,...)
-    end)
-end
-
-btT(cKAT,"🎯 Silent Aim",function(v)
-    getgenv().KAT_SilentAim=v
-    reg("KAT Silent Aim "..(v and"ON"or"OFF"))
-end,Color3.fromRGB(90,20,20))
-
-bt(cKAT,"🎯 Hitbox: Head",function()
-    if getgenv().KAT_Hitbox=="Head"then getgenv().KAT_Hitbox="HumanoidRootPart"
-    elseif getgenv().KAT_Hitbox=="HumanoidRootPart"then getgenv().KAT_Hitbox="UpperTorso"
-    elseif getgenv().KAT_Hitbox=="UpperTorso"then getgenv().KAT_Hitbox="Head"
-    else getgenv().KAT_Hitbox="Head"end
-    reg("KAT Hitbox: "..getgenv().KAT_Hitbox)
-end)
-
-bt(cKAT,"📏 FOV: 400",function()
-    getgenv().KAT_FOV=getgenv().KAT_FOV+100
-    if getgenv().KAT_FOV>1000 then getgenv().KAT_FOV=100 end
-    reg("KAT FOV: "..getgenv().KAT_FOV)
-end)
-
-btT(cKAT,"🚀 Auto Lançar Faca",function(v)
-    getgenv().KAT_AutoThrow=v
-    reg("KAT Auto Throw "..(v and"ON"or"OFF"))
-    if v then
-        task.spawn(function()
-            while getgenv().KAT_AutoThrow do
-                local target=GetClosestKAT()
-                if target and LP.Character then
-                    pcall(function()
-                        local mouse=LP:GetMouse()
-                        mouse1click()
-                    end)
-                end
-                task.wait(1)
-            end
-        end)
-    end
-end,Color3.fromRGB(90,20,20))
-
-btT(cKAT,"👁️ ESP KAT",function(v)
-    if v then
-        reg("KAT ESP ON")
-        for _,player in ipairs(P:GetPlayers())do
-            if player~=LP and player.Character then
-                local hrp=player.Character:FindFirstChild("HumanoidRootPart")
-                if hrp then
-                    local bb=Instance.new("BillboardGui")
-                    bb.Size=UDim2.new(0,200,0,40)
-                    bb.StudsOffset=Vector3.new(0,3.5,0)
-                    bb.AlwaysOnTop=true
-                    bb.Adornee=hrp
-                    bb.Name="KAT_ESP_"..player.Name
-                    bb.Parent=gui
-                    local nome=Instance.new("TextLabel",bb)
-                    nome.Size=UDim2.new(1,0,1,0)
-                    nome.BackgroundTransparency=1
-                    nome.Text=player.Name
-                    nome.TextColor3=Color3.fromRGB(255,80,80)
-                    nome.TextStrokeTransparency=0
-                    nome.Font=Enum.Font.GothamBold
-                    nome.TextSize=14
-                end
-            end
-        end
-    else
-        reg("KAT ESP OFF")
-        for _,obj in ipairs(gui:GetChildren())do
-            if obj.Name:find("KAT_ESP_")then obj:Destroy()end
-        end
-    end
-end,Color3.fromRGB(90,20,20))
-
-bt(cKAT,"ℹ️ Como Usar",function()
-    game:GetService("StarterGui"):SetCore("SendNotification",{
-        Title="KAT Silent Aim",
-        Text="Ativa o Silent Aim e lança a faca normalmente!",
-        Duration=5
-    })
-end)
-
 --===== DRAG =====
 local dragging,dragInput,dragStart,startPos
 local function updateDrag(input)
@@ -1537,4 +1411,45 @@ pB.MouseButton1Click:Connect(function()
     reg("Tamanho: "..novoTam)
 end)
 sel("Config")
-print("[LOST HUB] Carregado! Sem intro + Wall Check + Fling antigo + KAT corrigido.")
+print("[LOST HUB] Carregado! Silent Aim no Combate + Sem categoria KAT.")
+a=not a
+if a then T:Create(trk,TweenInfo.new(.2),{BackgroundColor3=Color3.fromRGB(80,200,120)}):Play()
+T:Create(th,TweenInfo.new(.2),{Position=UDim2.new(1,-20,.5,-9)}):Play()
+else T:Create(trk,TweenInfo.new(.2),{BackgroundColor3=Color3.fromRGB(50,55,65)}):Play()
+T:Create(th,TweenInfo.new(.2),{Position=UDim2.new(0,2,.5,-9)}):Play()end
+reg(tx.." "..(a and"ON"or"OFF"))cb(a)end)return h end
+local sec={}
+for _,n in ipairs(cs)do local sc=Instance.new("ScrollingFrame",ct)
+sc.Size=UDim2.new(1,0,1,0)sc.BackgroundTransparency=1
+sc.ScrollBarThickness=4 sc.AutomaticCanvasSize=Enum.AutomaticSize.Y
+sc.Visible=false
+Instance.new("UIListLayout",sc).Padding=UDim.new(0,8)sec[n]=sc end
+local function sel(n)for nn,b in pairs(mB)do local cr=CC[nn]or Color3.fromRGB(150,160,180)
+if nn==n then b.BackgroundColor3=cr b.TextColor3=Color3.fromRGB(15,18,24)
+else b.BackgroundColor3=Color3.fromRGB(22,26,34)b.TextColor3=cr end end
+for nn,s in pairs(sec)do s.Visible=(nn==n)end end
+for n,b in pairs(mB)do b.MouseButton1Click:Connect(function()sel(n)end)end
+--===== HEADER =====
+local mh=Instance.new("TextLabel",mn)mh.Size=UDim2.new(1,-180,0,18)
+mh.Position=UDim2.new(0,18,0,14)mh.BackgroundTransparency=1
+mh.Text="LOST HUB"mh.TextColor3=Color3.fromRGB(255,255,255)
+mh.TextSize=13 mh.Font=Enum.Font.GothamBold mh.TextXAlignment=Enum.TextXAlignment.Left
+local fL=Instance.new("TextLabel",mn)fL.Size=UDim2.new(0,150,0,18)
+fL.Position=UDim2.new(0,180,0,14)fL.BackgroundTransparency=1
+fL.Text="FPS: -- | --ms"fL.TextColor3=Color3.fromRGB(120,255,150)
+fL.TextSize=12 fL.Font=Enum.Font.GothamBold
+local fr=0 local ti=tick()
+task.spawn(function()while fL.Parent do
+fr=fr+1 local a=tick()
+if a-ti>=1 then local f=math.floor(fr/(a-ti))fr=0 ti=a
+local p=0 pcall(function()p=math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())end)
+fL.Text="FPS: "..f.." | "..p.."ms"end
+R.RenderStepped:Wait()end end)
+local function hB(x,tx)local b=Instance.new("TextButton",mn)
+b.Size=UDim2.new(0,28,0,28)b.Position=UDim2.new(1,x,0,14)
+b.BackgroundColor3=Color3.fromRGB(22,26,34)b.Text=tx
+b.TextColor3=Color3.fromRGB(200,210,230)b.TextSize=12
+b.Font=Enum.Font.GothamBold b.AutoButtonColor=false
+Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)return b end
+local mB2=hB(-170,"−")local pB=hB(-138,"+")
+local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")
