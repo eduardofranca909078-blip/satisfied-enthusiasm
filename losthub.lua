@@ -1,4 +1,4 @@
---// LOST HUB v2.3 - SEM INTRO + WALL CHECK
+--// LOST HUB v2.4 - SEM INTRO + WALL CHECK CORRIGIDO
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -616,20 +616,27 @@ local aimMouseAtivo=false
 
 local function temParede(alvo)
     if not wallCheck then return false end
-    local hrp=LP.Character and LP.Character:FindFirstChild("HumanoidRootPart")
-    if not hrp then return true end
-    local alvoHrp=alvo.Character and (alvo.Character:FindFirstChild("Head") or alvo.Character:FindFirstChild("HumanoidRootPart"))
-    if not alvoHrp then return true end
-    local origem=C.CFrame.Position
-    local direcao=alvoHrp.Position-origem
+    local minhaChar=LP.Character
+    local alvoChar=alvo.Character
+    if not minhaChar or not alvoChar then return true end
+    local origemPart=minhaChar:FindFirstChild("Head") or minhaChar:FindFirstChild("HumanoidRootPart")
+    local alvoPart=alvoChar:FindFirstChild("Head") or alvoChar:FindFirstChild("HumanoidRootPart")
+    if not origemPart or not alvoPart then return true end
+    local origem=origemPart.Position
+    local destino=alvoPart.Position
+    local direcao=destino-origem
     local params=RaycastParams.new()
     params.FilterType=Enum.RaycastFilterType.Exclude
-    params.FilterDescendantsInstances={LP.Character,alvo.Character,workspace.CurrentCamera}
+    params.IgnoreWater=true
+    params.FilterDescendantsInstances={minhaChar,alvoChar}
     local resultado=workspace:Raycast(origem,direcao,params)
     if resultado and resultado.Instance then
         local parte=resultado.Instance
-        if parte.Transparency>=0.9 or parte.CanCollide==false then return false end
-        if parte.Material==Enum.Material.Water then return false end
+        local parent=parte.Parent
+        if parent and (parent==minhaChar or parent==alvoChar) then return false end
+        if parte.Transparency>=0.9 then return false end
+        if parte.CanCollide==false then return false end
+        if parte:IsA("Accessory")or parte:IsA("Hat")then return false end
         return true
     end
     return false
@@ -654,15 +661,19 @@ btT(cCb,"🎯 Aimbot Toggle",function(v)
                     local menorDist=math.huge
                     local centro=Vector2.new(C.ViewportSize.X/2,C.ViewportSize.Y/2)
                     for _,p in ipairs(P:GetPlayers())do
-                        if p~=LP and p.Character and not isTeamMate(p)and not temParede(p)then
-                            local h=p.Character:FindFirstChild(aimPart) or p.Character:FindFirstChild("HumanoidRootPart")
-                            if h then
-                                local tp,ot=C:WorldToViewportPoint(h.Position)
-                                if ot then
-                                    local d=(Vector2.new(tp.X,tp.Y)-centro).Magnitude
-                                    if d<aimFov and d<menorDist then
-                                        menorDist=d
-                                        melhor=h
+                        if p~=LP and p.Character then
+                            if not isTeamMate(p)then
+                                if not temParede(p)then
+                                    local h=p.Character:FindFirstChild(aimPart) or p.Character:FindFirstChild("HumanoidRootPart")
+                                    if h then
+                                        local tp,ot=C:WorldToViewportPoint(h.Position)
+                                        if ot then
+                                            local d=(Vector2.new(tp.X,tp.Y)-centro).Magnitude
+                                            if d<aimFov and d<menorDist then
+                                                menorDist=d
+                                                melhor=h
+                                            end
+                                        end
                                     end
                                 end
                             end
@@ -1399,4 +1410,4 @@ pB.MouseButton1Click:Connect(function()
     reg("Tamanho: "..novoTam)
 end)
 sel("Config")
-print("[LOST HUB] Carregado! Sem intro + Wall Check + ESP respawn + Team Check.")
+print("[LOST HUB] Carregado! Sem intro + Wall Check corrigido + ESP respawn + Team Check.")
