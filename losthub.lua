@@ -1,4 +1,4 @@
---// LOST HUB v2.4 - SEM INTRO + WALL CHECK CORRIGIDO
+--// LOST HUB v2.5 - SEM INTRO + WALL CHECK + FLING ANTIGO
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -904,61 +904,61 @@ local cTr=card("TROLL",sec["Troll"],Color3.fromRGB(255,150,200))
 local flingAtivo=false
 local flingBlocos={}
 bt(cTr,"💥 Fling de Blocos",function()
-    if not S.sel or not S.sel.Character then reg("Sem alvo")return end
-    local h=S.sel.Character:FindFirstChild("HumanoidRootPart")
-    if not h then reg("Alvo sem HRP")return end
-    reg("💥 Fling → "..S.sel.Name)
-    flingAtivo=true
-    flingBlocos={}
-    task.spawn(function()
-        local blocos={}
-        for _,o in ipairs(workspace:GetDescendants())do
-            if o:IsA("BasePart")and not o.Anchored then
-                local ep=false
-                for _,p in ipairs(P:GetPlayers())do
-                    if p.Character and o:IsDescendantOf(p.Character)then ep=true break end
-                end
-                if not ep and (o.Position-h.Position).Magnitude<50 then
-                    table.insert(blocos,o)
-                    if #blocos>=20 then break end
-                end
-            end
-        end
-        if #blocos==0 then reg("❌ Nenhum bloco perto")return end
-        for _,b in ipairs(blocos)do
-            local bv=Instance.new("BodyVelocity",b)
-            bv.Name="LH_Fling"
-            bv.MaxForce=Vector3.new(math.huge,math.huge,math.huge)
-            bv.Velocity=Vector3.zero
-            table.insert(flingBlocos,b)
-        end
-        local ini=tick()
-        while tick()-ini<10 and flingAtivo do
-            if not S.sel or not S.sel.Character then break end
-            local th=S.sel.Character:FindFirstChild("HumanoidRootPart")
-            if not th then break end
-            for _,b in ipairs(blocos)do
-                if b and b.Parent then
-                    local bv=b:FindFirstChild("LH_Fling")
-                    if bv then
-                        local dir=(th.Position-b.Position)
-                        if dir.Magnitude>1 then bv.Velocity=dir.Unit*5000
-                        else bv.Velocity=Vector3.new(math.random(-5000,5000),math.random(-5000,5000),math.random(-5000,5000))end
-                    end
-                end
-            end
-            R.Heartbeat:Wait()
-        end
-        for _,b in ipairs(blocos)do
-            if b and b.Parent then
-                local bv=b:FindFirstChild("LH_Fling")
-                if bv then bv:Destroy()end
-            end
-        end
-        flingAtivo=false
-        flingBlocos={}
-        reg("✅ Fling finalizado")
-    end)
+if not S.sel or not S.sel.Character then reg("Sem alvo")return end
+local h=S.sel.Character:FindFirstChild("HumanoidRootPart")
+if not h then reg("Alvo sem HRP")return end
+reg("💥 Fling → "..S.sel.Name)
+flingAtivo=true
+flingBlocos={}
+task.spawn(function()
+local blocos={}
+for _,o in ipairs(workspace:GetDescendants())do
+if o:IsA("BasePart")and not o.Anchored then
+local ep=false
+for _,p in ipairs(P:GetPlayers())do
+if p.Character and o:IsDescendantOf(p.Character)then ep=true break end
+end
+if not ep and (o.Position-h.Position).Magnitude<50 then
+table.insert(blocos,o)
+if #blocos>=20 then break end
+end
+end
+end
+if #blocos==0 then reg("❌ Nenhum bloco perto")return end
+for _,b in ipairs(blocos)do
+local bv=Instance.new("BodyVelocity",b)
+bv.Name="LH_Fling"
+bv.MaxForce=Vector3.new(math.huge,math.huge,math.huge)
+bv.Velocity=Vector3.zero
+table.insert(flingBlocos,b)
+end
+local ini=tick()
+while tick()-ini<10 and flingAtivo do
+if not S.sel or not S.sel.Character then break end
+local th=S.sel.Character:FindFirstChild("HumanoidRootPart")
+if not th then break end
+for _,b in ipairs(blocos)do
+if b and b.Parent then
+local bv=b:FindFirstChild("LH_Fling")
+if bv then
+local dir=(th.Position-b.Position)
+if dir.Magnitude>1 then bv.Velocity=dir.Unit*5000
+else bv.Velocity=Vector3.new(math.random(-5000,5000),math.random(-5000,5000),math.random(-5000,5000))end
+end
+end
+end
+R.Heartbeat:Wait()
+end
+for _,b in ipairs(blocos)do
+if b and b.Parent then
+local bv=b:FindFirstChild("LH_Fling")
+if bv then bv:Destroy()end
+end
+end
+flingAtivo=false
+flingBlocos={}
+reg("✅ Fling finalizado")
+end)
 end,true)
 bt(cTr,"🛑 Parar Fling",function()
     flingAtivo=false
@@ -1410,4 +1410,4 @@ pB.MouseButton1Click:Connect(function()
     reg("Tamanho: "..novoTam)
 end)
 sel("Config")
-print("[LOST HUB] Carregado! Sem intro + Wall Check corrigido + ESP respawn + Team Check.")
+print("[LOST HUB] Carregado! Sem intro + Wall Check + Fling antigo.")
