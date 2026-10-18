@@ -1,1 +1,1440 @@
-return(function(...) local _7j,_1w,_2q=rawget,string.rep,bit32.band local _8n,_5f=table.concat,pcall local _2j,_1d,_2f=string.byte,type,assert local _9p,_9k=table.insert,string.gsub local _2r,_9t,_9q,_0s=bit32.byteswap,bit32.bxor,bit32.extract,string.sub local _1a,_7e,_1b=string.char,string.find,bit32.rshift local _2e=[=[qpo<2$>?R>)V$jFX)f`ObFGLuTg)`WoDJ)JM.dlT>f&-3`rmZYu5J?4;OWr[]J;=%B!:0VET_0,nG9)?&TEng].p.hkd9-c*_;LSYNP'9$s:$[nZB,B-:7A6$\[rVW(%TofWiu6:gYOD4nBhT;[P\kBUDFB\I"%?]H)JU&#^PdYUK14WA"2Uq98cV,GVg/FUBr]9<tQ8*8i49$,l@iOS4`N>^g`+Au5iY@[+[DllN.+5a9H#JB4>Z@Q$ct>8"8"8E'[?C7d35a@?jdRc3=2SW6eg=<.o[.PE-3X+4gt/\<Z\@0sM`4Q:5lb2/;,FM:WR*"@)"`0Oc<FdbSQH#<Ia'u5o_cr]bL)/HGS@m10+,o,sb,@<o,_NNu-VQAVD0$EeE<eoioeo)gi.'eDlsd+P"j2IOohMd>o3<IraiH:,^9OH5_,LFYXI2PdRuq,c^S6aB*"jpe<:?cW:p3l(MgKb5"JV6PW);n)pTlqlf/0s8^/s8`)45$5le')Qn/kfYJ:Qd/bRI<+s@o(Nsq9S+V8-Z`t'OSl#R327lg!B(Og-k"<Jf03lhXM?U!"L535Ojjd2"Am*^;[6-IZ-uuC4Vqd^Fnl3oQ$D#hXKJ`8q??mHst+a/-Sum(6_en0[&2CH=cjP5;*ul;md#F#t6Lm1AU;(#7kAB_CJCJp%T(O*L$60[>`d!d]OKpZe%JKc;R/fPB4UEM'u^,&B\Z8r:7go/8Y7CaBHpCOm;@&qa<pnd&p%l6E_,!'#=7aa$e?jpM\T0:p\ADe`n0GRV<![Y1P+S@cr1Y7r^&CiiZeTB9s`Ur+<r^KBj2EjqN`9ltQCD/nfB7hMdYI[GM+6'=bGug(b9uX<u7Fm>'M`!5URG94j'P):&]Lh3UoYbL[\('eLFP8m/l*pB.[dmiaN94SA2_GW9WjL9h%n!Yj`DQ0Q0tdDYkmEREbJK3C/gpY0#lYa>Q("R'PKg.u#<->n\6d;*]@ADH,X:mE(lqfW5:taSSI?[\/[Z;(Xha-Q``46t%8W)iRrsL<ZGh<A=YpOti[?Dm0]-O4C=^C-iUTt-==;!DTj#qCtX4jgBr<rM)R_WAWm>sBU:,^Y'sF+W"73j:Vlo]3NXBdW-V3<P,JSM"O`8dkmlW+`*Tnl"-__q6chNH[aE*"-p"nuYmd02]%7A)(9:A1#Nn]"L8\XS%4.Km2CYa]XX,[8?h`JU,+9.rUBdNa-.0CT=.b_DDa2<n)ag(lV-K;jsRZa54:S6]*XjYQ7\.ICl;5hsYLQb(BTBYrp"hfB\pPQG;r9WV,n>0%dp!]V5ug.d=6*7QH920RW$M/)r,S7S]jg`=(&ADN%I+"?dH:ugZH<"oi0+H)BFl8_?=98NX=1.;mB/m4&3<5ibW0=\%Vd9HfeD4M/M@VI?GG__eYs=3mYW3uM9(&ZK7k1cZQ9tdQ>Pq-abVT]%26<8-"SAe23Bs>kFe-&@rK9]c_14=tsNA.DDClD[<AatS73\VE)nEF&]2aE+P>;mZt,8CM(@"=?np&Q`YgM;#h&G.j*58Z9,YYf]_)1h*@O:W1tJs^B/=BAVh!^R\=ZC,9i<b;&HO(;O*[K)?^Aut4AB$F*92(+T.77jpossULbdDH:O-s-^/aoOCb%L*uY2,'^ifIAd9JAmR'g$M-p/M;*P;cM$qbg]SG/gS0:cjkIYU,.5?`h+d&5sW`t3!)oo`T+$N[).Pdk.e7iZ/T6gBBms_YK_*%\[T*7XTt$]NieC*Y^.F1LqAVU)7h1U'am_R(-g)S@ij=-<BGDE8KFf8&L>NTV73J"`Rf%TiACla&:6FXr7osu3&mLEKYdn0#9%/Ek\2TlVM9LRUj2PU/8(i#m_m#m/pHM"l@fGO0u?"QF3O&l!HL0i1B8YUoGc/&?m["<T6nrFaLlc"edUAL"dp:JM$[p)?`K3(IeE1h3F1k,-W4;[&RnW-_RfSoM$QOup<Q4GaKN0.n'&_s^7ic<a1]e!&&3E`Rjb#JcB4f8$,p>]Lbdg28s]m"]20E0RcZ]=jEOm;rh3pW1%irXtl%T!\,u>B7"a&7:[X/58!T`5j-cHg&B:_sEAk'QR^qjmu2(sK>IHK$H&Ol2K:].*)G?C9f%6qOb6n7^n0iUe@iLqZ$6\@4#>s6%,3b&@Vb;!QhBEh`h=KPr65eR"U>+"R0EIb9P\GSXl$CF[*WW'N;O5!Q%6p".Vf_$;Q9&e*<]K'fj&(h#h"8[.:[RJEEcL[)l"/pJ$c"Q3O<*=7o"`A][T3UjVG\/85e?$#MOh]5U[=P-\Dc(NVN4D*:A<J4OfjhNl8PbO;a[:qBc@e3h*NYB\mQc#G#;6prAVaCeaD+3$M="4Ei@pg54Z^tQO)\(t0^uU=>@`bXco:f<_"U(ujfNI$*AD/P'')'gY<a#tIhXnoIgoS0MA>QV73Y!#CLJ6<8dQ`+1=8BD='JK=Pj(,/&;)@\k2/<5"goP]BX,[Y2q`!rmHk^ZZ)[I:n<1$NW6r%9s.Yrl/(M'Ftg3q6>9De6-fb^#oO9LP'BQjLtK$_8;AZS&RI?.lCee[tWlD,mI;`#p3eOiX.cb*t]dXZ[;S@W6aob//C#naij,]h^ZSRgQtm'9(hmQZ(B[gOP5l$n5@G+>tf5A0CS\t<2Tn&5Y1gg8a_!Y]pGZQk^;&*a-eS$+<q^@d>/.(o7@ZDWB:]@(nr$]2NF!E^X0!O;0s]>H90luu$;iZB*DsZA-6h\_Yg]un"aZAiN8ar2j'6+Va#4P'&fa4I+BW2"3k+n-5;W?.\Z5m/MM"UB#-$A(Tk/UCR@m'0.H"BLbr2t:=<r'IX)ZU&.*70=OA/(,V>,X%:T1lWSC[tR`0CaK\):Y@E<(<cU^Q$1(I2>7K5"V<EOJYcoT=u/2m<Lf1A=38IZ93YIT8@1RG[*GHs$nm^,i4k0VOcb6fNa.:,AN9pNLKQrh8*,',nRI4gA'Y>L@QVskDL7pfi(Yh4aVc4$k]$F;9]rl5r$*RCuT3aNZnt=,g-^ECNQ?fcUFubeaEGthtM"eOeE9h^.oQK-[u\rcZt#P:p*Yme'iG>1.uUe#qVu:fKa:p-&VG7_BLaK&Rmr%KnjPi4Mb?dTp'@D"TmWiD6r.PSTYc5sNIrEBY.>9rp?Ja@['ZB9RP2U6Kt9kYY%QsmG0ZDDJ5q2)d_M]Ya9g:3%Hs3\uGl9;bOBuY+pEW^=qYG!iF0>FNFr?4oaBfu?X#4R,O]Yp<Kjs3^$B(sB<)iRt&MtGruW+E?da^fg_pe&6G[uDUE3=g!VI]gJ;uOY:,.iHmgE?A\KAZuq>Z*'.p,/nYl+_'ai*qR&>%,_2rZfRF./@.tp%r2UJP%4VjjZ.ScskNck13Pmn+b/m>UR^fj%u=.,$TSs$C(@smJ9_iRol^5du5G-"i2e`35h')UR@AZaJ]trYRu:[oZ>OiRfk$P\@ZTmlN,BC^j55c:aB83@=>@"jF(3=Z5@RK-90eA,A8Fh0E3g]]L%CrVc?GTlG+(jFLJp&+Jt>9D1&ll8E8L;'TYlUXs@2.?*a@*Irm`frF:9--,1/iL^LhLEett%d1BWiZC>ASDL:)gbT]CUtG1u#u8/=L[]R1dSi1>a-P4QgYI8/urhRa;VZFT\I1G7-X.@G2k*$9;CFSfP]:Q?\e!TmV!g]T*tGJ#td/.#5jprmV(+fbDQ14d:>1?Q$Tp0rPRn]aj\l!#Ma/[E=\*#Hh%m14c=F,DH_,?&=&H^e6.lmcqM+dN3E[6AV26Gj&*2%7?NGB8Tkl$ffYceEqU'FK/n2pjJN7T)'I.n/'/%*IA]/t/%Ghaho(BU&0U]uspX?h"N7,g<5&ekD)%YLB7s_@N/O`HPH4,cGB&$B\.r3,f1?UVDpQ$3]?-so$5):&X-&^1FQW2fECt%'Bl^8Bf6L821ajV<ZL)0[jX%7dC[C.`%I%psIF8a3FZI*f'%]c$&NN&#pW2`UI!S0'/u[?AO?jf$BjDf;$oarB3oLFD-#?B;">Z?,Wf=P:rOU_q`n#_=5).O!,m=4mCphi8<HQ;,cg)R/iR3d'rtLQ/#)TeSIsO13k(5$C&kL"Ma_5`JbY>Hr:^&3fN$e4o@:@0H=c!!ETm3g-mPNa[Y%2W**'ae&7j#7Sh#RYGt<?u:FgdVp*-Ye%<5K-MQ/lDN@#=u[I78O#3>5h)b%oj\-*l%=:ih.5STTNUYJZ1mfUY'_<571DMJ&WM;`@0"^WsZa1E5BN*"^WO9qUj0uU.r$gqBlfpG3;)&ln42,.&2q"IqgQE0;m3<1<I%4b5An.&I0m]8OVhTNjuGeLg=Xfm-n>RlSh33\AK0C&q+up8;'r9eB_D]]qG%'QO(<u;Z!N#TA4iXAiK>Pc6k$rFY*FXbJU#jEeN!i"D`mJ+8?to*A($m%g.Q/AkUMn#=\["haV4#os_^=")K@nCLT]=O=DO,ab0Qk^l(^e"qZ-s:"^/_(G[Qht,Q0=uBY%X;\QW)8&.CY=.ic5\utVfEhWr[hO(Q#;/Vf9)rX,YL:HKb29P_BdCjE>AaBl!"mdgg8P5WT'bGeI,t)?,p6(D3b<moOpQN)YCmGt7"K=lOO');BIL^5_Mb5#J'f?#_80Hh4f1#j^Aj9I#G=r(r<8pMF-@%,F<QF]!OP]VjK':/91-:qDnUhKOZftL,&dtHDE)=k4n5+QBcSmVa(Fs#ucS`$0?3I7)^cIs'Ugt>!7@FZ'l^P*F*tfk3QQZZ@ee-#C!3%*c+;tNpf`_q:`0.YuTAO?0M?@&'@p@?1Hb^NJoOiV1AN:3WObWogK)Hk,^",mO+VeZa[Ml'.=+k$1^gYtQQ=Y%6V;jpaD/O>/dr0D'_W9?e#<+K-F?oG8jZbYg0gkWm7e=MK<1mU9T',:nOZRNmj#i.$u_r9WQdKW]R%oLBrIfOABtZ-fDGVpBX:?@nuY/1:]J=#?aND`IF/qMI-gLN]CURo3QVC#Gs@Po@pYW0)?)>n&#Z_%:0`b"o]r\Jk&U1N2pdF]G*l\bu7<e1(Ns98/:drLfX!P;!0DY>*77KN<2=JTp_RVL^`mcn^]o_eH+KqkpJ8#mYltZcmP4r9s?`$_h/!"4AMb8X@j'rF/@=:WjGlk(5Oc/T%EDNL`$S>u8E*L7-o"fg1BT\$B;j/aE276UMarV&K7_E&Xkm:"YJ)$a(qri8D%r;HrDpZ*F;uoAeY>0b:o(u(o5m*RROV/c>(-/[lZs)9DnZu#fb%jOZ?,mc^ELlK/5;P:AnA4D<>2LMoR:rLPW`RF3Xg0@C>ZCdDaunC7p3e;8siWYHC^t[1)LnOd$66/9,H:EkOsBG)1sj0Xn6*hm,b/ZhZT#%#ZCc=Z_;,5DB6L^>mrTm_f:OE8c.m&H/^Q1tDn=5CYPW7R'Rh^<OY9/^T^$mest7C^@sZeN!'eXtRUD2Q+1d1*H8%@CfF/Ak[@-I5L_EhjPFj3t=kmU#"1HD9"#Oo6srng*>5Rd"@Xb=KI\U#es!0o#usdBsM_i^t8%0n5ksLL<[('oj*KK8'_VdW'5Z[o*#8ej=032@]OlpHglbIV>*_@t8K/*ZoK!$RfO9Klg!H%(GWO8F,28]\DrWsEhJ<heeP#1+b`a^2#Z]JuT(NHUARlN#JA!Y=u7i"8cb?PIQqVecBM0?_<-n"iqO''(BhVZdVOS;><X\3_K#_Ve;QC8f:^"<7*Zept/+[j,od@'2F1Q=M8EP@Z4IZ,!Dg])gRW*^IVMS9KX'!;1J@`<T=bJKTI3jsVb'6VL95ZtiE#lI>R6.\-d6G=Z^=JB;")n0QX6@>F@.rh^/9)h+YHa8W*^74[c[cW:8ktGT;AT/+uQ(uq#5\DH(17E3_W#ba%.[,=(&5nfMmjZf5.Ga0u%j0]9eX#XkX$h<d!ii$d6F5hWWPb2&A7<%^udkd"R$HM#'i)FSaQC^T-?!(AHls2jL@P'bi('eY^PVEAjAX%C-a_`;9E0OdSZZUoE4LuO3HMTNWgLiu/<9e6'LW"EL5#?\4*j?52WlTBJBX!'l8!9r3UlA9e8"Y,:V+@0fB@$h&&uLlQ[Ij!dk_%ukAJ^24+/9qc/qCkP-N3gr*-.>p;NOAWkXeG/Pk-ESVjc2ZF5sE*-KAfNE1J;!o6qs#H*#i[CBWF-GPO3:CMiX5,9bMu7bra9g6N;!$6Vh"^hW7H-`FenDFbF5R@*t>Y<07PF!YFYK1EoU$`HX/d4XitQFrip'l9J`srM#Sn5i8)kN748,N0#'uXg8_&]M8.T#k$mSu;emeYqLlF6aNsVlVnM2`Y,\<PiP?C3^*"s\t[T(CM^d8UK-E).G(kL9h/O.tmtPoA$18dsTqaF&c7)()XJ+^Yrb+dH07ok!rHRhKG=<No!BV%\%"OnRHfUn?-?('@$QOBU(J>"tE%B*iTufSh?A(9>uf#u7%]g!E:%98#:].WEj3&c>U)O!kUq-D7gTgn?202T'0WL1K[0"<t;(`'U#crLVk8Zah<.&=[<AL#%bBqS)3dYE[(6!tgKt4`LqR>pU?(>>n=S*ECZ:`gfHdfU2q'+M)?>0t,rO!VY@KRB(ae2Fg<0KrMr.S673n8TEf7NQGK\IRZ:\:C@B5YW>,YS'0q[Y=t8asC\k9_'(r`d$N'4\>e8AR;Xbl4%?FZ+HuAYLF!O1f^,0B<,+"9I%P0%,&Bf8P!7iPfa\@1WCSKS6gUf;i"g:Z\cM^3lg8>'N3=1gQA<(^m6:RB,)%_F<LYgN@]qR,EYkT28r*>7[pdY5UOB/t+l4b"(KGnK+*Ig=s\fVVO2>!@-qkDuR>Mn]]H>)u/SW'.f4m=c&nDGM=^"mX#@V$QFjVT^8)Wmo,m(D7KII0B_@&n&iFNidZ08\4gHE%^iufHPgY0m@Mn8@@`GWS!AW1R/Xqk'<'*;?6SP<i3;9E7iQ5?rML)=UuieLeKWR4"HguB7,l9=30WK!6O]6=*OH^!00lhV2Q7=,M3>:dY1m2]K[I%Dl>u3>,GtdI,D9"i_E(Ya-C+6V=aHE'uP`&WS^tp6D>E&^#K.8fIs[H]0p-rmL&,r9f-\3W#MIpOZOXIfntsV1\>A?isHNiCZE6;(<>%YVN^3@,oI%R.Ea6cVDYqDMDOHq[4fMZj7T"QgrKfqL.?VpmO%f=EusUVPf6&B)E.Nl&V_Lj<.fMk]TWr]c]g9A:k=fgIY3Jn<"td$RC[#ps`;m."Pqd-$>^0-8dpb)=</EtR=h^`gVi/a6C[V8"Uh<S-hc4%CkE<"AEkNmMSf:bl=CU.$fh4p/r/6!ns@,':!?=eN$:?;"`Ga6@fpY"!D)^1kV#Q#5+FAMjerF^I*$507B*ua'Aj='@hYDj*q,04@YZTn!//Qk0T@g>'cLAFQ7_R7U=)[K88<%e]0A$'@F9YNKd?csqE%C/oc%t9[)(U.`(3<Y8mQI=V_;!X-bIo#7Ch5N!C_F&Y>'$3&NQou2Zi\b[C0`6>QYi(jZ@B<b$Il5b%fofa?"`7C(L=dIXgdfG&f_ZIM'W&iU'U-qE0e2"FTL<)C$uHHkMIM*rPKXs'N43^^JfC)3O8E%^N72D0$9UJ854:fELeGI%s!N]tK$YWgB$E"HTSMcu*pa4m3aIob^demfM/b!-1/`-\p*+rHejC;B2YqENDKlHg[gL,]KP$)T/@,oUKOtMqB>sfQRjCF)'JAo^Ph3G%b%cO;9gV:,3#Zg?>0\%qCL!r0Q>45*4+h]Dkl9>PGDVZo61XUjBc/==BN_Jo?`)K.BLp-sDrOKWFN")<0BkCp0A!r0[k+C=a;@?m9U!oS?uBP+Zq3i>lcfd0"@'kmQ+dq`gPf'<,7+(XTh($0#P6p3'rEm((FRZ5?ZY&6uUL6[J,"SPr$U>&FS[0lehT[NFJj%%m>/R]HN,[;J054aL;V>Vp?):f>pZ3&2s(Tg>1`^0K^SVR8R^QC]"9OR<7R9kIjTgph>Rc<4^BA%KZa2"4HA.CKg><@XdGA!YUGJAK;JP<QJKP,36916_J4q_W%NJ!P6gtOh<6Vg&Z&T8YZEDQpLKA0H+UKVA<Or(b0?$I]H.BhA<1@Xld_,$QHF^oN0Fu\$4P8f:lq+RS$h5jPYoS&j7J4uT\r;8(@Pk4rcei)!#;AuLBB7'2f+p74&DN,AChJ)n&Yu83%S`!$'L'0=G)K5`_]b!bCkc/fk_o0-F<(>\%O/m"-Zp$,mRhc7b]rT.==aRmmMTl5KVk,(q1UsKe!<.BTE*#C<f"CGdU57*Y#5UphBTFDe)6\aAT27eSoQd4[C5tbH/-4T-Yn`I,)k96"pH8*ous8Pi(%/A08UO&Hkh@:uL>Q^9t[iJ]I%G/EFdj*,2b=n$(!`5Mr#IAXplK"?oTP%G?Dgk,*YbHmoERuKLZn`@2BWD(\!=#/q,$_#7o#rS>qg5&(:$umu)?'9Mb3iUCh[1-dL4`=J&R9^03t4m@8LFo_V!.(%poE:QPZlnKoJCfqmJh(OX=/?DG+n,4'n:Qro;0TsNr5Z<=+P:XDpZmscE]rOuSWMX(QlL4M>HGAG1@D8'PceJ[,P*[gh5V:O!57bn)K@*b^#-i`"$3l4+<Lib2/'DC@:)T)c8&N'uGaa`mc_jd%9=i#@;TgVaWXHkt;!!7LXY^%+!WKV/Ek=eBoiLqFc=e:(^D"$@I(fP$[M*Hb?cs/MQQ:oYc]<Z]VK0(,=C5K:XfHucc%6R-B?JP6Poj5djEa'uC,*H`\!gWurBgDN".$o0_g"Dcj@%iKYH"m=XVo7n6]t)Zhl=A_.Wg&X&J1q)"=9g-dQN[NL-i!Ab3iPDc1n=!CIn0$O6Tl?#K!g18,>gn%%\IlB=*6qTpc88)!B#*9d=hC:%.2]IpU5(1$.b]d)MV!g*'c_@gO7$$4oLg#_P>]:@uOSm)-L&)#ib@L&9b^A"K6G6(lktbuIkL!8ljUaYV8g.G:B/.5C%uOG:dBuQoF"'`f\f>eG!fIusHcp_)]g/k`GdLsT<6cagNik<#b]j(549TmVCl.6O/R=8ILW"C(+`%V<42*?6f#gF9BtZ.VkS,9b?V"%\QX8%pKkA$9s>uDC9:T`#7,8TY\oBI@JY@M_[B"J?Y9qQU;tFWsc00B/3>(Uebe_)2CP3<ERscBgH+DR8Q&;XrmX5D%r9o!@4W1WqtQ_4tEgX5a\7p>>[iNSofl%T@N%/&QY#2gjZae0$>"3Q\m=9l)1n:#:5qPK\=Z73$$$c1#(mB0[!`!i1?>3QbIeNXPQ5<ZJD%dV2-81*=[6j]qYV!N-RPCh(&`n`k!D7OPLYD47n=dWGG40X=<,oR'$;qi,D^*sCamLoI`c6dFA!W.XU#M[e8=k3X8g$Z-Ol#>YnCD#3n2t6PZmg)^REI_OAnoU,$`<:S1-L5dQi-tb6M*l_CeO`Rp1^(b:tETYo1cWp![J8M15rg?,E&+Ka45C^bSKa((+@C\.lR%`n7QIT;jq@uH5knsmogepcY;%N2ChONFfn$j#\mVr:GPSgU[(:$Gq8n,W;JRq<VbZb?44(U0P2C3u^33OhsbV*sdJ)Jd(!(M;YV&V>&8c'+JI:r;@PeHmQIjM8?O#<F'sqp,#0J\K\uKtk"M\s7pRk9U"FrV.h1Iih+72dqGRDL$d?h3WkcpK\_`LRq1AD=I4\/*=rAU:Y"tnc5WZ$AeonIArd!gQ_-#@OnhIubOUl#/)4Vt5R!YnlhUGu*"'E<XuMt:dAd@Td0NZ=F#1t;LDVHC")O]Cb[qmsT<CiVUslo^8-m_HA,U)juCIsiN?@aGN8;`l1[FNNpIeV(DXX]_V_EYM8se5N=(&(7%<_<QYR[4_9rqdMl%UZkL(R6rg4C*^D!<*5D1>dT@)5De'BF^JcDR[pRkQh:s8]et<-6kW+2aKINOR3#52>126+.LkM05C(f&fSqr?2;#[n%7^`j@q@NULgdO?CjH.([6/Ji/O)90?edCjm,>YLt8aFk`]a3m"-E[us'T'X.gA0&!Z:!?TJj<//j4%mYNe5.;8;:#I/!RU<%tD0`^LpBo'9*A`I\'%3?ebLJ2XM>O.[.Wo$U3-PQW$$#u#JuqL*8j%J_@kDi=sr*N=Y#2uTDaObS"`p2ccL0<k\Kpn5Xk-aB$Nj2jkJVMYi7r#R.*Mf%5Qu$gYlc1FKg(2-BF.$g"tRit=g>ir`A`Ld#'>t&r$"@]7SIdO@LpEcS[mmAfHTPJU3l5?+4alJ/f(SlNS&KOZd2TPN,bY9[`/1ZQYh5/dMpDP=K/Elqe:.C\'%LL.Dr7);RPegrQr8,!BK47>-^,cGhr@V6(>Ac1'K#I@YO!U-VJ54KAeoWl@MbO_c$'Q+n7F5TUXCbl`i`pU/g/kh3UFZuk48\*l,*T1UNfjblM'pb,62#h6CdVR#b%sQE+Io.u/<<l=1b?Y69@L2spQO%'sMtrpcXY+!\%q%RLs1#90$\e3[$eT,54S``^i&K1nBf3&gZpLmAS0"'X8G*)m8^hh_Ho-!8\#$sub"$CJ#*/kDj>M\c/)A%]!7_cAd^S:&d+`+PgKRte'l'.%0SWr%jPPs_OMYA0F5A-k,8c!YgtTQ7r(O_Q`MM(,Ku/S4;T*b`6<%/$?N;&In&s-EWr$_O5n;uKess*2'-hcEkkTR$i4S@#n"VBf1!#hp<Vh"F<B6lMgulc@b*'PUa_jWnT9"D*")&&ba`3?p!(>\67q>QEa$B^8(cq5nW9#L_YY?qgn7QX-[ipFqm=sX8B8#<m];Lh0r$j-'^8-E)8*J0#IjX&'j2[_,'n=AKjB'ac?oS^Qj;*;M8T#[!u&E5h-G&a!1AM=1&='T%bDm2Y/je65WV[D]h0rF9sLSbg*5V'8<?baQOoR!^DSk5mYRs7T[GJ@QX[@S]<BPY*0$qWg8u[GLd`%"^H<FSg>2g2cFN'5g-uRRKj;b1;ns%ZUTfm=E,Ne)pjC,:4\D8DLCq#!nC'"^br0sS59jV=5?Bs/Ag^2X:S-c(DNi</Or`_DV2'pj=qj;R=OS&KQWARSZ)!TdUf^$t0E%q+[cLHiAW7fg9)CO)#\8&SB`s5,]on4G%%\5J4'CpeN'l6h2ml#1"r9`2KL&T@E?2?5<QFDh=rE1T=MtbcEN_&%9pk7@rN%We6e(4a)hUF3f2A.-U\%t%TlmqH^T)4AspmMe.3O0,"uX':4"i-*YL^$AcoZk!W=9OK9M'9eZs!3.k`ZLar]e\Atas#$V5li-ED(N#,PAD2[9G$&Wd-sc@0O2lWCU?8B&+7%5m3&&lj"B`?>\n\!PM&O!f_a\BGVcBF'(n=`9F=#fql7:mC;FYq&`@s-qi6(X)fjql-irM$`>R-GNtk?[mO5TDh=1C9EYNDIt4XYUV)!';Ka?RA??k4?e#>O=_)?]'7g"pJ?]S</n8f(Jibb3QoV<65e]In;`th)lRW6j!%64/fg`M5ME!RY,:id9;,!gKd9r(8EKsO,8On,detL-(pc62@/Yee8HJtBE:@.MIfkQ)iJpAWr`"IF,_R>kqeq/Qf^#!:2V0!%_J/sQ'hXMp`!2I*+6*Y]->$.t)94/*W_/sR!%)&<pbrBW%L63PeUdR/Nbe4&1cI&=rWGuk6j)a[.1>@Yh9/>-Q-u,"b/f^oFHR'PGqg\"^MY]4&C.*VXAM;CoR<=hIZ3rI>d(^agkT0I!(%?Iplp`fC`[V"L$>:<(b3Vgp*c/65Z&#tPIr`$t./c\)QgFU$glGN$B-/3sbHC^\a:U[2HET>uTjXs4+I7VaT4c_1[grANIN'*`aM%,0<hI$W'XBI'4l*Q8'T&,/t$1I0H>NY(r=``#[aoN8i'HOSsQ,n3A8JdZ^7.0(YFoUu7a$9IKW>9s"Mgq4X;B'7_f\FQHiZ/:okkE2o6bk;f7R3ASc[&iaY-AK]L5_$[D&Ybu_SI(Z](%9k\f&.HsMho2I%VCC?=aaK6E7(_>EbUoZc_O@W`<Y=#lbl71?Ehj7djpYa(fRJ84K-7)?TK-Zo\5A0[To(YMpRq[g@N`s/c0T[7e96frjf@PNj5FYJX-PIg^<Rm\_#+sc?l^`!c;pHVE-7pP1O1s>bAs:mDOD&oG4TkDh2AJZ/a2L4*tPo1]$WF5PMX1u^-Q5K6j8W"o_)m4md5<dVE0pg=#_6W6%5t:#:?L\r'gJh!gg#Z,C<u'bi"d7NmdbV,M7DK.:lCV\A'PG2eRJc5@&Qan/oi_BdRFRY(rI9$:R$=W["hVSrfgtbB<B&L"i36d',DhHV)_]D/TaH&Hsh+)p`>4#QW8%#WrY>"lgjl;UAoM-"JH+j$"4er^`Hec%-*rN>csj]#^ftc*Q!klZcp?Jte@%I6/^\&_Z%mj'u/;W\_uoG-MS\N5[t@.#Bg'1WllP>4-B9(!l%TCoU9-He2sSAMu&3U[<eL,q=bQ.S9(;NlVY<D]=XP:S'dmgVS#i^LGIS9,(,nR5_fF9pXH%p&0Qls\!*Q?jAPsj4\a;dt8;Fg]$Ceo)kM"U0EYN`[N>`9E&<ANbG3!TA],>Tp1'rMT'!nt[5"n1SO*0N_n<kBGBT=)BB)c3Z`==rN`[>U[B/";=.hf/u#%=D[]'*=&!oHR81]7b7EEa0bMFMX"E8X?@-hu5=.H5Q2pN(]llKLD(0*0`n7FrKj4"EWc.81RkJX!Qe#8Z&mT<=2Z/r17C!p>+_O;?6ZWfCtLp`aE(M%1tYSQC;1lBkZol@N'N^?]R_I]Wt.W%s`TLA<o6],II:hqe(,t2^!EW;MG"2%sgWQhq^sn:)^=@;i)^e_>#jSeQ^"&mt.k8HJfg`[IRZM%W>o?$"kB9J!ts0A<5(UL=a2+0c8WH4+Gf#tc-;!H&#]G>6&("k%aq=!^5#ba/>2JS_XfY4,]8:Z3L%::F)tr&:)7GnOq_qc=.b>Zn0a"2NSNdq9+0kE3VI6j<fVWkY"Aq%>U3QBQ7#-GB3L(4NDO2q\;r7WlhbD`HW2)'?lBcCT=kM..bY_dE&@F0BLR>`e+OeY[-2S8>(U(;tR*_0Eq3>?!P"['^O^P%B5``go%U:eGN&*AaCQQ_`PRLLGd]jC,p3lcdtbPO`,,i\Tq)&At"?2Nq%FM*T"n*qH(`+&m-8mL5)'qp]dG.^7\+7GK!^07c*\`Kf<>Hk1c"T_lD*7u&!C53YR?tN+iZ3;gX7,erGqa*SS0%]n[7*o:ac2cl3A8oM)hG`@k<MAsDiSX5+)%cMuVbqcjiMkUAhFO%j.)D%"pXjj.5SfMhW[Ld%9sb-3JhTu0(*CcFX`&\VPZH6im^HDFL3@-]u43NVmnW-g8ZTQrQKDap9ND=%E/_d-U_pdK);0VKCR7nUsE`lic])fHjL0dbKFHlJe:@@gj/0O@7^>P3XQbY.[;B^ZL]NJ)hC:*M^@n.>O7O*$3U/q7b.G<NaN*gU/P57k7>#GNF)oQu]<WKDIPWc(\o=sr9hpe1u@!Fr-Tp'30Pt4K_!&kW)cP\_"-k3-7:]1fo--NAiA5OS\#<tqd[T-Bm&=nQ8,\;>]]d<`oiMC<EV'.B'RWMu]%k.NqQT\'*(u."`up>skSKri<YS%DeRs7W5:,"t.t5;8\W1:akC_.Kpjpeb:uIW*FdG5gko'$Pdl:KTc"C?&X/H%t>hZ1.uMe_M3."Kf_([R!euo9`^mZ>8,XKX"1RgaI1@*YnmSSp9nb(\")A%h2%IXOhB#gTS`@q/EN6qAN*Q*a)n!n"qVb"V8mH3&gr*ZZn6M]%..AfPsF6N?8?eB\XFhkH25ktEQ6N-b]HQ))A$:3;cm-u%e5n)V1-$<9T-aBS*'0sd!7tkISu86g,ms?inS4hnEhVES*ot$'=AC'f#D^8G#BPrk>TWq,7Q<ga8C!_M[qn(2CAehAfuYdmUQQ`X2BR!p^`dh[\%+YD3n>/K[TV5gQmA(/OMD)9RSCd>INdOT:\tr;6=*,`aQ9qI^r;58+4B'4BOmACA.4@I'Ihg$'O4IKn"3cVQ`=f5UPf6YC+((l8lI:Lu$([!1+*lG4B+][H=SZtT<3Y%;.R6ma[eYPWeL%j2\$a2<>9lqX*IWP`lXQ.=Db92hLJWpQSgS&I2AJH[j:@T9lpDTG3%OYt;+Xo/Zu=VuIKug3opH0Lng1N.K`V)dRl6.gQ%\?!<=lVrO-hf<U0X3YlrSQ*7I(G_/lEYA4cgm)I4%Ia'/N`>m^aPs[:O99#m(i5.YPek?5=KN*eGjfOA;aJ7mKh</@q$K'N-?Z53O,*4f!.e?:_(tqGe]1D,g4C^4Q=i\La.2P2F;ofp^KRS37[%S5DOdN1&7&N.jDp[tl:PI+S9XuZIq\.=nuo<@%B(h0hAc]X1Vh#IjQ%-W^4p;.r)-k0\!X.g*]>-r86Y8ImRCu5^TkU#jEMYi9bGSn4L)q3VONM\H?YZKdWG@V*bMNbJqh^:$DP:pdEG72Z03;_:Dn>_Ym6M%.A38nH(acnY_7ZFJ?]rDq[rKPH,VdE0O1?9X<+O.W2*RE^`McsW3#$R<:l@Y-;)OXIlVa/kmN95@;:ZMKr0*\)b]EWh<VthcRQs2$(;][8&7o:gkD^"4JASu0,i:G=IFnNN@RL/jH$Qd;qsASe"oW;V!j)ZCDQ%f7GJ9oCYX^jFS(kC!h82GK-I@,Gk:!VuP=DXGV3@3KVa5]"O[U%'Rc^9n1jfIO91dB!_UeG8/u*0<eD*!26YG$rc29t[*O4RdPE)m'@2SnheDo(kQSf+`ZIGfchDnQ@2,$\#o]:4TF:VJTFgXV/T;F]XXApk9hA1na.J1sqD?^I1W;O`KT#k;O'_;oB>%JHo?^s`i4aA2i>[?rm&e`:b;WcM!g\_Ue7(U!^O_kXQ!nlL"FRlKT/cB.Btk6lVKmR'!n%SD68I$\NtdJb/_Vd9o)/btZ.)Dpn:@AJ@bdN))9$p/2SA;K3=4s$#$O23R"T4g:D."9;DA+P!KVSeV!A<*!3]2LR'VJOi?9e#S%VLctmV1U)ZOF:uO?DC17pK>N709<1e9+TqNM04'k9WAp+`".RpNnQhcL)GtD3*EljJ".NTt1040UNM7a3`-`XtCQ:]O1Ad33['a)H`e@&VhWO?oe=3b*Ae5KI=Ai&gTAa]?FLttU(00"J,a,;%XW6g<g7_s:0tLbcE6/5$I60iGCh22IEVTd]Os/+1O1ENTn.F!c?;2&HeZAH*$$uE<&uAPN\l@.9b@Nf]ClnM6Bai/(^C%@DKc%`DW4blWrJj1q@N7f+XC7^c6!-=Uu0"^MSF!XM7Tf&]a*(30C="6FH=>4N=P<`&WVlZk8)PIROu!3L:R3A,)X=?D`8M1pK;:6CJH&91DBdO'.d;SRP-(t'/?J+E5g[WC6Z7[j(c?F78fY@5P0l!)lTkIrA6?*a2EH]U(a::t;_24Y&1ZD9m=hrS=m17]531Ypa,&5g+0ZV9c&9k5@m7kgWj/sAfes@;EqkTZW!6kk<=T?S,SZ<U?!fdjO,^iL>-ZM./n1H9Tm/-RtIaHCZ2].NSU3d&Lf5nOX(Ju0CJD_AQ=4B86TX2=\f4!];&bFYp]Y'dfT*M9YqXB[f\E-e7G4^UV!`FAZ_/jE]K7>R5/OqV-G*e]jgmIaR6!;XD`*#Upu&CW1h,1UuIrCPGZa+^6=4*Y'Or98l"dY_C6k_64A,Zc`cD!!`H9iR/#K?,O[?UENno<".Y`Cjd^3K2/P9^a%-ajtOajQXkV/\Fap7V@$m8k\C0:Y7';#iV.[H@)n,!,q0jhDqsqpPQ-U&Q6hBI)RZKQI1)LDg%()OMOO\7*o%`\XORGq`t]D]^C!FP58I_E2KPpJE.hr1faYr6uWP%`98Mf==@f+WEK,u"RF`rNhSAq]\(jk<gK]UleVN+ZGeRPZGKt($>QuN4Nd#npSu`,N)R3Ah:3k%YScY8q[-9I85a2/]%#dL[.q:RgMgULgbR+EXOAP)mASYRk,\R$cBBK]D4P#K*Xl(=?d20(LOT>r'`(9;J44nKh+f(#dU#gnRDpHJfJ@EGPNgMa@kRO$l=q63g@qpGqe*(-gXCdF$.riYJKMko6p\R`m""cn!3JYbOF](aq/D*-?LM.OX/!Ib^6\hJ[mf2C;A-kTG=@Y"JNGoCtdYnWP$?sJ[s&Sr167*tP"Q!&f`TqlGlo^rSA[72B)A1o9`gE3m\-IQm5G[3dea`7Q<F$6s],:-qKAc2Ffg/LiSVdBADl=A8-O16RAAW_ttcOG9Su/G&f4Q`;:$"&nK;b-7:C;7sXYmQ)dib2PNcV'lkIbY@FBX.W.E,BCEG-oNr7R*c0)I02PsPtgX.sMW?!fgh)8TD%%9rHS,8<P<b&d=6?17=7486=Ng?pLAi]@XKTg*)DE?BY,o#K=J+l#["7[p:oL[#GA#ZFXaAeE0"BVDo,S$<mPE.'34S4QeJ6,CCcQW`/W1N4,nDJ:uM+/^QuIFb]<+e*):k;KuELe.572CQ6]6;G(J$lbAKDup8M=uGoBetT>rLe'd4h4E=qi`Xh<Qu=d-J5c<>tk%7F_L<#2a!/WJ6&?Fps2OLr@CnNO-!T+N<[QV[79!-=""718Zk:u(juXM7^"R$9";KaCV(fp&?HWi//#P.<@Ot[X#"Il5'Pp1%CS89$T.G&')UAZQ9#Amc_o.**asYu,;CckX9Q)6.EQg3#*P9eCAiX\aA36,j43fh:i@.e3USu#Jic7nJ"?N*&i"g$7#TZqGjm5<!Th@@/%e^NnSjnq,;PQ"G<`kZT;IF4N5/[@M:2s1'$=$^$T`I*f,iHP[H9naMg.M8!-4^N3E=&HBoYGJSC87bmF2"AI2R<S[0srHP%?PfW)0'sLKbnh,k4[@>*4MQ`u]5CkEsZL(P?pZ#$15I16DkB-a'EN*<C\]o=240A.7YTo?ILd2A`E&-Us>.'/rKEIum`/tZ+*r.kPpNC*G3o6#QMi@s7&&`qPQ@Q_?Tq]i.5LCPHJ;#WI%ZgRkc\O15$Uflqtce8%bqinmMf?!5uC#+,=C$fkp,@.u6VG$<4<)uK5rD42>jfL'hJ([PZuG]]Vbhb/Z:Ir6pnCs_[C^8/72d3B(G`J;Xfc$9I'F9KB+,Gp'k0&op`c!Rt+/AqK!#*2RZ6m;p&kg)BRSkR($Nj4^)"HSB]iPW$(opj"BXV1TgI<NH@tgeoW^Yi+a;%*+@%>$;c!)f&-F)nlD:R7#^hcome/ja5pPk/:0hd5YFn^di$raMg4$"meu4aH_sg6$EW>#0uiD>g]"7nkjV,?4#L`Gcem=uQSNe<jpIKj5+=M09G$LB,Qgm&PqmlD8a.?JAq+;*E%*ODsS5OGAOSe7:POa[@mK3PDBWVN'ceGJ*UJ^nLsB3j8H_iZV0$NP_e:b+cot'DO":K9ltRb0QST"*eJ,-)\8EsP]@FZo33C<d\uDccQ.MN%Ha%TLHXf;or7$LaM\^EI#3TI%C,$[2e6;nUH>nG_m)C1h9C4uIs^5<S_lDdEMF_f%';7/)`YrM6-C_WC'0QVLMF=,#VX-43IDNqaliM3Of,TSJE?/?&,4TEo_lojXQ>(f&TR:d9S/HVt/VraR=.e5A]M^#];,A<Ct1Uf=tSncg+$adm@FU;OZi_g_53H0<XiLsD4>+-@k6mOs+f"g'c23P[@GjEf!XB3jCsirrF&t_T&6CLa4a(!6QO;Y`s\[)*J?rGXj>3W)uEs8?/$Q7cj-_LQUDa9dgW6l_t-I_bZ0cB@/#,]`_F&-G;p&6e!l2H`VjOd9N&OdGm#.!G%'"/kk\&"rG5[\AU*!R2?b<Io=u2Qe&<.J3%6)sMm/HtIEL$W)a3[qttS0N0bpCc.1B;;dX8X/%97Xue-i%_COA06ib`\2XtT77SsVY(^=>-]j[IF`2[3AJ=PM%c$tfr5ZL,H97h\iV*X"4"/Rmun3GUkkmpBt`PbD/XrHQ*IsbeFFk"/6[2tVJ04&TM1\!9\glG%b:BZ?-e[a6K$_Vle).#"b(+?Sq#j/cVAnk#>ma"*'Z,38mr/;Q'>q$S$dq')_@oSD(sS\m.,d\,cLjN^=@ueOpti!MQ<KDP1f^N]7@Q*I?]WKd)BBf`fnY3D>`%.+G@]Pq?AT.`oi4!Y$JJ>,bm6\@%%NMC-o_J@?lK+oFD-)rM4179Gah+0q$g[lhjU%R3Hl<nSt7GDn%lLZc0N1L4"6X%I:9^nYQo>fU-PE*:bE%!O9O3*,8ml(l@S1B2MU\`4=SP+4]p'-;:Z/;"/lqB#-2X`&Kk/")h\[FY!5P76i^"C#s(_#LdtR?_8r1FSW3QXqcd.\:!3=M&sG8.,X\a%\__(Bdj(Jb05clYDK5=@0G4HP#ia4blqEGG;A%[k(!+K((,VOW,fpa:0g*PA!4YH(9LmOMW2&^1e`3a!OXP)BrH%C(>daLX;!Ge'(P<"Ut*7R'HN%HjPc_/K)Tl,685j7)?NC_Z(4f[tj[AR*=*+FpudI'=u-5u[EhGP;&c)=-hb"fouR<!nei7.tul'9.0E`nnP0K7X/a9nE(q.1bG3)8,9aH9l+]2cD[rm1&6d%rU333^7NeH7*"Q+sqKBqqH\*?b5*&5C`ulKqf.M7j';,7,N6]-8#_(&_%>(`k<mnJB)%.B#2-o6gT<b76Q9rUf%4p?E@LFc,_sFKkr@4>+A,83Gl3#(Fd9"O.CP)dNsoL=tVc>iWab/ut<F\.;ns#2lA.>*YgACQ'sk.C0"Ms]R*"B#*-m6<bS\pRL]I"SB8^2ca6Y^0$#FBoDCNmp8'8iML8sEgE1BCPl&.@Ae3b2nN[srGq%57g0(gXWp]t55GsjN;nX%Os/Mnj.RQR8>7W/Y9Aob(jLpReoP+c.M<^]GE#mp?0C!qJCC,Id37MS$g$fpQTV5&_o`agYp%+VsU9E29-e6Q6qn]&G!!Q,/a7Vo;btIfC<b3B(V*^cq1t/#5Pau9peV],4,pCm7T&_SrU!X!`!T5p3cc[PBZX>u[#i(&gK"&\K!B6Zs>'@`B^"LtZi\?4I(r@eqJuoYi01CZ4eU^Amf$NLV"6X5j9Su(b6ArHHsLCE>8P]Uam/-fEL`s=u)@T2%mO@G1%PD`"E#qU;/pZaCH"3a71\@14n_SVDN,TPd>f-?dRduAY=1sRBn<mCBQ6UHaIkT"2aIUD[ZN$K]h_<22/CL\VRY_c>>3@(q)cuCPpLYnqubJ*,RKtG7Zq8U3h>DYKEr%dba3)r!S13<(4s:S(iqV>IM<s7#)']!YhuL$cQ*4e"u09q%nIj\XNZ%3ni/!B=WZ0^scK!\!79lk8k`4n`]Dkj7$h^d>fV$=Oi6:pF-tm8D>C\HtuTjAQS=Sr#86Yt''pR&R'Ir=.c1o]`,&[qQg"c%X%WCp[LEhhNh%sG^89XT_bY609Uf-Ec^HO4TJSY*pHhc-Y"IF;A].]((DV@OD)i;)KGJm4>aW<j0mR')rB`\TB.83ZCg"hMllZ>$D,Bfj2T(ldPn:RF*m3lKt(6)4)BXt4jg(e0^hHlu!N&eE#sM(cOImoFeZ05#X'utTL9UQad61K&Q3MXcop+aO"12PoEV)=3S`]^#-.cY$.Mf.m0r1sC@hQ"n6=`Zr43km^tg?[st-5SoXdF1T_g?]"EJ*A;B&0S@=8W\OQs3?JBd;(>1>ELu]`&`#lSpE+s:sj5:Y4Sk1G&&1]Fa+1gVTqJ2."HV8[chFQ0Ua'X-WDUp8]V(mSbUB7P-@g-M6\hFN0WiW3&88R<q)<&+C^nn2r_SXapeMYLe`MdFs)^pZ9L$Il<_C=cKI-3SGDblRr(FkppPA9G()D=j)?Eg:b#+jDNt`S?2?l5Ce3:`OI-[s]WB3i+9=2dKV9Pd]Fuj80IZPgWh6C#^$A?S#n@85_=(FukkgG/=Hh"sp=i+Q"U$ESb;!ePp(7Cl9$P?!n\nbi^2;HJTcRl8_VTb7A]fkL_Xh`$)jO,OTGnK4S.F:?B$Qs"-)[s.d\(N=+t4JscsSmQ!o5X%D78:%i8Y'!Bt\,Yj8oZRrpf<dc4Sfi"6CSCu4-!T(8ifae0+`Tl%#QB/J7^G>`#e7Y^f2<9ecUM=r_<1,k%qn^UJL89uSJf6OqKjfDm5OIo<ap$'OH6PcFBRI!]&#`,Jg0t/+;JK9228P/4*3UhQtk%:UnuH<,$qo(q]:-O>bK!_-ebec_&m+]oF7n2bGPW,&P1csprFokJA>6Z1S*(B0<,jAqdPd6-MslrDT[mp6(?T[\0[3EhSs<Z,"IE69RZC5/:;sCm"K$&7)fQNnY<q>@!(-7/G`ueIVqY(_5\^,>dPas,Y>1&X<7*:0Mpqj]$0*s8iQ5&??^!^'sJa(?4hT#8O7a',9F=d#"h17k[(Hu"4,"c+Yn7snoik-#8Kpi2gs9=&#07o:je3=LnKSds!f0MOKH+[RJ$.<J7HAOIkpbDUU=cA(SbaPX2_`!IC<opI*j(R83`[-:`c*@4BFIoZ<tLmI[_SXDP;BC%)6mBU.l[VlS!fk:'cj50Z,PO&24[[)Do@Ker]EU[ufX-E&63Bi^b1Jjo:f^#tAgU>>Qr^Q44m*5oAiUY^Z__2U1pmWgu'd(9ijQ<27@s9;H=\Xl:<liT*:kU`e`ko@\%(Q(!(QTV)\aLdS@46r3?"YVGXZ88J%.,KdH<]O1#5!9oLhG\.EV:=3.e%bD4f6B#Z,3+_L*MXNq1(W86q+`<Kq>CGDnCZ)N+%+3(QBKp%TmVsVL]Ef%4`MREnH.!KIPN\R"-@4KKi/rO&HI*)BlQDJ8QS*hhI943h+p6!;@lbA'7tS3csoLuT0hIA5-ai[+0-003t)]+]i7dQh!4h9(=2ZAOZCN7$<tE0'u`0Ji:0abC3"#?V:rtQt3_3-gP7J0H-1'0\:S#?;E_bG)bZJd%MGoX!hV/UOm.`j`pK^QjTf7EO1R,jRcd#mFKm5C&qo/d0/EqN3lL8Zb77';dPHa=$(p_0VS2k+Z,'sTd?q:%Q^c&Dg$K)a'_&qRH3I[S`%$H/HfF2uLl.N+c`lrNk2c$7WU+_+^]E`qBqb_2tK/1=!QZIhV-Z^lt7+h-M6V_uZ!#P!UZNug'_/I5fkY^L7QR2Ds.VIL?r1,6RkSftrbrHb11cR*Tj#/La1gY.NA19bkZg#9".5?.Tf[jVbI7n@k)mPi,-U@+dmK\Sr7so<gs"PUpR!@X2omsM=A(I_lBa`h2nnc&\%%lfZV]QX-C([MO$.tN>'l`,"r)I$BPT^UOYbo?CSP0CC!%$f_kOFR(e>k=MP(7oo4*lR9^[nA%aYeh%-OA/Y2IJP.]@lM4G[#E>G[5FT;KN;KYTCso=B>2Hp$&91Umr!bN4n)q')^I(2K>"J!o\kl2=n#eMIh):4Fl^GKm0-f.HC=R-#Q=<&6GNXL@@.iSc;_%Js:e!;1RuQ/tcS\cjAfKT,_2,kfkBBOsB01@mJPE,&;/_N[)%P@s&KPCB:+HnH4ESCQtLi0:n:&s_J0(9T49g->4_ctctMWnb`1r\Jp.'8a9diD9B*o$hMesRV@B'6o7Uc]M!`uXB2TB7.^smE[@gHYR6:+,A[n4UU0]*aY@S]"T6XD?O@n`QFgjpMj!Q[<o&OnqA#!`K2tB8.Cq[<>&85!#b<=-[l!MEg6YFlJTWN)t#m^f]FeN9-Vpmd6t0`\])QRW.($qI_d$2Z*_D`25'bcmLl`C:@%3bWr\H_!V;Q;2W+ft;*<Cm'%PP\SPadK^FCH4OTsf\98RGa"T!T?iOk4JqB"GPf-!u8kZ$"4'UO&?!+eHYTM-NJLD@86DN@/==Y6Asmq_rIk8Ud&K7G.P9#b@.2\)fn2Cf1QCSlFci?cq":BChJOQ6]:\S)osHGJKN59raVuTQ2E9E.%<oDPHFA9mNfun(,e;6XjS+_'.p8JK1<-$a[IB9l\MCmVhBfLuZELmTK&?5tu8tpohXW]0rgk2BD#U%M$2QJfJ[%(#L*Q+i.l'^o>5-b$g8oUB@1L$:?4K0Xfe^;3[!H=.<55\Xb(O5bWaEDP^I6<+kKu3^9]WrOqh'0sJ4dkYbuqXboMZc4=s:Gq4&NH99/7cXe7N,Tbb`n>=Vc3lJN[Q5FptOJ]ECf`eKA`tm8?pcu:l[J*O!s!T#6[Mgr,Pim-s6R]nq]S>6OV;'8q2M4V%hKPB7cojtuo'(dN*^^*gsS[2753@1SIW`'nb#Z=e-9T6L+nS-g`hVQAE1u'i@oMtQ:PG-@QbP_?ccpp)ANO[R2(!F,5^O^&pY.p"!Teu8TL*8!\We/JU]CLEknr](.gT9oplnA!@FhI::8b<g<Pb;\<RI-ohCpNu-m/`7m6F.!ldgE[1cm=i#3o%JR;Q&kmBnl=F/^.lB]g/3q7HRZ+,QSEI+JecTkH)t1[7:NnN,P=)_EAFBe,EAhPth+/2EKGK]@IUKfZ0#cgA5MM0pUL2FGci(RFDb`/t;=@=""u@eZ0\IuPSc8tr<9$0WkVl+SV]#`^7lP+4Eu&hiApf71Bt:;j#D6>R)0<[.A(%@PYn04Df(Zi1!X'3a#5(^_mXJQcJS_kc97B5IP",5(kVRjkkC!aJ2Nq!WMLXY]Lm[u]JDa3#iJfg^$DoOgsY.GgPr$^,6e`@69:qJl!0r-'dKf6RI]bGt]AgQLtDVqrot$H&gdI/1hQl`RbN&741jpNO*bkWu:K3Kngdh1"RVC'j(W5Bo&3/XBOn/;G>WR!SlBV?9pXSKF_V'k[A5CBPqK9THWCTb5i2rZ0X]NC_V4SY]3lhm(r-V/Q-.?Y52oXCjMsRom@\2#tDkn3qGbbTa!24*Y>0L=pg;q#$;Ujg=<.]/t#Vko)-lUL.r"_@`m;F5-Tsl+JsT^:\?dJgt-B\;P+2q81@Bq2h_5ga\R$YL<nY9\22Iqgi-eGuNHPsKs&VC^0dHC*fd>H/a)$puA`E<J/MNG[p-RrNl"sr9c3fVofs[I@AA-5se<HUMZFg3:J-rNufeX!12^>9E&*a4Ci[p_#m(o`NJ>NWr)@V@l?u*Sn_&BQk6CXemjOS>8]#f_25_EP$`/5'QqSId>CLR0F*$W.A2s-^cuZmbn/>Kes$(@lo;3s$?C-a09<_PfhPE-7Y*7%[R]fuHd)98XW'k[76_(:>5oKqYRR6'a>^S!UW_"$8ni;-hT$>scORZDFc.<XUV2#0.>MOS$L`<luQ%mYB3\@9G>_RmPtp]!i9"H:3U2..7@S<F2QtUYA_XR"q/;[U<HPfTn'3/Lpu4i.m^=B?V_tc/%R4HHYtp!lSJWguJo-aJe?PgJc:%I=hktjNtAk""AuSqS%!S!JDbNL@EM2i$Uk'1+Bd^g$[*N%kPl"bSm,Wa4ZoBVGh0Bs`R?7KWB!*]p,jLN))((L)qHpf_3C[!EX[;,0_<Cm`IJ-CE`uH-SEsKL^CsDA.3_5ub+^Rsm;d#Y#VH=4PQA9b/nHP;N'P7Qga:,STtPj$!%Ur;;:TYTKg>$gW*-2YV=QQ541c:h&+\_VAdbm7'Ch@MhKfni'&<.b1TiZgGYsk[-Da#Gm?eu*qlMp7gR"T2#?:X2$q#QdZP6]KO<_iXIpnW;(_lokLO=DM*X,A9g^nn"-0dRI,h>tk[=,!-tP]fc-s31"6flJ/+,];H6cGdu6`^b2@iHYlt+Fi$Z-E.T`MEF4&fC_E&JEqO7&(.dScTFBD9\==J"'-^A]CRHb+_^=pq[]"2Y=2.k2QSp&d9)4'5_bV.u=iBaDZcif:4p9-'@(--0mVQ5a3j)X>*S1DOWZo"9PKj__7(KNAcN&PRShAWe"CYO_UN>Sj=Mf)Q9Kb=!WMJ\a?"$[WI-?s>3pc>W:oitEK_e^XKdfqc5,>FcHn["atOi+sZ`^;aEKnFdT^I-lTMX^LDK"nG:NISO(mB*-(A-\OB_(Uahj2[V@<Pd"*OWX5fL1LB->mnhkK&g+Ptt5OGSi10'g=rNbsm=?#R$_49sRWI\)/Q^(c[d7'.KF"(H@7H?ZeP')bNH&1ojFc\thTA^*V;K2LhuIs!c?cAh&e46]O%5j;W%lb.X\,CRM#<bZc_H5@rK:[hfflaPJ9#K9er1p@U&\T%mLTtXDrfORDN"&2FpIhPNC/U:C`2oaqL16R*7P^:<'6'%SQFLZk`^slH^nWp^3T9_6P#^1CPT'jT&d9^7LJZA(ARD@0d9Ag-pDgTl+DKI*2e5EP1]X7hnV8GOPJ;F+j\^IX24m*1&cOB%lPEY#sAL6k]7;l[T?19H@;V\r)hIO.9TpNem0-b]o0o)qDV5WuVX]t0(Qr4RlB_'jpr$2"+\#5&3K_2!aO@>m`/u!):%/(8)/Z#+Y7c9L`p.(Y[5YNtX.;pc</>-'U!34]=rd^sObc><b5BMACoGtroiU*\(i^=&Q.a9jrk^^L!<;D=!eHZQc.&!9[][E[OBd)Xk'%aqU>JRgSe6MS?_k4@(9Cj;1nBf5'JZQR^9"KY8AjgcC7;/s8URi85ZfPmMjd/*g>h'1$7'(HjR;iu@t$^'Q<eSp_*\NG$da%%teLa^O1Z&V'+T.YS#o/5fRtg=d3P>N)i&p$K#sRr%'-./E5!\au:8!QU^HS,]iJX-s/;Z'!#&e7S9F23?b+Qr\ee,%n_A(b0L0WC'L!'2f.[K`#(M)r.a"&_6cVl.m.6IR7e-e8%Hu"9V_GpiI'GH*L$iSf/NRD$>($((bV3a:[jb3m(?'(+4),eVsCR)8"I"P;QRCJPeleH9<MP[]Rq&0"h;!T9*5j@GkhYoK5WkBMV>6D=DP%o7b.q(I;At20aGLLCbsk\5UR:qjk;>s:gRt5ABhlr!Rr4u2YYA>QC6=rj02[3ZtCQ#a]&`;PR6'Qu=OOP'?fi(Lj$cn(q]1s&diN6Jdd4NL;D9)us,Ak7n>_ZpB"p$fB[s>R<DUIh6]ti55R2XOaUk]>^t1#+i4eX\HmM)8]moS)DrAbpG3XB)k<o0QQoFt)6fLF0"mOn%sK-kr"dse]feX&UEGS?BuG<ctpanS084F`b?$Or)ktEemGZ0g79l,m+FXN2:I]\t@%^sjC)[tZD",SC0TtrmHKe";K#D",<9gZ9e9>uM7\(U[-*;]!IB3eShf"E(`]lCF;lt](5IY3ilrR#jF:U?SX$4e?[de\GKZ*'NiuMY!0o7s=`maKNKlSIO2$54MDSK/DPa'S]7KPudUn63,g/(0<1=E%F<hpCY:.]T7+?o-;%OcEE)ZE+'G:_r'1[_18!4;*mj!X8:MXge(A<$rpc%fMr3D*J3/I<L5q?.<9TQ)9#uqPUW>#8#@_^lLL0V+BNIUmgBu.PF[))p\OP94dea,u36A?idd2B`]<(4!9l@8)0!bG-Cr06=>hsNTXc-MrA!!YJsptN8$?Q[+T%=%42]EBCFn%&bW]Q$'UbYGc[hi7sG]`AW(7`CU(_IN+KKb?ufYiF<'S7lpqA.MF8ObMFj*u5jL^UrrSG_9U7;#;Q_Wsa=k%EnFmQ_6I(Pe;4Z-,q2@LDG3pkY*+B@?Q&utc&QPQ7qT(a*bplPHraUWDV^G>c&SXbecTif6I?rD!72H&WmWDM/gt938IVS_=aZ=C4t>R`'GLM$1MSaY07,2apr?PAh%g/d_`DSTQq^P"huk#s^M"Qr\)a[:fW4$nTkW+,n@sn.OJb5pAr+!p:D,B9u'SlbE%WoCLhIJ=+BM*1n_.(VQ_2>DW/=2]@e@o:n:GiO@]WP0apPTZ`0IYpj9c=2Ju)7bGcElI/H,2rO8dJkV4Map,ikLrbecdX9tn[;p1QrsXN^6rjsXUkA-\P;YNictb+X?@$B#<H_)@I=W?W[K*(`daB;*_$\\>$dE5Ec*>o].E(G]poeW`L<=sd;qZcdUJO^0ML^FW*'U*`XGl,ct'!g<Hn"Qd,p8_O<7@-csWit[u7d?9o1]2f/K(\$MF;?"tSYf?U'9ht$B;'V^ISDr_@+2$C6A.lpZ@fF-'HcK[G?+9m435+r1=RW,BXQX>?)RY%V&i9#!C&(&Oll54`"96btH`J=51l0LDsKmqp9d]KJO/]GdN(,d4"htfc\d+ot:cl;:CG/FlW9()B:dm&9&L;etk;ntJAbKu=c[KDl_TlZg*B+H6BYrc"CYp1e)%>>Qb2>>_#qg^h[Ya""HNV'_.Q/,KLpr\EeO$UaDn!.pENYs<MCCF;2O1Nb'<I#S&?r'HK;V\apV2G'a"231?#dQ3`U54bXA\?ICi*1N-5?F$bt"VX?NoG6k3lQ?0!sH_`ddE5&H"^D`=S%$6.GH(t[,!c`E6>n#?(*>"SI,,/J:A$u6TSkL(0[3%#,8NUtr+J5Gi&Ds0C7g`2ICDSnij1&OQ<6sfH4EKLL;#6jkNB]<<RH72Ar]DA.s5Acb>fA!sI"F*GQA(XogohU$sVPa9FpQ3\QXR(.l.>tGo^(QrHsTc3TX5e9/`g!T0WO70H#05VQO106F_\4C:(kU_sq3rb88$d>!X_Uib4(f"n2<K$28,(IrNI'.N:<LV9B<uk*jCdXJee_JLGZ9tGLMr[ri2.qaG?XI-"b9-kqPH2+``g7N]XM/46I5W!2)S/Za;4^+1-o>uS)iQKM'5441g"DRJBCF!8Yi")_Ef'a>"pJJ]:J<=)FW%ZEc!lh[E4JoOFgJ:d(+RCjCeQ^/c2pjbpbD-Z:WR1kQ]J@ceg1`0E:-98\]^/3/D(H^dPFO44XP7WXedJ_H6sa7uYDmP-pD!-G9.XB-#j2HX6u"9^WFB]+W3$QIn04J;MH!)Hq5j$k9s9-JHaI%WfbD-^`*k8;t4t'"00iS!3)1Hb8IYjH0V-7&I).X2mbKD\=QMA=ChW:.]Zm$e\JKq<%Tm8O4+QI.Lhf1;Mu'2^V%>D_1d=6A=9hTK5WHe7U,UQDm)9Qo^]!ipsTSB7.^0M^boJi+q5-p2I[@d]G:aX;K7aeQKMSkUt5Zm4V5[JfA:j8/QO"'5`pO#C7FYkJK7C(P@8PnF.2MX_CfA"\<IA[3]<5"#_LDtqE>IQ?tnFqMEb84&RtoEpsD3q_rEHBXW*Od/lQmDc!L/KA4#0irdY((mH%d(9YR5GG7k0tn30gjesYG*hVUgQ9m=R]\$e7bUd^\jbHp6qbjXI)K4c_C.I"fIFl=#\eh5cS]H%ci5a>7d$NXcLfMe0HI*<te5/rglEOI;7ILTX$+>Zo80aHGsICS[\X9E_bf#4%Cr`po>jiq9&glP7hW8^2hU60%lV,C%JA25UtJEeCZ7Y$>/kT]L&o$VRai8D,Aa+6#7#'Y1'`mXsnIJ@D&@H&N8Z&Pc%6_`<71.f.BdJs4"eqB:M6>$glnI*s\hf.Z1Ni4nO%b($SEN5U7BV=(YHhjcme4K><Ja=PE6K>H9B/5u_!n#p>VP(l2[s+dI,9`,Ou-$S>NOhY/%EUT=9^KB^87DImI<gmj$[1g<2;/Y'p089.,tCK-&'m9spM9Y_]@BsD<PhkSQZ8h;i9c[\<bOqdVTof$`cZPkLcYZ$4o<nu^DJKeUd@$si#BMb8LO[L];]6!oUJ%7b)Z5P_U@s=p07o'"E?Gk/mH1WO.fkF"b=sPnqD^4qXoMq3uTQ1@>Y5Dmnhe)]SFK@i?bZ90N`#cP)nDSCndhfDhmjZkH%aX9)tGNRf(:=1!WO=uDZ:M3utN3FkC?#[ErkaoE?LgWMY*M+oisD$QP2H-0kJ;b+jkQH)(m/U-,se>:IH/k/!?;&GH/YQhKjW&B"P@?=WtcBGX6:uKSZ1-S#t_NRgLg/G?mBa$ZF&eeY6u")e6AGHk3=fJE*lQcp3\(20MS(4"0;#DV2B]ir(Eql^+'((hFpI_ni29u+*HfeN\oU$.oM=MMl%<r7N/YB7ch/uf'26lfZV&m'tf+C:6ufr6>KU23#r^%-\@WiCAk/V@pgj]Nu\M$sp_pF^L0R=K*cko8sn;iHa\4(oPgFr^^2-6R>h4GTi:*^]ngsP?$=[n).P)0WErT&8=_,6Y**3pYFEiUiUaFINe\_U2T@<7V45U:?+D=J\AL!KjNX_k]7ZL.'@gUT9^m_#_Y5nuMr`0HH[`QON7.B(7/g)qr;X`bZGW9cu3h:7Kmg/!\XSHo3/`^b%m&3dP?0bEZmPW&:H2H\B*$(p"(h,Ve?XJX]VKA"94!FGu7e8u,:90Ng>trRnJeT)J^MbqF3olDSgrk@P1aLSn\q_#(aQp0qZDfi%)?Qds>>:F=5BJ@7-f=%ZDL8DQm\](FNc"EnMJn>rTKPfYg;uD9?MWN".cub31SCMIFl"<lAo,f+2G"m-\]=] local _3x=0 local _0l1=1 while _0l1<=#_2e do _3x=(_3x+_2j(_2e,_0l1))%4294967296 _0l1=_0l1+1 end local _3r=_2q(_3x,255) local _1n=_1a(_9t(((11*12+0-3)+0),_3r),_9t((1588-(1588//162)*162),_3r),_9t((0x80+0xE),_3r),_9t((1*((4*43+0-32))),_3r),_9t(((6^2+93)*1),_3r),_9t((0+(153-(133-185))),_3r),_9t((414-261),_3r),_9t(((((577-356)))),_3r),_9t((8*26+0),_3r),_9t(((((3800-(3800//365)*365)))),_3r),_9t((0+(144.0)),_3r),_9t((7707-(7707//267)*267),_3r),_9t(((4^2+123)*1),_3r),_9t((0x80+0x2),_3r),_9t((140-(48-67)),_3r),_9t((0+(6^2+169)),_3r),_9t((4*59-58),_3r),_9t((5*26+2),_3r),_9t((1*((3*77-23))),_3r),_9t(((261-41)+0),_3r),_9t(((8929-(8929//364)*364)*1),_3r),_9t((1*((222.0))),_3r),_9t((0+(4*65+2-44)),_3r),_9t(((3^2+196)+0),_3r),_9t((0+(101+36)),_3r)).._1a(_9t((0+(130.0)),_3r),_9t(((0xCD)+0),_3r),_9t((0x80+0x19),_3r),_9t((0+(373+347-499)),_3r),_9t((1*((223-41))),_3r),_9t((1*((2^9-334))),_3r),_9t(((((6592-(6592//340)*340)))),_3r),_9t(((11491-(11491//365)*365)+0),_3r),_9t(((108+100)*1),_3r),_9t(((((197.0)))),_3r),_9t((1*((3^2+169))),_3r),_9t((1*((169-37))),_3r),_9t(((3*66+1)+0),_3r),_9t(((12*18+4)+0),_3r),_9t(((((175+400-359)))),_3r),_9t(((((14206-(14206//412)*412)))),_3r),_9t(((55+161)*1),_3r),_9t((75+138),_3r),_9t(((((113+99)))),_3r),_9t(((396-200)*1),_3r),_9t(((316-116)*1),_3r),_9t((1*((-(-(387-174))))),_3r),_9t(((4*54+3)*1),_3r),_9t((0+(405-200)),_3r),_9t(((326-190)+0),_3r),_9t(((10*13+1)+0),_3r),_9t(((147-10)+0),_3r),_9t((0+(0xE7)),_3r),_9t(((((165+40-76)))),_3r),_9t((1*((171-41))),_3r),_9t(((((2^9-370)))),_3r),_9t((1*((12*11+8))),_3r)).._1a(_9t((12*14+10-49),_3r),_9t((0+(0xC8+0x5)),_3r),_9t((0+(248+281-376)),_3r),_9t(((278-(138-80))*1),_3r),_9t(((2*104+0)*1),_3r),_9t((232*243//375),_3r),_9t(((((0x90)))),_3r),_9t((0+(272-41)),_3r),_9t((139.0),_3r),_9t((1*((9412-(9412//238)*238))),_3r),_9t(((0x9F)+0),_3r),_9t((0xC0+0xD),_3r),_9t((1*((5*38+1-13))),_3r)).._1a(_9t((7^2+83),_3r),_9t((1*((2*122-36))),_3r),_9t((0+(778-558)),_3r),_9t(((357-164)+0),_3r),_9t(((((223.0)))),_3r),_9t(((184+37)+0),_3r),_9t((12^2+61),_3r),_9t(((((280-143)))),_3r),_9t(((12*14+1-39)*1),_3r),_9t(((765-(765//280)*280)*1),_3r)).._1a(_9t(((2^10-871)+0),_3r),_9t(((525+155-460)+0),_3r),_9t((-(-(324-142))),_3r),_9t(((((0x80+0x32)))),_3r),_9t(((((568-436)))),_3r),_9t((1*((0xB0))),_3r),_9t((0+(807-599)),_3r),_9t(((5*40+1-4)+0),_3r),_9t(((2^9-334)*1),_3r),_9t(((195+313-376)*1),_3r),_9t((1*((93+106))),_3r),_9t(((0xC0+0x15)+0),_3r),_9t((0+(2^8-37)),_3r),_9t(((((2508-(2508//462)*462)))),_3r),_9t((1*((206*202//187))),_3r)).._1a(_9t((1*((261-41))),_3r),_9t((0+(2^10-806)),_3r),_9t(((((2^10-828)))),_3r),_9t(((-(-(332-132)))+0),_3r),_9t((0+(6^2+180)),_3r),_9t((0+(168*226//172)),_3r),_9t((1*((443-227))),_3r),_9t((1*((669-464))),_3r),_9t((0+(0x80+0x8)),_3r),_9t((267-(143-7)),_3r),_9t((0+(137.0)),_3r)).._1a(_9t(((96+399-264)+0),_3r),_9t((0+(185-56)),_3r),_9t((182*23//32),_3r),_9t((1*((7030-(7030//246)*246))),_3r),_9t((1*((3*50+1-11))),_3r),_9t(((419-290)+0),_3r),_9t(((((0xC0+0xD)))),_3r),_9t(((240-(116-29))+0),_3r),_9t((0+(0xC0+0x1F)),_3r),_9t((1*((-(-(379-171))))),_3r),_9t(((((111+436-397)))),_3r),_9t(((-(-(294-150)))*1),_3r),_9t(((289+191-249)+0),_3r),_9t(((254-(141-26))*1),_3r),_9t((-(-(243-113))),_3r),_9t((0+(56+216-113)),_3r),_9t(((((0xC8+0x5)))),_3r),_9t(((7*26+5-9)*1),_3r),_9t((1*((449-317))),_3r),_9t(((375+375-542)+0),_3r),_9t((0+(3*73+1)),_3r),_9t(((2^8-63)+0),_3r)).._1a(_9t(((8^2+159)+0),_3r),_9t((0xD8+0x5),_3r),_9t(((0xCD)+0),_3r),_9t(((286-(153-4))+0),_3r),_9t(((((8^2+66)))),_3r),_9t((582-377),_3r),_9t((0+(7*21+6)),_3r),_9t(((2^9-289)*1),_3r),_9t((1*((209-27))),_3r),_9t(((((11806-(11806//306)*306)))),_3r),_9t((1*((6*26+3-27))),_3r),_9t((1*((9*19+5))),_3r),_9t(((120-(15-103))*1),_3r),_9t((9^2+116),_3r),_9t(((511+109-442)*1),_3r),_9t((0+(46-(31-117))),_3r),_9t(((3*66+1)+0),_3r),_9t(((8*33-45)*1),_3r),_9t((-(-(353-134))),_3r),_9t(((757-559)*1),_3r),_9t((0+(220.0)),_3r),_9t((0+(2*110-1)),_3r),_9t(((2^10-811)*1),_3r),_9t(((237-41)*1),_3r),_9t(((((1598-(1598//466)*466)))),_3r),_9t((0+(7*35+6-32)),_3r),_9t(((0xDF)+0),_3r),_9t((0+(11^2+98)),_3r),_9t((2^9-307),_3r),_9t((0+(9*16+8-16)),_3r)).._1a(_9t((1*((6*25-19))),_3r),_9t((0+(3^2+128)),_3r),_9t((0xE0+0x7),_3r),_9t((2*67-5),_3r),_9t(((((7*18+6-2)))),_3r),_9t(((473-331)+0),_3r),_9t((214-74),_3r),_9t(((((-(-(297-168)))))),_3r),_9t((1*((330-(186-61)))),_3r),_9t(((((0x99)))),_3r),_9t((0xC0+0x1E),_3r),_9t(((((7*38-58)))),_3r),_9t(((-(-(258-108)))*1),_3r),_9t(((0x90)+0),_3r),_9t((2^10-793),_3r),_9t(((0x8B)+0),_3r),_9t(((377-247)*1),_3r),_9t(((342+262-445)*1),_3r),_9t(((-(-(285-80)))*1),_3r),_9t((219-41),_3r),_9t((575-443),_3r)).._1a(_9t((1*((4*65-52))),_3r),_9t((7725-(7725//395)*395),_3r),_9t(((12*16+1)+0),_3r),_9t(((((-(-(418-198)))))),_3r),_9t((8*43-123),_3r),_9t(((((2^10-819)))),_3r),_9t(((178-41)+0),_3r),_9t((0+(5^2+105)),_3r),_9t((186+19),_3r),_9t(((9^2+72)*1),_3r),_9t((263-41),_3r),_9t((1*((280+184-282))),_3r),_9t(((0x80+0x32)*1),_3r),_9t((0+(0x80+0x4)),_3r),_9t(((6*31-10)+0),_3r),_9t((0+(12148-(12148//398)*398)),_3r),_9t(((12261-(12261//464)*464)+0),_3r)).._1a(_9t(((((357-179)))),_3r),_9t((0+(132.0)),_3r),_9t(((((6*47-83)))),_3r),_9t(((0xDF)*1),_3r),_9t((0+(9*30-53)),_3r),_9t((198.0),_3r),_9t(((196+215-193)+0),_3r),_9t(((0xC0+0x1B)+0),_3r),_9t(((((0xD8)))),_3r),_9t(((0xC4)+0),_3r),_9t(((((352-(186-34))))),_3r),_9t(((((222.0)))),_3r),_9t(((0x80+0x54)*1),_3r),_9t((0+(12*18+1)),_3r),_9t((0+(10*24+9-44)),_3r),_9t((1*((336-200))),_3r),_9t((530-399),_3r),_9t(((-(-(225-88)))*1),_3r),_9t((1*((6*53-87))),_3r),_9t((1*((129.0))),_3r),_9t((1*((9*28-122))),_3r),_9t(((3*49-5)+0),_3r)).._1a(_9t((1*((6920-(6920//226)*226))),_3r),_9t(((((-(-(142-13)))))),_3r),_9t((0+(205.0)),_3r),_9t(((((-(-(180-40)))))),_3r),_9t(((((11*12+10)))),_3r),_9t(((142.0)*1),_3r),_9t((249-41),_3r),_9t(((7*31+6)*1),_3r),_9t((1*((0xD0+0x9))),_3r),_9t((0+(0xC0+0x1A)),_3r),_9t((359-128),_3r),_9t(((0x8B)*1),_3r),_9t((1*((0x80+0x2))),_3r),_9t(((380-221)*1),_3r),_9t((185+20),_3r),_9t(((178+0)*1),_3r),_9t((261+189-318),_3r),_9t(((-(-(253-45)))+0),_3r),_9t(((6*40+2-22)+0),_3r),_9t(((304-111)*1),_3r),_9t((1*((5984-(5984//214)*214))),_3r),_9t(((414-261)+0),_3r),_9t(((((2^2+217)))),_3r),_9t((0+(0xC0+0xD)),_3r),_9t((1*((104+33))),_3r),_9t((0x80+0x2),_3r),_9t(((((10432-(10432//487)*487)))),_3r),_9t((1*((241*77//132))),_3r),_9t(((2^9-370)*1),_3r),_9t(((((160-18)))),_3r),_9t(((((660-452)))),_3r)).._1a(_9t((40-(6-163)),_3r),_9t((2*82-24),_3r),_9t(((1286-(1286//286)*286)+0),_3r),_9t((183-41),_3r),_9t((0+(9*33-99)),_3r),_9t(((537+31-415)+0),_3r),_9t(((((0xD8+0x5)))),_3r),_9t((1*((11*16+6))),_3r),_9t((0+(0xB2)),_3r),_9t((8*16+4),_3r),_9t(((248*116//163)*1),_3r),_9t(((19756-(19756//489)*489)+0),_3r),_9t((1*((-(-(283-83))))),_3r),_9t(((((-(-(295-76)))))),_3r),_9t((1*((3267-(3267//381)*381))),_3r),_9t(((141-(52-128))+0),_3r),_9t(((2*112-2)+0),_3r),_9t((1*((9338-(9338//456)*456))),_3r),_9t((1*((2*118-31))),_3r),_9t(((((38*172//48)))),_3r),_9t(((131.0)*1),_3r),_9t((0+(453+165-481)),_3r),_9t(((272-41)*1),_3r),_9t((1*((4^2+123))),_3r)).._1a(_9t(((229*199//350)+0),_3r),_9t((93-(51-117)),_3r),_9t(((233-28)*1),_3r),_9t((0+(6967-(6967//219)*219)),_3r),_9t((12005-(12005//383)*383),_3r),_9t(((((0xD0+0x0)))),_3r),_9t(((7*34-18)+0),_3r),_9t((1*((9^2+112))),_3r),_9t(((406-200)*1),_3r),_9t((153+0),_3r),_9t(((438+164-382)+0),_3r),_9t(((((0xCD)))),_3r),_9t(((-(-(223-86)))*1),_3r),_9t((2^9-382),_3r),_9t(((232*185//209)*1),_3r),_9t(((2*87-34)+0),_3r),_9t((0+(37+105)),_3r),_9t(((0x8E)*1),_3r),_9t(((((3*69+1)))),_3r),_9t(((((302-105)))),_3r)).._1a(_9t((1*((4^2+124))),_3r),_9t(((123-(16-35))*1),_3r),_9t(((((256-114)))),_3r),_9t((1*((2^8-58))),_3r),_9t((1*((0x80+0x19))),_3r),_9t((0+(245*243//270)),_3r),_9t((1*((0xB6))),_3r),_9t((0+(350+355-527)),_3r),_9t((0+(11*13+0-11)),_3r),_9t(((2^8-80)+0),_3r),_9t(((10^2+96)*1),_3r),_9t((0+(152*153//116)),_3r),_9t((0xDB),_3r),_9t((0+(6*36+3)),_3r),_9t(((((11*20+1)))),_3r),_9t((0+(221.0)),_3r),_9t((411-198),_3r),_9t((1*((63+142))),_3r),_9t((0+(0x80+0x8)),_3r),_9t(((6*27+5-36)+0),_3r),_9t(((((-(-(200-63)))))),_3r),_9t((0+(0xE0+0x7)),_3r),_9t(((((3^2+130)))),_3r),_9t((1*((5*29+2-17))),_3r),_9t((0x80+0x1F),_3r),_9t(((398+105-298)+0),_3r)).._1a(_9t(((0xB2)*1),_3r),_9t(((2^10-892)*1),_3r),_9t((1*((-(-(365-157))))),_3r),_9t(((7*32-4)+0),_3r),_9t(((((4*59-43)))),_3r),_9t(((88+118)+0),_3r),_9t((0+(153.0)),_3r),_9t((1*((80+143))),_3r),_9t(((((447-242)))),_3r),_9t((0+(11*14+0-17)),_3r),_9t((316-186),_3r),_9t((383+75-253),_3r),_9t((0+(7*37-119)),_3r)).._1a(_9t((731-589),_3r),_9t((0+(1647-(1647//301)*301)),_3r),_9t(((2^9-304)+0),_3r),_9t((197.0),_3r),_9t(((136+4)+0),_3r),_9t((-(-(203-61))),_3r),_9t((1*((-(-(179-37))))),_3r),_9t((1*((428-230))),_3r),_9t(((((189*122//150)))),_3r),_9t(((198*61//54)*1),_3r),_9t(((4*50+0-18)*1),_3r),_9t((0xB0+0x2),_3r),_9t(((((254-(152-30))))),_3r),_9t(((3*58+2)+0),_3r)).._1a(_9t(((((14564-(14564//449)*449)))),_3r),_9t((11^2+79),_3r),_9t(((20031-(20031//508)*508)*1),_3r),_9t(((9*29+0-42)*1),_3r),_9t((0+(8*27+5)),_3r),_9t(((0x80+0x5E)*1),_3r),_9t((0+(-(-(258-38)))),_3r),_9t(((((12^2+61)))),_3r),_9t((9*17+2-19),_3r),_9t((2^10-893),_3r),_9t(((2698-(2698//197)*197)*1),_3r),_9t((0+(6*40+1-10)),_3r),_9t(((139.0)*1),_3r),_9t((3*61-53),_3r),_9t(((((344-185)))),_3r),_9t(((14117-(14117//376)*376)*1),_3r),_9t((1*((164+14))),_3r),_9t((199+431-498),_3r),_9t((-(-(386-178))),_3r),_9t(((2^9-292)+0),_3r),_9t(((12*19+7-42)*1),_3r),_9t(((((509+150-453)))),_3r),_9t((-(-(275-122))),_3r),_9t((0+(3^2+213)),_3r),_9t(((((4*57+1-24)))),_3r),_9t((0+(5+132)),_3r)).._1a(_9t((-(-(211-81))),_3r),_9t((1*((480-275))),_3r),_9t(((-(-(224-84)))*1),_3r),_9t(((((2^2+138)))),_3r),_9t((2^9-370),_3r),_9t(((193*245//227)+0),_3r),_9t(((((261-64)))),_3r),_9t((11*13+3-6),_3r),_9t(((4*35+2)+0),_3r),_9t((7^2+93),_3r),_9t(((312-114)+0),_3r),_9t(((((-(-(279-126)))))),_3r),_9t((14^2+26),_3r),_9t(((((170-(122-134))))),_3r),_9t(((475-297)*1),_3r),_9t((1782-(1782//330)*330),_3r),_9t((1*((176.0))),_3r),_9t(((((226-(66-36))))),_3r),_9t((1*((2^9-312))),_3r),_9t((260-41),_3r),_9t(((((4*61+2-27)))),_3r),_9t(((0xDD)*1),_3r),_9t(((331-(131-22))*1),_3r),_9t(((259-41)*1),_3r),_9t(((-(-(306-101)))*1),_3r),_9t(((0x88)*1),_3r),_9t(((((88+43)))),_3r),_9t((1*((253+101-217))),_3r)).._1a(_9t((0+(304-(118-45))),_3r),_9t((0+(3*43+0)),_3r),_9t(((507+80-457)+0),_3r),_9t((1*((2*78-14))),_3r),_9t((0+(0x80+0xC)),_3r),_9t(((((-(-(287-158)))))),_3r),_9t((0+(0xCD)),_3r),_9t(((((2^9-334)))),_3r),_9t(((9*35-159)+0),_3r),_9t(((65+143)*1),_3r)).._1a(_9t((1*((30+110))),_3r),_9t(((2^9-370)*1),_3r),_9t(((250-108)+0),_3r),_9t((1*((144+51))),_3r),_9t((141-(20-74)),_3r),_9t(((((51+155)))),_3r),_9t(((((123+30)))),_3r),_9t(((0xDD)*1),_3r),_9t((334+5-108),_3r),_9t(((6*28+5-44)+0),_3r),_9t((0x82),_3r),_9t(((0x8E)*1),_3r),_9t(((140.0)*1),_3r),_9t((1*((4771-(4771//422)*422))),_3r),_9t((724-519),_3r),_9t((1*((326-(162-14)))),_3r),_9t(((10^2+54)*1),_3r),_9t(((-(-(227-19)))+0),_3r),_9t((1*((345-192))),_3r),_9t(((((2*114-7)))),_3r),_9t(((5*36+2)*1),_3r),_9t((0+(6*36+4)),_3r),_9t(((12*14+8)+0),_3r),_9t((0+(143-(144-196))),_3r),_9t(((0x80+0xB)+0),_3r),_9t(((258-41)+0),_3r),_9t((0+(84+129)),_3r)).._1a(_9t(((167-(44-108))*1),_3r),_9t((0+(3*60-21)),_3r),_9t((8*17-0),_3r),_9t(((163-(16-6))+0),_3r),_9t(((0x98+0x0)*1),_3r),_9t((159.0),_3r),_9t(((8*21+7-44)+0),_3r),_9t(((250-(144-99))*1),_3r),_9t(((1725-(1725//221)*221)*1),_3r)).._1a(_9t((0+(-(-(268-114)))),_3r)) local _9b=_1a((220*34//68)) local _6q=_1a((0+(3^2+106))) local _7g=_1a(_9t(((523+55-396)+0),_3r)).._1a(_9t(((169+5)*1),_3r)).._1a(_9t((1*((138+435-397))),_3r)) local _4c=_1a(((((6*18+0)))),((((3*37+0)))),((((0x61)))),(1*((10^2+0))),((((2^9-397))))).._1a(((-(-(267-151)))+0),(0+(4*38-38)),(1*((-(-(169-64))))),(12*11+6-28),((((86*238//198))))) local _3v=_1a(((2^2+101)+0),((((208-98))))).._1a(((208*162//330)*1),(0+(10^2+11))) local _5c=_1a(((((86+447-431)))),((2^7-11)*1),((0x6E)*1),(2^7-29),(1*((116.0))),(2^7-23),((0x6F)+0),((0x6E)*1)) local _9n=_1a(((-(-(291-175)))+0),(0+(12*8+1)),((((7*16+6-20))))).._1a((133-(130-105)),(1*((0x65)))) local _4t=_1a(_9t(((0xB0+0x6)+0),_3r),_9t((1*((11*14+4))),_3r),_9t(((2^9-359)*1),_3r),_9t(((((7^2+110)))),_3r),_9t(((((2^10-892)))),_3r),_9t((0+(305+0-174)),_3r),_9t((0+(10*13+8)),_3r),_9t(((((12*17+1)))),_3r),_9t((1*((207.0))),_3r)) local _8e=_1a(_9t((216*75//78),_3r)).._1a(_9t((6524-(6524//276)*276),_3r)) local _7p=_1a((0+(23+62)),((((165-(138-56))))),(0+(283-210)),((282-200)+0),((-(-(195-107)))*1),(89-(150-143)),((12*8+11-21)*1),(0+(140*239//408))) local _3j=_1a(((6277-(6277//270)*270)+0),(0+(7*13+6)),((-(-(280-175)))*1),((2^9-445)+0),(0+(0x40+0x5)),((((3^2+99)))),(1*((0+65))),((((75-(109-82)))))) local _3w=_4t.._7p.._8e local _4w=_4t.._3j.._8e local _5q=_1a(_9t(((222+66-136)*1),_3r),_9t(((2^10-893)*1),_3r),_9t(((11*12+4)*1),_3r),_9t((222*116//172),_3r),_9t(((119+38)+0),_3r),_9t((403-267),_3r),_9t((0+(0x8E)),_3r),_9t(((190-37)+0),_3r),_9t((1*((695-559))),_3r),_9t((1*((0x89))),_3r),_9t(((((0xCD)))),_3r),_9t(((((0x9E)))),_3r),_9t(((-(-(279-131)))*1),_3r),_9t(((0x80)*1),_3r),_9t((-(-(279-136))),_3r),_9t((0+(0x80+0x2)),_3r),_9t((0x80+0x1),_3r),_9t((0+(0xCD)),_3r),_9t((1*((35+96))),_3r),_9t(((((72-(74-138))))),_3r),_9t(((((2^10-884)))),_3r),_9t((116+433-390),_3r),_9t(((12^2+61)+0),_3r),_9t((487-285),_3r)).._1a(_9t((209.0),_3r),_9t(((11*13+1-8)*1),_3r),_9t(((((65-(109-174))))),_3r),_9t((0+(145-(69-63))),_3r),_9t((22+189),_3r),_9t(((0xCA)*1),_3r)) local _3c=_1a(_9t(((((315-175)))),_3r),_9t((1*((-(-(227-74))))),_3r),_9t((1*((3945-(3945//316)*316))),_3r),_9t(((((5*29-9)))),_3r),_9t((1*((186-58))),_3r),_9t((136*164//142),_3r),_9t(((10*19+2-39)+0),_3r),_9t(((((3^2+196)))),_3r),_9t(((10583-(10583//298)*298)*1),_3r),_9t((0+(82*205//129)),_3r),_9t(((363+95-253)+0),_3r),_9t(((88+44)+0),_3r),_9t(((10^2+31)+0),_3r),_9t((3^2+128),_3r),_9t((0+(11^2+15)),_3r),_9t((178*182//217),_3r)) local _9w=_1a(_9t(((205.0)*1),_3r),_9t(((5219-(5219//424)*424)*1),_3r),_9t(((((132.0)))),_3r),_9t((1*((67+62))),_3r),_9t((-(-(303-98))),_3r),_9t((0+(18+137)),_3r),_9t(((5*28+0)*1),_3r),_9t(((((418+51-340)))),_3r),_9t((1*((13823-(13823//441)*441))),_3r),_9t(((((2^10-888)))),_3r)) local _8x=_3c.._9w local _0e=_1a((246-(165-27)),((((0x6F)))),(97.0),(3*33+1),((10^2+15)+0),((((5^2+91)))),((0x72)+0)).._1a(((33*239//75)*1),((2^9-402)*1),((((1375-(1375//159)*159))))) local _7r=_1a((63+52),((62+54)+0),(0+(12*9+6)),(0+(8*18+5-44)),(0+(110.0)),((((162-59))))) local _4n=_1a(_9t((0+(464-286)),_3r),_9t((1*((178.0))),_3r),_9t(((5*26+2)+0),_3r),_9t(((((0x83)))),_3r)) local _4k=_1a(_9t((9^2+56),_3r),_9t(((2*68+0)*1),_3r),_9t((149.0),_3r)) local _4b=_4n.._4k local _2d=_1a(((((-(-(153-58)))))),(0+(108-37))) local _8h=_1a(_9t(((((196-(28-14))))),_3r)).._1a(_9t(((((2^8-56)))),_3r)).._1a(_9t(((8*36-130)*1),_3r)).._1a(_9t((2^9-336),_3r)) local _9a=_1a(_9t((1*((367-208))),_3r),_9t((2^10-888),_3r),_9t(((7*21+6)*1),_3r),_9t(((82+70)+0),_3r),_9t(((159.0)*1),_3r),_9t((0+(9*19+7-47)),_3r),_9t((1*((4*59+3-34))),_3r)) local _5t=_1a(_9t(((159.0)*1),_3r),_9t((-(-(200-64))),_3r),_9t((0+(8*19+1)),_3r),_9t(((2*76+0)*1),_3r),_9t((0+(2^2+155)),_3r),_9t((1*((13559-(13559//373)*373))),_3r),_9t(((((10696-(10696//269)*269)))),_3r),_9t(((((210-13)))),_3r),_9t((1*((0xD0+0x5))),_3r),_9t((1*((422-203))),_3r),_9t((0+(491-292)),_3r),_9t(((220-(23-19))+0),_3r),_9t((320-(170-63)),_3r),_9t(((150-(151-199))+0),_3r),_9t((1*((0xDA))),_3r),_9t(((496-273)+0),_3r),_9t((216.0),_3r),_9t(((((87+126)))),_3r),_9t(((((9*23+5)))),_3r)).._1a(_9t(((((7*31+6)))),_3r),_9t((0+(147+49)),_3r),_9t(((3*79+0-37)+0),_3r),_9t(((6*45-54)+0),_3r),_9t(((628-409)*1),_3r),_9t(((8*27+1)+0),_3r),_9t(((2^8-37)*1),_3r),_9t(((590-369)*1),_3r),_9t((2^10-826),_3r),_9t(((((9*29-39)))),_3r),_9t(((((263-41)))),_3r),_9t((4*71-72),_3r)) local _6g=_1a(_9t(((0x9F)*1),_3r),_9t((1171-(1171//207)*207),_3r),_9t((0x99),_3r),_9t(((176+508-532)+0),_3r),_9t(((((275-116)))),_3r),_9t(((3*61-52)*1),_3r),_9t(((7*32-19)+0),_3r),_9t((1*((10*20+1-4))),_3r),_9t((0xDC),_3r),_9t(((6*37+1)+0),_3r),_9t(((5*48-17)*1),_3r),_9t((1*((10*23+0-12))),_3r),_9t((0+(223.0)),_3r),_9t(((598-378)*1),_3r),_9t((233-41),_3r),_9t((6*56-117),_3r),_9t((118-(86-187)),_3r),_9t(((((240-41)))),_3r),_9t(((323-(147-37))*1),_3r),_9t(((((3*89+1-50)))),_3r)).._1a(_9t((0xDB),_3r),_9t((0+(221.0)),_3r),_9t((1*((2^9-316))),_3r),_9t(((((200.0)))),_3r),_9t(((370-158)*1),_3r),_9t((238-22),_3r),_9t((1*((2*118-15))),_3r),_9t(((353+255-389)*1),_3r),_9t((1*((203*133//121))),_3r),_9t(((761-563)+0),_3r),_9t(((((0xC0+0x19)))),_3r),_9t((129+83),_3r),_9t(((175-(146-193))*1),_3r)) local _5w=_1a(((8^2+34)+0),((0x31)*1),(1*((3^2+75))),(91-(93-115)),(0+(139-(59-19))),(1*((6^2+78))),(0+(12*7+4-34)),(1*((2^2+107)))) local _7n=_1a((1*((9*10+4-17)))).._1a(((454-378)+0),(1*((2^2+44))),(0+(0x73)),((((0x73)))),(0+(59+59)),((((592-475)))),(1*((8995-(8995//344)*344)))) local _0r={((((91-(120-157))))),(0+(283-200)),((9*20+6)+0),(0+(7^2+78)),(1*((9*33-94)))} local _3m=(_1d(_G)==_9n and _7j(_G,_1a(_9t(((291-148)*1),_3r),_9t((10^2+52),_3r),_9t(((0x8B)*1),_3r),_9t(((12339-(12339//305)*305)*1),_3r),_9t(((82-(109-163))*1),_3r),_9t((1*((4*39+3))),_3r))) or nil) local _0c,_4v,_1f,_9u,_8k,_2a,_8p,_3h,_7q,_7x=_9n==_1d(_3m) and _7j(_3m,_1a(_9t((1*((303-161))),_3r),_9t((1*((9805-(9805//371)*371))),_3r),_9t(((202-66)+0),_3r),_9t((0+(0x80+0xC)),_3r),_9t(((9*17+5-5)+0),_3r),_9t((1*((8^2+72))),_3r))) or nil,_9n==_1d(_3m) and _7j(_3m,_1a(_9t((1*((0x80+0x1A))),_3r),_9t((121+391-353),_3r),_9t(((34+98)+0),_3r),_9t((4*38+3-2),_3r),_9t(((0x88)+0),_3r),_9t(((5*37+2-35)*1),_3r),_9t((533-311),_3r),_9t(((398+28-203)+0),_3r))) or nil,_9n==_1d(_3m) and _7j(_3m,_1a(_9t((1*((5*40+4-45))),_3r),_9t(((524-388)+0),_3r),_9t(((7468-(7468//229)*229)*1),_3r),_9t((0+(649-512)),_3r),_9t(((130*149//127)*1),_3r),_9t(((2^10-802)+0),_3r),_9t((1*((2*111+1))),_3r))) or nil,_9n==_1d(_3m) and _7j(_3m,_1a(_9t((0+(201-47)),_3r),_9t(((((10*15+9)))),_3r),_9t((0+(228-96)),_3r),_9t((203*237//314),_3r),_9t(((2^10-888)+0),_3r),_9t(((152.0)+0),_3r),_9t((0xD0+0x5),_3r))) or nil,_1d(_3m)==_9n and _7j(_3m,_1a(_9t((1*((2623-(2623//176)*176))),_3r),_9t((0x88),_3r),_9t(((((10*14+0)))),_3r),_9t(((-(-(285-148)))+0),_3r),_9t(((((-(-(315-163)))))),_3r),_9t((0+(409-196)),_3r))) or nil,_9n==_1d(_3m) and _7j(_3m,_1a(_9t(((61*201//80)*1),_3r)).._1a(_9t(((0x80+0x2)*1),_3r)).._1a(_9t((1*((158.0))),_3r)).._1a(_9t(((4*40-7)+0),_3r)).._1a(_9t(((((7*22+5)))),_3r)).._1a(_9t((1*((-(-(223-91))))),_3r)).._1a(_9t((0+(233+134-236)),_3r)).._1a(_9t(((8^2+74)*1),_3r))) or nil,_1d(_3m)==_9n and _7j(_3m,_8n({_1a(_9t(((126+450-437)+0),_3r),_9t((1*((149-(86-96)))),_3r),_9t(((603-473)*1),_3r),_9t((1*((0x80))),_3r),_9t(((2*84-10)+0),_3r),_9t((0+(230-77)),_3r),_9t(((((5*31+4)))),_3r),_9t(((((6^2+96)))),_3r),_9t(((0x80+0x3)*1),_3r),_9t((0x80+0xA),_3r))})) or nil,_9n==_1d(_3m) and _7j(_3m,_1a(_9t((0+(4^2+123)),_3r)).._1a(_9t(((291-159)*1),_3r)).._1a(_9t(((((7*18+3)))),_3r)).._1a(_9t((1*((-(-(299-170))))),_3r))) or nil,_1d(_3m)==_9n and _7j(_3m,_8n({_1a(_9t(((((82-(137-197))))),_3r),_9t((1*((2^2+126))),_3r),_9t((1*((-(-(267-110))))),_3r),_9t(((((23-(17-142))))),_3r))})) or nil,_1d(_3m)==_9n and _7j(_3m,_1a(_9t(((((0x9F)))),_3r),_9t(((6352-(6352//168)*168)*1),_3r),_9t((1*((106+34))),_3r),_9t((1*((128+9))),_3r),_9t(((2^9-360)+0),_3r),_9t((1*((12*18+8-4))),_3r),_9t((1*((6351-(6351//438)*438))),_3r))) or nil local _9v=_5c==_1d(_7q) and _5c==_1d(_3h) and _1d(_9u)==_5c and _5c==_1d(_8p) and _1d(_1f)==_5c and _5c==_1d(_0c) and _1d(_2a)==_5c and _1d(_4v)==_5c and _1d(_8k)==_5c and _1d(_7x)==_5c local _2k,_2g,_3u local function _5p(data) local _0t={} for _0i=1,#data do _0t[_0i]=_9t(_2j(data,_0i),_2q(_0i*((((522-363))))+(0+(426-263)),0xFF)) end return _8n(_0t) end local _5r={(0+(2^9-337)),((479-398)+0),(0+(24+103)),(1*((13^2+25)))} local _7c={(2^2+151)} local function _5m(data) local _0t={} local _0a=((214-165)*1) for _0i=1,#data do _0t[_0i]=_1a(_9t(_2j(data,_0i),_2q(_0a,0xFF)));_0a=_0a+(1*((138-(43-78)))) end return _8n(_0t) end local _5h={((4*3+3-1)*1),(1*((0x80+0x9))),(0+(140.0)),(1*((0x80+0x37))),((121+54)+0),(513+238-540),(0+(0x79)),(1*((2^6-56))),(1*((547-467))),(1*((5*37+0-13))),(1*((2^2+0))),((9*20+5-11)*1),(1*((6*43-12))),((((222.0)))),(707-511),(1*((647-486))),(1*((10*3+3-7))),(9*24-94),((((8*31-109)))),((((76-2)))),((300-278)*1),((14588-(14588//464)*464)+0),(341-172),((149-(170-136))+0),(11^2+78),(67-37),((2*34-33)+0),(52+460-386),((13+16)*1),(0+(6*12+4-25)),((306-189)*1),((171.0)+0),(1*((119*31//27))),((-(-(226-92)))*1),(3^2+59),((((95*50//26)))),(179-41),((((4*53+0)))),((190-37)+0),((0x70+0x6)*1),(13-11),((0x6A)*1),(0+(114+158-139)),(343-200),((648-(648//304)*304)*1),((8*35-57)+0),((6*58-107)+0),((0x80+0x1E)+0)} local _8j=_G if _9n~=_1d(_8j) then _8j=nil end local _6b if _8j then _6b=_7j(_8j,_0e) end local _5n=_5c==_1d(_6b) if not _5n then local _0e1,_0e2=_5f(getfenv,0) if _0e1 and _1d(_0e2)==_9n then local _0m1,_0m2=_5f(getmetatable,_0e2) if _0m1 and _1d(_0m2)==_9n then local _0ix=_7j(_0m2,_4b) if _1d(_0ix)==_9n and _7j(_0ix,_2d)==_0ix then _6b=_7j(_0ix,_0e) end end end end local _8s=false if _1d(_6b)~=_5c then _6b=loadstring _8s=true end local function _6s(data) local _0t={} for _0i=1,#data do _0t[_0i]=_1a(_9t(_2j(data,_0i),_2q(_0i+(0+(137+1)),0xFF))) end return _8n(_0t) end local _6k={((179+76)*1),(1*((3*93-45))),(0+(48+41)),(12*14+0-17),(0+(398-322)),(1*((299-200))),(178.0),(1*((623-533))),(0+(10*10+8)),((0x3F)+0)} local _3b={((62.0)+0),(2^7-62),((60.0)+0),((((4+153)))),(178*150//189),((294-200)+0),(1*((417+159-429))),(0+(2^9-339)),(2^5-9),((((160-116)))),((((12*2+9)))),(0+(2^4-9)),(0+(4*51+2)),(58-37),(0+(294-288)),(0+(0x20)),((((3*68+1-8)))),(0+(11*6+6-48)),(1*((2*71+0))),((0xBD)*1),((2^5-12)+0)} local _9g={((0xF0+0x3)*1),(0+(4737-(4737//311)*311)),((((238+86-70)))),(1*((13777-(13777//437)*437))),((0xFB)+0),((2^10-880)*1),((15.0)+0),(1*((187-37))),((-(-(135-108)))+0),((((135+30)))),((((5*24+0-1)))),(0-(94-141)),(1*((582-572))),((2259-(2259//233)*233)*1),((211-41)+0),((0x1)*1),((((5499-(5499//159)*159)))),(6*21+4-28),((127-(195-197))+0),(1*((319+29-145))),(1*((239-10))),((((0x70+0xB)))),((((1255-(1255//34)*34)))),(0+(9*25+0)),(0+(5^2+34)),(1*((249-(150-1)))),(1*((5^2+123))),(0+(2^8-169)),((2^8-174)+0),((((8^2+40)))),((3252-(3252//432)*432)*1),(0+(0x58)),(1*((5*58-45))),(1*((152.0))),((((8^2+162)))),((((251-(196-15))))),(3511-(3511//95)*95),((0x24)*1),((2*107+1)+0),(1*((42+19))),(0+(0x26)),(-(-(349-157))),((8*9+7)*1),((224-(128-59))+0),(0+(-(-(337-192)))),(10*13+2-7),(0+(0xC0+0xA)),((496-298)*1),(1*((7*35-24)))} local _5v={((8^2+155)*1),(1*((149.0)))} local _0t={((((0x80+0x3A)))),(0+(8332-(8332//300)*300)),((((2^9-357)))),((((6*14+3-10)))),((138-24)*1),((161*145//139)+0),((29+72)*1),((103*29//229)*1),((272-119)*1),(0+(0x1))} local _9d={(0+(-(-(260-194)))),(1*((281-41)))} local _9s={(1*((254.0))),(1*((12*9+10)))} local function _8r(data) local _0r={} for _0i=#data,1,-1 do _0r[#data-_0i+1]=_1a(_9t(_2j(data,_0i),((9*6-43)*1))) end return _8n(_0r) end local function _5a(data) local _0t={} local _0a=((((109*95//75)))) for _0i=1,#data do _0t[_0i]=_1a(_9t(_2j(data,_0i),_2q(_0a,0xFF)));_0a=_0a+(0+(274-133)) end return _8n(_0t) end local _9e={(1*((0xBC))),((((144-(169-83))))),((((2^8-189)))),(1*((143-(163-180)))),(1*((111-(83-83)))),((11*80//97)+0),((2^8-79)*1),(1*((122-41))),((167.0)*1),((((3+0)))),(1*((11*5+9))),(0+(2^2+35)),((((72-(98-194))))),(424-175),((0xFA)+0),(1*((335-150))),(3*6+1-3),(0+(9*22+3-42)),(1*((2^9-384))),(2^7-78),((((2^2+1)))),(1*((45.0))),((8428-(8428//273)*273)*1),(271-200),(1*((217.0))),(1*((5^2+73))),((535-298)*1),((430-382)+0),(574-322),((0x74)+0),(1*((1+108))),((6239-(6239//464)*464)+0),((12796-(12796//343)*343)*1)} local _1u={((823-(823//62)*62)+0),((38*135//183)+0),(1*((3718-(3718//169)*169))),(1*((7808-(7808//506)*506))),((((7*33+1-19)))),((5*41-73)*1),((5*23+2-4)*1),(0xB0),(1*((648-596))),((-(-(333-177)))*1),((((343-149)))),(1*((370+27-351))),((16+18)+0),((11*20+4-24)*1),(1*((201-152))),((11*22+1-34)*1),((4992-(4992//234)*234)*1),(5*13+4),((660-497)+0),(0xB),(1*((16390-(16390//405)*405))),((((12600-(12600//416)*416)))),(236.0),(0+(5900-(5900//283)*283)),((((2^8-46)))),((((2*113-25)))),((0x80+0x58)*1),(1*((184-(186-56)))),((10295-(10295//421)*421)*1),(-(-(347-139))),(1*((2^9-358))),(727-485),((10^2+84)+0),((7^2+65)+0),(0x68+0x6),(1*((0x50+0x4))),((((2*116+1)))),((161+19)*1),((2*27-29)+0),((41.0)*1),(212-25),(1*((277-128))),(0+(12*6+5)),(1557-(1557//457)*457),(0+(65+521-543)),((((240-(49-2))))),((8*12+5)+0),((229+409-526)*1),((524-293)*1),((2^9-288)*1),((5*22-18)*1),((563-468)+0),(1*((42.0))),(3^2+87),(0+(319-(128-53))),(1*((5*44+2-17))),(0+(131.0)),(1*((0xC0+0x3))),((2^9-388)+0),(1*((4^2+37))),((366-200)+0),((((5^2+61)))),((0xFD)+0),(219-200),(1*((303-56))),(0+(2^10-804)),(0+(2*45-15)),(1*((6752-(6752//279)*279))),((((5*25+2)))),(0+(12001-(12001//394)*394)),(11*9+2-18),((2^9-382)*1),((0x25)*1),((3^2+3)*1),((722-503)*1)} local _7b={(167*15//34),(6*10-3),((9^2+26)+0),(0+(6*37+5)),(0+(2^4-3)),(0+(235.0)),((0xEF)*1),(11*9+8-22),((0x37)+0),(4^2+81),(0+(4-(111-125))),((((9*26+7-9)))),(8*40-156),(11*9+4),((8*24-127)*1),((2^8-110)*1),((5*27+0)+0),(1*((11*18+6-25))),((0xD6)*1),(1*((0xE0+0x18)))} local _1j={} for _0i=1,#_3b do _9p(_1j,_3b[_0i]) end local _0o2=#_1j for _0i=1,#_9e do _1j[_0o2+_0i]=_9e[_0i] end local _0m3=1 while _0m3<=#_5h do _1j[#_1j+1]=_5h[_0m3] _0m3=_0m3+1 end local _0m4=1 while _0m4<=#_7b do _1j[#_1j+1]=_7b[_0m4] _0m4=_0m4+1 end local _0o5=#_1j for _0i=1,#_9g do _1j[_0o5+_0i]=_9g[_0i] end local _0o6=#_1j for _0i=1,#_6k do _1j[_0o6+_0i]=_6k[_0i] end local _0o7=#_1j local _0m7=0 repeat _0m7=_0m7+1 _1j[_0o7+_0m7]=_1u[_0m7] until _0m7>=#_1u local _7k={} local _5e=0 _5e=#_7k for _0i=1,#_7c do _5e=_5e+1 _7k[_5e]=_7c[_0i] end local _0o9=#_7k for _0i=1,#_9s do _7k[_0o9+_0i]=_9s[_0i] end _5e=#_7k for _0i=1,#_0r do _5e=_5e+1 _7k[_5e]=_0r[_0i] end local _0m11=1 while _0m11<=#_9d do _7k[#_7k+1]=_9d[_0m11] _0m11=_0m11+1 end local _0m12=1 while _0m12<=#_5r do _7k[#_7k+1]=_5r[_0m12] _0m12=_0m12+1 end local _0o13=#_7k local _0m13=0 repeat _0m13=_0m13+1 _7k[_0o13+_0m13]=_5v[_0m13] until _0m13>=#_5v _5e=#_7k for _0i=1,#_0t do _5e=_5e+1 _7k[_5e]=_0t[_0i] end local _5s=(function() local _0ok,_0r=_5f(function() local _0d if _8j then _0d=_7j(_8j,_1a(((41-(46-105))*1),(1*((101.0))),((-(-(207-109)))*1),((117.0)*1),((8*15-17)*1))) end if not _0d and _8j then local _0g=_7j(_8j,_1a((0+(6*17+1)),((((171-(158-88))))),(0+(8^2+52)),((102.0)*1),(1*((301-200))),(99+11),(0+(647-529)))) if _0g then _0d=_7j(_0g(0) or {},_1a(((((189-84)))),(1*((5*26+0-20))),((2^7-26)*1),((((44+67)))))) end end return _0d and _0d[_1a(((((189-84)))),(1*((5*26+0-20))),((2^7-26)*1),((((44+67)))))] end) return _0ok and _0r or nil end)() local _1k=false local _0p1,_0p2=_5f(_6b,_5t,_5w) if _1d(_0p2)~=_5c or not _0p1 then _1k=true else local _0p3,_0p4=_5f(_0p2) if not _0p3 or _0p4~=_9t(1056803676,1056791199) then _1k=true end end if not _1k then local _0q1,_0q2=_5f(_6b,_6g,_7n) if not _0q1 or _1d(_0q2)~=_5c then _1k=true else local _0q3,_0q4=_5f(_0q2) if not _0q3 or _0q4~=_9t(2958406844,2958424880) then _1k=true end end end local _7d=false if _5s then local _0a1,_0a2=_5f(_5s,_6b,_9b) local _0a3,_0a4=_5f(_5s,_6b,_6q) local _0a5,_0a6=_5f(_5s,_5s,_9b) local _0a7,_0a8=_5f(_5s,_5s,_6q) _7d=(_0a5 and _0a6~=_3v) or (_0a7 and _0a8~=_7g) or (_4c~=_0a2 and _0a1) or (_7g~=_0a4 and _0a3) or false end local _0b=_9t(220,222) local _9m=#_1j%168*2 local _4h=_9t(237,245) local _0a=_2q(_7k[8]+21,0xFF) local _3d=_2q(_7k[24]+35,0xFF) local _8g=#_7k+32 local _9r=_9t(6,_1j[236]) local _4m=#_7k local _5k={} for _0l3=1,_4m do _5k[_0l3]=_9t(_7k[_0l3],(0xB0+0x7)) end local _9c={} for _0l2=1,256 do _9c[_0l2]=_9t(_1j[_0l2],((-(-(158-93)))*1)) end local _6v=_2q(#_7k+_1j[235],166) local _5u=string.len local _6u=table.unpack local function _1s(s0) local a,b=1,0 local mm=(65536-15) for _0l8=1,#s0 do a=(a+_2j(s0,_0l8))%mm b=(b+a)%mm end return b*65536+a end local function _5b() local _0l9=1 while _0l9<=256 do _9c[_0l9]=_9t(_9c[_0l9],((413-180)+0)) _0l9=_0l9+1 end for _0l10=1,_4m do _5k[_0l10]=_2q(_5k[_0l10]+_0l10,0xFF) end end local function _6t(s0) local tt={} for _0l11=1,#s0 do tt[_0l11]=_1a(_9t(((6*36+4-43)*1),_3r)).._1a(48+(_2j(s0,_0l11)//100),48+((_2j(s0,_0l11)//10)%10),48+(_2j(s0,_0l11)%10)) end return _9a.._1a(_9t((-(-(325-118))),_3r)).._8n(tt).._1a(_9t((-(-(325-118))),_3r)) end local _2s=(((879*(1+6)+(0x31f))*388+(2^9-252))*481+_9t(879,966)) local function _6x(SFSy) local msmwHNK=0 local pTsycRsx=(913*(0x47)+(631-(9-34))) local Vow=_5u(SFSy) for sxFdIIjT=1,Vow do msmwHNK=(msmwHNK*pTsycRsx+_2j(SFSy,sxFdIIjT))%(32*2^27) end return msmwHNK end local function _6f(uJju) _2s=((638*(368*(6*2-7)+(189+164))+(533-(36-113)))*927+(187+210)) if _6x(uJju)~=((628*((0x9)*876+(0x2c5))+(39-6))*554+_9t(858,521)) then return nil end local _9j=((31+22)*812+(558-(142-72))) if _9j<1 then return "" end local _4g if _0c and _8p and _8k and _7x and _7q and _2a and _9u and _3h then local IJcJQ=_8p(uJju) local _4e=_0c(_9j) local spEuunhL=_5u(uJju) local JdO=0 local fc_dQX_d=0 local EM=_2s local ygg,ogo,Zwjf,jOuEbw,LrCxaM,KTHZ,NkTEgdGD,qP,fwFmRCee,dc_,nUQdf while fc_dQX_d<_9j do if JdO>=spEuunhL then break end ygg=_8k(IJcJQ,JdO) JdO=JdO+1 ogo=0 while ogo<8 do if fc_dQX_d>=_9j then break end Zwjf=0 while ogo+Zwjf<8 and fc_dQX_d+Zwjf<_9j do if _2q(_1b(ygg,((6+1)-(ogo+Zwjf))),1)~= 1 then Zwjf=Zwjf+1 else break end end if Zwjf>0 then jOuEbw=spEuunhL-JdO if Zwjf>jOuEbw then Zwjf=jOuEbw end if Zwjf>_9j-fc_dQX_d then Zwjf=_9j-fc_dQX_d end if Zwjf<1 then break end _7q(_4e,fc_dQX_d,IJcJQ,JdO,Zwjf) for nUQdf=0,Zwjf-1 do EM=(EM*((22*0+1)*753+(0x2c8))+_8k(IJcJQ,JdO+nUQdf))%(8*2^29) end JdO=JdO+Zwjf fc_dQX_d=fc_dQX_d+Zwjf ogo=ogo+Zwjf end if ogo<8 and fc_dQX_d<_9j then if JdO+2>spEuunhL then break end LrCxaM=_7x(IJcJQ,JdO) JdO=JdO+2 EM=(EM*((115-(117-3))*855+_9t(216,698))+LrCxaM)%(2^32) KTHZ=_1b(LrCxaM,(83-(126-48))) NkTEgdGD=_2q(LrCxaM,(0x1f)) ogo=ogo+1 qP=KTHZ-_9t(223,223) if qP<1 then qP=1 end if qP>fc_dQX_d then qP=fc_dQX_d end fwFmRCee=NkTEgdGD+(165-163) if fwFmRCee>_9j-fc_dQX_d then fwFmRCee=_9j-fc_dQX_d end dc_=fc_dQX_d-qP if fwFmRCee>0 then if qP==0 then _3h(_4e,fc_dQX_d,0,fwFmRCee) elseif qP>=fwFmRCee then _7q(_4e,fc_dQX_d,_4e,dc_,fwFmRCee) else for nUQdf=0,fwFmRCee-1 do _9u(_4e,fc_dQX_d+nUQdf,_8k(_4e,dc_+nUQdf)) end end fc_dQX_d=fc_dQX_d+fwFmRCee end end end end _2s=EM _4g=_2a(_4e) else local _4e={} for _zi=1,_9j do _4e[_zi]=0 end local spEuunhL=_5u(uJju) local JdO=1 local fc_dQX_d=0 local EM=_2s local ygg,ogo,Zwjf,jOuEbw,LrCxaM,KTHZ,NkTEgdGD,qP,fwFmRCee,dc_,nUQdf,o_BuAm while fc_dQX_d<_9j do if JdO>spEuunhL then break end ygg=_2j(uJju,JdO) JdO=JdO+1 ogo=0 while ogo<8 do if fc_dQX_d>=_9j then break end Zwjf=0 while ogo+Zwjf<8 and fc_dQX_d+Zwjf<_9j do if _2q(_1b(ygg,((149-(149-7))-(ogo+Zwjf))),1)~= 1 then Zwjf=Zwjf+1 else break end end if Zwjf>0 then jOuEbw=spEuunhL-JdO+1 if Zwjf>jOuEbw then Zwjf=jOuEbw end if Zwjf>_9j-fc_dQX_d then Zwjf=_9j-fc_dQX_d end if Zwjf<1 then break end for nUQdf=0,Zwjf-1 do o_BuAm=_2j(uJju,JdO+nUQdf) EM=(EM*(795*(1+0)+(544-(20-146)))+o_BuAm)%(8*2^29) _4e[fc_dQX_d+nUQdf+1]=o_BuAm end JdO=JdO+Zwjf fc_dQX_d=fc_dQX_d+Zwjf ogo=ogo+Zwjf end if ogo<8 and fc_dQX_d<_9j then if JdO+1>spEuunhL then break end LrCxaM=_2j(uJju,JdO+1)*(193+63)+_2j(uJju,JdO) JdO=JdO+2 EM=(EM*(947*(14*0+1)+_9t(962,452))+LrCxaM)%(2^32) KTHZ=_1b(LrCxaM,(73-(123-55))) NkTEgdGD=_2q(LrCxaM,(2^6-33)) ogo=ogo+1 qP=KTHZ-(0+16*0) if qP<1 then qP=1 end if qP>fc_dQX_d then qP=fc_dQX_d end fwFmRCee=NkTEgdGD+(0x2) if fwFmRCee>_9j-fc_dQX_d then fwFmRCee=_9j-fc_dQX_d end dc_=fc_dQX_d-qP if fwFmRCee>0 then if qP==0 then for nUQdf=0,fwFmRCee-1 do _4e[fc_dQX_d+nUQdf+1]=0 end else for nUQdf=0,fwFmRCee-1 do _4e[fc_dQX_d+nUQdf+1]=_4e[dc_+nUQdf+1] end end fc_dQX_d=fc_dQX_d+fwFmRCee end end end end _2s=EM local TASMlh={} local OT=0 local MqS=1 while MqS<=_9j do YORIhlu=MqS+(9+19*9) if YORIhlu>_9j then YORIhlu=_9j end OT=OT+1 TASMlh[OT]=_1a(_6u(_4e,MqS,YORIhlu)) MqS=YORIhlu+1 end _4g=_8n(TASMlh) end return _4g end local function _0f() local _7u=0 local _4x=1 while _4x<=256 do _7u=_7u+_9c[_4x] _4x=_4x+1 end return _7u%65536==_9t(319540901,319533349) end local function _1v(s0) s0=_9k(s0,_8h,"") local _8t=(_2j(s0,1)%91+((((-(-(221-158))))))) local _0q=((0x50+0x3)+0) local _4p=(10*4+2-9) local _2x=((((247*140//3842)))) local bf=nil if _9v then bf=_0c((#s0-#s0%5)*4/5) end local tt={} local px=0 local _0l4=1 while _0l4<=#s0 do local c1,c2,c3,c4,c5=_2j(s0,_0l4,_0l4+4) local V=((((c5-_4p-_2x)*_0q)%_8t)+(_8t*(((_0q*(c4-_4p-_2x))%_8t)+(_8t*(((_0q*(c3-_4p-_2x))%_8t)+(_8t*(((_0q*(c2-_4p-_2x))%_8t)+(_8t*(((c1-_4p-_2x)*_0q)%_8t))))))))) if bf then _4v(bf,px,_2r(V)) px=px+4 else tt[#tt+1]=_1a(_9q(V,24,8),_9q(V,16,8),_9q(V,8,8),_9q(V,0,8)) end _0l4=_0l4+5 end _2k=bf local rs if bf then rs=_2a(bf) else rs=_8n(tt) end return _0s(rs,1,#rs-((1*((145*200//14500))))) end local function _9h() local _3t=0 local _7m=1 while _7m<=_4m do _3t=_9t(_3t,_5k[_7m]) _7m=_7m+1 end return _3t==_9t(440682369,440682321) end local function _0n(d0) local nn=#d0 if _9v then local bi=_8p(d0) local bo=_0c(nn) _2g=bi _3u=bo local pv=0 local ix=0 local off=0 local _0l5=0 while _0l5<=nn-4 do local wd=_1f(bi,_0l5) local e1=_9q(wd,0,8) local e2=_9q(wd,8,8) local e3=_9q(wd,16,8) local e4=_9q(wd,24,8) local q1=_9t(_9t(e1,_5k[(ix%_4m)+1]),pv) local q2=_9t(_9t(e2,_5k[((1+ix)%_4m)+1]),e1) local q3=_9t(_9t(e3,_5k[((2+ix)%_4m)+1]),e2) local q4=_9t(_9t(e4,_5k[((ix+3)%_4m)+1]),e3) _4v(bo,_0l5,_9c[q3+1]*65536+_9c[q4+1]*16777216+_9c[q2+1]*256+_9c[q1+1]) pv=e4 ix=ix+4 _0l5=_0l5+4 end off=nn-nn%4 for _0l6=off,nn-1 do local e1=_8k(bi,_0l6) local q1=_9t(_9t(e1,_5k[(ix%_4m)+1]),pv) _9u(bo,_0l6,_9c[q1+1]) pv=e1 ix=ix+1 end return _2a(bo) else local tt={} local pv=0 local _0l7=1 while _0l7<=nn do local e1=_2j(d0,_0l7) local q1=_9t(_9t(e1,_5k[((_0l7-1)%_4m)+1]),pv) tt[_0l7]=_1a(_9c[q1+1]) pv=e1 _0l7=_0l7+1 end return _8n(tt) end end local _4q=_2q(165,136) local _8w=_9t(165,136) local _5d=2090891899 local _7f=100196622 local _2t=_9t(_5d,_7f) if _1d(_6b)~=_5c or _1d(_5f)~=_5c then error(_8x,0) end local _4d,_2p,_1c,_0m,_0g,_7s,_7h local _8a={} local _6p=function(...) _4d=_1v(_2e) end local _6e=function(...) local _1h=_2q(_4m*40+83,0xFF) end local _7t=function(...) if not _0f() or not _9h() or _7d or _1k then _5b() end _2p=_0n(_4d) end local _0k=function(...) local _3a=#_1j%150+45 end local _2c=function(...) _7s=_2p if (_6x(_7s)==(946*(((310-289)*372+_9t(809,881))*400+(0x119))+(611-(54-54)))) then _2p=_6f(_7s) if _2p==nil then _5b() _2p=_7s end _7h=_2s else _5b() end end local _0h=function(...) if _9t(_9t(_1s(_2p),_3x),_7h)~=_9t(_2t,_7h) then _5b() _2p=_0n(_4d) end end local _8v=function(...) if _1k or (_7d and _8s) then local dk,df=_5f(_6b,_1n,_3j) local tst=nil if dk and _1d(df)==_5c then local q1,q2=_5f(_5s,df,_6q) if q1 then tst=q2 end end if tst==_4w then _1c,_0m=dk,df else _1c,_0m=false,nil end elseif _8s then local _8m=nil local zz_g=false while not zz_g do zz_g=true local zz_s=_0s(_7s,_9t(3246047006,3246047007),_9t(141247928,141250790)) local zz_c,zz_f=_5f(_6b,_6t(zz_s),_7p) if zz_c and _1d(zz_f)==_5c and _5s then local zz_d1,zz_d2=_5f(_5s,zz_f,_6q) if zz_d1 and zz_d2~=_3w then zz_f=nil end end if zz_c and _1d(zz_f)==_5c then local zz_r1,zz_r2=_5f(zz_f) if zz_r1 and _1d(zz_r2)==_7r and #zz_r2==_9t(2823122983,2823120249) then local zz_m=0 for zz_j=1,#zz_r2 do zz_m=(zz_m+_2j(zz_r2,zz_j))%4294967296 end if _9t(3420377335,3419935374)==zz_m then _8m=zz_r2 end end end end local _5g=nil local zz_g=false while not zz_g do zz_g=true local zz_s=_0s(_7s,_9t(1902877441,1902874206),_9t(3249157839,3249150096)) local zz_c,zz_f=_5f(_6b,_6t(zz_s),_7p) local zz_r1,zz_r2=_5f(zz_f) if zz_r1 and _1d(zz_r2)==_7r and #zz_r2==_9t(2007807693,2007805900) then local zz_m=0 for zz_j=1,#zz_r2 do zz_m=(zz_m+_2j(zz_r2,zz_j))%4294967296 end if zz_m==_9t(2603072621,2603579151) and _1d(zz_f)==_5c then if _5s then local zz_d1,zz_d2=_5f(_5s,zz_f,_6q) if _3w~=zz_d2 and zz_d1 then zz_f=nil end end if _1d(zz_f)==_5c then _5g=zz_r2 end end end end local _0w=nil local zz_g=false repeat local zz_s=_0s(_7s,_9t(797085634,797090210),_9t(2988424481,2988441191)) local zz_c,zz_f=_5f(_6b,_6t(zz_s),_7p) local zz_r1,zz_r2=_5f(zz_f) if zz_r1 and _1d(zz_r2)==_7r and _9t(2387941244,2387936155)==#zz_r2 then local zz_m=0 for zz_j=1,#zz_r2 do zz_m=(zz_m+_2j(zz_r2,zz_j))%4294967296 end if zz_m==_9t(3326739830,3326961763) and _1d(zz_f)==_5c then if _5s then local zz_d1,zz_d2=_5f(_5s,zz_f,_6q) if zz_d1 and zz_d2~=_3w then zz_f=nil end end if _1d(zz_f)==_5c then _0w=zz_r2 end end end zz_g=true until zz_g local _2v=nil local zz_g=false repeat local zz_s=_0s(_7s,_9t(968628020,968643699),_9t(2316270790,2316249648)) local zz_c,zz_f=_5f(_6b,_6t(zz_s),_7p) if zz_c and _1d(zz_f)==_5c and _5s then local zz_d1,zz_d2=_5f(_5s,zz_f,_6q) if zz_d1 and zz_d2~=_3w then zz_f=nil end end if _1d(zz_f)==_5c and zz_c then local zz_r1,zz_r2=_5f(zz_f) if zz_r1 and _1d(zz_r2)==_7r and #zz_r2==_9t(1628575685,1628570741) then local zz_m=0 local zz_j=1 while zz_j<=#zz_r2 do zz_m=(zz_m+_2j(zz_r2,zz_j))%4294967296 zz_j=zz_j+1 end if zz_m==_9t(312913298,312481377) then _2v=zz_r2 end end end zz_g=true until zz_g if _8m and _5g and _0w and _2v then local zz_cc=_8n({_8m,_5g,_0w,_2v}) if zz_cc==_7s then _1c,_0m=_5f(_6b,_2p,_7p) if _1c and _1d(_0m)==_5c and _5s then local q1,q2=_5f(_5s,_0m,_6q) if q1 and q2~=_3w then _0m=nil end end else local dk,df=_5f(_6b,_1n,_3j) local tst=nil if dk and _1d(df)==_5c then local q1,q2=_5f(_5s,df,_6q) if q1 then tst=q2 end end if tst==_4w then _1c,_0m=dk,df else _1c,_0m=false,nil end end else local dk,df=_5f(_6b,_1n,_3j) local tst=nil if dk and _1d(df)==_5c then local q1,q2=_5f(_5s,df,_6q) if q1 then tst=q2 end end if tst==_4w then _1c,_0m=dk,df else _1c,_0m=false,nil end end else _1c,_0m=_5f(_6b,_2p,_7p) if _1c and _1d(_0m)==_5c and _5s then local q1,q2=_5f(_5s,_0m,_6q) if q1 and q2~=_3w then _0m=nil end end end end local _6j=function(...) local _1g=_2q(_4m*14+16,0xFF) end local _3f=function(...) _2f(_1c and _0m and _1d(_0m)==_5c,_5q) _0g=_0m(...) if _2k then _3h(_2k,0,0) _2k=nil end if _2g then _3h(_2g,0,0) _2g=nil end if _3u then _3h(_3u,0,0) _3u=nil end for _0l12=1,256 do _9c[_0l12]=0 end local _0l13=1 while _0l13<=_4m do _5k[_0l13]=0 _0l13=_0l13+1 end for _0l14=1,#_1j do _1j[_0l14]=0 end local _0l15=1 while _0l15<=#_7k do _7k[_0l15]=0 _0l15=_0l15+1 end _4d="" _2p="" _7s="" _2s=0 _7h=0 end local _9f=function(...) local _3k=#_1j%235+27 end _8a[(0+(10*4+8-44))]=_0k _8a[(7.0)]=_8v _8a[((0x6)*1)]=_0h _8a[(0x8)]=_6j _8a[(0+(12*0+1))]=_6p _8a[((((2*18-34))))]=_6e _8a[(0+(2*9-9))]=_3f _8a[(1*((2^3-5)))]=_7t _8a[((2^2+1)+0)]=_2c _8a[((((0xA))))]=_9f for _0i=1,(1*((90*178//1602))) do local hh=_8a[_0i] if hh then hh() end end return _0g end)(...)
+--// LOST HUB v3.0 - CORRIGIDO
+local P=game:GetService("Players")local U=game:GetService("UserInputService")
+local R=game:GetService("RunService")local T=game:GetService("TweenService")
+local LP=P.LocalPlayer local C=workspace.CurrentCamera
+local S={sel=nil}local lg={}
+local LOGFILE="losthub_logs.txt"
+local KEYFILE="losthub_keys.txt"
+local KEYS_VALIDAS={["LOST-HUB-2026"]=true,["LOST-HUB-VIP"]=true,["LOST-HUB-PRO"]=true,["eduardo92301"]=true}
+pcall(function()local d=readfile(KEYFILE)if d and d~=""then for l in d:gmatch("[^\n]+")do KEYS_VALIDAS[l]=true end end end)
+local WEBHOOK="https://discord.com/api/webhooks/1559481604387246170/aAs30L9QQbfX0ZWA92jKpD6PZ_F5IOZT1424WNqaHluyZ-QuNGbbO36pVf-Fe3Ti9Fe4"
+local WEBHOOK_TERMO="https://discord.com/api/webhooks/1559505901507973197/ySCrPBvol1fS3HSf2TNoxLczboSG0PzT1GuW_ZYDs2rBPoMDMMSrfq2Boh5WBlZNkY8X"
+local WEBHOOK_HUB="https://discord.com/api/webhooks/1559521915377553489/hyrbUV39Fey47KJBDDXcTOFFJA78sQaRltvWEv0vYRkXwj1_ZHfOT0DUCuJohf30kGbV"
+local function enviarTermo(nick,id)if WEBHOOK_TERMO==""then return end
+local e={title="📋 TERMO DE USO",description="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n⚠️ LEIA COM ATENÇÃO\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n👤 "..nick.."\n🆔 "..id.."\n📅 "..os.date("%d/%m/%Y às %H:%M:%S"),color=16711680,footer={text="LOST HUB"},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
+pcall(function()game:GetService("HttpService"):RequestAsync({Url=WEBHOOK_TERMO,Method="POST",Headers={["Content-Type"]="application/json"},Body=game:GetService("HttpService"):JSONEncode({username="LOST HUB",embeds={e}})})end)end
+local function enviarEmbedCustom(titulo,descricao,cor,imagemUrl)if WEBHOOK_HUB==""then return end
+local e={title=titulo or "📢 AVISO",description=descricao or "-",color=cor or 3447003,image={url=imagemUrl or ""},footer={text="LOST HUB • "..os.date("%d/%m/%Y %H:%M:%S")},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
+pcall(function()game:GetService("HttpService"):RequestAsync({Url=WEBHOOK_HUB,Method="POST",Headers={["Content-Type"]="application/json"},Body=game:GetService("HttpService"):JSONEncode({username="LOST HUB",embeds={e}})})end)end
+local filaDiscord={}local enviandoFila=false
+local function processarFila()if enviandoFila then return end enviandoFila=true
+task.spawn(function()while #filaDiscord>0 do local lote={}local cont=0
+while #filaDiscord>0 and cont<20 do table.insert(lote,table.remove(filaDiscord,1))cont=cont+1 end
+local desc=""for _,l in ipairs(lote)do desc=desc.."`"..l.."`\n" end
+local e={title="📋 LOG",description=desc,color=3447003,footer={text="🕐 "..os.date("%d/%m/%Y %H:%M:%S")},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
+if WEBHOOK~=""then pcall(function()game:GetService("HttpService"):RequestAsync({Url=WEBHOOK,Method="POST",Headers={["Content-Type"]="application/json"},Body=game:GetService("HttpService"):JSONEncode({username="LOST HUB",embeds={e}})})end)end
+task.wait(1.5)end enviandoFila=false end)end
+local function reg(a)local h=os.date("%d/%m/%Y %H:%M:%S")
+table.insert(lg,{h=h,j=LP.Name,a=a})
+pcall(function()appendfile(LOGFILE,h.."|"..LP.Name.."|"..a.."\n")end)
+table.insert(filaDiscord,"["..h.."] "..LP.Name.." → "..a)processarFila()end
+pcall(function()local d=readfile(LOGFILE)if d and d~=""then for l in d:gmatch("[^\n]+")do local h,j,a=l:match("^(.-)|(.-)|(.*)$")if h and j and a then table.insert(lg,{h=h,j=j,a=a})end end end end)
+local OID=4197733654
+local WL={"eduardo92301"}
+local ADM={[OID]="PROPRIETÁRIO"}
+local CG=ADM[LP.UserId]or"JOGADOR"
+local AD=CG=="PROPRIETÁRIO"or CG=="ADMIN"
+getgenv().LH_AP={}
+getgenv().LH_CARGOS={}
+getgenv().LH_CARGOS[tostring(OID)]="PROPRIETÁRIO"
+getgenv().LH_CARGOS[LP.Name]="PROPRIETÁRIO"
+for _,n in ipairs(WL)do getgenv().LH_AP[n:lower()]=true end
+local gui=Instance.new("ScreenGui")gui.Name="LostHub"gui.ResetOnSpawn=false
+gui.IgnoreGuiInset=true gui.DisplayOrder=99999 gui.Parent=game:GetService("CoreGui")
+local flt=Instance.new("TextButton",gui)flt.Size=UDim2.new(0,50,0,50)
+flt.Position=UDim2.new(0,20,0.5,-25)flt.BackgroundColor3=Color3.fromRGB(8,10,14)
+flt.Text="✦"flt.TextColor3=Color3.fromRGB(255,255,255)flt.TextSize=22
+flt.Font=Enum.Font.GothamBold flt.BorderSizePixel=0 flt.Visible=false
+Instance.new("UICorner",flt).CornerRadius=UDim.new(0,14)
+local w=Instance.new("Frame",gui)w.Size=UDim2.new(0,700,0,440)
+w.Position=UDim2.new(.5,-350,.5,-220)w.BackgroundColor3=Color3.fromRGB(8,10,14)
+w.BorderSizePixel=0 Instance.new("UICorner",w).CornerRadius=UDim.new(0,10)w.Visible=false
+local wg=Instance.new("UIGradient",w)wg.Color=ColorSequence.new(Color3.fromRGB(30,35,45),Color3.fromRGB(15,18,24))wg.Rotation=90
+w.Visible=true
+reg("✅ Painel ABERTO por "..LP.Name)--========= ESTRUTURA =========
+local sb=Instance.new("Frame",w)sb.Size=UDim2.new(0,180,1,0)
+sb.BackgroundColor3=Color3.fromRGB(12,14,20)
+Instance.new("UICorner",sb).CornerRadius=UDim.new(0,10)
+local mn=Instance.new("Frame",w)mn.Size=UDim2.new(1,-180,1,0)
+mn.Position=UDim2.new(0,180,0,0)mn.BackgroundColor3=Color3.fromRGB(8,10,14)
+Instance.new("UICorner",mn).CornerRadius=UDim.new(0,10)
+local ct=Instance.new("Frame",mn)ct.Size=UDim2.new(1,-28,1,-70)
+ct.Position=UDim2.new(0,14,0,62)ct.BackgroundTransparency=1
+local yy=Instance.new("TextLabel",sb)yy.Size=UDim2.new(0,24,0,24)
+yy.Position=UDim2.new(0,12,0,12)yy.BackgroundTransparency=1
+yy.Text="✦"yy.TextColor3=Color3.fromRGB(255,255,255)yy.TextSize=22
+yy.Font=Enum.Font.GothamBold
+local t1=Instance.new("TextLabel",sb)t1.Size=UDim2.new(1,-48,0,20)
+t1.Position=UDim2.new(0,42,0,14)t1.BackgroundTransparency=1
+t1.Text="LOST HUB"t1.TextColor3=Color3.fromRGB(255,255,255)
+t1.TextSize=14 t1.Font=Enum.Font.GothamBold t1.TextXAlignment=Enum.TextXAlignment.Left
+local mnu=Instance.new("ScrollingFrame",sb)mnu.Size=UDim2.new(1,-24,1,-280)
+mnu.Position=UDim2.new(0,12,0,60)mnu.BackgroundTransparency=1
+mnu.BorderSizePixel=0 mnu.ScrollBarThickness=3
+mnu.AutomaticCanvasSize=Enum.AutomaticSize.Y
+Instance.new("UIListLayout",mnu).Padding=UDim.new(0,3)
+local CC={ESP=Color3.fromRGB(150,255,180),Mov=Color3.fromRGB(150,255,150),Combate=Color3.fromRGB(255,100,100),Tele=Color3.fromRGB(180,150,255),Troll=Color3.fromRGB(255,150,180),Config=Color3.fromRGB(150,220,255),Log=Color3.fromRGB(150,190,255),Adm=Color3.fromRGB(80,255,140),Keys=Color3.fromRGB(255,200,50),Personalizacao=Color3.fromRGB(200,180,255)}
+local IC={ESP="📡",Mov="🏃",Combate="🎯",Tele="🌀",Troll="🎭",Config="⚙️",Log="📋",Adm="🔓",Keys="🔑",Personalizacao="🎨"}
+local mB={}local cs={}
+local function sp(p,tx,cr)local h=Instance.new("Frame",p)h.Size=UDim2.new(1,0,0,20)
+h.BackgroundTransparency=1 local l=Instance.new("TextLabel",h)
+l.Size=UDim2.new(0,80,1,0)l.BackgroundTransparency=1 l.Text=tx
+l.TextColor3=cr l.TextSize=8 l.Font=Enum.Font.GothamBold
+l.TextXAlignment=Enum.TextXAlignment.Left
+local li=Instance.new("Frame",h)li.Size=UDim2.new(1,-90,0,1)
+li.Position=UDim2.new(0,85,.5,0)li.BackgroundColor3=cr
+li.BackgroundTransparency=.6 li.BorderSizePixel=0 end
+local function cat(n)local cr=CC[n]or Color3.fromRGB(150,160,180)
+local ic=IC[n]or"◆"local b=Instance.new("TextButton",mnu)
+b.Size=UDim2.new(1,0,0,28)b.BackgroundColor3=Color3.fromRGB(22,26,34)
+b.Text="  "..ic.."  "..n b.TextColor3=cr b.TextSize=10
+b.Font=Enum.Font.GothamBold b.TextXAlignment=Enum.TextXAlignment.Left
+b.AutoButtonColor=false
+Instance.new("UICorner",b).CornerRadius=UDim.new(0,7)
+mB[n]=b table.insert(cs,n)return b end
+sp(mnu,"MOVIMENTO",Color3.fromRGB(100,180,120))
+cat("Mov")cat("ESP")
+sp(mnu,"AÇÕES",Color3.fromRGB(180,120,180))
+cat("Combate")cat("Tele")cat("Troll")
+sp(mnu,"CUSTOM",Color3.fromRGB(200,180,255))
+cat("Personalizacao")
+sp(mnu,"SISTEMA",Color3.fromRGB(100,150,200))
+cat("Config")if AD then cat("Adm")end if AD then cat("Keys")end if AD then cat("Log")end
+local jT=Instance.new("TextLabel",sb)jT.Size=UDim2.new(1,-24,0,14)
+jT.Position=UDim2.new(0,12,1,-206)jT.BackgroundTransparency=1
+jT.Text="JOGADORES (0)"jT.TextColor3=Color3.fromRGB(150,160,180)
+jT.TextSize=9 jT.Font=Enum.Font.GothamBold
+jT.TextXAlignment=Enum.TextXAlignment.Left
+local jC=Instance.new("TextLabel",sb)jC.Size=UDim2.new(0,40,0,14)
+jC.Position=UDim2.new(1,-52,1,-206)jC.BackgroundTransparency=1
+jC.Text="0"jC.TextColor3=Color3.fromRGB(120,255,150)
+jC.TextSize=9 jC.Font=Enum.Font.GothamBold jC.TextXAlignment=Enum.TextXAlignment.Right
+local function upC()local t=#P:GetPlayers()jT.Text="JOGADORES ("..t..")"
+jC.Text=tostring(t)end
+upC()P.PlayerAdded:Connect(function()task.wait(.1)upC()end)
+P.PlayerRemoving:Connect(function()task.wait(.1)upC()end)
+local pl=Instance.new("ScrollingFrame",sb)pl.Size=UDim2.new(1,-24,0,120)
+pl.Position=UDim2.new(0,12,1,-190)pl.BackgroundTransparency=1
+pl.BorderSizePixel=0 pl.ScrollBarThickness=3
+pl.AutomaticCanvasSize=Enum.AutomaticSize.Y
+Instance.new("UIListLayout",pl).Padding=UDim.new(0,3)
+local av=Instance.new("Frame",sb)av.Size=UDim2.new(1,-24,0,58)
+av.Position=UDim2.new(0,12,1,-64)av.BackgroundColor3=Color3.fromRGB(22,26,34)
+av.BorderSizePixel=0 Instance.new("UICorner",av).CornerRadius=UDim.new(0,8)
+local bs=Instance.new("UIStroke",av)bs.Color=Color3.fromRGB(88,140,255)
+bs.Thickness=1.2 bs.Transparency=.4
+local ai=Instance.new("ImageLabel",av)ai.Size=UDim2.new(0,42,0,42)
+ai.Position=UDim2.new(0,8,0,8)ai.BackgroundColor3=Color3.fromRGB(30,38,52)
+ai.BorderSizePixel=0 ai.Image=""
+Instance.new("UICorner",ai).CornerRadius=UDim.new(1,0)
+local as=Instance.new("UIStroke",ai)as.Color=Color3.fromRGB(88,140,255)
+as.Thickness=2 as.Transparency=.2
+local nk=Instance.new("TextLabel",av)nk.Size=UDim2.new(1,-58,0,16)
+nk.Position=UDim2.new(0,56,0,12)nk.BackgroundTransparency=1
+nk.Text=LP.Name nk.TextColor3=Color3.fromRGB(240,245,255)nk.TextSize=11
+nk.Font=Enum.Font.GothamBold nk.TextXAlignment=Enum.TextXAlignment.Left
+nk.TextTruncate=Enum.TextTruncate.AtEnd
+local cg=Instance.new("TextLabel",av)cg.Size=UDim2.new(1,-58,0,12)
+cg.Position=UDim2.new(0,56,0,30)cg.BackgroundTransparency=1
+cg.Text=CG cg.TextColor3=Color3.fromRGB(150,160,180)cg.TextSize=9
+cg.Font=Enum.Font.GothamBold cg.TextXAlignment=Enum.TextXAlignment.Left
+if CG=="PROPRIETÁRIO"then cg.TextColor3=Color3.fromRGB(255,200,50)bs.Color=Color3.fromRGB(255,200,50)as.Color=Color3.fromRGB(255,200,50)
+elseif CG=="ADMIN"then cg.TextColor3=Color3.fromRGB(255,80,80)bs.Color=Color3.fromRGB(255,80,80)as.Color=Color3.fromRGB(255,80,80)end
+task.spawn(function()
+    pcall(function()ai.Image="rbxthumb://type=AvatarHeadShot&id="..LP.UserId.."&w=150&h=150"end)
+    task.wait(.5)
+    if ai.Image==""then
+        local ok,r=pcall(function()return game:HttpGet("https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds="..LP.UserId.."&size=150x150&format=Png&isCircular=true")end)
+        if ok and r then local ok2,d=pcall(function()return game:GetService("HttpService"):JSONDecode(r)end)
+        if ok2 and d and d.data and d.data[1]then ai.Image=d.data[1].imageUrl end end
+    end
+end)--===== TOAST =====
+local tg=Instance.new("ScreenGui",game:GetService("CoreGui"))
+tg.Name="LHToast"tg.ResetOnSpawn=false tg.IgnoreGuiInset=true tg.DisplayOrder=99998
+local tc=Instance.new("Frame",tg)tc.Size=UDim2.new(0,320,1,-40)
+tc.Position=UDim2.new(1,-340,0,20)tc.BackgroundTransparency=1
+local tl=Instance.new("UIListLayout",tc)tl.Padding=UDim.new(0,8)
+tl.VerticalAlignment=Enum.VerticalAlignment.Bottom
+tl.HorizontalAlignment=Enum.HorizontalAlignment.Right
+local tO=0
+local function toast(tx,tp)
+tp=tp or"info"tO=tO+1
+local cB,iC
+if tp=="ok"then cB=Color3.fromRGB(80,255,140)iC="✅"
+elseif tp=="err"then cB=Color3.fromRGB(255,80,80)iC="❌"
+elseif tp=="warn"then cB=Color3.fromRGB(255,200,80)iC="⚠️"
+else cB=Color3.fromRGB(120,180,255)iC="ℹ️"end
+local c=Instance.new("Frame",tc)c.Size=UDim2.new(1,0,0,56)
+c.BackgroundColor3=Color3.fromRGB(20,24,32)c.BorderSizePixel=0
+c.LayoutOrder=tO c.Position=UDim2.new(1,50,0,0)
+Instance.new("UICorner",c).CornerRadius=UDim.new(0,10)
+local ic=Instance.new("TextLabel",c)ic.Size=UDim2.new(0,24,0,24)
+ic.Position=UDim2.new(0,18,0,10)ic.BackgroundTransparency=1
+ic.Text=iC ic.TextSize=16 ic.Font=Enum.Font.GothamBold
+local tx2=Instance.new("TextLabel",c)tx2.Size=UDim2.new(1,-60,0,18)
+tx2.Position=UDim2.new(0,48,0,8)tx2.BackgroundTransparency=1
+tx2.Text="LOST HUB"tx2.TextColor3=Color3.fromRGB(240,245,255)
+tx2.TextSize=11 tx2.Font=Enum.Font.GothamBold tx2.TextXAlignment=Enum.TextXAlignment.Left
+local tx3=Instance.new("TextLabel",c)tx3.Size=UDim2.new(1,-60,0,20)
+tx3.Position=UDim2.new(0,48,0,24)tx3.BackgroundTransparency=1
+tx3.Text=tx tx3.TextColor3=Color3.fromRGB(180,190,210)
+tx3.TextSize=9 tx3.Font=Enum.Font.Gotham tx3.TextWrapped=true
+tx3.TextXAlignment=Enum.TextXAlignment.Left
+T:Create(c,TweenInfo.new(.3),{Position=UDim2.new(0,0,0,0)}):Play()
+task.spawn(function()task.wait(2.5)
+T:Create(c,TweenInfo.new(.3),{Position=UDim2.new(1,50,0,0)}):Play()
+task.wait(.3)c:Destroy()end)end
+local ro=reg
+reg=function(a)ro(a)
+local tp="info"local al=a:lower()
+if al:find("cargo")then tp="ok"
+elseif al:find("on")or al:find("aprov")or al:find("aberto")or al:find("entrou")or al:find("gerada")then tp="ok"
+elseif al:find("erro")or al:find("falh")or al:find("sem")then tp="err"
+elseif al:find("off")or al:find("fechou")or al:find("parou")or al:find("minimizou")then tp="warn"end
+toast(a,tp)end
+--===== FUNÇÕES BASE =====
+local function card(ti,p,cr)local c=Instance.new("Frame",p)
+c.Size=UDim2.new(1,0,0,0)c.AutomaticSize=Enum.AutomaticSize.Y
+c.BackgroundColor3=Color3.fromRGB(22,26,34)
+Instance.new("UICorner",c).CornerRadius=UDim.new(0,7)
+local pd=Instance.new("UIPadding",c)pd.PaddingTop=UDim.new(0,9)
+pd.PaddingBottom=UDim.new(0,9)pd.PaddingLeft=UDim.new(0,12)pd.PaddingRight=UDim.new(0,12)
+local br=Instance.new("Frame",c)br.Size=UDim2.new(0,2,0,12)
+br.Position=UDim2.new(0,0,0,9)br.BackgroundColor3=cr or Color3.fromRGB(200,210,230)
+local t=Instance.new("TextLabel",c)t.Size=UDim2.new(1,-8,0,12)
+t.Position=UDim2.new(0,8,0,7)t.BackgroundTransparency=1
+t.Text=ti t.TextColor3=cr or Color3.fromRGB(200,210,230)t.TextSize=9
+t.Font=Enum.Font.GothamBold t.TextXAlignment=Enum.TextXAlignment.Left
+Instance.new("UIListLayout",c).Padding=UDim.new(0,6)
+local h=Instance.new("Frame",c)h.Size=UDim2.new(1,0,0,0)
+h.AutomaticSize=Enum.AutomaticSize.Y h.BackgroundTransparency=1
+h.LayoutOrder=2 Instance.new("UIListLayout",h).Padding=UDim.new(0,6)
+return h end
+local function bt(p,tx,cb,tr)local b=Instance.new("TextButton",p)
+b.Size=UDim2.new(1,0,0,32)
+b.BackgroundColor3=tr and Color3.fromRGB(60,30,40)or Color3.fromRGB(28,33,44)
+b.Text="  "..tx b.TextColor3=tr and Color3.fromRGB(220,180,190)or Color3.fromRGB(180,190,210)
+b.TextSize=10 b.Font=Enum.Font.GothamBold b.AutoButtonColor=false
+b.TextXAlignment=Enum.TextXAlignment.Left
+Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)
+local cH=tr and Color3.fromRGB(90,45,60)or Color3.fromRGB(45,52,68)
+local cB=b.BackgroundColor3
+b.MouseEnter:Connect(function()T:Create(b,TweenInfo.new(.15),{BackgroundColor3=cH}):Play()end)
+b.MouseLeave:Connect(function()T:Create(b,TweenInfo.new(.15),{BackgroundColor3=cB}):Play()end)
+b.MouseButton1Click:Connect(function()
+T:Create(b,TweenInfo.new(.1),{BackgroundColor3=Color3.fromRGB(220,60,80)}):Play()
+reg(tx)task.wait(.1)T:Create(b,TweenInfo.new(.15),{BackgroundColor3=cH}):Play()
+cb()end)return b end
+local function btT(p,tx,cb,cr)local h=Instance.new("Frame",p)
+h.Size=UDim2.new(1,0,0,34)h.BackgroundColor3=cr or Color3.fromRGB(28,33,44)
+Instance.new("UICorner",h).CornerRadius=UDim.new(0,8)
+local l=Instance.new("TextLabel",h)l.Size=UDim2.new(1,-60,1,0)
+l.Position=UDim2.new(0,12,0,0)l.BackgroundTransparency=1
+l.Text=tx l.TextColor3=Color3.fromRGB(180,190,210)l.TextSize=10
+l.Font=Enum.Font.GothamBold l.TextXAlignment=Enum.TextXAlignment.Left
+local trk=Instance.new("Frame",h)trk.Size=UDim2.new(0,44,0,22)
+trk.Position=UDim2.new(1,-52,.5,-11)trk.BackgroundColor3=Color3.fromRGB(50,55,65)
+Instance.new("UICorner",trk).CornerRadius=UDim.new(1,0)
+local th=Instance.new("Frame",trk)th.Size=UDim2.new(0,18,0,18)
+th.Position=UDim2.new(0,2,.5,-9)th.BackgroundColor3=Color3.fromRGB(220,225,235)
+Instance.new("UICorner",th).CornerRadius=UDim.new(1,0)
+local btn=Instance.new("TextButton",h)btn.Size=UDim2.new(1,0,1,0)
+btn.BackgroundTransparency=1 btn.Text=""
+local a=false
+btn.MouseButton1Click:Connect(function()
+a=not a
+if a then T:Create(trk,TweenInfo.new(.2),{BackgroundColor3=Color3.fromRGB(80,200,120)}):Play()
+T:Create(th,TweenInfo.new(.2),{Position=UDim2.new(1,-20,.5,-9)}):Play()
+else T:Create(trk,TweenInfo.new(.2),{BackgroundColor3=Color3.fromRGB(50,55,65)}):Play()
+T:Create(th,TweenInfo.new(.2),{Position=UDim2.new(0,2,.5,-9)}):Play()end
+reg(tx.." "..(a and"ON"or"OFF"))cb(a)end)return h end
+local sec={}
+for _,n in ipairs(cs)do local sc=Instance.new("ScrollingFrame",ct)
+sc.Size=UDim2.new(1,0,1,0)sc.BackgroundTransparency=1
+sc.ScrollBarThickness=4 sc.AutomaticCanvasSize=Enum.AutomaticSize.Y
+sc.Visible=false
+Instance.new("UIListLayout",sc).Padding=UDim.new(0,8)sec[n]=sc end
+local function sel(n)for nn,b in pairs(mB)do local cr=CC[nn]or Color3.fromRGB(150,160,180)
+if nn==n then b.BackgroundColor3=cr b.TextColor3=Color3.fromRGB(15,18,24)
+else b.BackgroundColor3=Color3.fromRGB(22,26,34)b.TextColor3=cr end end
+for nn,s in pairs(sec)do s.Visible=(nn==n)end end
+for n,b in pairs(mB)do b.MouseButton1Click:Connect(function()sel(n)end)end
+--===== HEADER =====
+local mh=Instance.new("TextLabel",mn)mh.Size=UDim2.new(1,-180,0,18)
+mh.Position=UDim2.new(0,18,0,14)mh.BackgroundTransparency=1
+mh.Text="LOST HUB"mh.TextColor3=Color3.fromRGB(255,255,255)
+mh.TextSize=13 mh.Font=Enum.Font.GothamBold mh.TextXAlignment=Enum.TextXAlignment.Left
+local fL=Instance.new("TextLabel",mn)fL.Size=UDim2.new(0,150,0,18)
+fL.Position=UDim2.new(0,180,0,14)fL.BackgroundTransparency=1
+fL.Text="FPS: -- | --ms"fL.TextColor3=Color3.fromRGB(120,255,150)
+fL.TextSize=12 fL.Font=Enum.Font.GothamBold
+local fr=0 local ti=tick()
+task.spawn(function()while fL.Parent do
+fr=fr+1 local a=tick()
+if a-ti>=1 then local f=math.floor(fr/(a-ti))fr=0 ti=a
+local p=0 pcall(function()p=math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())end)
+fL.Text="FPS: "..f.." | "..p.."ms"end
+R.RenderStepped:Wait()end end)
+local function hB(x,tx)local b=Instance.new("TextButton",mn)
+b.Size=UDim2.new(0,28,0,28)b.Position=UDim2.new(1,x,0,14)
+b.BackgroundColor3=Color3.fromRGB(22,26,34)b.Text=tx
+b.TextColor3=Color3.fromRGB(200,210,230)b.TextSize=12
+b.Font=Enum.Font.GothamBold b.AutoButtonColor=false
+Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)return b end
+local mB2=hB(-170,"−")local pB=hB(-138,"+")
+local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")--===== ADM + CARGOS + KEYS =====
+if AD then
+local cA=card("APROVAÇÕES",sec["Adm"],Color3.fromRGB(80,255,140))
+local iA=Instance.new("TextBox",cA)iA.Size=UDim2.new(1,0,0,34)
+iA.BackgroundColor3=Color3.fromRGB(20,24,32)iA.TextColor3=Color3.fromRGB(255,255,255)
+iA.PlaceholderText="nick do player..."iA.PlaceholderColor3=Color3.fromRGB(100,110,130)
+iA.TextSize=11 iA.Font=Enum.Font.GothamBold iA.ClearTextOnFocus=false
+Instance.new("UICorner",iA).CornerRadius=UDim.new(0,6)
+bt(cA,"✅ APROVAR",function()
+local n=iA.Text:gsub("%s+","")if n==""then return end
+if not getgenv().LH_AP then getgenv().LH_AP={}end
+getgenv().LH_AP[n:lower()]=true reg("Aprovado: "..n)
+iA.Text=""end)
+bt(cA,"❌ REPROVAR",function()
+local n=iA.Text:gsub("%s+","")if n==""then return end
+getgenv().LH_AP[n:lower()]=nil reg("Reprovado: "..n)
+iA.Text=""end)
+local cCargo=card("👑 GERENCIAR CARGOS",sec["Adm"],Color3.fromRGB(255,200,80))
+local selCargo=Instance.new("TextLabel",cCargo)
+selCargo.Size=UDim2.new(1,0,0,20)selCargo.BackgroundColor3=Color3.fromRGB(20,24,32)
+selCargo.Text="  🎯 Nenhum jogador selecionado"selCargo.TextColor3=Color3.fromRGB(255,200,80)
+selCargo.TextSize=10 selCargo.Font=Enum.Font.GothamBold selCargo.TextXAlignment=Enum.TextXAlignment.Left
+Instance.new("UICorner",selCargo).CornerRadius=UDim.new(0,6)
+task.spawn(function()while selCargo.Parent do
+if S.sel then selCargo.Text="  🎯 Selecionado: "..S.sel.Name
+selCargo.TextColor3=Color3.fromRGB(255,255,255)
+else selCargo.Text="  🎯 Nenhum jogador selecionado"
+selCargo.TextColor3=Color3.fromRGB(255,200,80)end
+task.wait(0.3)end end)
+local function setCargo(novoCargo)
+    if not S.sel then reg("❌ Cargo: nenhum selecionado")return end
+    local alvo=S.sel local id=tostring(alvo.UserId)local nome=alvo.Name
+    if not getgenv().LH_CARGOS then getgenv().LH_CARGOS={} end
+    getgenv().LH_CARGOS[id]=novoCargo getgenv().LH_CARGOS[nome]=novoCargo
+    reg("👑 Cargo: "..nome.." → "..novoCargo)
+end
+local cargos={{n="👑 PROPRIETÁRIO", c=Color3.fromRGB(255,200,50), t="PROPRIETÁRIO"},{n="🛡️ ADMIN", c=Color3.fromRGB(255,80,80), t="ADMIN"},{n="⚔️ MOD", c=Color3.fromRGB(100,150,255), t="MOD"},{n="⭐ VIP", c=Color3.fromRGB(180,100,255), t="VIP"},{n="👤 JOGADOR", c=Color3.fromRGB(150,160,180), t="JOGADOR"}}
+for _,cargo in ipairs(cargos)do
+    local btn=Instance.new("TextButton",cCargo)
+    btn.Size=UDim2.new(1,0,0,32)btn.BackgroundColor3=Color3.fromRGB(28,33,44)
+    btn.Text="  "..cargo.n btn.TextColor3=cargo.c btn.TextSize=10
+    btn.Font=Enum.Font.GothamBold btn.TextXAlignment=Enum.TextXAlignment.Left
+    btn.AutoButtonColor=false
+    Instance.new("UICorner",btn).CornerRadius=UDim.new(0,6)
+    btn.MouseButton1Click:Connect(function()setCargo(cargo.t)end)
+end
+local btnRem=Instance.new("TextButton",cCargo)
+btnRem.Size=UDim2.new(1,0,0,28)btnRem.BackgroundColor3=Color3.fromRGB(60,30,40)
+btnRem.Text="  🗑️  REMOVER CARGO"btnRem.TextColor3=Color3.fromRGB(255,150,150)
+btnRem.TextSize=10 btnRem.Font=Enum.Font.GothamBold
+btnRem.TextXAlignment=Enum.TextXAlignment.Left btnRem.AutoButtonColor=false
+Instance.new("UICorner",btnRem).CornerRadius=UDim.new(0,6)
+btnRem.MouseButton1Click:Connect(function()
+    if not S.sel then reg("❌ Nenhum selecionado")return end
+    if getgenv().LH_CARGOS then
+        getgenv().LH_CARGOS[tostring(S.sel.UserId)]=nil
+        getgenv().LH_CARGOS[S.sel.Name]=nil
+    end
+    reg("🗑️ Cargo removido: "..S.sel.Name)
+end)
+end
+if AD then
+local cK=card("GERADOR DE KEYS",sec["Keys"],Color3.fromRGB(255,200,50))
+local iK=Instance.new("TextBox",cK)iK.Size=UDim2.new(1,0,0,34)
+iK.BackgroundColor3=Color3.fromRGB(20,24,32)iK.TextColor3=Color3.fromRGB(255,220,100)
+iK.PlaceholderText="Ex: LOST-HUB-VIP-001"iK.PlaceholderColor3=Color3.fromRGB(100,110,130)
+iK.Text=""iK.TextSize=11 iK.Font=Enum.Font.GothamBold iK.ClearTextOnFocus=false
+Instance.new("UICorner",iK).CornerRadius=UDim.new(0,6)
+local function salvarKeys()
+    local t=""
+    for k,_ in pairs(KEYS_VALIDAS)do t=t..k.."\n" end
+    pcall(function()writefile(KEYFILE,t)end)
+end
+bt(cK,"🔑 GERAR KEY",function()
+local k=iK.Text:gsub("%s+","")
+if k==""then reg("❌ Digite uma key!")return end
+if KEYS_VALIDAS[k]then reg("❌ Key já existe")return end
+KEYS_VALIDAS[k]=true salvarKeys() reg("🔑 Key GERADA: "..k)
+iK.Text=""end)
+bt(cK,"🗑️ REMOVER KEY",function()
+local k=iK.Text:gsub("%s+","")
+if k==""then reg("❌ Digite uma key!")return end
+if not KEYS_VALIDAS[k]then reg("❌ Key não existe")return end
+KEYS_VALIDAS[k]=nil salvarKeys() reg("🗑️ Key REMOVIDA: "..k)
+iK.Text=""end)
+bt(cK,"💾 Enviar Keys Discord",function()
+local lista=""
+for k,_ in pairs(KEYS_VALIDAS)do lista=lista.."`"..k.."`\n" end
+if lista==""then reg("❌ Nenhuma key")return end
+if WEBHOOK~=""then
+    local embed={title="🔑 KEYS ATIVAS",description=lista,color=16766720,footer={text="Solicitado por: "..LP.Name},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
+    pcall(function()game:GetService("HttpService"):RequestAsync({Url=WEBHOOK,Method="POST",Headers={["Content-Type"]="application/json"},Body=game:GetService("HttpService"):JSONEncode({username="LOST HUB",embeds={embed}})})end)
+    reg("📤 Keys enviadas")
+end
+end)
+bt(cK,"🎲 Gerar Key Aleatória",function()
+local k="LOST-HUB-"..math.random(100000,999999)
+KEYS_VALIDAS[k]=true salvarKeys() reg("🎲 Key: "..k)
+iK.Text=k end,true)
+end
+--===== ESP =====
+local cE=card("ESP",sec["ESP"],Color3.fromRGB(120,255,180))
+local eF=Instance.new("Folder",gui)eF.Name="LHEsp"
+local eA=false local eC=Color3.fromRGB(0,255,140)
+local eD=500 local eS=true
+local CE={{n="Verde",c=Color3.fromRGB(0,255,140)},{n="Vermelho",c=Color3.fromRGB(255,60,60)},{n="Azul",c=Color3.fromRGB(60,150,255)},{n="Roxo",c=Color3.fromRGB(180,100,255)},{n="Rosa",c=Color3.fromRGB(255,120,200)},{n="Amarelo",c=Color3.fromRGB(255,220,60)},{n="Branco",c=Color3.fromRGB(255,255,255)}}
+local cI=1 local AL={100,250,500,1000,5000,999999}local aI=3
+local function limE()for _,c in ipairs(eF:GetChildren())do c:Destroy()end end
+local function cP(p)
+    if p==LP or not p.Character then return end
+    if eF:FindFirstChild("P_"..p.Name)then return end
+    local h=p.Character:FindFirstChild("HumanoidRootPart")
+    if not h then return end
+    local b=Instance.new("BillboardGui",eF)b.Name="P_"..p.Name
+    b.Size=UDim2.new(0,180,0,40)b.StudsOffset=Vector3.new(0,3.5,0)
+    b.AlwaysOnTop=true b.Adornee=h
+    local n=Instance.new("TextLabel",b)n.Size=UDim2.new(1,0,.5,0)
+    n.BackgroundTransparency=1 n.Text=p.Name n.TextColor3=eC
+    n.Font=Enum.Font.GothamBold n.TextSize=13
+    local hp=Instance.new("TextLabel",b)hp.Size=UDim2.new(1,0,.5,0)
+    hp.Position=UDim2.new(0,0,.5,0)hp.BackgroundTransparency=1
+    hp.TextColor3=Color3.fromRGB(255,255,255)
+    hp.Font=Enum.Font.GothamBold hp.TextSize=10
+    task.spawn(function()
+        while b.Parent do
+            if p.Character then
+                local novoH=p.Character:FindFirstChild("HumanoidRootPart")
+                if novoH and novoH~=b.Adornee then b.Adornee=novoH h=novoH end
+            end
+            local u=p.Character and p.Character:FindFirstChildOfClass("Humanoid")
+            if u then
+                if eS and u.Health<=0 then hp.Text="💀"
+                else hp.Text="❤ "..math.floor(u.Health)end
+            else hp.Text="💀"end
+            if h and h.Parent then
+                local d=math.floor((h.Position-C.CFrame.Position).Magnitude)
+                if d>eD then b.Enabled=false else b.Enabled=true n.Text=p.Name.." ["..d.."m]"end
+            end
+            R.RenderStepped:Wait()
+        end
+    end)
+end
+btT(cE,"📡 ESP Players",function(v)
+    eA=v
+    if v then limE()for _,p in ipairs(P:GetPlayers())do if p~=LP then cP(p)end end reg("ESP ON")
+    else eA=false limE()reg("ESP OFF")end
+end,Color3.fromRGB(30,70,50))
+bt(cE,"🎨 Cor: Verde",function()cI=cI%#CE+1 eC=CE[cI].c reg("Cor: "..CE[cI].n)
+if eA then limE()for _,p in ipairs(P:GetPlayers())do if p~=LP then cP(p)end end end end,true)
+bt(cE,"📏 Alcance: 500",function()aI=aI%#AL+1 eD=AL[aI]
+reg("Alcance: "..(eD==999999 and"∞"or tostring(eD).."m"))
+if eA then limE()for _,p in ipairs(P:GetPlayers())do if p~=LP then cP(p)end end end end,true)
+btT(cE,"❤ Só Vivos",function(v)eS=v reg("Só Vivos "..(v and"ON"or"OFF"))end,Color3.fromRGB(40,60,50))
+P.PlayerAdded:Connect(function(p)
+    p.CharacterAdded:Connect(function()
+        if eA then task.wait(1) local ex=eF:FindFirstChild("P_"..p.Name) if ex then ex:Destroy()end cP(p) end
+    end)
+    if eA then task.wait(1)if p.Character then cP(p)end end
+end)
+for _,p in ipairs(P:GetPlayers())do
+    if p~=LP then
+        p.CharacterAdded:Connect(function()
+            if eA then task.wait(1) local ex=eF:FindFirstChild("P_"..p.Name) if ex then ex:Destroy()end cP(p) end
+        end)
+    end
+end
+LP.CharacterAdded:Connect(function()
+    if eA then task.wait(1.5) limE() for _,p in ipairs(P:GetPlayers())do if p~=LP then cP(p)end end end
+end)
+--===== MOVIMENTOS =====
+local cM=card("MOVIMENTOS",sec["Mov"],Color3.fromRGB(120,255,120))
+bt(cM,"🎯 TP Para Alvo",function()
+if not S.sel or not S.sel.Character then reg("Sem alvo")return end
+if not LP.Character then return end
+local m=LP.Character:FindFirstChild("HumanoidRootPart")
+local h=S.sel.Character:FindFirstChild("HumanoidRootPart")
+if not m or not h then return end
+reg("TP → "..S.sel.Name)
+pcall(function()m.CFrame=h.CFrame*CFrame.new(0,0,3)m.Velocity=Vector3.zero end)end,true)
+bt(cM,"📥 Trazer Alvo",function()
+if not S.sel or not S.sel.Character then reg("Sem alvo")return end
+if not LP.Character then return end
+local m=LP.Character:FindFirstChild("HumanoidRootPart")
+local h=S.sel.Character:FindFirstChild("HumanoidRootPart")
+if not m or not h then return end
+reg("Trazer → "..S.sel.Name)
+pcall(function()h.CFrame=m.CFrame*CFrame.new(0,0,3)h.Velocity=Vector3.zero end)end,true)
+local ncA=false
+local function aplN()if not LP.Character then return end
+for _,o in ipairs(LP.Character:GetDescendants())do
+if o:IsA("BasePart")and o.CanCollide then o.CanCollide=false end end end
+btT(cM,"👻 Noclip",function(v)ncA=v
+if v then reg("Noclip ON")aplN()
+task.spawn(function()while ncA do task.wait(.15)if ncA then aplN()end end end)
+else reg("Noclip OFF")
+if LP.Character then for _,o in ipairs(LP.Character:GetDescendants())do
+if o:IsA("BasePart")then pcall(function()o.CanCollide=true end)end end end end end,Color3.fromRGB(80,80,120))
+local spdAtivo=false local spdValor=16
+btT(cM,"⚡ Speed Hack",function(v)
+    spdAtivo=v
+    if v then reg("Speed ON")
+        task.spawn(function()
+            while spdAtivo do
+                if LP.Character then
+                    local hum=LP.Character:FindFirstChildOfClass("Humanoid")
+                    if hum then hum.WalkSpeed=spdValor end
+                end
+                task.wait(0.1)
+            end
+        end)
+    else
+        reg("Speed OFF")
+        if LP.Character then
+            local hum=LP.Character:FindFirstChildOfClass("Humanoid")
+            if hum then hum.WalkSpeed=16 end
+        end
+    end
+end,Color3.fromRGB(60,90,60))
+bt(cM,"⚡ Aumentar Velocidade",function()
+    spdValor=spdValor+16
+    if spdValor>200 then spdValor=16 end
+    reg("Velocidade: "..spdValor)
+    if LP.Character then
+        local hum=LP.Character:FindFirstChildOfClass("Humanoid")
+        if hum then hum.WalkSpeed=spdValor end
+    end
+end)
+local jmpAtivo=false local jmpValor=50
+btT(cM,"🦘 Jump Power",function(v)
+    jmpAtivo=v
+    if v then reg("Jump ON")
+        task.spawn(function()
+            while jmpAtivo do
+                if LP.Character then
+                    local hum=LP.Character:FindFirstChildOfClass("Humanoid")
+                    if hum then hum.JumpPower=jmpValor end
+                end
+                task.wait(0.1)
+            end
+        end)
+    else
+        reg("Jump OFF")
+        if LP.Character then
+            local hum=LP.Character:FindFirstChildOfClass("Humanoid")
+            if hum then hum.JumpPower=50 end
+        end
+    end
+end,Color3.fromRGB(60,90,60))
+local infJump=false
+btT(cM,"🦘 Infinite Jump",function(v)
+    infJump=v
+    reg("Inf Jump "..(v and "ON" or "OFF"))
+end,Color3.fromRGB(60,90,60))
+U.JumpRequest:Connect(function()
+    if infJump and LP.Character then
+        local hum=LP.Character:FindFirstChildOfClass("Humanoid")
+        if hum then hum:ChangeState(Enum.HumanoidStateType.Jumping) end
+    end
+end)
+local flyAtivo=false local flyBV=nil local flyBG=nil
+btT(cM,"🕊️ Fly",function(v)
+    flyAtivo=v
+    if v then reg("Fly ON")
+        if LP.Character then
+            local hrp=LP.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                flyBV=Instance.new("BodyVelocity",hrp)
+                flyBV.MaxForce=Vector3.new(1e5,1e5,1e5)
+                flyBV.Velocity=Vector3.zero
+                flyBG=Instance.new("BodyGyro",hrp)
+                flyBG.MaxTorque=Vector3.new(1e5,1e5,1e5)
+                flyBG.P=1000
+                task.spawn(function()
+                    while flyAtivo do
+                        if not hrp or not hrp.Parent then break end
+                        local cam=C.CFrame
+                        local move=Vector3.zero
+                        if U:IsKeyDown(Enum.KeyCode.W) then move=move+cam.LookVector end
+                        if U:IsKeyDown(Enum.KeyCode.S) then move=move-cam.LookVector end
+                        if U:IsKeyDown(Enum.KeyCode.A) then move=move-cam.RightVector end
+                        if U:IsKeyDown(Enum.KeyCode.D) then move=move+cam.RightVector end
+                        if U:IsKeyDown(Enum.KeyCode.Space) then move=move+Vector3.new(0,1,0) end
+                        if U:IsKeyDown(Enum.KeyCode.LeftShift) then move=move-Vector3.new(0,1,0) end
+                        if move.Magnitude>0 then move=move.Unit*80 end
+                        flyBV.Velocity=move
+                        flyBG.CFrame=cam
+                        R.Heartbeat:Wait()
+                    end
+                    if flyBV then flyBV:Destroy() end
+                    if flyBG then flyBG:Destroy() end
+                end)
+            end
+        end
+    else
+        reg("Fly OFF")
+        if flyBV then flyBV:Destroy() flyBV=nil end
+        if flyBG then flyBG:Destroy() flyBG=nil end
+    end
+end,Color3.fromRGB(90,90,140))
+--===== COMBATE (COM SILENT AIM NO LANÇAMENTO) =====
+local cCb=card("COMBATE",sec["Combate"],Color3.fromRGB(255,100,100))
+local aimAtivo=false
+local aimFov=150
+local aimSuave=1
+local aimPart="Head"
+local teamCheck=false
+local wallCheck=true
+local aimMouseAtivo=false
+local silentAtivo=false
+
+local function temParede(alvo)
+    if not wallCheck then return false end
+    local minhaChar=LP.Character
+    local alvoChar=alvo.Character
+    if not minhaChar or not alvoChar then return true end
+    local origemPart=minhaChar:FindFirstChild("Head") or minhaChar:FindFirstChild("HumanoidRootPart")
+    local alvoPart=alvoChar:FindFirstChild("Head") or alvoChar:FindFirstChild("HumanoidRootPart")
+    if not origemPart or not alvoPart then return true end
+    local origem=origemPart.Position
+    local destino=alvoPart.Position
+    local direcao=destino-origem
+    local params=RaycastParams.new()
+    params.FilterType=Enum.RaycastFilterType.Exclude
+    params.IgnoreWater=true
+    params.FilterDescendantsInstances={minhaChar,alvoChar}
+    local resultado=workspace:Raycast(origem,direcao,params)
+    if resultado and resultado.Instance then
+        local parte=resultado.Instance
+        local parent=parte.Parent
+        if parent and (parent==minhaChar or parent==alvoChar) then return false end
+        if parte.Transparency>=0.9 then return false end
+        if parte.CanCollide==false then return false end
+        if parte:IsA("Accessory")or parte:IsA("Hat")then return false end
+        return true
+    end
+    return false
+end
+
+local function isTeamMate(alvo)
+    if not teamCheck then return false end
+    local meuTime=LP.Team
+    local timeAlvo=alvo.Team
+    if meuTime and timeAlvo and meuTime==timeAlvo then return true end
+    return false
+end
+
+-- Hook SEGURO: só redireciona o Raycast quando você LANÇA a faca
+if hookmetamethod and getnamecallmethod then
+    local oldNamecall
+    oldNamecall=hookmetamethod(game,"__namecall",function(self,...)
+        local method=getnamecallmethod()
+        if silentAtivo and (method=="FindPartOnRay"or method=="FindPartOnRayWithIgnoreList"or method=="FindPartOnRayWithWhitelist")then
+            local args={...}
+            local ray=args[1]
+            if ray and typeof(ray)=="Ray"then
+                local melhor=nil
+                local menorDist=400
+                local myChar=LP.Character
+                if myChar then
+                    local myHrp=myChar:FindFirstChild("HumanoidRootPart")
+                    if myHrp then
+                        for _,p in ipairs(P:GetPlayers())do
+                            if p~=LP and p.Character then
+                                if not isTeamMate(p)then
+                                    local targetPart=p.Character:FindFirstChild(aimPart) or p.Character:FindFirstChild("HumanoidRootPart")
+                                    if targetPart then
+                                        local dist=(targetPart.Position-myHrp.Position).Magnitude
+                                        if dist<menorDist then
+                                            menorDist=dist
+                                            melhor=targetPart
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+                if melhor then
+                    local novaDir=(melhor.Position-ray.Origin).Unit*ray.Direction.Magnitude
+                    args[1]=Ray.new(ray.Origin,novaDir)
+                    return oldNamecall(self,unpack(args))
+                end
+            end
+        end
+        return oldNamecall(self,...)
+    end)
+end
+
+btT(cCb,"🎯 Aimbot Toggle",function(v)
+    aimAtivo=v
+    if v then
+        reg("Aimbot ON")
+        task.spawn(function()
+            while aimAtivo do
+                pcall(function()
+                    local melhor=nil
+                    local menorDist=math.huge
+                    local centro=Vector2.new(C.ViewportSize.X/2,C.ViewportSize.Y/2)
+                    for _,p in ipairs(P:GetPlayers())do
+                        if p~=LP and p.Character then
+                            if not isTeamMate(p)then
+                                if not temParede(p)then
+                                    local h=p.Character:FindFirstChild(aimPart) or p.Character:FindFirstChild("HumanoidRootPart")
+                                    if h then
+                                        local tp,ot=C:WorldToViewportPoint(h.Position)
+                                        if ot then
+                                            local d=(Vector2.new(tp.X,tp.Y)-centro).Magnitude
+                                            if d<aimFov and d<menorDist then
+                                                menorDist=d
+                                                melhor=h
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    if melhor then
+                        local cp=C.CFrame.Position
+                        local dir=(melhor.Position-cp).Unit
+                        C.CFrame=C.CFrame:Lerp(CFrame.new(cp,cp+dir),1/math.max(aimSuave,1))
+                    end
+                end)
+                R.RenderStepped:Wait()
+            end
+        end)
+    else
+        reg("Aimbot OFF")
+    end
+end,Color3.fromRGB(90,30,30))
+
+btT(cCb,"🎯 Silent Aim (Faca)",function(v)
+    silentAtivo=v
+    reg("Silent Aim "..(v and"ON"or"OFF"))
+end,Color3.fromRGB(90,30,30))
+
+bt(cCb,"👁️ Mirar Alvo",function()
+    if not S.sel or not S.sel.Character then reg("Sem alvo")return end
+    if isTeamMate(S.sel)then reg("❌ É do seu time!")return end
+    if temParede(S.sel)then reg("❌ Alvo atrás da parede!")return end
+    local alvo=S.sel.Character:FindFirstChild("Head") or S.sel.Character:FindFirstChild("HumanoidRootPart")
+    if not alvo then return end
+    reg("Mira → "..S.sel.Name)
+    task.spawn(function()
+        local ini=tick()
+        while tick()-ini<0.3 do
+            local cp=C.CFrame.Position
+            local dir=(alvo.Position-cp).Unit
+            C.CFrame=CFrame.new(cp,cp+dir)
+            R.RenderStepped:Wait()
+        end
+    end)
+end,true)
+
+bt(cCb,"🔫 Atirar no Alvo",function()
+    if not S.sel then return end
+    pcall(function()
+        local vu=game:GetService("VirtualUser")
+        vu:CaptureController()
+        vu:ClickButton1(Vector2.new(C.ViewportSize.X/2,C.ViewportSize.Y/2))
+    end)
+    reg("Atirou: "..S.sel.Name)
+end,true)
+
+bt(cCb,"📏 FOV: 150",function()
+    aimFov=aimFov+100
+    if aimFov>500 then aimFov=100 end
+    reg("FOV: "..aimFov)
+end)
+
+bt(cCb,"🎯 Parte: Head",function()
+    if aimPart=="Head"then aimPart="HumanoidRootPart"
+    elseif aimPart=="HumanoidRootPart"then aimPart="UpperTorso"
+    else aimPart="Head"end
+    reg("Parte: "..aimPart)
+end)
+
+bt(cCb,"⚡ Suavidade: 1x",function()
+    aimSuave=aimSuave+1
+    if aimSuave>10 then aimSuave=1 end
+    reg("Suavidade: "..aimSuave.."x")
+end)
+
+btT(cCb,"👥 Team Check",function(v)
+    teamCheck=v
+    reg("Team Check "..(v and"ON"or"OFF"))
+end,Color3.fromRGB(60,60,90))
+
+btT(cCb,"🧱 Wall Check",function(v)
+    wallCheck=v
+    reg("Wall Check "..(v and"ON"or"OFF"))
+end,Color3.fromRGB(70,50,90))
+
+btT(cCb,"🖱️ Aim no Mouse",function(v)
+    aimMouseAtivo=v
+    reg("AimMouse "..(v and"ON"or"OFF"))
+end,Color3.fromRGB(90,30,30))
+
+R.RenderStepped:Connect(function()
+    if not aimMouseAtivo then return end
+    pcall(function()
+        local mouse=U:GetMouse()
+        if mouse and mouse.Hit then
+            local hrp=LP.Character and LP.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                local dir=(mouse.Hit.Position-C.CFrame.Position).Unit
+                C.CFrame=CFrame.new(C.CFrame.Position,C.CFrame.Position+dir)
+            end
+        end
+    end)
+end)--===== TELECINESE =====
+local cT=card("TELECINESE",sec["Tele"],Color3.fromRGB(180,150,255))
+local function acC()
+    if not LP.Character then return nil end
+    local m=LP.Character:FindFirstChild("HumanoidRootPart")
+    if not m then return nil end
+    local c1,d1=nil,400
+    for _,o in ipairs(workspace:GetChildren())do
+        if o:IsA("Model")then
+            local v=false
+            for _,d in ipairs(o:GetChildren())do
+                if d:IsA("VehicleSeat")or d:IsA("Seat")then v=true break end
+            end
+            if v then
+                local pr=o.PrimaryPart or o:FindFirstChildWhichIsA("BasePart")
+                if pr then
+                    local di=(pr.Position-m.Position).Magnitude
+                    if di<d1 then d1=di c1=pr end
+                end
+            end
+        end
+    end
+    return c1
+end
+bt(cT,"🚗 Puxar Carro",function()
+    local c=acC()
+    if not c then reg("Sem carro")return end
+    local m=c:FindFirstAncestorOfClass("Model")
+    if not m then return end
+    local p={}
+    for _,d in ipairs(m:GetDescendants())do
+        if d:IsA("BasePart")and not d.Anchored then
+            table.insert(p,d)
+            if #p>=6 then break end
+        end
+    end
+    for _,x in ipairs(p)do
+        local b=Instance.new("BodyVelocity",x)
+        b.Name="LH_Pux"
+        b.MaxForce=Vector3.new(5e5,5e5,5e5)
+        b.Velocity=Vector3.zero
+    end
+    reg("Puxar Carro")
+    task.spawn(function()
+        local i=tick()
+        while tick()-i<4 do
+            if not LP.Character then break end
+            local mh=LP.Character:FindFirstChild("HumanoidRootPart")
+            if not mh then break end
+            local a=mh.Position+mh.CFrame.LookVector*10+Vector3.new(0,3,0)
+            for _,x in ipairs(p)do
+                if x and x.Parent then
+                    local b=x:FindFirstChild("LH_Pux")
+                    if b then
+                        local d=a-x.Position
+                        if d.Magnitude<8 then b.Velocity=Vector3.zero
+                        else b.Velocity=d.Unit*math.min(150,d.Magnitude*3)end
+                    end
+                end
+            end
+            R.Heartbeat:Wait()
+        end
+        for _,x in ipairs(p)do
+            if x and x.Parent then
+                local b=x:FindFirstChild("LH_Pux")
+                if b then b:Destroy()end
+            end
+        end
+    end)
+end)
+bt(cT,"💥 Lançar Carro",function()
+    if not S.sel or not S.sel.Character then reg("Sem alvo")return end
+    local c=acC()
+    if not c then reg("Sem carro")return end
+    local m=c:FindFirstAncestorOfClass("Model")
+    if not m then return end
+    local p={}
+    for _,d in ipairs(m:GetDescendants())do
+        if d:IsA("BasePart")and not d.Anchored then
+            table.insert(p,d)
+            if #p>=8 then break end
+        end
+    end
+    for _,x in ipairs(p)do
+        local b=Instance.new("BodyVelocity",x)
+        b.Name="LH_Lan"
+        b.MaxForce=Vector3.new(1e8,1e8,1e8)
+        b.Velocity=Vector3.zero
+    end
+    reg("Lançar Carro")
+    task.spawn(function()
+        local i=tick()
+        while tick()-i<6 do
+            if not S.sel or not S.sel.Character then break end
+            local th=S.sel.Character:FindFirstChild("HumanoidRootPart")
+            if not th then break end
+            local ap=th.Position+Vector3.new(0,3,0)
+            for _,x in ipairs(p)do
+                if x and x.Parent then
+                    local b=x:FindFirstChild("LH_Lan")
+                    if b then
+                        local d=ap-x.Position
+                        if d.Magnitude<5 then b.Velocity=Vector3.zero
+                        else b.Velocity=d.Unit*math.min(3000,d.Magnitude*15)end
+                    end
+                end
+            end
+            R.Heartbeat:Wait()
+        end
+        for _,x in ipairs(p)do
+            if x and x.Parent then
+                local b=x:FindFirstChild("LH_Lan")
+                if b then b:Destroy()end
+            end
+        end
+    end)
+end)
+bt(cT,"🔓 Soltar Tudo",function()
+    for _,c in ipairs(workspace:GetChildren())do
+        if c:IsA("Model")then
+            for _,d in ipairs(c:GetDescendants())do
+                if d:IsA("BasePart")then
+                    local bv1=d:FindFirstChild("LH_Pux")
+                    local bv2=d:FindFirstChild("LH_Lan")
+                    if bv1 then bv1:Destroy()end
+                    if bv2 then bv2:Destroy()end
+                end
+            end
+        end
+    end
+    reg("Soltar Tudo")
+end)
+--===== TROLL =====
+local cTr=card("TROLL",sec["Troll"],Color3.fromRGB(255,150,200))
+local flingAtivo=false
+local flingBlocos={}
+bt(cTr,"💥 Fling de Blocos",function()
+    if not S.sel or not S.sel.Character then reg("Sem alvo")return end
+    local h=S.sel.Character:FindFirstChild("HumanoidRootPart")
+    if not h then reg("Alvo sem HRP")return end
+    reg("💥 Fling → "..S.sel.Name)
+    flingAtivo=true
+    flingBlocos={}
+    task.spawn(function()
+        local blocos={}
+        for _,o in ipairs(workspace:GetDescendants())do
+            if o:IsA("BasePart")and not o.Anchored then
+                local ep=false
+                for _,p in ipairs(P:GetPlayers())do
+                    if p.Character and o:IsDescendantOf(p.Character)then ep=true break end
+                end
+                if not ep and (o.Position-h.Position).Magnitude<50 then
+                    table.insert(blocos,o)
+                    if #blocos>=20 then break end
+                end
+            end
+        end
+        if #blocos==0 then reg("❌ Nenhum bloco perto")return end
+        for _,b in ipairs(blocos)do
+            local bv=Instance.new("BodyVelocity",b)
+            bv.Name="LH_Fling"
+            bv.MaxForce=Vector3.new(math.huge,math.huge,math.huge)
+            bv.Velocity=Vector3.zero
+            table.insert(flingBlocos,b)
+        end
+        local ini=tick()
+        while tick()-ini<10 and flingAtivo do
+            if not S.sel or not S.sel.Character then break end
+            local th=S.sel.Character:FindFirstChild("HumanoidRootPart")
+            if not th then break end
+            for _,b in ipairs(blocos)do
+                if b and b.Parent then
+                    local bv=b:FindFirstChild("LH_Fling")
+                    if bv then
+                        local dir=(th.Position-b.Position)
+                        if dir.Magnitude>1 then bv.Velocity=dir.Unit*5000
+                        else bv.Velocity=Vector3.new(math.random(-5000,5000),math.random(-5000,5000),math.random(-5000,5000))end
+                    end
+                end
+            end
+            R.Heartbeat:Wait()
+        end
+        for _,b in ipairs(blocos)do
+            if b and b.Parent then
+                local bv=b:FindFirstChild("LH_Fling")
+                if bv then bv:Destroy()end
+            end
+        end
+        flingAtivo=false
+        flingBlocos={}
+        reg("✅ Fling finalizado")
+    end)
+end,true)
+bt(cTr,"🛑 Parar Fling",function()
+    flingAtivo=false
+    for _,b in ipairs(flingBlocos)do
+        if b and b.Parent then
+            local bv=b:FindFirstChild("LH_Fling")
+            if bv then bv:Destroy()end
+        end
+    end
+    flingBlocos={}
+    reg("🛑 Fling PARADO")
+end,true)
+btT(cTr,"🍑 Sarrada",function(v)
+    if not v then return end
+    if not S.sel or not S.sel.Character then reg("Sem alvo")return end
+    if not LP.Character then return end
+    reg("Sarrada ON → "..S.sel.Name)
+    local t=0
+    task.spawn(function()
+        while t<8 do
+            if not LP.Character or not S.sel.Character then break end
+            local m=LP.Character:FindFirstChild("HumanoidRootPart")
+            local h=S.sel.Character:FindFirstChild("HumanoidRootPart")
+            if not m or not h then break end
+            t=t+.08
+            local bf=h.CFrame*CFrame.new(0,0,2.2)
+            local em=math.sin(t*12)*.9
+            local sb2=math.abs(math.sin(t*12))*.3
+            m.CFrame=bf*CFrame.new(0,sb2,em)
+            m.Velocity=Vector3.zero
+            R.Heartbeat:Wait()
+        end
+    end)
+end,Color3.fromRGB(120,50,80))
+bt(cTr,"🔥 Matar Alvo",function()
+    if not S.sel or not S.sel.Character then reg("Sem alvo")return end
+    local hum=S.sel.Character:FindFirstChildOfClass("Humanoid")
+    if hum then hum.Health=0 reg("Matou: "..S.sel.Name)end
+end,true)
+--===== PERSONALIZAÇÃO =====
+local cPer=card("🎨 PAINEL",sec["Personalizacao"],Color3.fromRGB(200,180,255))
+local temaIdx=1
+local temas={
+    {n="🌙 Dark Padrão",bg=Color3.fromRGB(8,10,14),accent=Color3.fromRGB(88,140,255)},
+    {n="🔴 Blood",bg=Color3.fromRGB(15,5,8),accent=Color3.fromRGB(220,40,60)},
+    {n="🟢 Matrix",bg=Color3.fromRGB(5,15,8),accent=Color3.fromRGB(80,255,120)},
+    {n="🟣 Purple",bg=Color3.fromRGB(15,8,20),accent=Color3.fromRGB(180,100,255)},
+    {n="🟡 Gold",bg=Color3.fromRGB(18,15,5),accent=Color3.fromRGB(255,200,50)},
+    {n="🩵 Cyan",bg=Color3.fromRGB(5,15,18),accent=Color3.fromRGB(0,220,255)},
+    {n="🩷 Pink",bg=Color3.fromRGB(20,8,15),accent=Color3.fromRGB(255,120,200)},
+    {n="⚫ Black",bg=Color3.fromRGB(0,0,0),accent=Color3.fromRGB(150,150,150)},
+    {n="⚪ White",bg=Color3.fromRGB(230,230,235),accent=Color3.fromRGB(50,50,50)},
+}
+local transAtual=0
+bt(cPer,"🎨 Trocar Tema",function()
+    temaIdx=temaIdx%#temas+1
+    local t=temas[temaIdx]
+    T:Create(w,TweenInfo.new(.3),{BackgroundColor3=t.bg}):Play()
+    if wg then T:Create(wg,TweenInfo.new(.3),{Color=ColorSequence.new(t.accent,t.bg)}):Play()end
+    for _,b in pairs(mB)do
+        pcall(function()T:Create(b,TweenInfo.new(.3),{TextColor3=t.accent}):Play()end)
+    end
+    reg("Tema: "..t.n)
+end)
+bt(cPer,"👻 Transparência",function()
+    transAtual=transAtual+0.1
+    if transAtual>0.9 then transAtual=0 end
+    T:Create(w,TweenInfo.new(.2),{BackgroundTransparency=transAtual}):Play()
+    reg("Transparência: "..math.floor(transAtual*100).."%")
+end)
+bt(cPer,"🌈 Borda Neon",function()
+    pcall(function()
+        if not w:FindFirstChildOfClass("UIStroke")then
+            local s=Instance.new("UIStroke",w)
+            s.Thickness=2
+            s.Color=Color3.fromRGB(255,100,200)
+        end
+        local s=w:FindFirstChildOfClass("UIStroke")
+        if s then s.Color=Color3.fromRGB(math.random(100,255),math.random(100,255),math.random(100,255))end
+    end)
+    reg("Borda Neon")
+end)
+btT(cPer,"💫 Efeito Arco-Íris",function(v)
+    getgenv().LH_Rainbow=v
+    if v then
+        reg("Arco-Íris ON")
+        task.spawn(function()
+            local h=0
+            while getgenv().LH_Rainbow do
+                h=(h+0.01)%1
+                local cor=Color3.fromHSV(h,0.8,1)
+                for _,b in pairs(mB)do
+                    pcall(function()b.TextColor3=cor end)
+                end
+                R.Heartbeat:Wait()
+            end
+        end)
+    else
+        reg("Arco-Íris OFF")
+    end
+end,Color3.fromRGB(120,80,180))
+bt(cPer,"🔄 Resetar Tema",function()
+    local t=temas[1]
+    T:Create(w,TweenInfo.new(.3),{BackgroundColor3=t.bg,BackgroundTransparency=0}):Play()
+    for n,b in pairs(mB)do
+        local cr=CC[n]or Color3.fromRGB(150,160,180)
+        pcall(function()T:Create(b,TweenInfo.new(.3),{TextColor3=cr}):Play()end)
+    end
+    reg("Tema resetado")
+end)
+--===== ANTI-LAG + INTERFACE =====
+local cL=card("ANTI-LAG",sec["Config"],Color3.fromRGB(120,255,120))
+local aA=false
+btT(cL,"⚡ Anti-Lag",function(v)
+    aA=v
+    if v then
+        reg("Anti-Lag ON")
+        task.spawn(function()
+            while aA do
+                for _,o in ipairs(workspace:GetDescendants())do
+                    if o:IsA("ParticleEmitter")or o:IsA("Trail")or o:IsA("Smoke")or o:IsA("Fire")or o:IsA("Sparkles")or o:IsA("Beam")then o.Enabled=false end
+                    if o:IsA("BasePart")then pcall(function()o.CastShadow=false end)end
+                end
+                task.wait(3)
+            end
+        end)
+    else
+        reg("Anti-Lag OFF")
+    end
+end,Color3.fromRGB(40,80,40))
+local cI2=card("INTERFACE",sec["Config"],Color3.fromRGB(150,200,255))
+bt(cI2,"📊 FPS",function()fL.Visible=not fL.Visible reg("FPS "..(fL.Visible and"ON"or"OFF"))end)
+local tms={{n="Pequeno",w=500,h=320},{n="Médio",w=700,h=440},{n="Grande",w=1000,h=600}}
+local tI=2
+bt(cI2,"📐 Tamanho",function()
+    tI=tI%3+1
+    local t=tms[tI]
+    T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,t.w,0,t.h)}):Play()
+    reg("Tam: "..t.n)
+end)
+bt(cI2,"📌 Centralizar",function()
+    local vp=workspace.CurrentCamera.ViewportSize
+    T:Create(w,TweenInfo.new(.2),{Position=UDim2.new(0,vp.X/2-w.Size.X.Offset/2,0,vp.Y/2-w.Size.Y.Offset/2)}):Play()
+    reg("Central")
+end)
+local fbAtivo=false
+btT(cI2,"💡 Fullbright",function(v)
+    fbAtivo=v
+    if v then
+        reg("Fullbright ON")
+        task.spawn(function()
+            while fbAtivo do
+                pcall(function()
+                    local l=game:GetService("Lighting")
+                    l.Brightness=2
+                    l.ClockTime=14
+                    l.FogEnd=100000
+                    l.GlobalShadows=false
+                end)
+                task.wait(2)
+            end
+        end)
+    else
+        reg("Fullbright OFF")
+    end
+end,Color3.fromRGB(80,80,50))
+local antiAfk=false
+btT(cI2,"🚫 Anti-AFK",function(v)
+    antiAfk=v
+    if v then
+        reg("Anti-AFK ON")
+        task.spawn(function()
+            while antiAfk do
+                pcall(function()
+                    local vu=game:GetService("VirtualUser")
+                    vu:CaptureController()
+                    vu:ClickButton2(Vector2.new())
+                end)
+                task.wait(60)
+            end
+        end)
+    else
+        reg("Anti-AFK OFF")
+    end
+end,Color3.fromRGB(60,60,80))
+bt(cI2,"🔄 Rejoin",function()
+    reg("Rejoin")
+    pcall(function()game:GetService("TeleportService"):Teleport(game.PlaceId,LP)end)
+end)
+bt(cI2,"🌐 Server Hop",function()
+    reg("Server Hop")
+    pcall(function()
+        local r=game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100")
+        local d=game:GetService("HttpService"):JSONDecode(r)
+        if d and d.data then
+            for _,srv in ipairs(d.data)do
+                if srv.id~=game.JobId and srv.playing<srv.maxPlayers then
+                    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,srv.id,LP)
+                    return
+                end
+            end
+        end
+    end)
+end)
+--===== EMBEDS =====
+local cEmb=card("EMBEDS DISCORD",sec["Config"],Color3.fromRGB(114,137,218))
+local embTitulo=Instance.new("TextBox",cEmb)
+embTitulo.Size=UDim2.new(1,0,0,32)
+embTitulo.BackgroundColor3=Color3.fromRGB(20,24,32)
+embTitulo.TextColor3=Color3.fromRGB(255,255,255)
+embTitulo.PlaceholderText="📌 Título do embed..."
+embTitulo.PlaceholderColor3=Color3.fromRGB(100,110,130)
+embTitulo.Text=""
+embTitulo.TextSize=11
+embTitulo.Font=Enum.Font.GothamBold
+embTitulo.ClearTextOnFocus=false
+Instance.new("UICorner",embTitulo).CornerRadius=UDim.new(0,6)
+local embDesc=Instance.new("TextBox",cEmb)
+embDesc.Size=UDim2.new(1,0,0,60)
+embDesc.BackgroundColor3=Color3.fromRGB(20,24,32)
+embDesc.TextColor3=Color3.fromRGB(255,255,255)
+embDesc.PlaceholderText="📝 Descrição do embed..."
+embDesc.PlaceholderColor3=Color3.fromRGB(100,110,130)
+embDesc.Text=""
+embDesc.TextSize=11
+embDesc.Font=Enum.Font.Gotham
+embDesc.ClearTextOnFocus=false
+embDesc.TextWrapped=true
+embDesc.MultiLine=true
+Instance.new("UICorner",embDesc).CornerRadius=UDim.new(0,6)
+local embImg=Instance.new("TextBox",cEmb)
+embImg.Size=UDim2.new(1,0,0,32)
+embImg.BackgroundColor3=Color3.fromRGB(20,24,32)
+embImg.TextColor3=Color3.fromRGB(255,255,255)
+embImg.PlaceholderText="🖼️ URL da imagem..."
+embImg.PlaceholderColor3=Color3.fromRGB(100,110,130)
+embImg.Text=""
+embImg.TextSize=11
+embImg.Font=Enum.Font.Gotham
+embImg.ClearTextOnFocus=false
+Instance.new("UICorner",embImg).CornerRadius=UDim.new(0,6)
+local embCores={{n="🔴 Vermelho",c=16711680},{n="🟢 Verde",c=65280},{n="🔵 Azul",c=3447003},{n="🟡 Amarelo",c=16776960},{n="🟣 Roxo",c=10181046},{n="🟠 Laranja",c=15105570},{n="⚪ Branco",c=16777215}}
+local embCorIdx=3
+local embCorBtn=bt(cEmb,"🎨 Cor: 🔵 Azul",function()
+    embCorIdx=embCorIdx%#embCores+1
+    local cor=embCores[embCorIdx]
+    if embCorBtn then embCorBtn.Text="🎨 Cor: "..cor.n end
+    reg("Cor do embed: "..cor.n)
+end,true)
+bt(cEmb,"📤 ENVIAR EMBED",function()
+    local tit=embTitulo.Text
+    local desc=embDesc.Text
+    local img=embImg.Text
+    if tit==""then tit="📢 AVISO LOST HUB" end
+    if desc==""then desc="Nenhuma descrição." end
+    local cor=embCores[embCorIdx].c
+    task.spawn(function()enviarEmbedCustom(tit,desc,cor,img)end)
+end)
+--===== CRÉDITO =====
+local cc=Instance.new("Frame",sec["Config"])
+cc.Size=UDim2.new(1,0,0,60)
+cc.BackgroundColor3=Color3.fromRGB(20,24,32)
+Instance.new("UICorner",cc).CornerRadius=UDim.new(0,10)
+local cT2=Instance.new("TextLabel",cc)
+cT2.Size=UDim2.new(1,0,0,20)
+cT2.Position=UDim2.new(0,0,0,12)
+cT2.BackgroundTransparency=1
+cT2.Text="✦ LOST HUB ✦"
+cT2.TextColor3=Color3.fromRGB(255,255,255)
+cT2.Font=Enum.Font.GothamBold
+cT2.TextSize=14
+local cN=Instance.new("TextLabel",cc)
+cN.Size=UDim2.new(1,0,0,22)
+cN.Position=UDim2.new(0,0,0,32)
+cN.BackgroundTransparency=1
+cN.Text="by LOST"
+cN.TextColor3=Color3.fromRGB(180,190,210)
+cN.Font=Enum.Font.GothamBold
+cN.TextSize=12
+bt(cI2,"🗑️ Fechar",function()
+    reg("🚪 Painel FECHADO por "..LP.Name)
+    task.wait(.1)
+    gui:Destroy()
+end)
+--===== LOG =====
+if AD then
+local c5=card("REGISTRO",sec["Log"],Color3.fromRGB(88,140,255))
+local tL=Instance.new("TextLabel",c5)
+tL.Size=UDim2.new(1,0,0,14)
+tL.BackgroundTransparency=1
+tL.Text="Total: 0"
+tL.TextColor3=Color3.fromRGB(150,165,190)
+tL.TextSize=10
+tL.Font=Enum.Font.Gotham
+tL.TextXAlignment=Enum.TextXAlignment.Left
+local sL2=Instance.new("ScrollingFrame",c5)
+sL2.Size=UDim2.new(1,0,0,160)
+sL2.BackgroundColor3=Color3.fromRGB(15,18,24)
+sL2.ScrollBarThickness=4
+sL2.AutomaticCanvasSize=Enum.AutomaticSize.Y
+Instance.new("UICorner",sL2).CornerRadius=UDim.new(0,6)
+Instance.new("UIListLayout",sL2).Padding=UDim.new(0,3)
+local uT=-1
+local function upL()
+    if #lg==uT then return end
+    uT=#lg
+    for _,c in ipairs(sL2:GetChildren())do
+        if c:IsA("Frame")then c:Destroy()end
+    end
+    for i=#lg,1,-1 do
+        local L=lg[i]
+        local f=Instance.new("Frame",sL2)
+        f.Size=UDim2.new(1,-2,0,22)
+        f.BackgroundColor3=Color3.fromRGB(22,26,34)
+        Instance.new("UICorner",f).CornerRadius=UDim.new(0,5)
+        local l1=Instance.new("TextLabel",f)
+        l1.Size=UDim2.new(0,120,1,0)
+        l1.Position=UDim2.new(0,4,0,0)
+        l1.BackgroundTransparency=1
+        l1.Text=L.h
+        l1.TextColor3=Color3.fromRGB(130,150,180)
+        l1.TextSize=8
+        l1.Font=Enum.Font.Gotham
+        l1.TextXAlignment=Enum.TextXAlignment.Left
+        local l2=Instance.new("TextLabel",f)
+        l2.Size=UDim2.new(0,80,1,0)
+        l2.Position=UDim2.new(0,128,0,0)
+        l2.BackgroundTransparency=1
+        l2.Text="["..L.j.."]"
+        l2.TextColor3=Color3.fromRGB(88,180,255)
+        l2.TextSize=9
+        l2.Font=Enum.Font.GothamBold
+        l2.TextXAlignment=Enum.TextXAlignment.Left
+        local l3=Instance.new("TextLabel",f)
+        l3.Size=UDim2.new(1,-210,1,0)
+        l3.Position=UDim2.new(0,210,0,0)
+        l3.BackgroundTransparency=1
+        l3.Text=L.a
+        l3.TextColor3=Color3.fromRGB(220,230,245)
+        l3.TextSize=9
+        l3.Font=Enum.Font.Gotham
+        l3.TextXAlignment=Enum.TextXAlignment.Left
+    end
+    tL.Text="Total: "..#lg
+end
+reg("🟢 Painel carregado - "..LP.Name.." ("..CG..")")
+upL()
+task.spawn(function()
+    while tL.Parent do
+        task.wait(.5)
+        pcall(upL)
+    end
+end)
+bt(c5,"💾 Salvar Arquivo",function()
+    local t="=== LOG LOST HUB ===\n"..LP.Name.."\n\n"
+    for _,L in ipairs(lg)do t=t..L.h.." | ["..L.j.."] | "..L.a.."\n" end
+    pcall(function()writefile(LOGFILE,t)end)
+    reg("💾 Log salvo")
+end)
+bt(c5,"🗑️ Limpar",function()
+    lg={}
+    uT=-1
+    pcall(function()writefile(LOGFILE,"")end)
+    reg("🗑️ Log limpo")
+    upL()
+end)
+end
+--===== DRAG =====
+local dragging,dragInput,dragStart,startPos
+local function updateDrag(input)
+    local delta=input.Position-dragStart
+    w.Position=UDim2.new(startPos.X.Scale,startPos.X.Offset+delta.X,startPos.Y.Scale,startPos.Y.Offset+delta.Y)
+end
+mh.InputBegan:Connect(function(input)
+    if input.UserInputType==Enum.UserInputType.MouseButton1 or input.UserInputType==Enum.UserInputType.Touch then
+        dragging=true
+        dragStart=input.Position
+        startPos=w.Position
+        input.Changed:Connect(function()
+            if input.UserInputState==Enum.UserInputState.End then dragging=false end
+        end)
+    end
+end)
+mh.InputChanged:Connect(function(input)
+    if input.UserInputType==Enum.UserInputType.MouseMovement or input.UserInputType==Enum.UserInputType.Touch then
+        dragInput=input
+    end
+end)
+U.InputChanged:Connect(function(input)
+    if input==dragInput and dragging then updateDrag(input)end
+end)
+--===== REFRESH =====
+local function rf()
+    for _,c in ipairs(pl:GetChildren())do
+        if c:IsA("TextButton")then c:Destroy()end
+    end
+    for _,p in ipairs(P:GetPlayers())do
+        local b=Instance.new("TextButton",pl)
+        b.Size=UDim2.new(1,0,0,24)
+        b.BackgroundColor3=(S.sel==p)and Color3.fromRGB(88,140,255)or Color3.fromRGB(22,26,34)
+        b.Text="  "..p.Name
+        b.TextColor3=Color3.fromRGB(220,230,245)
+        b.TextSize=9
+        b.Font=Enum.Font.GothamBold
+        b.TextXAlignment=Enum.TextXAlignment.Left
+        b.AutoButtonColor=false
+        Instance.new("UICorner",b).CornerRadius=UDim.new(0,5)
+        b.MouseButton1Click:Connect(function()
+            S.sel=p
+            reg("Sel: "..p.Name)
+            rf()
+        end)
+    end
+    upC()
+end
+rf()
+P.PlayerAdded:Connect(rf)
+P.PlayerRemoving:Connect(function()
+    task.wait(.1)
+    rf()
+end)
+-- BOTÕES DA JANELA (CORRIGIDOS)
+cB2.MouseButton1Click:Connect(function()
+    reg("❌ Painel FECHADO (X) por "..LP.Name)
+    task.wait(.1)
+    gui:Destroy()
+end)
+hB2.MouseButton1Click:Connect(function()
+    reg("👁️ Painel MINIMIZADO por "..LP.Name)
+    w.Visible=false
+    flt.Visible=true
+end)
+flt.MouseButton1Click:Connect(function()
+    w.Visible=true
+    flt.Visible=false
+end)
+mB2.MouseButton1Click:Connect(function()
+    local tamAtual=w.Size.X.Offset
+    local novoTam=math.max(400,tamAtual-50)
+    if novoTam==tamAtual then return end
+    local proporcao=novoTam/tamAtual
+    T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,novoTam,0,w.Size.Y.Offset*proporcao)}):Play()
+    reg("Tamanho: "..novoTam)
+end)
+pB.MouseButton1Click:Connect(function()
+    local tamAtual=w.Size.X.Offset
+    local novoTam=math.min(1200,tamAtual+50)
+    if novoTam==tamAtual then return end
+    local proporcao=novoTam/tamAtual
+    T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,novoTam,0,w.Size.Y.Offset*proporcao)}):Play()
+    reg("Tamanho: "..novoTam)
+end)
+sel("Config")
+print("[LOST HUB] Carregado! Silent Aim + Botões funcionando.")
