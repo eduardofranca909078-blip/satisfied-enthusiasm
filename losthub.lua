@@ -1,4 +1,4 @@
---// LOST HUB v3.0 - CORRIGIDO
+--// LOST HUB v3.1 - PUXAR TODOS OS CARROS
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -580,8 +580,7 @@ btT(cM,"🕊️ Fly",function(v)
         if flyBV then flyBV:Destroy() flyBV=nil end
         if flyBG then flyBG:Destroy() flyBG=nil end
     end
-end,Color3.fromRGB(90,90,140))
---===== COMBATE (COM SILENT AIM NO LANÇAMENTO) =====
+end,Color3.fromRGB(90,90,140))--===== COMBATE =====
 local cCb=card("COMBATE",sec["Combate"],Color3.fromRGB(255,100,100))
 local aimAtivo=false
 local aimFov=150
@@ -619,7 +618,6 @@ local function temParede(alvo)
     end
     return false
 end
-
 local function isTeamMate(alvo)
     if not teamCheck then return false end
     local meuTime=LP.Team
@@ -628,7 +626,6 @@ local function isTeamMate(alvo)
     return false
 end
 
--- Hook SEGURO: só redireciona o Raycast quando você LANÇA a faca
 if hookmetamethod and getnamecallmethod then
     local oldNamecall
     oldNamecall=hookmetamethod(game,"__namecall",function(self,...)
@@ -792,7 +789,9 @@ R.RenderStepped:Connect(function()
             end
         end
     end)
-end)--===== TELECINESE =====
+end)
+
+--===== TELECINESE =====
 local cT=card("TELECINESE",sec["Tele"],Color3.fromRGB(180,150,255))
 local function acC()
     if not LP.Character then return nil end
@@ -924,6 +923,7 @@ bt(cT,"🔓 Soltar Tudo",function()
     end
     reg("Soltar Tudo")
 end)
+
 --===== TROLL =====
 local cTr=card("TROLL",sec["Troll"],Color3.fromRGB(255,150,200))
 local flingAtivo=false
@@ -1023,6 +1023,36 @@ bt(cTr,"🔥 Matar Alvo",function()
     local hum=S.sel.Character:FindFirstChildOfClass("Humanoid")
     if hum then hum.Health=0 reg("Matou: "..S.sel.Name)end
 end,true)
+bt(cTr,"🚛 Puxar TODOS os Carros",function()
+    if not LP.Character then return end
+    local myHrp = LP.Character:FindFirstChild("HumanoidRootPart")
+    if not myHrp then return end
+    local count = 0
+    local carrosEncontrados = {}
+    for _, obj in ipairs(workspace:GetChildren()) do
+        if obj:IsA("Model") then
+            local isVehicle = false
+            for _, child in ipairs(obj:GetChildren()) do
+                if child:IsA("VehicleSeat") or child:IsA("Seat") then isVehicle = true break end
+            end
+            if isVehicle then
+                local primary = obj.PrimaryPart or obj:FindFirstChildWhichIsA("BasePart")
+                if primary then table.insert(carrosEncontrados, obj) count = count + 1 end
+            end
+        end
+    end
+    if count == 0 then reg("❌ Nenhum carro encontrado.") return end
+    reg("🚛 Puxando " .. count .. " carros...")
+    for i, carro in ipairs(carrosEncontrados) do
+        pcall(function()
+            local novaPosicao = myHrp.CFrame * CFrame.new(math.random(-15,15), 5, math.random(-15,-5))
+            carro:PivotTo(novaPosicao)
+        end)
+        if i % 5 == 0 then task.wait(0.1) end
+    end
+    reg("✅ Puxou " .. count .. " carros!")
+end,true)
+
 --===== PERSONALIZAÇÃO =====
 local cPer=card("🎨 PAINEL",sec["Personalizacao"],Color3.fromRGB(200,180,255))
 local temaIdx=1
@@ -1057,9 +1087,7 @@ end)
 bt(cPer,"🌈 Borda Neon",function()
     pcall(function()
         if not w:FindFirstChildOfClass("UIStroke")then
-            local s=Instance.new("UIStroke",w)
-            s.Thickness=2
-            s.Color=Color3.fromRGB(255,100,200)
+            local s=Instance.new("UIStroke",w) s.Thickness=2 s.Color=Color3.fromRGB(255,100,200)
         end
         local s=w:FindFirstChildOfClass("UIStroke")
         if s then s.Color=Color3.fromRGB(math.random(100,255),math.random(100,255),math.random(100,255))end
@@ -1075,15 +1103,11 @@ btT(cPer,"💫 Efeito Arco-Íris",function(v)
             while getgenv().LH_Rainbow do
                 h=(h+0.01)%1
                 local cor=Color3.fromHSV(h,0.8,1)
-                for _,b in pairs(mB)do
-                    pcall(function()b.TextColor3=cor end)
-                end
+                for _,b in pairs(mB)do pcall(function()b.TextColor3=cor end)end
                 R.Heartbeat:Wait()
             end
         end)
-    else
-        reg("Arco-Íris OFF")
-    end
+    else reg("Arco-Íris OFF") end
 end,Color3.fromRGB(120,80,180))
 bt(cPer,"🔄 Resetar Tema",function()
     local t=temas[1]
@@ -1094,6 +1118,7 @@ bt(cPer,"🔄 Resetar Tema",function()
     end
     reg("Tema resetado")
 end)
+
 --===== ANTI-LAG + INTERFACE =====
 local cL=card("ANTI-LAG",sec["Config"],Color3.fromRGB(120,255,120))
 local aA=false
@@ -1110,10 +1135,9 @@ btT(cL,"⚡ Anti-Lag",function(v)
                 task.wait(3)
             end
         end)
-    else
-        reg("Anti-Lag OFF")
-    end
+    else reg("Anti-Lag OFF") end
 end,Color3.fromRGB(40,80,40))
+
 local cI2=card("INTERFACE",sec["Config"],Color3.fromRGB(150,200,255))
 bt(cI2,"📊 FPS",function()fL.Visible=not fL.Visible reg("FPS "..(fL.Visible and"ON"or"OFF"))end)
 local tms={{n="Pequeno",w=500,h=320},{n="Médio",w=700,h=440},{n="Grande",w=1000,h=600}}
@@ -1138,17 +1162,12 @@ btT(cI2,"💡 Fullbright",function(v)
             while fbAtivo do
                 pcall(function()
                     local l=game:GetService("Lighting")
-                    l.Brightness=2
-                    l.ClockTime=14
-                    l.FogEnd=100000
-                    l.GlobalShadows=false
+                    l.Brightness=2 l.ClockTime=14 l.FogEnd=100000 l.GlobalShadows=false
                 end)
                 task.wait(2)
             end
         end)
-    else
-        reg("Fullbright OFF")
-    end
+    else reg("Fullbright OFF") end
 end,Color3.fromRGB(80,80,50))
 local antiAfk=false
 btT(cI2,"🚫 Anti-AFK",function(v)
@@ -1159,15 +1178,12 @@ btT(cI2,"🚫 Anti-AFK",function(v)
             while antiAfk do
                 pcall(function()
                     local vu=game:GetService("VirtualUser")
-                    vu:CaptureController()
-                    vu:ClickButton2(Vector2.new())
+                    vu:CaptureController() vu:ClickButton2(Vector2.new())
                 end)
                 task.wait(60)
             end
         end)
-    else
-        reg("Anti-AFK OFF")
-    end
+    else reg("Anti-AFK OFF") end
 end,Color3.fromRGB(60,60,80))
 bt(cI2,"🔄 Rejoin",function()
     reg("Rejoin")
@@ -1188,8 +1204,10 @@ bt(cI2,"🌐 Server Hop",function()
         end
     end)
 end)
---===== EMBEDS =====
-local cEmb=card("EMBEDS DISCORD",sec["Config"],Color3.fromRGB(114,137,218))
+
+--===== EMBEDS (MOVIDO PARA O ADM) =====
+if AD then
+local cEmb=card("EMBEDS DISCORD",sec["Adm"],Color3.fromRGB(114,137,218))
 local embTitulo=Instance.new("TextBox",cEmb)
 embTitulo.Size=UDim2.new(1,0,0,32)
 embTitulo.BackgroundColor3=Color3.fromRGB(20,24,32)
@@ -1242,6 +1260,8 @@ bt(cEmb,"📤 ENVIAR EMBED",function()
     local cor=embCores[embCorIdx].c
     task.spawn(function()enviarEmbedCustom(tit,desc,cor,img)end)
 end)
+end
+
 --===== CRÉDITO =====
 local cc=Instance.new("Frame",sec["Config"])
 cc.Size=UDim2.new(1,0,0,60)
@@ -1268,6 +1288,7 @@ bt(cI2,"🗑️ Fechar",function()
     task.wait(.1)
     gui:Destroy()
 end)
+
 --===== LOG =====
 if AD then
 local c5=card("REGISTRO",sec["Log"],Color3.fromRGB(88,140,255))
@@ -1351,7 +1372,8 @@ bt(c5,"🗑️ Limpar",function()
     upL()
 end)
 end
---===== DRAG =====
+
+--===== DRAG + BOTÕES DA JANELA =====
 local dragging,dragInput,dragStart,startPos
 local function updateDrag(input)
     local delta=input.Position-dragStart
@@ -1375,37 +1397,6 @@ end)
 U.InputChanged:Connect(function(input)
     if input==dragInput and dragging then updateDrag(input)end
 end)
---===== REFRESH =====
-local function rf()
-    for _,c in ipairs(pl:GetChildren())do
-        if c:IsA("TextButton")then c:Destroy()end
-    end
-    for _,p in ipairs(P:GetPlayers())do
-        local b=Instance.new("TextButton",pl)
-        b.Size=UDim2.new(1,0,0,24)
-        b.BackgroundColor3=(S.sel==p)and Color3.fromRGB(88,140,255)or Color3.fromRGB(22,26,34)
-        b.Text="  "..p.Name
-        b.TextColor3=Color3.fromRGB(220,230,245)
-        b.TextSize=9
-        b.Font=Enum.Font.GothamBold
-        b.TextXAlignment=Enum.TextXAlignment.Left
-        b.AutoButtonColor=false
-        Instance.new("UICorner",b).CornerRadius=UDim.new(0,5)
-        b.MouseButton1Click:Connect(function()
-            S.sel=p
-            reg("Sel: "..p.Name)
-            rf()
-        end)
-    end
-    upC()
-end
-rf()
-P.PlayerAdded:Connect(rf)
-P.PlayerRemoving:Connect(function()
-    task.wait(.1)
-    rf()
-end)
--- BOTÕES DA JANELA (CORRIGIDOS)
 cB2.MouseButton1Click:Connect(function()
     reg("❌ Painel FECHADO (X) por "..LP.Name)
     task.wait(.1)
@@ -1436,5 +1427,36 @@ pB.MouseButton1Click:Connect(function()
     T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,novoTam,0,w.Size.Y.Offset*proporcao)}):Play()
     reg("Tamanho: "..novoTam)
 end)
+
+--===== REFRESH =====
+local function rf()
+    for _,c in ipairs(pl:GetChildren())do
+        if c:IsA("TextButton")then c:Destroy()end
+    end
+    for _,p in ipairs(P:GetPlayers())do
+        local b=Instance.new("TextButton",pl)
+        b.Size=UDim2.new(1,0,0,24)
+        b.BackgroundColor3=(S.sel==p)and Color3.fromRGB(88,140,255)or Color3.fromRGB(22,26,34)
+        b.Text="  "..p.Name
+        b.TextColor3=Color3.fromRGB(220,230,245)
+        b.TextSize=9
+        b.Font=Enum.Font.GothamBold
+        b.TextXAlignment=Enum.TextXAlignment.Left
+        b.AutoButtonColor=false
+        Instance.new("UICorner",b).CornerRadius=UDim.new(0,5)
+        b.MouseButton1Click:Connect(function()
+            S.sel=p
+            reg("Sel: "..p.Name)
+            rf()
+        end)
+    end
+    upC()
+end
+rf()
+P.PlayerAdded:Connect(rf)
+P.PlayerRemoving:Connect(function()
+    task.wait(.1)
+    rf()
+end)
 sel("Config")
-print("[LOST HUB] Carregado! Silent Aim + Botões funcionando.")
+print("[LOST HUB] Carregado! EMBEDS no Adm + Puxar TODOS os carros.")
