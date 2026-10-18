@@ -1,4 +1,4 @@
---// LOST HUB v3.1 - PUXAR TODOS OS CARROS
+--// LOST HUB v3.3 - EMBED NO ADM + PUXAR TUDO FÍSICO
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -282,7 +282,7 @@ b.TextColor3=Color3.fromRGB(200,210,230)b.TextSize=12
 b.Font=Enum.Font.GothamBold b.AutoButtonColor=false
 Instance.new("UICorner",b).CornerRadius=UDim.new(0,6)return b end
 local mB2=hB(-170,"−")local pB=hB(-138,"+")
-local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")--===== ADM + CARGOS + KEYS =====
+local hB2=hB(-80,"👁️")local cB2=hB(-44,"□")--===== ADM + CARGOS + KEYS + EMBEDS =====
 if AD then
 local cA=card("APROVAÇÕES",sec["Adm"],Color3.fromRGB(80,255,140))
 local iA=Instance.new("TextBox",cA)iA.Size=UDim2.new(1,0,0,34)
@@ -382,6 +382,64 @@ local k="LOST-HUB-"..math.random(100000,999999)
 KEYS_VALIDAS[k]=true salvarKeys() reg("🎲 Key: "..k)
 iK.Text=k end,true)
 end
+
+--===== EMBEDS DISCORD (MOVIDO PARA ADM) =====
+if AD then
+local cEmb=card("EMBEDS DISCORD",sec["Adm"],Color3.fromRGB(114,137,218))
+local embTitulo=Instance.new("TextBox",cEmb)
+embTitulo.Size=UDim2.new(1,0,0,32)
+embTitulo.BackgroundColor3=Color3.fromRGB(20,24,32)
+embTitulo.TextColor3=Color3.fromRGB(255,255,255)
+embTitulo.PlaceholderText="📌 Título do embed..."
+embTitulo.PlaceholderColor3=Color3.fromRGB(100,110,130)
+embTitulo.Text=""
+embTitulo.TextSize=11
+embTitulo.Font=Enum.Font.GothamBold
+embTitulo.ClearTextOnFocus=false
+Instance.new("UICorner",embTitulo).CornerRadius=UDim.new(0,6)
+local embDesc=Instance.new("TextBox",cEmb)
+embDesc.Size=UDim2.new(1,0,0,60)
+embDesc.BackgroundColor3=Color3.fromRGB(20,24,32)
+embDesc.TextColor3=Color3.fromRGB(255,255,255)
+embDesc.PlaceholderText="📝 Descrição do embed..."
+embDesc.PlaceholderColor3=Color3.fromRGB(100,110,130)
+embDesc.Text=""
+embDesc.TextSize=11
+embDesc.Font=Enum.Font.Gotham
+embDesc.ClearTextOnFocus=false
+embDesc.TextWrapped=true
+embDesc.MultiLine=true
+Instance.new("UICorner",embDesc).CornerRadius=UDim.new(0,6)
+local embImg=Instance.new("TextBox",cEmb)
+embImg.Size=UDim2.new(1,0,0,32)
+embImg.BackgroundColor3=Color3.fromRGB(20,24,32)
+embImg.TextColor3=Color3.fromRGB(255,255,255)
+embImg.PlaceholderText="🖼️ URL da imagem..."
+embImg.PlaceholderColor3=Color3.fromRGB(100,110,130)
+embImg.Text=""
+embImg.TextSize=11
+embImg.Font=Enum.Font.Gotham
+embImg.ClearTextOnFocus=false
+Instance.new("UICorner",embImg).CornerRadius=UDim.new(0,6)
+local embCores={{n="🔴 Vermelho",c=16711680},{n="🟢 Verde",c=65280},{n="🔵 Azul",c=3447003},{n="🟡 Amarelo",c=16776960},{n="🟣 Roxo",c=10181046},{n="🟠 Laranja",c=15105570},{n="⚪ Branco",c=16777215}}
+local embCorIdx=3
+local embCorBtn=bt(cEmb,"🎨 Cor: 🔵 Azul",function()
+    embCorIdx=embCorIdx%#embCores+1
+    local cor=embCores[embCorIdx]
+    if embCorBtn then embCorBtn.Text="🎨 Cor: "..cor.n end
+    reg("Cor do embed: "..cor.n)
+end,true)
+bt(cEmb,"📤 ENVIAR EMBED",function()
+    local tit=embTitulo.Text
+    local desc=embDesc.Text
+    local img=embImg.Text
+    if tit==""then tit="📢 AVISO LOST HUB" end
+    if desc==""then desc="Nenhuma descrição." end
+    local cor=embCores[embCorIdx].c
+    task.spawn(function()enviarEmbedCustom(tit,desc,cor,img)end)
+end)
+end
+
 --===== ESP =====
 local cE=card("ESP",sec["ESP"],Color3.fromRGB(120,255,180))
 local eF=Instance.new("Folder",gui)eF.Name="LHEsp"
@@ -590,7 +648,6 @@ local teamCheck=false
 local wallCheck=true
 local aimMouseAtivo=false
 local silentAtivo=false
-
 local function temParede(alvo)
     if not wallCheck then return false end
     local minhaChar=LP.Character
@@ -625,7 +682,6 @@ local function isTeamMate(alvo)
     if meuTime and timeAlvo and meuTime==timeAlvo then return true end
     return false
 end
-
 if hookmetamethod and getnamecallmethod then
     local oldNamecall
     oldNamecall=hookmetamethod(game,"__namecall",function(self,...)
@@ -666,7 +722,6 @@ if hookmetamethod and getnamecallmethod then
         return oldNamecall(self,...)
     end)
 end
-
 btT(cCb,"🎯 Aimbot Toggle",function(v)
     aimAtivo=v
     if v then
@@ -709,12 +764,10 @@ btT(cCb,"🎯 Aimbot Toggle",function(v)
         reg("Aimbot OFF")
     end
 end,Color3.fromRGB(90,30,30))
-
 btT(cCb,"🎯 Silent Aim (Faca)",function(v)
     silentAtivo=v
     reg("Silent Aim "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(90,30,30))
-
 bt(cCb,"👁️ Mirar Alvo",function()
     if not S.sel or not S.sel.Character then reg("Sem alvo")return end
     if isTeamMate(S.sel)then reg("❌ É do seu time!")return end
@@ -732,7 +785,6 @@ bt(cCb,"👁️ Mirar Alvo",function()
         end
     end)
 end,true)
-
 bt(cCb,"🔫 Atirar no Alvo",function()
     if not S.sel then return end
     pcall(function()
@@ -742,41 +794,34 @@ bt(cCb,"🔫 Atirar no Alvo",function()
     end)
     reg("Atirou: "..S.sel.Name)
 end,true)
-
 bt(cCb,"📏 FOV: 150",function()
     aimFov=aimFov+100
     if aimFov>500 then aimFov=100 end
     reg("FOV: "..aimFov)
 end)
-
 bt(cCb,"🎯 Parte: Head",function()
     if aimPart=="Head"then aimPart="HumanoidRootPart"
     elseif aimPart=="HumanoidRootPart"then aimPart="UpperTorso"
     else aimPart="Head"end
     reg("Parte: "..aimPart)
 end)
-
 bt(cCb,"⚡ Suavidade: 1x",function()
     aimSuave=aimSuave+1
     if aimSuave>10 then aimSuave=1 end
     reg("Suavidade: "..aimSuave.."x")
 end)
-
 btT(cCb,"👥 Team Check",function(v)
     teamCheck=v
     reg("Team Check "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(60,60,90))
-
 btT(cCb,"🧱 Wall Check",function(v)
     wallCheck=v
     reg("Wall Check "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(70,50,90))
-
 btT(cCb,"🖱️ Aim no Mouse",function(v)
     aimMouseAtivo=v
     reg("AimMouse "..(v and"ON"or"OFF"))
 end,Color3.fromRGB(90,30,30))
-
 R.RenderStepped:Connect(function()
     if not aimMouseAtivo then return end
     pcall(function()
@@ -790,7 +835,6 @@ R.RenderStepped:Connect(function()
         end
     end)
 end)
-
 --===== TELECINESE =====
 local cT=card("TELECINESE",sec["Tele"],Color3.fromRGB(180,150,255))
 local function acC()
@@ -923,7 +967,6 @@ bt(cT,"🔓 Soltar Tudo",function()
     end
     reg("Soltar Tudo")
 end)
-
 --===== TROLL =====
 local cTr=card("TROLL",sec["Troll"],Color3.fromRGB(255,150,200))
 local flingAtivo=false
@@ -1023,12 +1066,13 @@ bt(cTr,"🔥 Matar Alvo",function()
     local hum=S.sel.Character:FindFirstChildOfClass("Humanoid")
     if hum then hum.Health=0 reg("Matou: "..S.sel.Name)end
 end,true)
-bt(cTr,"🚛 Puxar TODOS os Carros",function()
+-- PUXAR TUDO (FÍSICO)
+bt(cTr,"🌪️ Puxar TUDO (Físico)",function()
     if not LP.Character then return end
     local myHrp = LP.Character:FindFirstChild("HumanoidRootPart")
     if not myHrp then return end
-    local count = 0
-    local carrosEncontrados = {}
+    local objetos = {}
+    local maxObjetos = 80
     for _, obj in ipairs(workspace:GetChildren()) do
         if obj:IsA("Model") then
             local isVehicle = false
@@ -1037,22 +1081,60 @@ bt(cTr,"🚛 Puxar TODOS os Carros",function()
             end
             if isVehicle then
                 local primary = obj.PrimaryPart or obj:FindFirstChildWhichIsA("BasePart")
-                if primary then table.insert(carrosEncontrados, obj) count = count + 1 end
+                if primary then table.insert(objetos, primary) end
             end
         end
     end
-    if count == 0 then reg("❌ Nenhum carro encontrado.") return end
-    reg("🚛 Puxando " .. count .. " carros...")
-    for i, carro in ipairs(carrosEncontrados) do
-        pcall(function()
-            local novaPosicao = myHrp.CFrame * CFrame.new(math.random(-15,15), 5, math.random(-15,-5))
-            carro:PivotTo(novaPosicao)
-        end)
-        if i % 5 == 0 then task.wait(0.1) end
+    for _, obj in ipairs(workspace:GetDescendants()) do
+        if #objetos >= maxObjetos then break end
+        if obj:IsA("BasePart") and not obj.Anchored and not obj:IsDescendantOf(LP.Character) then
+            local isPlayerPart = false
+            for _, p in ipairs(P:GetPlayers()) do
+                if p ~= LP and p.Character and obj:IsDescendantOf(p.Character) then
+                    isPlayerPart = true
+                    break
+                end
+            end
+            if not isPlayerPart and obj.Size.Magnitude > 2 then
+                table.insert(objetos, obj)
+            end
+        end
     end
-    reg("✅ Puxou " .. count .. " carros!")
-end,true)
-
+    if #objetos == 0 then reg("❌ Nenhum carro ou bloco solto encontrado.") return end
+    reg("🌪️ Puxando " .. #objetos .. " objetos (Físico)...")
+    task.spawn(function()
+        local bodyVelocities = {}
+        for _, obj in ipairs(objetos) do
+            pcall(function()
+                obj:SetNetworkOwner(LP)
+                local bv = Instance.new("BodyVelocity", obj)
+                bv.Name = "LH_SuperPull"
+                bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                bv.Velocity = Vector3.zero
+                table.insert(bodyVelocities, {obj = obj, bv = bv})
+            end)
+        end
+        local inicio = tick()
+        while tick() - inicio < 4 do
+            if not LP.Character then break end
+            local hrpAtual = LP.Character:FindFirstChild("HumanoidRootPart")
+            if not hrpAtual then break end
+            local alvoPos = hrpAtual.Position + hrpAtual.CFrame.LookVector * 5 + Vector3.new(0, 3, 0)
+            for _, item in ipairs(bodyVelocities) do
+                if item.obj and item.obj.Parent and item.bv and item.bv.Parent then
+                    local dist = (alvoPos - item.obj.Position).Magnitude
+                    if dist < 10 then item.bv.Velocity = Vector3.zero
+                    else item.bv.Velocity = (alvoPos - item.obj.Position).Unit * math.min(300, dist * 6) end
+                end
+            end
+            task.wait(0.05)
+        end
+        for _, item in ipairs(bodyVelocities) do
+            if item.bv and item.bv.Parent then item.bv:Destroy() end
+        end
+        reg("✅ Puxada finalizada.")
+    end)
+end, true)
 --===== PERSONALIZAÇÃO =====
 local cPer=card("🎨 PAINEL",sec["Personalizacao"],Color3.fromRGB(200,180,255))
 local temaIdx=1
@@ -1118,7 +1200,6 @@ bt(cPer,"🔄 Resetar Tema",function()
     end
     reg("Tema resetado")
 end)
-
 --===== ANTI-LAG + INTERFACE =====
 local cL=card("ANTI-LAG",sec["Config"],Color3.fromRGB(120,255,120))
 local aA=false
@@ -1137,7 +1218,6 @@ btT(cL,"⚡ Anti-Lag",function(v)
         end)
     else reg("Anti-Lag OFF") end
 end,Color3.fromRGB(40,80,40))
-
 local cI2=card("INTERFACE",sec["Config"],Color3.fromRGB(150,200,255))
 bt(cI2,"📊 FPS",function()fL.Visible=not fL.Visible reg("FPS "..(fL.Visible and"ON"or"OFF"))end)
 local tms={{n="Pequeno",w=500,h=320},{n="Médio",w=700,h=440},{n="Grande",w=1000,h=600}}
@@ -1204,64 +1284,6 @@ bt(cI2,"🌐 Server Hop",function()
         end
     end)
 end)
-
---===== EMBEDS (MOVIDO PARA O ADM) =====
-if AD then
-local cEmb=card("EMBEDS DISCORD",sec["Adm"],Color3.fromRGB(114,137,218))
-local embTitulo=Instance.new("TextBox",cEmb)
-embTitulo.Size=UDim2.new(1,0,0,32)
-embTitulo.BackgroundColor3=Color3.fromRGB(20,24,32)
-embTitulo.TextColor3=Color3.fromRGB(255,255,255)
-embTitulo.PlaceholderText="📌 Título do embed..."
-embTitulo.PlaceholderColor3=Color3.fromRGB(100,110,130)
-embTitulo.Text=""
-embTitulo.TextSize=11
-embTitulo.Font=Enum.Font.GothamBold
-embTitulo.ClearTextOnFocus=false
-Instance.new("UICorner",embTitulo).CornerRadius=UDim.new(0,6)
-local embDesc=Instance.new("TextBox",cEmb)
-embDesc.Size=UDim2.new(1,0,0,60)
-embDesc.BackgroundColor3=Color3.fromRGB(20,24,32)
-embDesc.TextColor3=Color3.fromRGB(255,255,255)
-embDesc.PlaceholderText="📝 Descrição do embed..."
-embDesc.PlaceholderColor3=Color3.fromRGB(100,110,130)
-embDesc.Text=""
-embDesc.TextSize=11
-embDesc.Font=Enum.Font.Gotham
-embDesc.ClearTextOnFocus=false
-embDesc.TextWrapped=true
-embDesc.MultiLine=true
-Instance.new("UICorner",embDesc).CornerRadius=UDim.new(0,6)
-local embImg=Instance.new("TextBox",cEmb)
-embImg.Size=UDim2.new(1,0,0,32)
-embImg.BackgroundColor3=Color3.fromRGB(20,24,32)
-embImg.TextColor3=Color3.fromRGB(255,255,255)
-embImg.PlaceholderText="🖼️ URL da imagem..."
-embImg.PlaceholderColor3=Color3.fromRGB(100,110,130)
-embImg.Text=""
-embImg.TextSize=11
-embImg.Font=Enum.Font.Gotham
-embImg.ClearTextOnFocus=false
-Instance.new("UICorner",embImg).CornerRadius=UDim.new(0,6)
-local embCores={{n="🔴 Vermelho",c=16711680},{n="🟢 Verde",c=65280},{n="🔵 Azul",c=3447003},{n="🟡 Amarelo",c=16776960},{n="🟣 Roxo",c=10181046},{n="🟠 Laranja",c=15105570},{n="⚪ Branco",c=16777215}}
-local embCorIdx=3
-local embCorBtn=bt(cEmb,"🎨 Cor: 🔵 Azul",function()
-    embCorIdx=embCorIdx%#embCores+1
-    local cor=embCores[embCorIdx]
-    if embCorBtn then embCorBtn.Text="🎨 Cor: "..cor.n end
-    reg("Cor do embed: "..cor.n)
-end,true)
-bt(cEmb,"📤 ENVIAR EMBED",function()
-    local tit=embTitulo.Text
-    local desc=embDesc.Text
-    local img=embImg.Text
-    if tit==""then tit="📢 AVISO LOST HUB" end
-    if desc==""then desc="Nenhuma descrição." end
-    local cor=embCores[embCorIdx].c
-    task.spawn(function()enviarEmbedCustom(tit,desc,cor,img)end)
-end)
-end
-
 --===== CRÉDITO =====
 local cc=Instance.new("Frame",sec["Config"])
 cc.Size=UDim2.new(1,0,0,60)
@@ -1288,7 +1310,6 @@ bt(cI2,"🗑️ Fechar",function()
     task.wait(.1)
     gui:Destroy()
 end)
-
 --===== LOG =====
 if AD then
 local c5=card("REGISTRO",sec["Log"],Color3.fromRGB(88,140,255))
@@ -1372,7 +1393,6 @@ bt(c5,"🗑️ Limpar",function()
     upL()
 end)
 end
-
 --===== DRAG + BOTÕES DA JANELA =====
 local dragging,dragInput,dragStart,startPos
 local function updateDrag(input)
@@ -1427,7 +1447,6 @@ pB.MouseButton1Click:Connect(function()
     T:Create(w,TweenInfo.new(.2),{Size=UDim2.new(0,novoTam,0,w.Size.Y.Offset*proporcao)}):Play()
     reg("Tamanho: "..novoTam)
 end)
-
 --===== REFRESH =====
 local function rf()
     for _,c in ipairs(pl:GetChildren())do
@@ -1459,4 +1478,4 @@ P.PlayerRemoving:Connect(function()
     rf()
 end)
 sel("Config")
-print("[LOST HUB] Carregado! EMBEDS no Adm + Puxar TODOS os carros.")
+print("[LOST HUB] Carregado! EMBEDS no Adm + Puxar TUDO Físico.")
