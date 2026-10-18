@@ -1,4 +1,4 @@
---// LOST HUB v3.3 - EMBED NO ADM + PUXAR TUDO FÍSICO
+--// LOST HUB v3.3 - EMBED NO ADM + PUXAR TUDO FÍSICO (OTIMIZADO)
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -1066,44 +1066,73 @@ bt(cTr,"🔥 Matar Alvo",function()
     local hum=S.sel.Character:FindFirstChildOfClass("Humanoid")
     if hum then hum.Health=0 reg("Matou: "..S.sel.Name)end
 end,true)
--- PUXAR TUDO (FÍSICO)
+
+-- PUXAR TUDO (FÍSICO) - OTIMIZADO
 bt(cTr,"🌪️ Puxar TUDO (Físico)",function()
     if not LP.Character then return end
     local myHrp = LP.Character:FindFirstChild("HumanoidRootPart")
     if not myHrp then return end
+    
     local objetos = {}
     local maxObjetos = 80
+    
+    -- Função para verificar se a peça é de um jogador
+    local function isPlayerPart(part)
+        for _, p in ipairs(P:GetPlayers()) do
+            if p ~= LP and p.Character and part:IsDescendantOf(p.Character) then
+                return true
+            end
+        end
+        return false
+    end
+
+    -- 1. Procurar Veículos (Garante pegar o modelo inteiro)
     for _, obj in ipairs(workspace:GetChildren()) do
+        if #objetos >= maxObjetos then break end
         if obj:IsA("Model") then
             local isVehicle = false
             for _, child in ipairs(obj:GetChildren()) do
-                if child:IsA("VehicleSeat") or child:IsA("Seat") then isVehicle = true break end
+                if child:IsA("VehicleSeat") or child:IsA("Seat") then 
+                    isVehicle = true 
+                    break 
+                end
             end
             if isVehicle then
-                local primary = obj.PrimaryPart or obj:FindFirstChildWhichIsA("BasePart")
-                if primary then table.insert(objetos, primary) end
+                -- Pega todas as partes do carro para não despedaçar
+                for _, part in ipairs(obj:GetDescendants()) do
+                    if part:IsA("BasePart") and not part.Anchored then
+                        table.insert(objetos, part)
+                        if #objetos >= maxObjetos then break end
+                    end
+                end
             end
         end
     end
+
+    -- 2. Procurar blocos soltos
     for _, obj in ipairs(workspace:GetDescendants()) do
         if #objetos >= maxObjetos then break end
-        if obj:IsA("BasePart") and not obj.Anchored and not obj:IsDescendantOf(LP.Character) then
-            local isPlayerPart = false
-            for _, p in ipairs(P:GetPlayers()) do
-                if p ~= LP and p.Character and obj:IsDescendantOf(p.Character) then
-                    isPlayerPart = true
-                    break
-                end
-            end
-            if not isPlayerPart and obj.Size.Magnitude > 2 then
+        if obj:IsA("BasePart") and not obj.Anchored and not isPlayerPart(obj) then
+            -- Filtro de volume melhorado (X * Y * Z)
+            local volume = obj.Size.X * obj.Size.Y * obj.Size.Z
+            if volume > 1 then 
                 table.insert(objetos, obj)
             end
         end
     end
-    if #objetos == 0 then reg("❌ Nenhum carro ou bloco solto encontrado.") return end
-    reg("🌪️ Puxando " .. #objetos .. " objetos (Físico)...")
+    
+    if #objetos == 0 then 
+        reg("❌ Nenhum objeto válido encontrado.") 
+        return 
+    end
+    
+    reg("🌪️ Puxando " .. #objetos .. " objetos...")
+    
     task.spawn(function()
         local bodyVelocities = {}
+        local connection
+        
+        -- Aplica a física
         for _, obj in ipairs(objetos) do
             pcall(function()
                 obj:SetNetworkOwner(LP)
@@ -1111,30 +1140,50 @@ bt(cTr,"🌪️ Puxar TUDO (Físico)",function()
                 bv.Name = "LH_SuperPull"
                 bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
                 bv.Velocity = Vector3.zero
+                bv.P = 1250 -- Deixa a puxada mais responsiva
                 table.insert(bodyVelocities, {obj = obj, bv = bv})
             end)
         end
+        
+        -- Loop de puxada
         local inicio = tick()
-        while tick() - inicio < 4 do
-            if not LP.Character then break end
-            local hrpAtual = LP.Character:FindFirstChild("HumanoidRootPart")
-            if not hrpAtual then break end
+        local acabou = false
+        
+        connection = R.Heartbeat:Connect(function()
+            -- Para se passar de 4 segundos, se morrer, ou se desativar
+            if tick() - inicio > 4 or not LP.Character or not LP.Character:FindFirstChild("HumanoidRootPart") then
+                acabou = true
+                connection:Disconnect()
+                return
+            end
+            
+            local hrpAtual = LP.Character.HumanoidRootPart
             local alvoPos = hrpAtual.Position + hrpAtual.CFrame.LookVector * 5 + Vector3.new(0, 3, 0)
+            
             for _, item in ipairs(bodyVelocities) do
                 if item.obj and item.obj.Parent and item.bv and item.bv.Parent then
                     local dist = (alvoPos - item.obj.Position).Magnitude
-                    if dist < 10 then item.bv.Velocity = Vector3.zero
-                    else item.bv.Velocity = (alvoPos - item.obj.Position).Unit * math.min(300, dist * 6) end
+                    if dist < 8 then 
+                        item.bv.Velocity = Vector3.zero
+                    else 
+                        item.bv.Velocity = (alvoPos - item.obj.Position).Unit * math.min(250, dist * 5) 
+                    end
                 end
             end
-            task.wait(0.05)
-        end
+        end)
+        
+        -- Limpeza depois de 4 segundos
+        task.wait(4)
+        if connection then connection:Disconnect() end
         for _, item in ipairs(bodyVelocities) do
-            if item.bv and item.bv.Parent then item.bv:Destroy() end
+            if item.bv and item.bv.Parent then 
+                item.bv:Destroy() 
+            end
         end
         reg("✅ Puxada finalizada.")
     end)
 end, true)
+
 --===== PERSONALIZAÇÃO =====
 local cPer=card("🎨 PAINEL",sec["Personalizacao"],Color3.fromRGB(200,180,255))
 local temaIdx=1
@@ -1478,4 +1527,4 @@ P.PlayerRemoving:Connect(function()
     rf()
 end)
 sel("Config")
-print("[LOST HUB] Carregado! EMBEDS no Adm + Puxar TUDO Físico.")
+print("[LOST HUB] Carregado! EMBEDS no Adm + Puxar TUDO Físico Otimizado.")
