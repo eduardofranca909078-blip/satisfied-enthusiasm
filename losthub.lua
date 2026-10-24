@@ -1,4 +1,4 @@
---// LOST HUB v3.5 - INTRO + KEY + VIP + PUXAR TUDO + LAG SYSTEM
+--// LOST HUB v3.6 - INTRO + KEY + VIP + PUXAR TUDO + LAG SYSTEM + IY FLING
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
@@ -1379,6 +1379,74 @@ bt(cTr,"🛑 Parar Lag / Limpar",function()
     reg("✅ Limpeza concluída.")
 end, true)
 
+-- ==========================================
+-- 🌀 IY FLING (GIRAR E ARREMESSAR)
+-- ==========================================
+local iyFlingAtivo = false
+local iyFlingConnection = nil
+
+btT(cTr,"🌀 Fling IY (Girar e Arremessar)",function(v)
+    iyFlingAtivo = v
+    if v then
+        reg("🌀 IY Fling ATIVADO! Encoste em alguém.")
+        
+        if not LP.Character then return end
+        local hrp = LP.Character:FindFirstChild("HumanoidRootPart")
+        if not hrp then return end
+
+        local spin = Instance.new("BodyAngularVelocity", hrp)
+        spin.Name = "LH_IYSpin"
+        spin.AngularVelocity = Vector3.new(0, 1000, 0) 
+        spin.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+        
+        iyFlingConnection = R.Heartbeat:Connect(function()
+            if not iyFlingAtivo or not LP.Character then return end
+            
+            local meuHrp = LP.Character:FindFirstChild("HumanoidRootPart")
+            if not meuHrp then return end
+            
+            for _, p in ipairs(P:GetPlayers()) do
+                if p ~= LP and p.Character then
+                    local alvoHrp = p.Character:FindFirstChild("HumanoidRootPart")
+                    
+                    if alvoHrp then
+                        local dist = (meuHrp.Position - alvoHrp.Position).Magnitude
+                        if dist < 8 then
+                            pcall(function()
+                                alvoHrp:SetNetworkOwner(LP)
+                                
+                                local bv = Instance.new("BodyVelocity", alvoHrp)
+                                bv.Name = "LH_IYFling"
+                                bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                                bv.Velocity = Vector3.new(math.random(-50000, 50000), 50000, math.random(-50000, 50000))
+                                
+                                task.delay(0.5, function()
+                                    if bv then bv:Destroy() end
+                                end)
+                            end)
+                        end
+                    end
+                end
+            end
+        end)
+        
+    else
+        reg("🛑 IY Fling DESATIVADO.")
+        if iyFlingConnection then
+            iyFlingConnection:Disconnect()
+            iyFlingConnection = nil
+        end
+        
+        if LP.Character then
+            local hrp = LP.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                local spin = hrp:FindFirstChild("LH_IYSpin")
+                if spin then spin:Destroy() end
+            end
+        end
+    end
+end,Color3.fromRGB(100,50,120))
+
 --===== PERSONALIZAÇÃO =====
 local cPer=card("🎨 PAINEL",sec["Personalizacao"],Color3.fromRGB(200,180,255))
 local temaIdx=1
@@ -1722,4 +1790,4 @@ P.PlayerRemoving:Connect(function()
     rf()
 end)
 sel("Config")
-print("[LOST HUB] Carregado! LAG SYSTEM + PUXAR TUDO + VIP BYPASS.")
+print("[LOST HUB] Carregado! IY FLING + LAG SYSTEM + PUXAR TUDO + VIP BYPASS.")
