@@ -1,15 +1,155 @@
---// LOST HUB v3.3 - EMBED NO ADM + PUXAR TUDO FÍSICO (OTIMIZADO)
+--// LOST HUB v3.5 - INTRO + KEY + VIP + PUXAR TUDO + LAG SYSTEM
 local P=game:GetService("Players")local U=game:GetService("UserInputService")
 local R=game:GetService("RunService")local T=game:GetService("TweenService")
 local LP=P.LocalPlayer local C=workspace.CurrentCamera
 local S={sel=nil}local lg={}
 local LOGFILE="losthub_logs.txt"
 local KEYFILE="losthub_keys.txt"
+
+-- ==========================================
+-- ⚠️ COLOQUE O LINK DO SEU SITE AQUI ABAIXO ⚠️
+local URL_SITE = "COLOQUE_O_LINK_DO_SEU_SITE_AQUI" 
+-- ==========================================
+
 local KEYS_VALIDAS={["LOST-HUB-2026"]=true,["LOST-HUB-VIP"]=true,["LOST-HUB-PRO"]=true,["eduardo92301"]=true}
 pcall(function()local d=readfile(KEYFILE)if d and d~=""then for l in d:gmatch("[^\n]+")do KEYS_VALIDAS[l]=true end end end)
+
+local OID=4197733654
+local WL={"eduardo92301"}
+local ADM={[OID]="PROPRIETÁRIO"}
+local CG=ADM[LP.UserId]or"JOGADOR"
+local AD=CG=="PROPRIETÁRIO"or CG=="ADMIN"
+
+-- Verifica se o jogador é VIP+ para pular a intro
+local isVipOuSuperior = (LP.UserId == OID) -- Dono sempre passa
+if getgenv().LH_CARGOS and getgenv().LH_CARGOS[LP.Name] then
+    local cg = getgenv().LH_CARGOS[LP.Name]
+    if cg == "VIP" or cg == "MOD" or cg == "ADMIN" or cg == "PROPRIETÁRIO" then
+        isVipOuSuperior = true
+    end
+end
+for _,n in ipairs(WL)do if LP.Name:lower()==n:lower() then isVipOuSuperior=true end end
+
+--===== SISTEMA DE INTRO E KEY =====
+local function IniciarIntro()
+    local introGui = Instance.new("ScreenGui")
+    introGui.Name = "LostHub_Intro"
+    introGui.ResetOnSpawn = false
+    introGui.IgnoreGuiInset = true
+    introGui.DisplayOrder = 999999
+    introGui.Parent = game:GetService("CoreGui")
+
+    local frame = Instance.new("Frame", introGui)
+    frame.Size = UDim2.new(0, 320, 0, 260)
+    frame.Position = UDim2.new(0.5, -160, 0.5, -130)
+    frame.BackgroundColor3 = Color3.fromRGB(12, 14, 20)
+    frame.BorderSizePixel = 0
+    Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 12)
+    local stroke = Instance.new("UIStroke", frame)
+    stroke.Color = Color3.fromRGB(88, 140, 255)
+    stroke.Thickness = 2
+
+    local title = Instance.new("TextLabel", frame)
+    title.Size = UDim2.new(1, 0, 0, 40)
+    title.Position = UDim2.new(0, 0, 0, 15)
+    title.BackgroundTransparency = 1
+    title.Text = "LOST HUB"
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextSize = 24
+    title.Font = Enum.Font.GothamBold
+
+    local subtitle = Instance.new("TextLabel", frame)
+    subtitle.Size = UDim2.new(1, 0, 0, 20)
+    subtitle.Position = UDim2.new(0, 0, 0, 55)
+    subtitle.BackgroundTransparency = 1
+    subtitle.Text = "Verificação de Segurança"
+    subtitle.TextColor3 = Color3.fromRGB(150, 160, 180)
+    subtitle.TextSize = 12
+    subtitle.Font = Enum.Font.Gotham
+
+    local keyBox = Instance.new("TextBox", frame)
+    keyBox.Size = UDim2.new(1, -40, 0, 40)
+    keyBox.Position = UDim2.new(0, 20, 0, 90)
+    keyBox.BackgroundColor3 = Color3.fromRGB(20, 24, 32)
+    keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+    keyBox.PlaceholderText = "Cole sua Key aqui..."
+    keyBox.PlaceholderColor3 = Color3.fromRGB(100, 110, 130)
+    keyBox.TextSize = 14
+    keyBox.Font = Enum.Font.Gotham
+    Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 8)
+
+    local btnVerificar = Instance.new("TextButton", frame)
+    btnVerificar.Size = UDim2.new(0.5, -30, 0, 35)
+    btnVerificar.Position = UDim2.new(0, 20, 0, 145)
+    btnVerificar.BackgroundColor3 = Color3.fromRGB(88, 140, 255)
+    btnVerificar.Text = "✅ Verificar"
+    btnVerificar.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btnVerificar.Font = Enum.Font.GothamBold
+    btnVerificar.TextSize = 13
+    Instance.new("UICorner", btnVerificar).CornerRadius = UDim.new(0, 6)
+
+    local btnSite = Instance.new("TextButton", frame)
+    btnSite.Size = UDim2.new(0.5, -30, 0, 35)
+    btnSite.Position = UDim2.new(0.5, 10, 0, 145)
+    btnSite.BackgroundColor3 = Color3.fromRGB(30, 35, 45)
+    btnSite.Text = "🔗 Obter Key"
+    btnSite.TextColor3 = Color3.fromRGB(180, 190, 210)
+    btnSite.Font = Enum.Font.GothamBold
+    btnSite.TextSize = 13
+    Instance.new("UICorner", btnSite).CornerRadius = UDim.new(0, 6)
+
+    local statusLabel = Instance.new("TextLabel", frame)
+    statusLabel.Size = UDim2.new(1, 0, 0, 20)
+    statusLabel.Position = UDim2.new(0, 0, 0, 210)
+    statusLabel.BackgroundTransparency = 1
+    statusLabel.Text = ""
+    statusLabel.TextColor3 = Color3.fromRGB(255, 80, 80)
+    statusLabel.TextSize = 11
+    statusLabel.Font = Enum.Font.Gotham
+
+    local function ValidarKey()
+        local keyDigitada = keyBox.Text:gsub("%s+", "")
+        if KEYS_VALIDAS[keyDigitada] then
+            statusLabel.TextColor3 = Color3.fromRGB(80, 255, 140)
+            statusLabel.Text = "Key Válida! Abrindo painel..."
+            task.wait(1)
+            introGui:Destroy()
+        else
+            statusLabel.Text = "❌ Key inválida ou expirada!"
+            keyBox.Text = ""
+            task.wait(2)
+            statusLabel.Text = ""
+        end
+    end
+
+    btnVerificar.MouseButton1Click:Connect(ValidarKey)
+    
+    btnSite.MouseButton1Click:Connect(function()
+        pcall(function() 
+            game:GetService("GuiService"):OpenBrowserWindow(URL_SITE) 
+        end)
+    end)
+
+    if isVipOuSuperior then
+        title.Text = "BEM-VINDO VIP"
+        subtitle.Text = "Acesso liberado automaticamente..."
+        keyBox.Visible = false
+        btnVerificar.Visible = false
+        btnSite.Visible = false
+        task.wait(1.5)
+        introGui:Destroy()
+    else
+        repeat task.wait() until not introGui.Parent
+    end
+end
+
+IniciarIntro() -- Executa a intro antes de carregar o resto
+
+--===== INÍCIO DO PAINEL =====
 local WEBHOOK="https://discord.com/api/webhooks/1559481604387246170/aAs30L9QQbfX0ZWA92jKpD6PZ_F5IOZT1424WNqaHluyZ-QuNGbbO36pVf-Fe3Ti9Fe4"
 local WEBHOOK_TERMO="https://discord.com/api/webhooks/1559505901507973197/ySCrPBvol1fS3HSf2TNoxLczboSG0PzT1GuW_ZYDs2rBPoMDMMSrfq2Boh5WBlZNkY8X"
 local WEBHOOK_HUB="https://discord.com/api/webhooks/1559521915377553489/hyrbUV39Fey47KJBDDXcTOFFJA78sQaRltvWEv0vYRkXwj1_ZHfOT0DUCuJohf30kGbV"
+
 local function enviarTermo(nick,id)if WEBHOOK_TERMO==""then return end
 local e={title="📋 TERMO DE USO",description="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n⚠️ LEIA COM ATENÇÃO\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n👤 "..nick.."\n🆔 "..id.."\n📅 "..os.date("%d/%m/%Y às %H:%M:%S"),color=16711680,footer={text="LOST HUB"},timestamp=os.date("!%Y-%m-%dT%H:%M:%SZ")}
 pcall(function()game:GetService("HttpService"):RequestAsync({Url=WEBHOOK_TERMO,Method="POST",Headers={["Content-Type"]="application/json"},Body=game:GetService("HttpService"):JSONEncode({username="LOST HUB",embeds={e}})})end)end
@@ -29,11 +169,7 @@ table.insert(lg,{h=h,j=LP.Name,a=a})
 pcall(function()appendfile(LOGFILE,h.."|"..LP.Name.."|"..a.."\n")end)
 table.insert(filaDiscord,"["..h.."] "..LP.Name.." → "..a)processarFila()end
 pcall(function()local d=readfile(LOGFILE)if d and d~=""then for l in d:gmatch("[^\n]+")do local h,j,a=l:match("^(.-)|(.-)|(.*)$")if h and j and a then table.insert(lg,{h=h,j=j,a=a})end end end end)
-local OID=4197733654
-local WL={"eduardo92301"}
-local ADM={[OID]="PROPRIETÁRIO"}
-local CG=ADM[LP.UserId]or"JOGADOR"
-local AD=CG=="PROPRIETÁRIO"or CG=="ADMIN"
+
 getgenv().LH_AP={}
 getgenv().LH_CARGOS={}
 getgenv().LH_CARGOS[tostring(OID)]="PROPRIETÁRIO"
@@ -1076,7 +1212,6 @@ bt(cTr,"🌪️ Puxar TUDO (Físico)",function()
     local objetos = {}
     local maxObjetos = 80
     
-    -- Função para verificar se a peça é de um jogador
     local function isPlayerPart(part)
         for _, p in ipairs(P:GetPlayers()) do
             if p ~= LP and p.Character and part:IsDescendantOf(p.Character) then
@@ -1086,19 +1221,14 @@ bt(cTr,"🌪️ Puxar TUDO (Físico)",function()
         return false
     end
 
-    -- 1. Procurar Veículos (Garante pegar o modelo inteiro)
     for _, obj in ipairs(workspace:GetChildren()) do
         if #objetos >= maxObjetos then break end
         if obj:IsA("Model") then
             local isVehicle = false
             for _, child in ipairs(obj:GetChildren()) do
-                if child:IsA("VehicleSeat") or child:IsA("Seat") then 
-                    isVehicle = true 
-                    break 
-                end
+                if child:IsA("VehicleSeat") or child:IsA("Seat") then isVehicle = true break end
             end
             if isVehicle then
-                -- Pega todas as partes do carro para não despedaçar
                 for _, part in ipairs(obj:GetDescendants()) do
                     if part:IsA("BasePart") and not part.Anchored then
                         table.insert(objetos, part)
@@ -1109,30 +1239,20 @@ bt(cTr,"🌪️ Puxar TUDO (Físico)",function()
         end
     end
 
-    -- 2. Procurar blocos soltos
     for _, obj in ipairs(workspace:GetDescendants()) do
         if #objetos >= maxObjetos then break end
         if obj:IsA("BasePart") and not obj.Anchored and not isPlayerPart(obj) then
-            -- Filtro de volume melhorado (X * Y * Z)
             local volume = obj.Size.X * obj.Size.Y * obj.Size.Z
-            if volume > 1 then 
-                table.insert(objetos, obj)
-            end
+            if volume > 1 then table.insert(objetos, obj) end
         end
     end
     
-    if #objetos == 0 then 
-        reg("❌ Nenhum objeto válido encontrado.") 
-        return 
-    end
-    
+    if #objetos == 0 then reg("❌ Nenhum objeto válido encontrado.") return end
     reg("🌪️ Puxando " .. #objetos .. " objetos...")
     
     task.spawn(function()
         local bodyVelocities = {}
         local connection
-        
-        -- Aplica a física
         for _, obj in ipairs(objetos) do
             pcall(function()
                 obj:SetNetworkOwner(LP)
@@ -1140,48 +1260,123 @@ bt(cTr,"🌪️ Puxar TUDO (Físico)",function()
                 bv.Name = "LH_SuperPull"
                 bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
                 bv.Velocity = Vector3.zero
-                bv.P = 1250 -- Deixa a puxada mais responsiva
+                bv.P = 1250
                 table.insert(bodyVelocities, {obj = obj, bv = bv})
             end)
         end
         
-        -- Loop de puxada
         local inicio = tick()
-        local acabou = false
-        
         connection = R.Heartbeat:Connect(function()
-            -- Para se passar de 4 segundos, se morrer, ou se desativar
             if tick() - inicio > 4 or not LP.Character or not LP.Character:FindFirstChild("HumanoidRootPart") then
-                acabou = true
                 connection:Disconnect()
                 return
             end
-            
             local hrpAtual = LP.Character.HumanoidRootPart
             local alvoPos = hrpAtual.Position + hrpAtual.CFrame.LookVector * 5 + Vector3.new(0, 3, 0)
-            
             for _, item in ipairs(bodyVelocities) do
                 if item.obj and item.obj.Parent and item.bv and item.bv.Parent then
                     local dist = (alvoPos - item.obj.Position).Magnitude
-                    if dist < 8 then 
-                        item.bv.Velocity = Vector3.zero
-                    else 
-                        item.bv.Velocity = (alvoPos - item.obj.Position).Unit * math.min(250, dist * 5) 
-                    end
+                    if dist < 8 then item.bv.Velocity = Vector3.zero
+                    else item.bv.Velocity = (alvoPos - item.obj.Position).Unit * math.min(250, dist * 5) end
                 end
             end
         end)
-        
-        -- Limpeza depois de 4 segundos
         task.wait(4)
         if connection then connection:Disconnect() end
         for _, item in ipairs(bodyVelocities) do
-            if item.bv and item.bv.Parent then 
-                item.bv:Destroy() 
-            end
+            if item.bv and item.bv.Parent then item.bv:Destroy() end
         end
         reg("✅ Puxada finalizada.")
     end)
+end, true)
+
+-- ==========================================
+-- 🌐 SISTEMA DE LAG (ALVO E SERVIDOR)
+-- ==========================================
+local lagAtivo = false
+local pastaDeLag = nil
+local pastaLagAlvo = nil
+
+bt(cTr,"🌐 Lag no Alvo (Selecionado)",function()
+    if not S.sel or not S.sel.Character then reg("❌ Selecione um jogador!") return end
+    local alvo = S.sel
+    local hrpAlvo = alvo.Character:FindFirstChild("HumanoidRootPart")
+    if not hrpAlvo then reg("❌ Alvo sem HRP") return end
+    
+    reg("🌐 Enviando Lag para: "..alvo.Name)
+    lagAtivo = true
+    
+    if not pastaLagAlvo then
+        pastaLagAlvo = Instance.new("Folder", workspace)
+        pastaLagAlvo.Name = "LH_TargetLag"
+    end
+    
+    task.spawn(function()
+        local total = 200
+        for i = 1, total do
+            if not lagAtivo or not alvo.Character then break end
+            local b = Instance.new("Part")
+            b.Size = Vector3.new(4, 4, 4)
+            b.Transparency = 1
+            b.CanCollide = false
+            b.Anchored = false
+            b.Position = hrpAlvo.Position + Vector3.new(math.random(-15,15), math.random(5,15), math.random(-15,15))
+            b.Parent = pastaLagAlvo
+            
+            pcall(function()
+                b:SetNetworkOwner(alvo)
+                local bv = Instance.new("BodyVelocity", b)
+                bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                bv.Velocity = Vector3.new(math.random(-1000,1000), math.random(-1000,1000), math.random(-1000,1000))
+            end)
+            task.wait(0.02)
+        end
+        reg("✅ Lag no alvo enviado!")
+    end)
+end, true)
+
+bt(cTr,"💀 Lag Server Inteiro",function()
+    reg("💀 Iniciando Lag no SERVIDOR...")
+    lagAtivo = true
+    
+    if pastaDeLag then pastaDeLag:Destroy() end
+    pastaDeLag = Instance.new("Folder", workspace)
+    pastaDeLag.Name = "LH_ServerLag"
+    
+    task.spawn(function()
+        local total = 500
+        for i = 1, total do
+            if not lagAtivo then break end
+            local b = Instance.new("Part")
+            b.Size = Vector3.new(10, 10, 10)
+            b.Transparency = 1
+            b.CanCollide = false
+            b.Anchored = false
+            b.Position = Vector3.new(math.random(-5000,5000), 5000, math.random(-5000,5000))
+            b.Parent = pastaDeLag
+            
+            pcall(function()
+                local players = P:GetPlayers()
+                local randomPlayer = players[math.random(1, #players)]
+                if randomPlayer and randomPlayer.Character then
+                    b:SetNetworkOwner(randomPlayer)
+                end
+                local bv = Instance.new("BodyVelocity", b)
+                bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                bv.Velocity = Vector3.new(math.random(-5000,5000), math.random(-5000,5000), math.random(-5000,5000))
+            end)
+            if i % 10 == 0 then task.wait(0.05) end 
+        end
+        reg("💀 Servidor lagado!")
+    end)
+end, true)
+
+bt(cTr,"🛑 Parar Lag / Limpar",function()
+    lagAtivo = false
+    reg("🛑 Limpando lag...")
+    if pastaLagAlvo then pastaLagAlvo:Destroy() pastaLagAlvo = nil end
+    if pastaDeLag then pastaDeLag:Destroy() pastaDeLag = nil end
+    reg("✅ Limpeza concluída.")
 end, true)
 
 --===== PERSONALIZAÇÃO =====
@@ -1527,4 +1722,4 @@ P.PlayerRemoving:Connect(function()
     rf()
 end)
 sel("Config")
-print("[LOST HUB] Carregado! EMBEDS no Adm + Puxar TUDO Físico Otimizado.")
+print("[LOST HUB] Carregado! LAG SYSTEM + PUXAR TUDO + VIP BYPASS.")
