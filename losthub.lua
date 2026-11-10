@@ -1,4 +1,4 @@
---// ZEDUX HUB FINAL - PARTE 1
+--// ZEDUX HUB FINAL CORRIGIDO - PARTE 1
 local P = game:GetService("Players")
 local U = game:GetService("UserInputService")
 local R = game:GetService("RunService")
@@ -361,21 +361,9 @@ local function IniciarIntro()
             statusLog.Text = ""
         end
     end)
-
-    if isVipOuSuperior then
-        statusLog.TextColor3 = Color3.fromRGB(0, 200, 100)
-        statusLog.Text = "Autenticado via VIP."
-        task.wait(1.5)
-        introGui:Destroy()
-        w.Visible = true
-    else
-        repeat task.wait() until not introGui.Parent
-    end
 end
 
-IniciarIntro()
-
-local filaDiscord = {}
+IniciarIntro()local filaDiscord = {}
 local enviandoFila = false
 local function processarFila()
     if enviandoFila then return end
@@ -453,6 +441,7 @@ w.BorderSizePixel = 0
 Instance.new("UICorner", w).CornerRadius = UDim.new(0, 10)
 w.Visible = false
 w.ClipsDescendants = true
+
 local starfield = Instance.new("Frame", w)
 starfield.Name = "Starfield"
 starfield.Size = UDim2.new(1, 0, 1, 0)
@@ -688,9 +677,7 @@ end
 
 task.spawn(function()
     pcall(function() ai.Image = "rbxthumb://type=AvatarHeadShot&id=" .. LP.UserId .. "&w=150&h=150" end)
-end)
-
-local tg = Instance.new("ScreenGui", game:GetService("CoreGui"))
+end)local tg = Instance.new("ScreenGui", game:GetService("CoreGui"))
 tg.Name = "ZeduxToast"
 tg.ResetOnSpawn = false
 tg.IgnoreGuiInset = true
