@@ -1,4 +1,4 @@
---// ZEDUX HUB v12.0 - FULL SCRIPT (FORMATADO E UNIFICADO)
+--// ZEDUX HUB v13.0 - PARTE 1 (VARS, LOADER E PAINEL)
 local P = game:GetService("Players")
 local U = game:GetService("UserInputService")
 local R = game:GetService("RunService")
@@ -73,9 +73,7 @@ local function ChecarTempoKey(key)
     local tempoAgora = os.time()
     local chaveSalva = ""
     
-    pcall(function() 
-        chaveSalva = readfile(TEMPOFILE) 
-    end)
+    pcall(function() chaveSalva = readfile(TEMPOFILE) end)
     
     if chaveSalva ~= "" then
         local dados = string.split(chaveSalva, "|")
@@ -88,26 +86,18 @@ local function ChecarTempoKey(key)
     end
     
     local segundos = 0
-    if string.find(key, "ZEDUX-DIA-") then
-        segundos = 86400
-    elseif string.find(key, "ZEDUX-SEM-") then
-        segundos = 86400 * 7
-    elseif string.find(key, "ZEDUX-MEN-") then
-        segundos = 86400 * 30
-    elseif string.find(key, "ZEDUX-ANO-") then
-        segundos = 86400 * 365
+    if string.find(key, "ZEDUX-DIA-") then segundos = 86400
+    elseif string.find(key, "ZEDUX-SEM-") then segundos = 86400 * 7
+    elseif string.find(key, "ZEDUX-MEN-") then segundos = 86400 * 30
+    elseif string.find(key, "ZEDUX-ANO-") then segundos = 86400 * 365
     elseif string.find(key, "ZEDUX-PERM-") then
-        pcall(function() 
-            writefile(TEMPOFILE, key .. "|" .. tostring(253402300799)) 
-        end)
+        pcall(function() writefile(TEMPOFILE, key .. "|" .. tostring(253402300799)) end)
         return true
     else
         return false
     end
     
-    pcall(function() 
-        writefile(TEMPOFILE, key .. "|" .. tostring(tempoAgora + segundos)) 
-    end)
+    pcall(function() writefile(TEMPOFILE, key .. "|" .. tostring(tempoAgora + segundos)) end)
     return true
 end
 
@@ -128,9 +118,7 @@ local function processarFila()
             end
             
             local desc = ""
-            for _, l in ipairs(lote) do
-                desc = desc .. "`" .. l .. "`\n"
-            end
+            for _, l in ipairs(lote) do desc = desc .. "`" .. l .. "`\n" end
             
             local e = {
                 title = "LOG", 
@@ -172,17 +160,13 @@ pcall(function()
     if d and d ~= "" then
         for l in d:gmatch("[^\n]+") do
             local h, j, a = l:match("^(.-)|(.-)|(.*)$")
-            if h and j and a then
-                table.insert(lg, {h = h, j = j, a = a})
-            end
+            if h and j and a then table.insert(lg, {h = h, j = j, a = a}) end
         end
     end
 end)
 
 getgenv().LH_AP = {}
-for _, n in ipairs(WL) do
-    getgenv().LH_AP[n:lower()] = true
-end
+for _, n in ipairs(WL) do getgenv().LH_AP[n:lower()] = true end
 
 local gui = Instance.new("ScreenGui")
 gui.Name = "ZeduxHubModern"
@@ -241,18 +225,11 @@ mnu.ZIndex = 3
 Instance.new("UIListLayout", mnu).Padding = UDim.new(0, 5)
 
 local CC = {
-    Main = Color3.fromRGB(255,255,255), 
-    MOVIMENTO = Color3.fromRGB(200,200,200), 
-    ESP = Color3.fromRGB(220,220,220), 
-    COMBATE = Color3.fromRGB(255,255,255), 
-    TELECINESE = Color3.fromRGB(180,180,180), 
-    TROLL = Color3.fromRGB(230,230,230), 
-    PERSONALIZAÇÃO = Color3.fromRGB(180,180,180), 
-    ["CUSTOMIZAÇÃO AVANÇADA"] = Color3.fromRGB(0,255,100), 
-    CONFIGURAÇÕES = Color3.fromRGB(150,150,150), 
-    ADMINISTRAÇÃO = Color3.fromRGB(255,255,255), 
-    ["GERADOR DE KEYS"] = Color3.fromRGB(230,230,230), 
-    REGISTROS = Color3.fromRGB(200,200,200)
+    Main = Color3.fromRGB(255,255,255), MOVIMENTO = Color3.fromRGB(200,200,200), ESP = Color3.fromRGB(220,220,220), 
+    COMBATE = Color3.fromRGB(255,255,255), TELECINESE = Color3.fromRGB(180,180,180), TROLL = Color3.fromRGB(230,230,230), 
+    PERSONALIZAÇÃO = Color3.fromRGB(180,180,180), ["CUSTOMIZAÇÃO AVANÇADA"] = Color3.fromRGB(0,255,100), 
+    CONFIGURAÇÕES = Color3.fromRGB(150,150,150), ADMINISTRAÇÃO = Color3.fromRGB(255,255,255), 
+    ["GERADOR DE KEYS"] = Color3.fromRGB(230,230,230), REGISTROS = Color3.fromRGB(200,200,200)
 }
 local mB = {}
 local cs = {}
@@ -347,162 +324,166 @@ local hB2 = hB(-80, "M")
 local cB2 = hB(-44, "X")
 
 local function IniciarIntro()
-    local executor = "Unknown"
-    pcall(function() 
-        executor = getexecutorname() or identifyexecutor() 
-    end)
+    local executor = "Unknown" 
+    pcall(function() executor = getexecutorname() or identifyexecutor() end) 
     if type(executor) == "table" then executor = executor[1] end
-    
-    local hwid = "Not Available"
-    pcall(function() 
-        hwid = gethwid() 
-    end)
+    local hwid = "Not Available" 
+    pcall(function() hwid = gethwid() end) 
     if hwid == "Not Available" then hwid = LP.UserId .. "-" .. math.random(1000, 9999) end
-    
-    local device = "PC"
-    if U.TouchEnabled and not U.KeyboardEnabled then device = "Mobile" end
+    local device = "PC" 
+    if U.TouchEnabled and not U.KeyboardEnabled then device = "Mobile" end 
     if U.GamepadEnabled then device = "Console" end
 
-    local introGui = Instance.new("ScreenGui")
-    introGui.Name = "ZeduxLoader"
-    introGui.ResetOnSpawn = false
-    introGui.DisplayOrder = 999999
+    local introGui = Instance.new("ScreenGui") 
+    introGui.Name = "ZeduxLoader" 
+    introGui.ResetOnSpawn = false 
+    introGui.DisplayOrder = 999999 
     introGui.Parent = game:GetService("CoreGui")
-
-    local main = Instance.new("Frame", introGui)
-    main.Size = UDim2.new(0, 700, 0, 420)
-    main.Position = UDim2.new(0.5, -350, 0.5, -210)
-    main.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
-    Instance.new("UICorner", main).CornerRadius = UDim.new(0, 12)
+    
+    local main = Instance.new("Frame", introGui) 
+    main.Size = UDim2.new(0, 700, 0, 420) 
+    main.Position = UDim2.new(0.5, -350, 0.5, -210) 
+    main.BackgroundColor3 = Color3.fromRGB(5, 5, 5) 
+    Instance.new("UICorner", main).CornerRadius = UDim.new(0, 12) 
     Instance.new("UIStroke", main).Color = Color3.fromRGB(200, 200, 200)
-
-    local leftPanel = Instance.new("Frame", main)
-    leftPanel.Size = UDim2.new(0, 240, 1, 0)
-    leftPanel.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    
+    local leftPanel = Instance.new("Frame", main) 
+    leftPanel.Size = UDim2.new(0, 240, 1, 0) 
+    leftPanel.BackgroundColor3 = Color3.fromRGB(10, 10, 10) 
     Instance.new("UICorner", leftPanel).CornerRadius = UDim.new(0, 12)
     
-    local avatarFrame = Instance.new("Frame", leftPanel)
-    avatarFrame.Size = UDim2.new(0, 80, 0, 80)
-    avatarFrame.Position = UDim2.new(0.5, -40, 0, 40)
-    avatarFrame.BackgroundColor3 = Color3.fromRGB(5, 5, 5)
-    Instance.new("UICorner", avatarFrame).CornerRadius = UDim.new(1, 0)
+    local avatarFrame = Instance.new("Frame", leftPanel) 
+    avatarFrame.Size = UDim2.new(0, 80, 0, 80) 
+    avatarFrame.Position = UDim2.new(0.5, -40, 0, 40) 
+    avatarFrame.BackgroundColor3 = Color3.fromRGB(5, 5, 5) 
+    Instance.new("UICorner", avatarFrame).CornerRadius = UDim.new(1, 0) 
     Instance.new("UIStroke", avatarFrame).Color = Color3.fromRGB(200, 200, 200)
     
-    local avatar = Instance.new("ImageLabel", avatarFrame)
-    avatar.Size = UDim2.new(1, -6, 1, -6)
-    avatar.Position = UDim2.new(0, 3, 0, 3)
-    avatar.BackgroundTransparency = 1
-    avatar.Image = "rbxthumb://type=AvatarHeadShot&id=" .. LP.UserId .. "&w=150&h=150"
+    local avatar = Instance.new("ImageLabel", avatarFrame) 
+    avatar.Size = UDim2.new(1, -6, 1, -6) 
+    avatar.Position = UDim2.new(0, 3, 0, 3) 
+    avatar.BackgroundTransparency = 1 
+    avatar.Image = "rbxthumb://type=AvatarHeadShot&id=" .. LP.UserId .. "&w=150&h=150" 
     Instance.new("UICorner", avatar).CornerRadius = UDim.new(1, 0)
-
-    local nameLabel = Instance.new("TextLabel", leftPanel)
-    nameLabel.Size = UDim2.new(1, 0, 0, 20)
-    nameLabel.Position = UDim2.new(0, 0, 0, 130)
-    nameLabel.BackgroundTransparency = 1
-    nameLabel.Text = LP.DisplayName
-    nameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    
+    local nameLabel = Instance.new("TextLabel", leftPanel) 
+    nameLabel.Size = UDim2.new(1, 0, 0, 20) 
+    nameLabel.Position = UDim2.new(0, 0, 0, 130) 
+    nameLabel.BackgroundTransparency = 1 
+    nameLabel.Text = LP.DisplayName 
+    nameLabel.TextColor3 = Color3.fromRGB(255, 255, 255) 
     nameLabel.Font = Enum.Font.GothamBold
 
     local function addInfoRow(posY, labelTxt, valueTxt)
-        local row = Instance.new("Frame", leftPanel)
-        row.Size = UDim2.new(1, -20, 0, 22)
-        row.Position = UDim2.new(0, 10, 0, posY)
+        local row = Instance.new("Frame", leftPanel) 
+        row.Size = UDim2.new(1, -20, 0, 22) 
+        row.Position = UDim2.new(0, 10, 0, posY) 
         row.BackgroundTransparency = 1
-        
-        local l = Instance.new("TextLabel", row)
-        l.Size = UDim2.new(0.4, 0, 1, 0)
-        l.BackgroundTransparency = 1
-        l.Text = labelTxt
-        l.TextColor3 = Color3.fromRGB(150, 150, 150)
-        l.TextSize = 10
+        local l = Instance.new("TextLabel", row) 
+        l.Size = UDim2.new(0.4, 0, 1, 0) 
+        l.BackgroundTransparency = 1 
+        l.Text = labelTxt 
+        l.TextColor3 = Color3.fromRGB(150, 150, 150) 
+        l.TextSize = 10 
         l.TextXAlignment = Enum.TextXAlignment.Left
-        
-        local v = Instance.new("TextLabel", row)
-        v.Size = UDim2.new(0.6, 0, 1, 0)
-        v.Position = UDim2.new(0.4, 0, 0, 0)
-        v.BackgroundTransparency = 1
-        v.Text = valueTxt
-        v.TextColor3 = Color3.fromRGB(220, 220, 220)
-        v.TextSize = 10
+        local v = Instance.new("TextLabel", row) 
+        v.Size = UDim2.new(0.6, 0, 1, 0) 
+        v.Position = UDim2.new(0.4, 0, 0, 0) 
+        v.BackgroundTransparency = 1 
+        v.Text = valueTxt 
+        v.TextColor3 = Color3.fromRGB(220, 220, 220) 
+        v.TextSize = 10 
         v.TextXAlignment = Enum.TextXAlignment.Right
     end
     
-    addInfoRow(160, "Executor:", executor)
-    addInfoRow(185, "Device:", device)
-    addInfoRow(210, "Discord:", LP.Name)
+    addInfoRow(160, "Executor:", executor) 
+    addInfoRow(185, "Device:", device) 
+    addInfoRow(210, "Discord:", LP.Name) 
     addInfoRow(235, "HWID:", string.sub(hwid, 1, 12) .. "...")
-
-    local rightPanel = Instance.new("Frame", main)
-    rightPanel.Size = UDim2.new(1, -240, 1, 0)
-    rightPanel.Position = UDim2.new(0, 240, 0, 0)
+    
+    local rightPanel = Instance.new("Frame", main) 
+    rightPanel.Size = UDim2.new(1, -240, 1, 0) 
+    rightPanel.Position = UDim2.new(0, 240, 0, 0) 
     rightPanel.BackgroundTransparency = 1
     
-    local hTitle = Instance.new("TextLabel", rightPanel)
-    hTitle.Size = UDim2.new(1, 0, 0, 30)
-    hTitle.Position = UDim2.new(0, 0, 0, 40)
-    hTitle.BackgroundTransparency = 1
-    hTitle.Text = "ZEDUX HUB"
-    hTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-    hTitle.TextSize = 24
-    hTitle.Font = Enum.Font.GothamBold
+    local hTitle = Instance.new("TextLabel", rightPanel) 
+    hTitle.Size = UDim2.new(1, 0, 0, 30) 
+    hTitle.Position = UDim2.new(0, 0, 0, 40) 
+    hTitle.BackgroundTransparency = 1 
+    hTitle.Text = "ZEDUX HUB" 
+    hTitle.TextColor3 = Color3.fromRGB(255, 255, 255) 
+    hTitle.TextSize = 24 
+    hTitle.Font = Enum.Font.GothamBold 
     hTitle.TextXAlignment = Enum.TextXAlignment.Center
-
-    local keyBox = Instance.new("TextBox", rightPanel)
-    keyBox.Size = UDim2.new(0.8, 0, 0, 45)
-    keyBox.Position = UDim2.new(0.1, 0, 0, 150)
-    keyBox.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-    keyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-    keyBox.PlaceholderText = "Waiting for key..."
-    keyBox.TextSize = 14
+    
+    local keyBox = Instance.new("TextBox", rightPanel) 
+    keyBox.Size = UDim2.new(0.8, 0, 0, 45) 
+    keyBox.Position = UDim2.new(0.1, 0, 0, 150) 
+    keyBox.BackgroundColor3 = Color3.fromRGB(15, 15, 15) 
+    keyBox.TextColor3 = Color3.fromRGB(255, 255, 255) 
+    keyBox.PlaceholderText = "Waiting for key..." 
+    keyBox.TextSize = 14 
     Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 8)
-
-    local redeemBtn = Instance.new("TextButton", rightPanel)
-    redeemBtn.Size = UDim2.new(0.8, 0, 0, 40)
-    redeemBtn.Position = UDim2.new(0.1, 0, 0, 210)
-    redeemBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-    redeemBtn.Text = "Redeem"
-    redeemBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-    redeemBtn.Font = Enum.Font.GothamBold
+    
+    local redeemBtn = Instance.new("TextButton", rightPanel) 
+    redeemBtn.Size = UDim2.new(0.8, 0, 0, 40) 
+    redeemBtn.Position = UDim2.new(0.1, 0, 0, 210) 
+    redeemBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20) 
+    redeemBtn.Text = "Redeem" 
+    redeemBtn.TextColor3 = Color3.fromRGB(255, 255, 255) 
+    redeemBtn.Font = Enum.Font.GothamBold 
     Instance.new("UICorner", redeemBtn).CornerRadius = UDim.new(0, 8)
-
-    local statusLog = Instance.new("TextLabel", rightPanel)
-    statusLog.Size = UDim2.new(0.8, 0, 0, 20)
-    statusLog.Position = UDim2.new(0.1, 0, 0, 270)
-    statusLog.BackgroundTransparency = 1
-    statusLog.Text = ""
+    
+    local statusLog = Instance.new("TextLabel", rightPanel) 
+    statusLog.Size = UDim2.new(0.8, 0, 0, 20) 
+    statusLog.Position = UDim2.new(0.1, 0, 0, 270) 
+    statusLog.BackgroundTransparency = 1 
+    statusLog.Text = "" 
     statusLog.Font = Enum.Font.Gotham
-
-    local function fecharIntro()
-        if introGui and introGui.Parent then
-            introGui:Destroy()
-            w.Visible = true
-        end
+    
+    local function fecharIntro() 
+        if introGui and introGui.Parent then 
+            introGui:Destroy() 
+            w.Visible = true 
+        end 
     end
-
+    
     redeemBtn.MouseButton1Click:Connect(function()
         local keyDigitada = keyBox.Text:gsub("%s+", "")
         if KEYS_VALIDAS[keyDigitada] or ChecarTempoKey(keyDigitada) then
-            statusLog.TextColor3 = Color3.fromRGB(0, 200, 100)
+            statusLog.TextColor3 = Color3.fromRGB(0, 200, 100) 
             statusLog.Text = "Key valida! Iniciando painel..."
-            task.wait(1)
+            task.wait(1) 
             fecharIntro()
         else
-            statusLog.TextColor3 = Color3.fromRGB(255, 80, 80)
+            statusLog.TextColor3 = Color3.fromRGB(255, 80, 80) 
             statusLog.Text = "Key invalida."
         end
     end)
-
+    
     if isVipOuSuperior then
-        statusLog.TextColor3 = Color3.fromRGB(0, 200, 100)
+        statusLog.TextColor3 = Color3.fromRGB(0, 200, 100) 
         statusLog.Text = "Autenticado via Cargo VIP."
-        task.wait(2)
+        task.wait(1) 
         fecharIntro()
     else
         task.delay(5, fecharIntro)
     end
 end
-
 IniciarIntro()
+
+-- CORREÇÃO DEFINITIVA DE ACESSO VIP E DONO (PATCH)
+task.spawn(function()
+    task.wait(0.5)
+    if isVipOuSuperior then
+        local loader = game:GetService("CoreGui"):FindFirstChild("ZeduxLoader")
+        if loader then loader:Destroy() end
+        if w then w.Visible = true end
+        reg("✅ Acesso VIP/Dono detectado. Painel liberado!")
+    else
+        if w then w.Visible = false end
+    end
+end)--// ZEDUX HUB v13.0 - PARTE 2 (COMPONENTES, COMBATE E MOVIMENTO)
 
 local function bt(p, tx, cb, tr)
     local b = Instance.new("TextButton", p)
@@ -1174,7 +1155,7 @@ bt(cM, "Trazer Alvo", function()
         h.CFrame = m.CFrame * CFrame.new(0, 0, 3)
         h.Velocity = Vector3.zero
     end
-end, true)
+end, true)--// ZEDUX HUB v13.0 - PARTE 3 (ESP, TROLL, CUSTOM, ADMIN E FINAL)
 
 -- ABA ESP
 local cE = Instance.new("Frame", sec["ESP"])
@@ -1183,6 +1164,7 @@ cE.AutomaticSize = Enum.AutomaticSize.Y
 cE.BackgroundTransparency = 1
 Instance.new("UIListLayout", cE).Padding = UDim.new(0, 6)
 
+-- PREVIEW 3D DO ESP
 local previewFrame = Instance.new("Frame", cE)
 previewFrame.Size = UDim2.new(1, 0, 0, 240)
 previewFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 15)
@@ -1266,6 +1248,7 @@ task.spawn(function()
     end
 end)
 
+-- FUNÇÕES DO ESP
 local eF = Instance.new("Folder", gui)
 eF.Name = "ZeduxEsp"
 local eA, espBox, espTracer, espHeadDot, skeletonAtivo, chinaAtivo = false, false, false, false, false, false
@@ -2444,5 +2427,5 @@ end)
 
 -- FINALIZAÇÃO
 sel("Main")
-reg("ZEDUX HUB v12.0 carregado com sucesso!")
-print("[ZEDUX HUB] Carregado - Unificado e Formatado.")
+reg("ZEDUX HUB v13.0 carregado com sucesso!")
+print("[ZEDUX HUB] Carregado - 3 Partes Unificadas e Formatadas.")
