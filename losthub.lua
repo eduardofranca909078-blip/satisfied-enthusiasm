@@ -2014,7 +2014,7 @@ P.PlayerRemoving:Connect(function() task.wait(0.1) rf() end)
 
 -- CORREÇÃO DEFINITIVA PARA O PAINEL APARECER E NÃO FECHAR
 task.spawn(function()
-    task.wait(1)
+    task.wait(1.5)
     if isVipOuSuperior then
         local loader = game:GetService("CoreGui"):FindFirstChild("ZeduxLoader")
         if loader then loader:Destroy() end
