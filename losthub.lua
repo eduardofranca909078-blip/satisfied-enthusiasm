@@ -1,4 +1,4 @@
---// ZEDUX HUB v15.0 - FULL SCRIPT (SEM EMOJIS) - PARTE 1
+--// ZEDUX HUB FINAL - PARTE 1
 local P = game:GetService("Players")
 local U = game:GetService("UserInputService")
 local R = game:GetService("RunService")
@@ -453,7 +453,6 @@ w.BorderSizePixel = 0
 Instance.new("UICorner", w).CornerRadius = UDim.new(0, 10)
 w.Visible = false
 w.ClipsDescendants = true
-
 local starfield = Instance.new("Frame", w)
 starfield.Name = "Starfield"
 starfield.Size = UDim2.new(1, 0, 1, 0)
@@ -979,8 +978,7 @@ local mB2 = hB(-170, "-")
 local pB = hB(-138, "+")
 local hB2 = hB(-80, "M")
 local cB2 = hB(-44, "X")
-
--- (Main e customização continuam na parte 2)-- ABA MAIN
+-- ABA MAIN
 local cMain = Instance.new("Frame", sec["Main"])
 cMain.Size = UDim2.new(1, 0, 0, 0)
 cMain.AutomaticSize = Enum.AutomaticSize.Y
@@ -1991,13 +1989,40 @@ pB.MouseButton1Click:Connect(function() local tamAtual = w.Size.X.Offset local n
 local function rf()
     for _, c in ipairs(pl:GetChildren()) do if c:IsA("TextButton") then c:Destroy() end end
     for _, p in ipairs(P:GetPlayers()) do
-        local b = Instance.new("TextButton", pl) b.Size = UDim2.new(1, 0, 0, 24) b.BackgroundColor3 = (S.sel == p) and Color3.fromRGB(200, 200, 200) or Color3.fromRGB(25, 25, 25) b.Text = "  " .. p.Name b.TextColor3 = (S.sel == p) and Color3.fromRGB(0, 0, 0) or Color3.fromRGB(220, 220, 220) b.TextSize = 9 b.Font = Enum.Font.GothamBold b.TextXAlignment = Enum.TextXAlignment.Left b.AutoButtonColor = false b.ZIndex = 4 Instance.new("UICorner", b).CornerRadius = UDim.new(0, 5)
-        b.MouseButton1Click:Connect(function() S.sel = p reg("Sel: " .. p.Name) rf() end)
+        local b = Instance.new("TextButton", pl) 
+        b.Size = UDim2.new(1, 0, 0, 24) 
+        b.BackgroundColor3 = (S.sel == p) and Color3.fromRGB(200, 200, 200) or Color3.fromRGB(25, 25, 25) 
+        b.Text = "  " .. p.Name 
+        b.TextColor3 = (S.sel == p) and Color3.fromRGB(0, 0, 0) or Color3.fromRGB(220, 220, 220) 
+        b.TextSize = 9 
+        b.Font = Enum.Font.GothamBold 
+        b.TextXAlignment = Enum.TextXAlignment.Left 
+        b.AutoButtonColor = false 
+        b.ZIndex = 4 
+        Instance.new("UICorner", b).CornerRadius = UDim.new(0,5)
+        b.MouseButton1Click:Connect(function() 
+            S.sel = p 
+            reg("Sel: " .. p.Name) 
+            rf() 
+        end)
     end
     upC()
 end
 rf()
 P.PlayerAdded:Connect(rf)
 P.PlayerRemoving:Connect(function() task.wait(0.1) rf() end)
+
+-- CORREÇÃO DEFINITIVA PARA O PAINEL APARECER E NÃO FECHAR
+task.spawn(function()
+    task.wait(1)
+    if isVipOuSuperior then
+        local loader = game:GetService("CoreGui"):FindFirstChild("ZeduxLoader")
+        if loader then loader:Destroy() end
+        if w then w.Visible = true end
+    else
+        if w then w.Visible = false end
+    end
+end)
+
 sel("Main")
-print("[ZEDUX HUB] Carregado - Sem Emojis e com todas funcoes.")
+print("[ZEDUX HUB] Carregado com sucesso!")
