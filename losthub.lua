@@ -1,4 +1,4 @@
---// ZEDUX HUB v21.0 - FINAL ABSOLUTO
+--// ZEDUX HUB v22.0 - VISUAL POLIDO
 local P = game:GetService("Players")
 local U = game:GetService("UserInputService")
 local R = game:GetService("RunService")
@@ -8,15 +8,11 @@ local C = workspace.CurrentCamera
 local S = {sel = nil}
 local lg = {}
 
--- CONFIG
 local URL_DISCORD = "https://discord.gg/s6GSy4TuJ"
 local WEBHOOK = "https://discord.com/api/webhooks/1559481604387246170/aAs30L9QQbfX0ZWA92jKpD6PZ_F5IOZT1424WNqaHluyZ-QuNGbbO36pVf-Fe3Ti9Fe4"
-local KEYFILE = "zedux_keys.txt"
-local TEMPOFILE = "zedux_tempo.txt"
-local LOGFILE = "zedux_logs.txt"
+local KEYFILE, TEMPOFILE, LOGFILE = "zedux_keys.txt", "zedux_tempo.txt", "zedux_logs.txt"
 
--- DETECÇÃO
-local executor = "Desconhecido"
+local executor = "Delta"
 pcall(function() executor = getexecutorname() or identifyexecutor() end)
 if type(executor) == "table" then executor = executor[1] end
 local device = "PC"
@@ -25,7 +21,6 @@ if U.GamepadEnabled then device = "Console" end
 local hwid = "N/A"
 pcall(function() hwid = gethwid() end)
 
--- KEY SYSTEM
 local KEYS_VALIDAS = { ["ZEDUX-HUB-2026"] = true, ["ZEDUX-HUB-VIP"] = true, ["ZEDUX-HUB-PRO"] = true }
 pcall(function() local d = readfile(KEYFILE) if d and d ~= "" then for l in d:gmatch("[^\n]+") do KEYS_VALIDAS[l] = true end end end)
 local OID = 4197733654
@@ -33,8 +28,7 @@ local CG = (LP.UserId == OID) and "PROPRIETÁRIO" or "JOGADOR"
 local isVipOuSuperior = (LP.UserId == OID)
 
 local function ChecarTempoKey(key)
-    local tempoAgora = os.time()
-    local chaveSalva = ""
+    local tempoAgora = os.time() local chaveSalva = ""
     pcall(function() chaveSalva = readfile(TEMPOFILE) end)
     if chaveSalva ~= "" then
         local dados = string.split(chaveSalva, "|")
@@ -64,31 +58,25 @@ end
 
 -- INTRO
 local function IniciarIntro()
-    local introGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-    introGui.ResetOnSpawn = false introGui.DisplayOrder = 999999
-    local main = Instance.new("Frame", introGui)
-    main.Size = UDim2.new(0, 400, 0, 300) main.Position = UDim2.new(0.5, -200, 0.5, -150)
-    main.BackgroundColor3 = Color3.fromRGB(5, 5, 5) Instance.new("UICorner", main).CornerRadius = UDim.new(0, 12) Instance.new("UIStroke", main).Color = Color3.fromRGB(200, 200, 200)
+    local introGui = Instance.new("ScreenGui", game:GetService("CoreGui")) introGui.ResetOnSpawn = false introGui.DisplayOrder = 999999
+    local main = Instance.new("Frame", introGui) main.Size = UDim2.new(0, 400, 0, 300) main.Position = UDim2.new(0.5, -200, 0.5, -150) main.BackgroundColor3 = Color3.fromRGB(10, 10, 12) Instance.new("UICorner", main).CornerRadius = UDim.new(0, 12) Instance.new("UIStroke", main).Color = Color3.fromRGB(50, 50, 50)
     local hTitle = Instance.new("TextLabel", main) hTitle.Size = UDim2.new(1, 0, 0, 30) hTitle.Position = UDim2.new(0, 0, 0, 20) hTitle.BackgroundTransparency = 1 hTitle.Text = "ZEDUX HUB" hTitle.TextColor3 = Color3.fromRGB(255, 255, 255) hTitle.TextSize = 24 hTitle.Font = Enum.Font.GothamBold
     local infoTxt = Instance.new("TextLabel", main) infoTxt.Size = UDim2.new(1, -20, 0, 40) infoTxt.Position = UDim2.new(0, 10, 0, 55) infoTxt.BackgroundTransparency = 1 infoTxt.Text = "Executor: " .. executor .. "\nDispositivo: " .. device infoTxt.TextColor3 = Color3.fromRGB(150, 150, 150) infoTxt.TextSize = 11 infoTxt.Font = Enum.Font.Gotham
     local keyBox = Instance.new("TextBox", main) keyBox.Size = UDim2.new(0.8, 0, 0, 40) keyBox.Position = UDim2.new(0.1, 0, 0, 110) keyBox.BackgroundColor3 = Color3.fromRGB(15, 15, 15) keyBox.TextColor3 = Color3.fromRGB(255, 255, 255) keyBox.PlaceholderText = "Digite sua key..." keyBox.PlaceholderColor3 = Color3.fromRGB(100, 100, 100) Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0, 8) Instance.new("UIStroke", keyBox).Color = Color3.fromRGB(150, 150, 150)
     local redeemBtn = Instance.new("TextButton", main) redeemBtn.Size = UDim2.new(0.8, 0, 0, 40) redeemBtn.Position = UDim2.new(0.1, 0, 0, 165) redeemBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25) redeemBtn.Text = "Validar Key" redeemBtn.TextColor3 = Color3.fromRGB(255, 255, 255) redeemBtn.Font = Enum.Font.GothamBold Instance.new("UICorner", redeemBtn).CornerRadius = UDim.new(0, 8)
     local discordBtn = Instance.new("TextButton", main) discordBtn.Size = UDim2.new(0.8, 0, 0, 30) discordBtn.Position = UDim2.new(0.1, 0, 0, 220) discordBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 150) discordBtn.Text = "Entrar no Discord" discordBtn.TextColor3 = Color3.fromRGB(255, 255, 255) discordBtn.Font = Enum.Font.GothamBold Instance.new("UICorner", discordBtn).CornerRadius = UDim.new(0, 8)
     discordBtn.MouseButton1Click:Connect(function() pcall(function() game:GetService("GuiService"):OpenBrowserWindow(URL_DISCORD) end) end)
-    local statusLog = Instance.new("TextLabel", main) statusLog.Size = UDim2.new(0.8, 0, 0, 20) statusLog.Position = UDim2.new(0.1, 0, 0, 260) statusLog.BackgroundTransparency = 1 statusLog.TextColor3 = Color3.fromRGB(0, 200, 100) statusLog.TextSize = 10 statusLog.Font = Enum.Font.Gotham
-    redeemBtn.MouseButton1Click:Connect(function() local key = keyBox.Text:gsub("%s+", "") if KEYS_VALIDAS[key] or ChecarTempoKey(key) then statusLog.Text = "✅ Key válida!" task.wait(1) introGui:Destroy() else statusLog.TextColor3 = Color3.fromRGB(255, 80, 80) statusLog.Text = "❌ Key inválida." end end)
+    local statusLog = Instance.new("TextLabel", main) statusLog.Size = UDim2.new(0.8, 0, 0, 20) statusLog.Position = UDim2.new(0.1, 0, 0, 260) statusLog.BackgroundTransparency = 1 statusLog.TextColor3 = Color3.fromRGB(80, 255, 120) statusLog.TextSize = 10 statusLog.Font = Enum.Font.Gotham
+    redeemBtn.MouseButton1Click:Connect(function() local key = keyBox.Text:gsub("%s+", "") if KEYS_VALIDAS[key] or ChecarTempoKey(key) then statusLog.Text = "Key válida!" task.wait(1) introGui:Destroy() else statusLog.TextColor3 = Color3.fromRGB(255, 80, 80) statusLog.Text = "Key inválida." end end)
     if isVipOuSuperior then task.wait(0.5) introGui:Destroy() else repeat task.wait() until not introGui.Parent end
 end
 IniciarIntro()
 
--- ENGINE VISUAL
-local gui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-gui.ResetOnSpawn = false gui.IgnoreGuiInset = true gui.DisplayOrder = 99999
-local w = Instance.new("Frame", gui)
-w.Size = UDim2.new(0, 700, 0, 480) w.Position = UDim2.new(0.5, -350, 0.5, -240)
-w.BackgroundColor3 = Color3.fromRGB(10, 10, 12) Instance.new("UICorner", w).CornerRadius = UDim.new(0, 8) Instance.new("UIStroke", w).Color = Color3.fromRGB(40, 40, 40) w.ClipsDescendants = true
+-- ENGINE VISUAL POLIDO
+local gui = Instance.new("ScreenGui", game:GetService("CoreGui")) gui.ResetOnSpawn = false gui.IgnoreGuiInset = true gui.DisplayOrder = 99999
+local w = Instance.new("Frame", gui) w.Size = UDim2.new(0, 700, 0, 480) w.Position = UDim2.new(0.5, -350, 0.5, -240) w.BackgroundColor3 = Color3.fromRGB(10, 10, 12) Instance.new("UICorner", w).CornerRadius = UDim.new(0, 8) Instance.new("UIStroke", w).Color = Color3.fromRGB(40, 40, 40) w.ClipsDescendants = true
 
--- ESTRELAS
+-- ESTRELAS DE FUNDO
 local starLayer = Instance.new("Frame", w) starLayer.Size = UDim2.new(1, 0, 1, 0) starLayer.BackgroundTransparency = 1 starLayer.ZIndex = 1 starLayer.ClipsDescendants = true
 for i = 1, 100 do
     local star = Instance.new("Frame", starLayer) local size = math.random(1, 3) star.Size = UDim2.new(0, size, 0, size) star.Position = UDim2.new(math.random(), 0, math.random(), 0) star.BackgroundColor3 = Color3.fromRGB(255, 255, 255) star.BackgroundTransparency = math.random(3, 8) / 10 star.BorderSizePixel = 0 star.ZIndex = 1 Instance.new("UICorner", star).CornerRadius = UDim.new(1, 0)
@@ -96,7 +84,7 @@ for i = 1, 100 do
 end
 local overlay = Instance.new("Frame", w) overlay.Size = UDim2.new(1, 0, 1, 0) overlay.BackgroundColor3 = Color3.fromRGB(10, 10, 12) overlay.BackgroundTransparency = 0.4 overlay.BorderSizePixel = 0 overlay.ZIndex = 2
 
--- DRAG
+-- TOPBAR (BARRA DE ARRASTAR)
 local topBar = Instance.new("Frame", w) topBar.Size = UDim2.new(1, 0, 0, 50) topBar.BackgroundTransparency = 1 topBar.ZIndex = 15
 local dragging, dragInput, dragStart, startPos
 local function updateDrag(input) local delta = input.Position - dragStart w.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y) end
@@ -108,8 +96,12 @@ U.InputChanged:Connect(function(input) if input == dragInput and dragging then u
 local gengarGif = Instance.new("ImageLabel", w) gengarGif.Size = UDim2.new(0, 45, 0, 45) gengarGif.Position = UDim2.new(0, 10, 0, 2) gengarGif.BackgroundTransparency = 1 gengarGif.Image = "rbxassetid://8031522141" gengarGif.ZIndex = 10
 task.spawn(function() local tempo = 0 while gengarGif.Parent do tempo = tempo + 0.05 gengarGif.Size = UDim2.new(0, 45 * (1 + math.sin(tempo) * 0.05), 0, 45 * (1 + math.sin(tempo) * 0.05)) gengarGif.Rotation = math.sin(tempo * 2) * 3 gengarGif.ImageColor3 = Color3.fromRGB(255, 255 * (0.8 + math.sin(tempo) * 0.2), 255 * (0.8 + math.sin(tempo) * 0.2)) task.wait(0.05) end end)
 
--- BOTÕES TOPO
+-- FPS COUNTER E BOTÕES TOPO
+local fpsCounter = Instance.new("TextLabel", w) fpsCounter.Size = UDim2.new(0, 100, 0, 20) fpsCounter.Position = UDim2.new(1, -230, 0, 15) fpsCounter.BackgroundTransparency = 1 fpsCounter.Text = "FPS: -- | --ms" fpsCounter.TextColor3 = Color3.fromRGB(150, 150, 150) fpsCounter.TextSize = 10 fpsCounter.Font = Enum.Font.GothamBold fpsCounter.ZIndex = 20
+task.spawn(function() local frames = 0 local lastTime = tick() while fpsCounter.Parent do frames = frames + 1 local now = tick() if now - lastTime >= 1 then local fps = math.floor(frames / (now - lastTime)) local ping = 0 pcall(function() ping = math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue()) end) fpsCounter.Text = "FPS: " .. fps .. " | " .. ping .. "ms" frames = 0 lastTime = now end R.RenderStepped:Wait() end end)
+
 local btnHwid = Instance.new("TextButton", w) btnHwid.Size = UDim2.new(0, 60, 0, 25) btnHwid.Position = UDim2.new(0, 65, 0, 12) btnHwid.BackgroundColor3 = Color3.fromRGB(25, 25, 25) btnHwid.Text = "HWID" btnHwid.TextColor3 = Color3.fromRGB(255, 255, 255) btnHwid.TextSize = 9 btnHwid.Font = Enum.Font.GothamBold Instance.new("UICorner", btnHwid).CornerRadius = UDim.new(0, 4) btnHwid.ZIndex = 20 btnHwid.MouseButton1Click:Connect(function() pcall(function() setclipboard(hwid) end) end)
+
 local btnDiminuir = Instance.new("TextButton", w) btnDiminuir.Size = UDim2.new(0, 25, 0, 25) btnDiminuir.Position = UDim2.new(1, -95, 0, 12) btnDiminuir.BackgroundColor3 = Color3.fromRGB(25, 25, 25) btnDiminuir.Text = "-" btnDiminuir.TextColor3 = Color3.fromRGB(255, 255, 255) btnDiminuir.Font = Enum.Font.GothamBold Instance.new("UICorner", btnDiminuir).CornerRadius = UDim.new(0, 4) btnDiminuir.ZIndex = 20
 local btnAumentar = Instance.new("TextButton", w) btnAumentar.Size = UDim2.new(0, 25, 0, 25) btnAumentar.Position = UDim2.new(1, -65, 0, 12) btnAumentar.BackgroundColor3 = Color3.fromRGB(25, 25, 25) btnAumentar.Text = "+" btnAumentar.TextColor3 = Color3.fromRGB(255, 255, 255) btnAumentar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnAumentar).CornerRadius = UDim.new(0, 4) btnAumentar.ZIndex = 20
 local btnFechar = Instance.new("TextButton", w) btnFechar.Size = UDim2.new(0, 25, 0, 25) btnFechar.Position = UDim2.new(1, -35, 0, 12) btnFechar.BackgroundColor3 = Color3.fromRGB(50, 20, 20) btnFechar.Text = "X" btnFechar.TextColor3 = Color3.fromRGB(255, 255, 255) btnFechar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnFechar).CornerRadius = UDim.new(0, 4) btnFechar.ZIndex = 20
@@ -118,25 +110,25 @@ btnAumentar.MouseButton1Click:Connect(function() local tam = w.Size T:Create(w, 
 btnFechar.MouseButton1Click:Connect(function() gui:Destroy() end)
 U.InputBegan:Connect(function(input, gp) if gp then return end if input.KeyCode == Enum.KeyCode.K then w.Visible = not w.Visible end end)
 
--- SIDEBAR
+-- SIDEBAR (CORRIGIDA E ESCURA)
 local sb = Instance.new("Frame", w) sb.Size = UDim2.new(0, 180, 1, 0) sb.BackgroundColor3 = Color3.fromRGB(12, 12, 15) sb.BorderSizePixel = 0 Instance.new("UICorner", sb).CornerRadius = UDim.new(0, 8) sb.ZIndex = 3
-local sbScroll = Instance.new("ScrollingFrame", sb) sbScroll.Size = UDim2.new(1, 0, 1, -60) sbScroll.BackgroundTransparency = 1 sbScroll.ScrollBarThickness = 3 sbScroll.AutomaticCanvasSize = Enum.AutomaticSize.Y sbScroll.CanvasSize = UDim2.new(0, 0, 0, 0) Instance.new("UIPadding", sbScroll).PaddingTop = UDim.new(0, 10) sbScroll.ZIndex = 4
+local sbScroll = Instance.new("ScrollingFrame", sb) sbScroll.Size = UDim2.new(1, 0, 1, -60) sbScroll.BackgroundTransparency = 1 sbScroll.ScrollBarThickness = 2 sbScroll.ScrollBarImageColor3 = Color3.fromRGB(80, 80, 80) sbScroll.AutomaticCanvasSize = Enum.AutomaticSize.Y sbScroll.CanvasSize = UDim2.new(0, 0, 0, 0) Instance.new("UIPadding", sbScroll).PaddingTop = UDim.new(0, 10) sbScroll.ZIndex = 4
 local layoutSidebar = Instance.new("UIListLayout", sbScroll) layoutSidebar.Padding = UDim.new(0, 4) layoutSidebar.HorizontalAlignment = Enum.HorizontalAlignment.Center layoutSidebar.SortOrder = Enum.SortOrder.LayoutOrder
 
--- PERFIL
+-- PERFIL RODAPÉ
 local profileFrame = Instance.new("Frame", sb) profileFrame.Size = UDim2.new(1, -20, 0, 50) profileFrame.Position = UDim2.new(0, 10, 1, -58) profileFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 25) profileFrame.BorderSizePixel = 0 profileFrame.ZIndex = 5 Instance.new("UICorner", profileFrame).CornerRadius = UDim.new(0, 6) Instance.new("UIStroke", profileFrame).Color = Color3.fromRGB(50, 50, 60)
 local avatar = Instance.new("ImageLabel", profileFrame) avatar.Size = UDim2.new(0, 36, 0, 36) avatar.Position = UDim2.new(0, 7, 0.5, -18) avatar.BackgroundColor3 = Color3.fromRGB(10, 10, 10) avatar.Image = "rbxthumb://type=AvatarHeadShot&id=" .. LP.UserId .. "&w=150&h=150" avatar.ZIndex = 6 Instance.new("UICorner", avatar).CornerRadius = UDim.new(1, 0) Instance.new("UIStroke", avatar).Color = Color3.fromRGB(100, 100, 100)
 local nick = Instance.new("TextLabel", profileFrame) nick.Size = UDim2.new(1, -50, 0, 15) nick.Position = UDim2.new(0, 50, 0, 10) nick.BackgroundTransparency = 1 nick.Text = LP.DisplayName nick.TextColor3 = Color3.fromRGB(255, 255, 255) nick.TextSize = 11 nick.Font = Enum.Font.GothamBold nick.TextXAlignment = Enum.TextXAlignment.Left nick.TextTruncate = Enum.TextTruncate.AtEnd nick.ZIndex = 6
 local cargo = Instance.new("TextLabel", profileFrame) cargo.Size = UDim2.new(1, -50, 0, 12) cargo.Position = UDim2.new(0, 50, 0, 26) cargo.BackgroundTransparency = 1 cargo.Text = CG cargo.TextColor3 = Color3.fromRGB(150, 150, 150) cargo.TextSize = 9 cargo.Font = Enum.Font.GothamBold cargo.TextXAlignment = Enum.TextXAlignment.Left cargo.ZIndex = 6
 local onlineDot = Instance.new("Frame", profileFrame) onlineDot.Size = UDim2.new(0, 6, 0, 6) onlineDot.Position = UDim2.new(1, -12, 0, 8) onlineDot.BackgroundColor3 = Color3.fromRGB(0, 255, 100) onlineDot.ZIndex = 7 Instance.new("UICorner", onlineDot).CornerRadius = UDim.new(1, 0)
 
--- CONTEÚDO
+-- CONTEÚDO PRINCIPAL
 local mn = Instance.new("Frame", w) mn.Size = UDim2.new(1, -180, 1, 0) mn.Position = UDim2.new(0, 180, 0, 0) mn.BackgroundTransparency = 1 mn.ClipsDescendants = true mn.ZIndex = 3
 local ct = Instance.new("Frame", mn) ct.Size = UDim2.new(1, -20, 1, -20) ct.Position = UDim2.new(0, 10, 0, 10) ct.BackgroundTransparency = 1 ct.ZIndex = 3
 
 -- FUNÇÕES BASE
 local function yoxCard(parent, title, symbol)
-    local cf = Instance.new("Frame", parent) cf.Size = UDim2.new(1, 0, 0, 0) cf.AutomaticSize = Enum.AutomaticSize.Y cf.BackgroundColor3 = Color3.fromRGB(18, 18, 18) Instance.new("UICorner", cf).CornerRadius = UDim.new(0, 6)
+    local cf = Instance.new("Frame", parent) cf.Size = UDim2.new(1, 0, 0, 0) cf.AutomaticSize = Enum.AutomaticSize.Y cf.BackgroundColor3 = Color3.fromRGB(22, 22, 22) Instance.new("UICorner", cf).CornerRadius = UDim.new(0, 6) Instance.new("UIStroke", cf).Color = Color3.fromRGB(35, 35, 35)
     local tl = Instance.new("TextLabel", cf) tl.Size = UDim2.new(1, -20, 0, 25) tl.Position = UDim2.new(0, 10, 0, 5) tl.BackgroundTransparency = 1 tl.Text = symbol .. "  " .. title tl.TextColor3 = Color3.fromRGB(180, 180, 180) tl.TextSize = 10 tl.Font = Enum.Font.GothamBold tl.TextXAlignment = Enum.TextXAlignment.Left
     local c = Instance.new("Frame", cf) c.Size = UDim2.new(1, -20, 0, 0) c.Position = UDim2.new(0, 10, 0, 25) c.AutomaticSize = Enum.AutomaticSize.Y c.BackgroundTransparency = 1 Instance.new("UIListLayout", c).Padding = UDim.new(0, 5) return c
 end
@@ -173,22 +165,15 @@ for i, name in ipairs(tabs) do
 end
 btns["⌂ Main"].BackgroundColor3 = Color3.fromRGB(25, 25, 25) btns["⌂ Main"].TextColor3 = Color3.fromRGB(255, 255, 255) pages["⌂ Main"].Visible = true
 
--- DASHBOARD
+-- DASHBOARD (MAIN)
 local mainCard = yoxCard(pages["⌂ Main"], "Dashboard", "⌂")
-local welcomeCard = Instance.new("Frame", mainCard) welcomeCard.Size = UDim2.new(1, 0, 0, 80) welcomeCard.BackgroundColor3 = Color3.fromRGB(20, 20, 20) Instance.new("UICorner", welcomeCard).CornerRadius = UDim.new(0, 6)
+local welcomeCard = Instance.new("Frame", mainCard) welcomeCard.Size = UDim2.new(1, 0, 0, 80) welcomeCard.BackgroundColor3 = Color3.fromRGB(22, 22, 22) Instance.new("UICorner", welcomeCard).CornerRadius = UDim.new(0, 6)
 local avatarBall = Instance.new("ImageLabel", welcomeCard) avatarBall.Size = UDim2.new(0, 60, 0, 60) avatarBall.Position = UDim2.new(0, 10, 0.5, -30) avatarBall.BackgroundColor3 = Color3.fromRGB(10, 10, 10) avatarBall.Image = "rbxthumb://type=AvatarHeadShot&id=" .. LP.UserId .. "&w=150&h=150" Instance.new("UICorner", avatarBall).CornerRadius = UDim.new(1, 0) Instance.new("UIStroke", avatarBall).Color = Color3.fromRGB(200, 200, 200)
 local welcomeText = Instance.new("TextLabel", welcomeCard) welcomeText.Size = UDim2.new(1, -90, 0, 20) welcomeText.Position = UDim2.new(0, 80, 0, 20) welcomeText.BackgroundTransparency = 1 welcomeText.Text = "Bem-vindo de volta," welcomeText.TextColor3 = Color3.fromRGB(200, 200, 200) welcomeText.TextSize = 11 welcomeText.Font = Enum.Font.Gotham welcomeText.TextXAlignment = Enum.TextXAlignment.Left
 local nameText = Instance.new("TextLabel", welcomeCard) nameText.Size = UDim2.new(1, -90, 0, 25) nameText.Position = UDim2.new(0, 80, 0, 38) nameText.BackgroundTransparency = 1 nameText.Text = LP.DisplayName nameText.TextColor3 = Color3.fromRGB(255, 255, 255) nameText.TextSize = 18 nameText.Font = Enum.Font.GothamBold nameText.TextXAlignment = Enum.TextXAlignment.Left
 local sysCard = yoxCard(pages["⌂ Main"], "System Info", "▦")
-local function addInfoLinha(texto, valor, cor)
-    local row = Instance.new("Frame", sysCard) row.Size = UDim2.new(1, 0, 0, 20) row.BackgroundTransparency = 1
-    local l = Instance.new("TextLabel", row) l.Size = UDim2.new(0.5, 0, 1, 0) l.BackgroundTransparency = 1 l.Text = texto l.TextColor3 = Color3.fromRGB(150, 150, 150) l.TextSize = 10 l.Font = Enum.Font.Gotham l.TextXAlignment = Enum.TextXAlignment.Left
-    local v = Instance.new("TextLabel", row) v.Size = UDim2.new(0.5, 0, 1, 0) v.Position = UDim2.new(0.5, 0, 0, 0) v.BackgroundTransparency = 1 v.Text = valor v.TextColor3 = cor or Color3.fromRGB(255, 255, 255) v.TextSize = 10 v.Font = Enum.Font.GothamBold v.TextXAlignment = Enum.TextXAlignment.Right
-end
-addInfoLinha("Executor:", executor, Color3.fromRGB(80, 255, 120))
-addInfoLinha("Dispositivo:", device, Color3.fromRGB(80, 255, 120))
-addInfoLinha("Cargo:", CG, Color3.fromRGB(255, 200, 50))
-addInfoLinha("HWID:", string.sub(hwid, 1, 15) .. "...", Color3.fromRGB(150, 150, 150))
+local function addInfoLinha(texto, valor, cor) local row = Instance.new("Frame", sysCard) row.Size = UDim2.new(1, 0, 0, 20) row.BackgroundTransparency = 1 local l = Instance.new("TextLabel", row) l.Size = UDim2.new(0.5, 0, 1, 0) l.BackgroundTransparency = 1 l.Text = texto l.TextColor3 = Color3.fromRGB(150, 150, 150) l.TextSize = 10 l.Font = Enum.Font.Gotham l.TextXAlignment = Enum.TextXAlignment.Left local v = Instance.new("TextLabel", row) v.Size = UDim2.new(0.5, 0, 1, 0) v.Position = UDim2.new(0.5, 0, 0, 0) v.BackgroundTransparency = 1 v.Text = valor v.TextColor3 = cor or Color3.fromRGB(255, 255, 255) v.TextSize = 10 v.Font = Enum.Font.GothamBold v.TextXAlignment = Enum.TextXAlignment.Right end
+addInfoLinha("Executor:", executor, Color3.fromRGB(80, 255, 120)) addInfoLinha("Dispositivo:", device, Color3.fromRGB(80, 255, 120)) addInfoLinha("Cargo:", CG, Color3.fromRGB(255, 200, 50)) addInfoLinha("HWID:", string.sub(hwid, 1, 15) .. "...", Color3.fromRGB(150, 150, 150))
 
 -- RAGE
 local rageMov = yoxCard(pages["⛹ Rage"], "Movement", "⛹") yoxSlider(rageMov, "WalkSpeed", 16, 200, 16, function(v) if LP.Character and LP.Character:FindFirstChildOfClass("Humanoid") then LP.Character.Humanoid.WalkSpeed = v end end) yoxSlider(rageMov, "JumpPower", 50, 300, 50, function(v) if LP.Character and LP.Character:FindFirstChildOfClass("Humanoid") then LP.Character.Humanoid.JumpPower = v end end)
@@ -288,4 +273,4 @@ end
 
 local unloadBtn = Instance.new("TextButton", pages["◐ Settings"]) unloadBtn.Size = UDim2.new(1,0,0,35) unloadBtn.BackgroundColor3 = Color3.fromRGB(150,40,40) unloadBtn.Text = "Hold to unload" unloadBtn.TextColor3 = Color3.fromRGB(255,255,255) unloadBtn.Font = Enum.Font.GothamBold Instance.new("UICorner", unloadBtn).CornerRadius = UDim.new(0,6) unloadBtn.MouseButton1Click:Connect(function() gui:Destroy() end)
 
-print("[ZEDUX] v21.0 completo carregado!")
+print("[ZEDUX] v22.0 - Visual polido carregado!")
