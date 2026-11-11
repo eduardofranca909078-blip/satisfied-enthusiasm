@@ -1,4 +1,4 @@
---// ZEDUX HUB v7.0 - FULL SCRIPT (TEMPO DE KEY + DASHBOARD + ALL FEATURES + BLACK/SILVER + STARFIELD + FLING + CUSTOMIZAÇÃO)
+--// ZEDUX HUB v7.0 - FULL SCRIPT (TEMPO DE KEY + DASHBOARD + ALL FEATURES + BLACK/SILVER + STARFIELD + FLING + CUSTOMIZAÇÃO + YOX UI)
 local P = game:GetService("Players")
 local U = game:GetService("UserInputService")
 local R = game:GetService("RunService")
@@ -659,7 +659,7 @@ cat("TELECINESE")
 cat("TROLL")
 sp(mnu, "CUSTOM", Color3.fromRGB(200, 200, 200))
 cat("PERSONALIZAÇÃO")
-cat("CUSTOMIZAÇÃO AVANÇADA") -- NOVA ABA ADICIONADA
+cat("CUSTOMIZAÇÃO AVANÇADA")
 sp(mnu, "SISTEMA", Color3.fromRGB(150, 150, 150))
 cat("CONFIGURAÇÕES")
 if AD then cat("ADMINISTRAÇÃO") end
@@ -1237,7 +1237,7 @@ local visualCard = card("HEADLESS & KORBLOX HUB", cCustom, Color3.fromRGB(0, 255
 local isHeadless = false
 local isKorblox = false
 local isNoHair = false
-local originalParts = {} -- Guarda as cores originais
+local originalParts = {}
 
 local function updateCharacter()
     local char = LP.Character
@@ -1246,7 +1246,6 @@ local function updateCharacter()
     local head = char:FindFirstChild("Head")
     local humanoid = char:FindFirstChildOfClass("Humanoid")
     
-    -- 1. Headless (Remove os olhos, boca e o mesh da cabeça)
     if head then
         for _, v in ipairs(head:GetChildren()) do
             if v:IsA("Mesh") or v:IsA("Decal") or v:IsA("SpecialMesh") or v.Name == "face" then
@@ -1257,7 +1256,6 @@ local function updateCharacter()
         end
     end
     
-    -- 2. Korblox (Altera a cor e textura das pernas e braços)
     if humanoid then
         for _, part in ipairs(char:GetDescendants()) do
             if part:IsA("BasePart") and (part.Name:find("Leg") or part.Name:find("Arm") or part.Name:find("Hand") or part.Name:find("Foot")) then
@@ -1265,7 +1263,7 @@ local function updateCharacter()
                     if not originalParts[part] then
                         originalParts[part] = part.Color
                     end
-                    part.Color = Color3.fromRGB(20, 20, 20) -- Cor escura do Korblox
+                    part.Color = Color3.fromRGB(20, 20, 20)
                     part.Material = Enum.Material.SmoothPlastic
                 else
                     if originalParts[part] then
@@ -1276,7 +1274,6 @@ local function updateCharacter()
         end
     end
     
-    -- 3. Remover Cabelo
     for _, v in ipairs(char:GetChildren()) do
         if v:IsA("Accessory") and v.AccessoryType == Enum.AccessoryType.Hair then
             if isNoHair then
@@ -1288,7 +1285,6 @@ local function updateCharacter()
     end
 end
 
--- Recria a customização quando o jogador respawna
 LP.CharacterAdded:Connect(function()
     task.wait(1.5)
     if isHeadless or isKorblox or isNoHair then
@@ -1296,7 +1292,6 @@ LP.CharacterAdded:Connect(function()
     end
 end)
 
--- Botão: Headless (Igual da Foto)
 local btnHeadless = bt(visualCard, "HEADLESS: OFF", function()
     isHeadless = not isHeadless
     btnHeadless.Text = "HEADLESS: " .. (isHeadless and "ON" or "OFF")
@@ -1307,7 +1302,6 @@ end)
 btnHeadless.Size = UDim2.new(1, 0, 0, 40)
 btnHeadless.TextSize = 12
 
--- Botão: Korblox (Pernas e Braços)
 local btnKorblox = bt(visualCard, "KORBLOX: OFF", function()
     isKorblox = not isKorblox
     btnKorblox.Text = "KORBLOX: " .. (isKorblox and "ON" or "OFF")
@@ -1318,7 +1312,6 @@ end)
 btnKorblox.Size = UDim2.new(1, 0, 0, 40)
 btnKorblox.TextSize = 12
 
--- Botão: Sem Cabelo
 local btnNoHair = bt(visualCard, "WITHOUT HAIR: OFF", function()
     isNoHair = not isNoHair
     btnNoHair.Text = "WITHOUT HAIR: " .. (isNoHair and "ON" or "OFF")
@@ -1515,7 +1508,7 @@ end, true)
 end
 
 -- =======================================================
--- 6. ESP
+-- 6. ESP (COM YOX UI)
 -- =======================================================
 local cE = card("ESP", sec["ESP"], Color3.fromRGB(220, 220, 220))
 local eF = Instance.new("Folder", gui)
@@ -1650,7 +1643,7 @@ LP.CharacterAdded:Connect(function()
 end)
 
 -- =======================================================
--- 7. MOVIMENTO
+-- 7. MOVIMENTO (COM SLIDERS YOX)
 -- =======================================================
 local cM = card("MOVIMENTO", sec["MOVIMENTO"], Color3.fromRGB(200, 200, 200))
 
@@ -1698,9 +1691,106 @@ btT(cM, "👻 Noclip", function(v)
     end
 end, Color3.fromRGB(80, 80, 120))
 
+-- SLIDER de Velocidade
 local spdAtivo = false
 local spdValor = 16
-btT(cM, "⚡ Speed Hack", function(v)
+
+local function criarSliderYox(parent, titulo, minV, maxV, valorInicial, callback)
+    local container = Instance.new("Frame", parent)
+    container.Size = UDim2.new(1, 0, 0, 40)
+    container.BackgroundTransparency = 1
+    container.ZIndex = 5
+    
+    local label = Instance.new("TextLabel", container)
+    label.Size = UDim2.new(1, -40, 0, 15)
+    label.BackgroundTransparency = 1
+    label.Text = titulo
+    label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    label.TextSize = 11
+    label.Font = Enum.Font.Gotham
+    label.TextXAlignment = Enum.TextXAlignment.Left
+    label.ZIndex = 6
+
+    local valorLabel = Instance.new("TextLabel", container)
+    valorLabel.Size = UDim2.new(0, 40, 0, 15)
+    valorLabel.Position = UDim2.new(1, -40, 0, 0)
+    valorLabel.BackgroundTransparency = 1
+    valorLabel.Text = tostring(valorInicial)
+    valorLabel.TextColor3 = Color3.fromRGB(120, 120, 120)
+    valorLabel.TextSize = 10
+    valorLabel.Font = Enum.Font.GothamBold
+    valorLabel.TextXAlignment = Enum.TextXAlignment.Right
+    valorLabel.ZIndex = 6
+
+    local barraBG = Instance.new("Frame", container)
+    barraBG.Size = UDim2.new(1, 0, 0, 4)
+    barraBG.Position = UDim2.new(0, 0, 0, 25)
+    barraBG.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    barraBG.BorderSizePixel = 0
+    barraBG.ZIndex = 6
+    Instance.new("UICorner", barraBG).CornerRadius = UDim.new(1, 0)
+
+    local fill = Instance.new("Frame", barraBG)
+    fill.Size = UDim2.new((valorInicial - minV) / (maxV - minV), 0, 1, 0)
+    fill.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+    fill.ZIndex = 7
+    Instance.new("UICorner", fill).CornerRadius = UDim.new(1, 0)
+
+    local bolinha = Instance.new("Frame", barraBG)
+    bolinha.Size = UDim2.new(0, 10, 0, 10)
+    bolinha.Position = UDim2.new((valorInicial - minV) / (maxV - minV), -5, 0.5, -5)
+    bolinha.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    bolinha.ZIndex = 8
+    Instance.new("UICorner", bolinha).CornerRadius = UDim.new(1, 0)
+
+    local btnArrastar = Instance.new("TextButton", barraBG)
+    btnArrastar.Size = UDim2.new(1, 0, 1, 10)
+    btnArrastar.Position = UDim2.new(0, 0, 0, -3)
+    btnArrastar.BackgroundTransparency = 1
+    btnArrastar.Text = ""
+    btnArrastar.ZIndex = 9
+
+    local arrastando = false
+    local function atualizar(input)
+        local posX = math.clamp(input.Position.X - barraBG.AbsolutePosition.X, 0, barraBG.AbsoluteSize.X)
+        local porcentagem = posX / barraBG.AbsoluteSize.X
+        local valorFinal = math.floor(minV + (maxV - minV) * porcentagem)
+        
+        fill.Size = UDim2.new(porcentagem, 0, 1, 0)
+        bolinha.Position = UDim2.new(porcentagem, -5, 0.5, -5)
+        valorLabel.Text = tostring(valorFinal)
+        callback(valorFinal)
+    end
+
+    btnArrastar.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            arrastando = true
+            atualizar(input)
+        end
+    end)
+
+    U.InputChanged:Connect(function(input)
+        if arrastando and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            atualizar(input)
+        end
+    end)
+
+    U.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            arrastando = false
+        end
+    end)
+end
+
+criarSliderYox(cM, "WalkSpeed (Velocidade)", 16, 200, 16, function(val)
+    spdValor = val
+    if spdAtivo and LP.Character then
+        local hum = LP.Character:FindFirstChildOfClass("Humanoid")
+        if hum then hum.WalkSpeed = val end
+    end
+end)
+
+btT(cM, "⚡ Ativar Speed Hack", function(v)
     spdAtivo = v
     if v then
         reg("Speed ON")
@@ -1722,19 +1812,18 @@ btT(cM, "⚡ Speed Hack", function(v)
     end
 end, Color3.fromRGB(60, 90, 60))
 
-bt(cM, "⚡ Aumentar Velocidade", function()
-    spdValor = spdValor + 16
-    if spdValor > 200 then spdValor = 16 end
-    reg("Velocidade: " .. spdValor)
-    if LP.Character then
+local jmpAtivo = false
+local jmpValor = 50
+
+criarSliderYox(cM, "JumpPower (Pulo)", 50, 300, 50, function(val)
+    jmpValor = val
+    if jmpAtivo and LP.Character then
         local hum = LP.Character:FindFirstChildOfClass("Humanoid")
-        if hum then hum.WalkSpeed = spdValor end
+        if hum then hum.JumpPower = val end
     end
 end)
 
-local jmpAtivo = false
-local jmpValor = 50
-btT(cM, "🦘 Jump Power", function(v)
+btT(cM, "🦘 Ativar Jump Power", function(v)
     jmpAtivo = v
     if v then
         reg("Jump ON")
@@ -1811,7 +1900,7 @@ btT(cM, "🕊️ Fly", function(v)
 end, Color3.fromRGB(90, 90, 140))
 
 -- =======================================================
--- 8. COMBATE
+-- 8. COMBATE (COM AIMBOT YOX)
 -- =======================================================
 local cCb = card("COMBATE", sec["COMBATE"], Color3.fromRGB(220, 220, 220))
 local aimAtivo = false
@@ -1973,7 +2062,10 @@ bt(cCb, "🔫 Atirar no Alvo", function()
     reg("Atirou: " .. S.sel.Name)
 end, true)
 
-bt(cCb, "📏 FOV: 150", function() aimFov = aimFov + 100 if aimFov > 500 then aimFov = 100 end reg("FOV: " .. aimFov) end)
+criarSliderYox(cCb, "FOV (Raio de Mira)", 50, 500, 150, function(val)
+    aimFov = val
+end)
+
 bt(cCb, "🎯 Parte: Head", function() if aimPart == "Head" then aimPart = "HumanoidRootPart" elseif aimPart == "HumanoidRootPart" then aimPart = "UpperTorso" else aimPart = "Head" end reg("Parte: " .. aimPart) end)
 bt(cCb, "⚡ Suavidade: 1x", function() aimSuave = aimSuave + 1 if aimSuave > 10 then aimSuave = 1 end reg("Suavidade: " .. aimSuave .. "x") end)
 btT(cCb, "👥 Team Check", function(v) teamCheck = v reg("Team Check " .. (v and "ON" or "OFF")) end, Color3.fromRGB(60, 60, 90))
@@ -2463,7 +2555,7 @@ bt(cPer, "🔄 Resetar Tema", function()
 end)
 
 -- =======================================================
--- 12. CONFIGURAÇÕES
+-- 12. CONFIGURAÇÕES (COM YOX THEMES)
 -- =======================================================
 local cL = card("ANTI-LAG", sec["CONFIGURAÇÕES"], Color3.fromRGB(200, 200, 200))
 local aA = false
@@ -2562,6 +2654,41 @@ bt(cI2, "🌐 Server Hop", function()
         end
     end)
 end)
+
+-- THEMES (YOX)
+local cTheme = card("🎨 Temas (Appearance)", sec["CONFIGURAÇÕES"], Color3.fromRGB(200, 200, 200))
+local temasLista = {
+    {n = "Violet", c = Color3.fromRGB(168, 85, 247)},
+    {n = "Crimson", c = Color3.fromRGB(220, 40, 60)},
+    {n = "Cyber Cyan", c = Color3.fromRGB(0, 220, 255)},
+    {n = "Emerald", c = Color3.fromRGB(80, 255, 120)},
+    {n = "Amber", c = Color3.fromRGB(255, 200, 50)},
+    {n = "Monochrome", c = Color3.fromRGB(150, 150, 150)}
+}
+
+local function aplicarTema(cor)
+    T:Create(w, TweenInfo.new(0.3), {BackgroundColor3 = cor}):Play()
+    for _, b in pairs(mB) do 
+        pcall(function() T:Create(b, TweenInfo.new(0.3), {TextColor3 = cor}):Play() end) 
+    end
+end
+
+for _, tema in ipairs(temasLista) do
+    local btnTema = Instance.new("TextButton", cTheme)
+    btnTema.Size = UDim2.new(0.48, 0, 0, 30)
+    btnTema.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    btnTema.Text = "  🎨 " .. tema.n
+    btnTema.TextColor3 = tema.c
+    btnTema.Font = Enum.Font.GothamBold
+    btnTema.TextSize = 10
+    btnTema.TextXAlignment = Enum.TextXAlignment.Left
+    Instance.new("UICorner", btnTema).CornerRadius = UDim.new(0, 4)
+    
+    btnTema.MouseButton1Click:Connect(function()
+        aplicarTema(tema.c)
+        reg("Tema alterado: " .. tema.n)
+    end)
+end
 
 local cc = Instance.new("Frame", sec["CONFIGURAÇÕES"])
 cc.Size = UDim2.new(1, 0, 0, 60)
@@ -2793,4 +2920,4 @@ P.PlayerRemoving:Connect(function()
 end)
 
 sel("Main")
-print("[ZEDUX HUB] Carregado com Customização Headless e Korblox!")
+print("[ZEDUX HUB] Carregado com Customização Headless e Korblox e Funções Yox!")
