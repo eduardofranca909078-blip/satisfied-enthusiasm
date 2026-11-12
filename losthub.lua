@@ -1,4 +1,4 @@
---// ZEDUX HUB v41.0 - PARTE 1: BASE, LOGIN E MENU (CORRIGIDO)
+--// ZEDUX HUB v42.0 - PARTE 1: BASE, LOGIN E MENU (TOP BAR + FIX ZINDEX)
 local P = game:GetService("Players")
 local U = game:GetService("UserInputService")
 local R = game:GetService("RunService")
@@ -48,20 +48,52 @@ for i = 1, 100 do
     task.spawn(function() while star.Parent do local tempoPiscar = math.random(10, 30) / 10 local transAlvo = math.random(0, 8) / 10 T:Create(star, TweenInfo.new(tempoPiscar, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {BackgroundTransparency = transAlvo}):Play() task.wait(tempoPiscar) local posAtual = star.Position T:Create(star, TweenInfo.new(3, Enum.EasingStyle.Linear), {Position = UDim2.new(posAtual.X.Scale, 0, posAtual.Y.Scale + 0.05, 0)}):Play() task.wait(3) if star.Position.Y.Scale > 1 then star.Position = UDim2.new(math.random(), 0, -0.05, 0) end end end)
 end
 
-local topBar = Instance.new("Frame", w) topBar.Size = UDim2.new(1, 0, 0, 50) topBar.BackgroundTransparency = 1 topBar.ZIndex = 50
+-- TOP BAR (BARRA DE ARRASTAR E BOTÕES DE JANELA)
+local topBar = Instance.new("Frame", w) 
+topBar.Size = UDim2.new(1, 0, 0, 40) 
+topBar.BackgroundColor3 = Color3.fromRGB(20, 20, 24) 
+topBar.BackgroundTransparency = 0.2
+topBar.ZIndex = 50
+topBar.ClipsDescendants = true
+Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 8)
+
+local fixTop = Instance.new("Frame", topBar)
+fixTop.Size = UDim2.new(1, 0, 0, 10)
+fixTop.Position = UDim2.new(0, 0, 1, -10)
+fixTop.BackgroundColor3 = Color3.fromRGB(20, 20, 24)
+fixTop.BorderSizePixel = 0
+fixTop.ZIndex = 50
+
 local dragging, dragInput, dragStart, startPos
 local function updateDrag(input) local delta = input.Position - dragStart w.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y) end
 topBar.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then dragging = true dragStart = input.Position startPos = w.Position input.Changed:Connect(function() if input.UserInputState == Enum.UserInputState.End then dragging = false end end) end end)
 topBar.InputChanged:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end)
 U.InputChanged:Connect(function(input) if input == dragInput and dragging then updateDrag(input) end end)
 
-local gengarGif = Instance.new("ImageLabel", w) gengarGif.Size = UDim2.new(0, 45, 0, 45) gengarGif.Position = UDim2.new(0, 10, 0, 2) gengarGif.BackgroundTransparency = 1 gengarGif.Image = "rbxassetid://8031522141" gengarGif.ZIndex = 51
-task.spawn(function() local tempo = 0 while gengarGif.Parent do tempo = tempo + 0.05 gengarGif.Size = UDim2.new(0, 45 * (1 + math.sin(tempo) * 0.05), 0, 45 * (1 + math.sin(tempo) * 0.05)) gengarGif.Rotation = math.sin(tempo * 2) * 3 task.wait(0.05) end end)
+local gengarGif = Instance.new("ImageLabel", topBar) 
+gengarGif.Size = UDim2.new(0, 30, 0, 30) 
+gengarGif.Position = UDim2.new(0, 15, 0.5, -15) 
+gengarGif.BackgroundTransparency = 1 
+gengarGif.Image = "rbxassetid://8031522141" 
+gengarGif.ZIndex = 51
+task.spawn(function() local tempo = 0 while gengarGif.Parent do tempo = tempo + 0.05 gengarGif.Size = UDim2.new(0, 30 * (1 + math.sin(tempo) * 0.1), 0, 30 * (1 + math.sin(tempo) * 0.1)) gengarGif.Position = UDim2.new(0, 15 - (30 * (1 + math.sin(tempo) * 0.1) - 30)/2, 0.5, -15 - (30 * (1 + math.sin(tempo) * 0.1) - 30)/2) gengarGif.Rotation = math.sin(tempo * 2) * 5 task.wait(0.05) end end)
 
-local btnMinimizar = Instance.new("TextButton", w) btnMinimizar.Size = UDim2.new(0, 25, 0, 25) btnMinimizar.Position = UDim2.new(1, -125, 0, 12) btnMinimizar.BackgroundColor3 = Color3.fromRGB(30, 30, 35) btnMinimizar.Text = "—" btnMinimizar.TextColor3 = Color3.fromRGB(255, 255, 255) btnMinimizar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnMinimizar).CornerRadius = UDim.new(0, 4) btnMinimizar.ZIndex = 51
-local btnDiminuir = Instance.new("TextButton", w) btnDiminuir.Size = UDim2.new(0, 25, 0, 25) btnDiminuir.Position = UDim2.new(1, -95, 0, 12) btnDiminuir.BackgroundColor3 = Color3.fromRGB(30, 30, 35) btnDiminuir.Text = "-" btnDiminuir.TextColor3 = Color3.fromRGB(255, 255, 255) btnDiminuir.Font = Enum.Font.GothamBold Instance.new("UICorner", btnDiminuir).CornerRadius = UDim.new(0, 4) btnDiminuir.ZIndex = 51
-local btnAumentar = Instance.new("TextButton", w) btnAumentar.Size = UDim2.new(0, 25, 0, 25) btnAumentar.Position = UDim2.new(1, -65, 0, 12) btnAumentar.BackgroundColor3 = Color3.fromRGB(30, 30, 35) btnAumentar.Text = "+" btnAumentar.TextColor3 = Color3.fromRGB(255, 255, 255) btnAumentar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnAumentar).CornerRadius = UDim.new(0, 4) btnAumentar.ZIndex = 51
-local btnFechar = Instance.new("TextButton", w) btnFechar.Size = UDim2.new(0, 25, 0, 25) btnFechar.Position = UDim2.new(1, -35, 0, 12) btnFechar.BackgroundColor3 = Color3.fromRGB(60, 20, 20) btnFechar.Text = "X" btnFechar.TextColor3 = Color3.fromRGB(255, 255, 255) btnFechar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnFechar).CornerRadius = UDim.new(0, 4) btnFechar.ZIndex = 51
+local titleLabel = Instance.new("TextLabel", topBar)
+titleLabel.Size = UDim2.new(0, 200, 1, 0)
+titleLabel.Position = UDim2.new(0, 55, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "ZEDUX HUB"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextSize = 14
+titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+titleLabel.ZIndex = 51
+
+local btnFechar = Instance.new("TextButton", topBar) btnFechar.Size = UDim2.new(0, 25, 0, 25) btnFechar.Position = UDim2.new(1, -35, 0.5, -12.5) btnFechar.BackgroundColor3 = Color3.fromRGB(60, 20, 20) btnFechar.Text = "X" btnFechar.TextColor3 = Color3.fromRGB(255, 255, 255) btnFechar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnFechar).CornerRadius = UDim.new(0, 4) btnFechar.ZIndex = 51
+local btnAumentar = Instance.new("TextButton", topBar) btnAumentar.Size = UDim2.new(0, 25, 0, 25) btnAumentar.Position = UDim2.new(1, -65, 0.5, -12.5) btnAumentar.BackgroundColor3 = Color3.fromRGB(30, 30, 35) btnAumentar.Text = "+" btnAumentar.TextColor3 = Color3.fromRGB(255, 255, 255) btnAumentar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnAumentar).CornerRadius = UDim.new(0, 4) btnAumentar.ZIndex = 51
+local btnDiminuir = Instance.new("TextButton", topBar) btnDiminuir.Size = UDim2.new(0, 25, 0, 25) btnDiminuir.Position = UDim2.new(1, -95, 0.5, -12.5) btnDiminuir.BackgroundColor3 = Color3.fromRGB(30, 30, 35) btnDiminuir.Text = "-" btnDiminuir.TextColor3 = Color3.fromRGB(255, 255, 255) btnDiminuir.Font = Enum.Font.GothamBold Instance.new("UICorner", btnDiminuir).CornerRadius = UDim.new(0, 4) btnDiminuir.ZIndex = 51
+local btnMinimizar = Instance.new("TextButton", topBar) btnMinimizar.Size = UDim2.new(0, 25, 0, 25) btnMinimizar.Position = UDim2.new(1, -125, 0.5, -12.5) btnMinimizar.BackgroundColor3 = Color3.fromRGB(30, 30, 35) btnMinimizar.Text = "—" btnMinimizar.TextColor3 = Color3.fromRGB(255, 255, 255) btnMinimizar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnMinimizar).CornerRadius = UDim.new(0, 4) btnMinimizar.ZIndex = 51
+
 local flt = Instance.new("TextButton", gui) flt.Size = UDim2.new(0, 50, 0, 50) flt.Position = UDim2.new(0, 20, 0.5, -25) flt.BackgroundColor3 = Color3.fromRGB(20, 20, 25) flt.Text = "👻" flt.TextColor3 = Color3.fromRGB(255, 255, 255) flt.TextSize = 22 flt.Font = Enum.Font.GothamBold flt.BorderSizePixel = 0 flt.Visible = false Instance.new("UICorner", flt).CornerRadius = UDim.new(0, 14)
 
 btnDiminuir.MouseButton1Click:Connect(function() local tam = w.Size T:Create(w, TweenInfo.new(0.2), {Size = UDim2.new(0, math.max(400, tam.X.Offset - 50), 0, math.max(300, tam.Y.Offset - 30))}):Play() end)
@@ -71,7 +103,8 @@ btnMinimizar.MouseButton1Click:Connect(function() w.Visible = false flt.Visible 
 flt.MouseButton1Click:Connect(function() w.Visible = true flt.Visible = false end)
 U.InputBegan:Connect(function(input, gp) if gp then return end if input.KeyCode == Enum.KeyCode.K then w.Visible = not w.Visible end end)
 
-local sb = Instance.new("Frame", w) sb.Size = UDim2.new(0, 180, 1, 0) sb.BackgroundColor3 = Color3.fromRGB(20, 20, 24) sb.BorderSizePixel = 0 Instance.new("UICorner", sb).CornerRadius = UDim.new(0, 8) sb.ZIndex = 10
+-- SIDEBAR
+local sb = Instance.new("Frame", w) sb.Size = UDim2.new(0, 180, 1, -40) sb.Position = UDim2.new(0, 0, 0, 40) sb.BackgroundColor3 = Color3.fromRGB(20, 20, 24) sb.BorderSizePixel = 0 Instance.new("UICorner", sb).CornerRadius = UDim.new(0, 8) sb.ZIndex = 10
 local sbScroll = Instance.new("ScrollingFrame", sb) sbScroll.Size = UDim2.new(1, 0, 1, -60) sbScroll.BackgroundTransparency = 1 sbScroll.ScrollBarThickness = 2 sbScroll.ScrollBarImageColor3 = Color3.fromRGB(80, 80, 90) sbScroll.AutomaticCanvasSize = Enum.AutomaticSize.Y sbScroll.CanvasSize = UDim2.new(0, 0, 0, 0) Instance.new("UIPadding", sbScroll).PaddingTop = UDim.new(0, 10) sbScroll.ZIndex = 11
 local layoutSidebar = Instance.new("UIListLayout", sbScroll) layoutSidebar.Padding = UDim.new(0, 4) layoutSidebar.HorizontalAlignment = Enum.HorizontalAlignment.Center layoutSidebar.SortOrder = Enum.SortOrder.LayoutOrder
 
@@ -81,10 +114,11 @@ local nick = Instance.new("TextLabel", profileFrame) nick.Size = UDim2.new(1, -5
 local cargo = Instance.new("TextLabel", profileFrame) cargo.Size = UDim2.new(1, -50, 0, 12) cargo.Position = UDim2.new(0, 50, 0, 26) cargo.BackgroundTransparency = 1 cargo.Text = CG cargo.TextColor3 = Color3.fromRGB(160, 160, 160) cargo.TextSize = 9 cargo.Font = Enum.Font.GothamBold cargo.TextXAlignment = Enum.TextXAlignment.Left cargo.ZIndex = 13
 local onlineDot = Instance.new("Frame", profileFrame) onlineDot.Size = UDim2.new(0, 6, 0, 6) onlineDot.Position = UDim2.new(1, -12, 0, 8) onlineDot.BackgroundColor3 = Color3.fromRGB(0, 255, 100) onlineDot.ZIndex = 14 Instance.new("UICorner", onlineDot).CornerRadius = UDim.new(1, 0)
 
-local mn = Instance.new("Frame", w) mn.Size = UDim2.new(1, -180, 1, 0) mn.Position = UDim2.new(0, 180, 0, 0) mn.BackgroundTransparency = 1 mn.ClipsDescendants = true mn.ZIndex = 10
+-- CONTEÚDO PRINCIPAL (Abaixo da TopBar)
+local mn = Instance.new("Frame", w) mn.Size = UDim2.new(1, -180, 1, -40) mn.Position = UDim2.new(0, 180, 0, 40) mn.BackgroundTransparency = 1 mn.ClipsDescendants = true mn.ZIndex = 10
 local ct = Instance.new("Frame", mn) ct.Size = UDim2.new(1, -20, 1, -20) ct.Position = UDim2.new(0, 10, 0, 10) ct.BackgroundTransparency = 1 ct.ZIndex = 11
 
--- FUNÇÃO YOX CARD CORRIGIDA (COM UILISTLAYOUT PARA NÃO SUMIR)
+-- FUNÇÃO YOX CARD (COM O FIX DE ZINDEX PARA NÃO SUMIR O CONTEÚDO)
 local function yoxCard(parent, title, symbol)
     local cf = Instance.new("Frame", parent) 
     cf.Size = UDim2.new(1, 0, 0, 0) 
@@ -97,7 +131,15 @@ local function yoxCard(parent, title, symbol)
     local padding = Instance.new("UIPadding", cf) padding.PaddingTop = UDim.new(0, 10) padding.PaddingBottom = UDim.new(0, 10) padding.PaddingLeft = UDim.new(0, 12) padding.PaddingRight = UDim.new(0, 12)
     local layout = Instance.new("UIListLayout", cf) layout.Padding = UDim.new(0, 5) layout.SortOrder = Enum.SortOrder.LayoutOrder
     local tl = Instance.new("TextLabel", cf) tl.Size = UDim2.new(1, 0, 0, 20) tl.BackgroundTransparency = 1 tl.Text = symbol .. "  " .. string.upper(title) tl.TextColor3 = Color3.fromRGB(200, 200, 210) tl.TextSize = 11 tl.Font = Enum.Font.GothamBold tl.TextXAlignment = Enum.TextXAlignment.Left tl.ZIndex = 21 tl.LayoutOrder = 1
-    local c = Instance.new("Frame", cf) c.Size = UDim2.new(1, 0, 0, 0) c.AutomaticSize = Enum.AutomaticSize.Y c.BackgroundTransparency = 1 c.ZIndex = 21 c.LayoutOrder = 2 Instance.new("UIListLayout", c).Padding = UDim.new(0, 8) return c
+    local c = Instance.new("Frame", cf) c.Size = UDim2.new(1, 0, 0, 0) c.AutomaticSize = Enum.AutomaticSize.Y c.BackgroundTransparency = 1 c.ZIndex = 21 c.LayoutOrder = 2 Instance.new("UIListLayout", c).Padding = UDim.new(0, 8) 
+    
+    c.ChildAdded:Connect(function(child)
+        if child:IsA("GuiObject") and child.ZIndex < 22 then
+            child.ZIndex = 22
+        end
+    end)
+    
+    return c
 end
 
 local function yoxToggle(parent, text, callback)
@@ -133,11 +175,8 @@ for i, name in ipairs(tabs) do
     pages[name] = p btns[name] = b
     b.MouseButton1Click:Connect(function() for n, bt in pairs(btns) do bt.BackgroundTransparency = 1 bt.TextColor3 = Color3.fromRGB(150, 150, 160) pages[n].Visible = false end b.BackgroundTransparency = 0.2 b.BackgroundColor3 = Color3.fromRGB(80, 100, 255) b.TextColor3 = Color3.fromRGB(255, 255, 255) p.Visible = true end)
 end
-btns["⌂ Main"].BackgroundTransparency = 0.2 btns["⌂ Main"].BackgroundColor3 = Color3.fromRGB(80, 100, 255) btns["⌂ Main"].TextColor3 = Color3.fromRGB(255, 255, 255) pages["⌂ Main"].Visible = true--// ZEDUX HUB v41.0 - PARTE 2: MAIN, RAGE, AIMBOT E VISUALS
+btns["⌂ Main"].BackgroundTransparency = 0.2 btns["⌂ Main"].BackgroundColor3 = Color3.fromRGB(80, 100, 255) btns["⌂ Main"].TextColor3 = Color3.fromRGB(255, 255, 255) pages["⌂ Main"].Visible = true--// ZEDUX HUB v42.0 - PARTE 2: MAIN, RAGE, AIMBOT E VISUALS
 
--- =======================================================
--- DASHBOARD (MAIN) COM GENGAR E DISCORD
--- =======================================================
 local mainCard = yoxCard(pages["⌂ Main"], "Dashboard", "⌂")
 local profileCard = Instance.new("Frame", mainCard) 
 profileCard.Size = UDim2.new(1, 0, 0, 90) 
@@ -217,7 +256,7 @@ gengarMain.Size = UDim2.new(0, 80, 0, 80)
 gengarMain.Position = UDim2.new(0.5, -40, 0, 10) 
 gengarMain.BackgroundTransparency = 1 
 gengarMain.Image = "rbxassetid://8031522141" 
-gengarMain.ZIndex = 5
+gengarMain.ZIndex = 22
 task.spawn(function() 
     local tempo = 0 
     while gengarMain.Parent do 
@@ -231,9 +270,7 @@ task.spawn(function()
     end 
 end)
 
--- =======================================================
--- RAGE (MOVIMENTO)
--- =======================================================
+-- RAGE
 local rageMov = yoxCard(pages["⛹ Rage"], "Movement", "⛹") 
 yoxSlider(rageMov, "WalkSpeed", 16, 200, 16, function(v) if LP.Character and LP.Character:FindFirstChildOfClass("Humanoid") then LP.Character.Humanoid.WalkSpeed = v end end) 
 yoxSlider(rageMov, "JumpPower", 50, 300, 50, function(v) if LP.Character and LP.Character:FindFirstChildOfClass("Humanoid") then LP.Character.Humanoid.JumpPower = v end end)
@@ -270,9 +307,7 @@ end)
 local rageInf = yoxCard(pages["⛹ Rage"], "Infinite jump", "△") 
 yoxToggle(rageInf, "Infinite jump", function(v) U.JumpRequest:Connect(function() if v and LP.Character then LP.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end end) end)
 
--- =======================================================
--- AIMBOT AVANÇADO (CAMERA + SILENT + TRIGGER)
--- =======================================================
+-- AIMBOT
 local aimEnabled, silentEnabled, triggerEnabled = false, false, false 
 local aimFov, aimSmooth = 150, 5 
 local aimPart = "Head" 
@@ -421,21 +456,31 @@ R.RenderStepped:Connect(function()
     end 
 end)
 
--- =======================================================
--- VISUALS (ESP E CORES)
--- =======================================================
+-- VISUALS (ESP, BONE ESP DE LINHAS, CHAMS E CORES)
 local espCard = yoxCard(pages["▣ Visuals"], "ESP Visuals", "▣") 
 local espFolder = Instance.new("Folder", gui) 
 local espAtivo, espSkeletonAtivo, espNameAtivo, espDistAtivo, espTracerAtivo = false, false, false, false, false 
 local espMaxDist = 1000 
-local corAtual = Color3.fromRGB(255, 255, 255) 
+local corAtual = Color3.fromRGB(0, 255, 255) 
 local espCache = {}
+
+local boneConnections = {
+    {"Head", "UpperTorso"}, {"UpperTorso", "LowerTorso"}, 
+    {"UpperTorso", "LeftUpperArm"}, {"LeftUpperArm", "LeftLowerArm"},
+    {"UpperTorso", "RightUpperArm"}, {"RightUpperArm", "RightLowerArm"},
+    {"LowerTorso", "LeftUpperLeg"}, {"LeftUpperLeg", "LeftLowerLeg"},
+    {"LowerTorso", "RightUpperLeg"}, {"RightUpperLeg", "RightLowerLeg"}
+}
 
 local function aplicarCorNova() 
     for _, data in pairs(espCache) do 
         if data.tracer then data.tracer.Color = corAtual end 
         if data.highlight then data.highlight.OutlineColor = corAtual end 
-        for _, part in ipairs(data.skeletonParts) do part.Color3 = corAtual end 
+        if data.skeletonLines then 
+            for _, line in ipairs(data.skeletonLines) do 
+                line.Color = corAtual 
+            end 
+        end 
     end 
 end
 
@@ -530,7 +575,9 @@ local function limparESP()
     for _, data in pairs(espCache) do 
         if data.billboard then data.billboard:Destroy() end 
         if data.highlight then data.highlight:Destroy() end 
-        if data.skeletonParts then for _, part in ipairs(data.skeletonParts) do part:Destroy() end end 
+        if data.skeletonLines then 
+            for _, line in ipairs(data.skeletonLines) do line:Remove() end 
+        end 
         if data.tracer then data.tracer:Remove() end 
     end 
     espCache = {} 
@@ -539,16 +586,18 @@ end
 local function atualizarESP() 
     if not (espAtivo or espSkeletonAtivo or espNameAtivo or espDistAtivo or espTracerAtivo) then limparESP() return end 
     local centroTela = Vector2.new(C.ViewportSize.X / 2, C.ViewportSize.Y) 
+    
     for _, p in ipairs(P:GetPlayers()) do 
         if p ~= LP and p.Character then 
             local char = p.Character 
             local hrp = char:FindFirstChild("HumanoidRootPart") 
             local hum = char:FindFirstChildOfClass("Humanoid") 
+            
             if hrp and hum then 
                 local dist = math.floor((hrp.Position - C.CFrame.Position).Magnitude) 
                 if dist <= espMaxDist then 
                     if not espCache[p.UserId] then 
-                        espCache[p.UserId] = { skeletonParts = {} } 
+                        espCache[p.UserId] = { skeletonLines = {} } 
                         local b = Instance.new("BillboardGui", espFolder) 
                         b.Adornee = hrp 
                         b.Size = UDim2.new(0, 150, 0, 45) 
@@ -570,14 +619,26 @@ local function atualizarESP()
                         espCache[p.UserId].distLbl.TextSize = 10 
                         espCache[p.UserId].distLbl.Font = Enum.Font.Gotham 
                         espCache[p.UserId].distLbl.TextStrokeTransparency = 0 
+                        
                         if Drawing then 
                             espCache[p.UserId].tracer = Drawing.new("Line") 
                             espCache[p.UserId].tracer.Thickness = 1 
                             espCache[p.UserId].tracer.Color = corAtual 
                             espCache[p.UserId].tracer.Transparency = 0.7 
+                            
+                            for i = 1, #boneConnections do
+                                local line = Drawing.new("Line")
+                                line.Color = corAtual
+                                line.Thickness = 1.5
+                                line.Transparency = 1
+                                line.Visible = false
+                                table.insert(espCache[p.UserId].skeletonLines, line)
+                            end
                         end 
                     end 
+                    
                     local data = espCache[p.UserId] 
+                    
                     if espAtivo then 
                         if not data.highlight then 
                             data.highlight = Instance.new("Highlight", espFolder) 
@@ -591,29 +652,39 @@ local function atualizarESP()
                     else 
                         if data.highlight then data.highlight:Destroy() data.highlight = nil end 
                     end 
-                    if espSkeletonAtivo then 
-                        if #data.skeletonParts == 0 then 
-                            local bones = {"Head", "UpperTorso", "LowerTorso", "LeftUpperArm", "LeftLowerArm", "RightUpperArm", "RightLowerArm", "LeftUpperLeg", "LeftLowerLeg", "RightUpperLeg", "RightLowerLeg"} 
-                            for _, boneName in ipairs(bones) do 
-                                local bone = char:FindFirstChild(boneName) 
-                                if bone and bone:IsA("BasePart") then 
-                                    local line = Instance.new("BoxHandleAdornment", espFolder) 
-                                    line.Adornee = bone 
-                                    line.Size = bone.Size 
-                                    line.Color3 = corAtual 
-                                    line.Transparency = 0.5 
-                                    line.AlwaysOnTop = true 
-                                    table.insert(data.skeletonParts, line) 
+                    
+                    if espSkeletonAtivo and Drawing then 
+                        for i, connection in ipairs(boneConnections) do 
+                            local bone1 = char:FindFirstChild(connection[1]) 
+                            local bone2 = char:FindFirstChild(connection[2]) 
+                            local line = data.skeletonLines[i] 
+                            
+                            if bone1 and bone2 then 
+                                local pos1, onScreen1 = C:WorldToViewportPoint(bone1.Position) 
+                                local pos2, onScreen2 = C:WorldToViewportPoint(bone2.Position) 
+                                
+                                if onScreen1 and onScreen2 then 
+                                    line.From = Vector2.new(pos1.X, pos1.Y) 
+                                    line.To = Vector2.new(pos2.X, pos2.Y) 
+                                    line.Visible = true 
+                                else 
+                                    line.Visible = false 
                                 end 
+                            else 
+                                line.Visible = false 
                             end 
                         end 
                     else 
-                        if #data.skeletonParts > 0 then for _, part in ipairs(data.skeletonParts) do part:Destroy() end data.skeletonParts = {} end 
+                        if data.skeletonLines then 
+                            for _, line in ipairs(data.skeletonLines) do line.Visible = false end 
+                        end 
                     end 
+                    
                     data.nameLbl.Visible = espNameAtivo 
                     data.nameLbl.Text = p.Name 
                     data.distLbl.Visible = espDistAtivo 
                     data.distLbl.Text = "[" .. dist .. "m]" 
+                    
                     if data.tracer then 
                         if espTracerAtivo then 
                             local screenPos, onScreen = C:WorldToViewportPoint(hrp.Position) 
@@ -634,11 +705,11 @@ local function atualizarESP()
     end 
 end
 
-yoxToggle(espCard, "Body Outline (Chams)", function(v) espAtivo = v end) 
-yoxToggle(espCard, "Skeleton ESP", function(v) espSkeletonAtivo = v end) 
+yoxToggle(espCard, "Chams ESP (Contorno)", function(v) espAtivo = v end) 
+yoxToggle(espCard, "Bone ESP (Esqueleto)", function(v) espSkeletonAtivo = v end) 
 yoxToggle(espCard, "Name ESP", function(v) espNameAtivo = v end) 
 yoxToggle(espCard, "Distance ESP", function(v) espDistAtivo = v end) 
-yoxToggle(espCard, "Tracer Lines", function(v) espTracerAtivo = v end) 
+yoxToggle(espCard, "Snap Lines (Tracer)", function(v) espTracerAtivo = v end) 
 yoxSlider(espCard, "Max Distance", 100, 5000, 1000, function(v) espMaxDist = v end)
 
 local btnAbrirCor = Instance.new("TextButton", espCard) 
@@ -651,11 +722,8 @@ btnAbrirCor.TextSize = 10
 Instance.new("UICorner", btnAbrirCor).CornerRadius = UDim.new(0, 4) 
 btnAbrirCor.MouseButton1Click:Connect(function() pickerFrame.Visible = not pickerFrame.Visible end)
 
-R.RenderStepped:Connect(function() atualizarESP() end)--// ZEDUX HUB v41.0 - PARTE 3: PLAYERS, EXTRAS E SETTINGS
+R.RenderStepped:Connect(function() atualizarESP() end)--// ZEDUX HUB v42.0 - PARTE 3: PLAYERS, EXTRAS E SETTINGS
 
--- =======================================================
--- PLAYERS (PREVIEW 3D DO PERSONAGEM)
--- =======================================================
 local pCard = yoxCard(pages["◍ Players"], "Players List", "◍") 
 local pList = Instance.new("ScrollingFrame", pCard) 
 pList.Size = UDim2.new(1, 0, 0, 120) 
@@ -769,9 +837,7 @@ task.spawn(function()
     if LP.Character then atualizarPreview(LP) end 
 end)
 
--- =======================================================
 -- TELECINESE
--- =======================================================
 local teleCard = yoxCard(pages["◎ Telecinese"], "Telecinese", "◎") 
 local function acC() 
     if not LP.Character then return nil end 
@@ -866,9 +932,7 @@ makeBtnTele("Soltar Tudo", function()
     end 
 end)
 
--- =======================================================
 -- EXPLORER
--- =======================================================
 local expCard = yoxCard(pages["▤ Explorer"], "Explorer", "▤") 
 local expList = Instance.new("ScrollingFrame", expCard) 
 expList.Size = UDim2.new(1, 0, 0, 120) 
@@ -903,9 +967,7 @@ btnRefreshExp.Font = Enum.Font.GothamBold
 Instance.new("UICorner", btnRefreshExp).CornerRadius = UDim.new(0, 4) 
 btnRefreshExp.MouseButton1Click:Connect(refreshExp)
 
--- =======================================================
--- CHAT (SUPORTE IA)
--- =======================================================
+-- CHAT (IA)
 local chatCard = yoxCard(pages["⌨ Chat"], "Suporte IA", "⌨") 
 local chatHistory = Instance.new("ScrollingFrame", chatCard) 
 chatHistory.Size = UDim2.new(1, 0, 0, 150) 
@@ -969,7 +1031,6 @@ chatSend.MouseButton1Click:Connect(function()
     task.spawn(function() 
         pcall(function() 
             local HttpService = game:GetService("HttpService") 
-            -- ⚠️ COLOQUE SUA API KEY DA OPENAI AQUI
             local apiKey = "SUA_CHAVE_AQUI" 
             
             local response = HttpService:RequestAsync({ 
@@ -996,9 +1057,7 @@ chatSend.MouseButton1Click:Connect(function()
     end) 
 end)
 
--- =======================================================
--- AMBIENTE E SETTINGS
--- =======================================================
+-- AMBIENTE
 local ambCard = yoxCard(pages["☾ Ambiente"], "Sky / Aurora", "☾") 
 local currentSky = nil 
 local function clearSky() 
@@ -1050,6 +1109,7 @@ for _, ceu in ipairs(ceus) do
     end) 
 end
 
+-- SETTINGS E REGISTROS
 local fpsCard = yoxCard(pages["◐ Settings"], "FPS & Performance", "▦") 
 local fpsCapped, fpsLimit = false, 60 
 local function aplicarFpsCap(valor) 
@@ -1116,4 +1176,4 @@ tL.TextSize = 9
 tL.Font = Enum.Font.Gotham 
 tL.TextXAlignment = Enum.TextXAlignment.Left
 
-print("[ZEDUX] v41.0 Carregado com Sucesso!")
+print("[ZEDUX] v42.0 Carregado com Sucesso!")
