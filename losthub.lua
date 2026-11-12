@@ -1,4 +1,4 @@
---// ZEDUX HUB v42.0 - PARTE 1: BASE, LOGIN E MENU (TOP BAR + FIX ZINDEX)
+--// ZEDUX HUB v44.0 - BLOCO 1: BASE E UI ENGINE
 local P = game:GetService("Players")
 local U = game:GetService("UserInputService")
 local R = game:GetService("RunService")
@@ -48,21 +48,9 @@ for i = 1, 100 do
     task.spawn(function() while star.Parent do local tempoPiscar = math.random(10, 30) / 10 local transAlvo = math.random(0, 8) / 10 T:Create(star, TweenInfo.new(tempoPiscar, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {BackgroundTransparency = transAlvo}):Play() task.wait(tempoPiscar) local posAtual = star.Position T:Create(star, TweenInfo.new(3, Enum.EasingStyle.Linear), {Position = UDim2.new(posAtual.X.Scale, 0, posAtual.Y.Scale + 0.05, 0)}):Play() task.wait(3) if star.Position.Y.Scale > 1 then star.Position = UDim2.new(math.random(), 0, -0.05, 0) end end end)
 end
 
--- TOP BAR (BARRA DE ARRASTAR E BOTÕES DE JANELA)
-local topBar = Instance.new("Frame", w) 
-topBar.Size = UDim2.new(1, 0, 0, 40) 
-topBar.BackgroundColor3 = Color3.fromRGB(20, 20, 24) 
-topBar.BackgroundTransparency = 0.2
-topBar.ZIndex = 50
-topBar.ClipsDescendants = true
-Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 8)
-
-local fixTop = Instance.new("Frame", topBar)
-fixTop.Size = UDim2.new(1, 0, 0, 10)
-fixTop.Position = UDim2.new(0, 0, 1, -10)
-fixTop.BackgroundColor3 = Color3.fromRGB(20, 20, 24)
-fixTop.BorderSizePixel = 0
-fixTop.ZIndex = 50
+-- TOP BAR
+local topBar = Instance.new("Frame", w) topBar.Size = UDim2.new(1, 0, 0, 40) topBar.BackgroundColor3 = Color3.fromRGB(20, 20, 24) topBar.BackgroundTransparency = 0.2 topBar.ZIndex = 50 topBar.ClipsDescendants = true Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 8)
+local fixTop = Instance.new("Frame", topBar) fixTop.Size = UDim2.new(1, 0, 0, 10) fixTop.Position = UDim2.new(0, 0, 1, -10) fixTop.BackgroundColor3 = Color3.fromRGB(20, 20, 24) fixTop.BorderSizePixel = 0 fixTop.ZIndex = 50
 
 local dragging, dragInput, dragStart, startPos
 local function updateDrag(input) local delta = input.Position - dragStart w.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y) end
@@ -70,24 +58,10 @@ topBar.InputBegan:Connect(function(input) if input.UserInputType == Enum.UserInp
 topBar.InputChanged:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end)
 U.InputChanged:Connect(function(input) if input == dragInput and dragging then updateDrag(input) end end)
 
-local gengarGif = Instance.new("ImageLabel", topBar) 
-gengarGif.Size = UDim2.new(0, 30, 0, 30) 
-gengarGif.Position = UDim2.new(0, 15, 0.5, -15) 
-gengarGif.BackgroundTransparency = 1 
-gengarGif.Image = "rbxassetid://8031522141" 
-gengarGif.ZIndex = 51
+local gengarGif = Instance.new("ImageLabel", topBar) gengarGif.Size = UDim2.new(0, 30, 0, 30) gengarGif.Position = UDim2.new(0, 15, 0.5, -15) gengarGif.BackgroundTransparency = 1 gengarGif.Image = "rbxassetid://8031522141" gengarGif.ZIndex = 51
 task.spawn(function() local tempo = 0 while gengarGif.Parent do tempo = tempo + 0.05 gengarGif.Size = UDim2.new(0, 30 * (1 + math.sin(tempo) * 0.1), 0, 30 * (1 + math.sin(tempo) * 0.1)) gengarGif.Position = UDim2.new(0, 15 - (30 * (1 + math.sin(tempo) * 0.1) - 30)/2, 0.5, -15 - (30 * (1 + math.sin(tempo) * 0.1) - 30)/2) gengarGif.Rotation = math.sin(tempo * 2) * 5 task.wait(0.05) end end)
 
-local titleLabel = Instance.new("TextLabel", topBar)
-titleLabel.Size = UDim2.new(0, 200, 1, 0)
-titleLabel.Position = UDim2.new(0, 55, 0, 0)
-titleLabel.BackgroundTransparency = 1
-titleLabel.Text = "ZEDUX HUB"
-titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-titleLabel.Font = Enum.Font.GothamBold
-titleLabel.TextSize = 14
-titleLabel.TextXAlignment = Enum.TextXAlignment.Left
-titleLabel.ZIndex = 51
+local titleLabel = Instance.new("TextLabel", topBar) titleLabel.Size = UDim2.new(0, 200, 1, 0) titleLabel.Position = UDim2.new(0, 55, 0, 0) titleLabel.BackgroundTransparency = 1 titleLabel.Text = "ZEDUX HUB" titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255) titleLabel.Font = Enum.Font.GothamBold titleLabel.TextSize = 14 titleLabel.TextXAlignment = Enum.TextXAlignment.Left titleLabel.ZIndex = 51
 
 local btnFechar = Instance.new("TextButton", topBar) btnFechar.Size = UDim2.new(0, 25, 0, 25) btnFechar.Position = UDim2.new(1, -35, 0.5, -12.5) btnFechar.BackgroundColor3 = Color3.fromRGB(60, 20, 20) btnFechar.Text = "X" btnFechar.TextColor3 = Color3.fromRGB(255, 255, 255) btnFechar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnFechar).CornerRadius = UDim.new(0, 4) btnFechar.ZIndex = 51
 local btnAumentar = Instance.new("TextButton", topBar) btnAumentar.Size = UDim2.new(0, 25, 0, 25) btnAumentar.Position = UDim2.new(1, -65, 0.5, -12.5) btnAumentar.BackgroundColor3 = Color3.fromRGB(30, 30, 35) btnAumentar.Text = "+" btnAumentar.TextColor3 = Color3.fromRGB(255, 255, 255) btnAumentar.Font = Enum.Font.GothamBold Instance.new("UICorner", btnAumentar).CornerRadius = UDim.new(0, 4) btnAumentar.ZIndex = 51
@@ -114,36 +88,40 @@ local nick = Instance.new("TextLabel", profileFrame) nick.Size = UDim2.new(1, -5
 local cargo = Instance.new("TextLabel", profileFrame) cargo.Size = UDim2.new(1, -50, 0, 12) cargo.Position = UDim2.new(0, 50, 0, 26) cargo.BackgroundTransparency = 1 cargo.Text = CG cargo.TextColor3 = Color3.fromRGB(160, 160, 160) cargo.TextSize = 9 cargo.Font = Enum.Font.GothamBold cargo.TextXAlignment = Enum.TextXAlignment.Left cargo.ZIndex = 13
 local onlineDot = Instance.new("Frame", profileFrame) onlineDot.Size = UDim2.new(0, 6, 0, 6) onlineDot.Position = UDim2.new(1, -12, 0, 8) onlineDot.BackgroundColor3 = Color3.fromRGB(0, 255, 100) onlineDot.ZIndex = 14 Instance.new("UICorner", onlineDot).CornerRadius = UDim.new(1, 0)
 
--- CONTEÚDO PRINCIPAL (Abaixo da TopBar)
 local mn = Instance.new("Frame", w) mn.Size = UDim2.new(1, -180, 1, -40) mn.Position = UDim2.new(0, 180, 0, 40) mn.BackgroundTransparency = 1 mn.ClipsDescendants = true mn.ZIndex = 10
 local ct = Instance.new("Frame", mn) ct.Size = UDim2.new(1, -20, 1, -20) ct.Position = UDim2.new(0, 10, 0, 10) ct.BackgroundTransparency = 1 ct.ZIndex = 11
 
--- FUNÇÃO YOX CARD (COM O FIX DE ZINDEX PARA NÃO SUMIR O CONTEÚDO)
+-- FUNÇÃO YOX CARD CORRIGIDA (RETORNA O CONTEÚDO)
 local function yoxCard(parent, title, symbol)
     local cf = Instance.new("Frame", parent) 
     cf.Size = UDim2.new(1, 0, 0, 0) 
     cf.AutomaticSize = Enum.AutomaticSize.Y 
     cf.BackgroundColor3 = Color3.fromRGB(20, 20, 24) 
-    cf.BackgroundTransparency = 0 
     cf.ZIndex = 20 
     Instance.new("UICorner", cf).CornerRadius = UDim.new(0, 10)
     local stroke = Instance.new("UIStroke", cf) stroke.Color = Color3.fromRGB(45, 45, 55) stroke.Thickness = 1.5
-    local padding = Instance.new("UIPadding", cf) padding.PaddingTop = UDim.new(0, 10) padding.PaddingBottom = UDim.new(0, 10) padding.PaddingLeft = UDim.new(0, 12) padding.PaddingRight = UDim.new(0, 12)
-    local layout = Instance.new("UIListLayout", cf) layout.Padding = UDim.new(0, 5) layout.SortOrder = Enum.SortOrder.LayoutOrder
-    local tl = Instance.new("TextLabel", cf) tl.Size = UDim2.new(1, 0, 0, 20) tl.BackgroundTransparency = 1 tl.Text = symbol .. "  " .. string.upper(title) tl.TextColor3 = Color3.fromRGB(200, 200, 210) tl.TextSize = 11 tl.Font = Enum.Font.GothamBold tl.TextXAlignment = Enum.TextXAlignment.Left tl.ZIndex = 21 tl.LayoutOrder = 1
-    local c = Instance.new("Frame", cf) c.Size = UDim2.new(1, 0, 0, 0) c.AutomaticSize = Enum.AutomaticSize.Y c.BackgroundTransparency = 1 c.ZIndex = 21 c.LayoutOrder = 2 Instance.new("UIListLayout", c).Padding = UDim.new(0, 8) 
     
-    c.ChildAdded:Connect(function(child)
-        if child:IsA("GuiObject") and child.ZIndex < 22 then
-            child.ZIndex = 22
-        end
-    end)
+    local padding = Instance.new("UIPadding", cf) padding.PaddingTop = UDim.new(0, 10) padding.PaddingBottom = UDim.new(0, 10) padding.PaddingLeft = UDim.new(0, 12) padding.PaddingRight = UDim.new(0, 12)
+    local layout = Instance.new("UIListLayout", cf) layout.Padding = UDim.new(0, 8) layout.SortOrder = Enum.SortOrder.LayoutOrder
+    
+    local tl = Instance.new("TextLabel", cf) tl.Size = UDim2.new(1, 0, 0, 20) tl.BackgroundTransparency = 1 tl.Text = symbol .. "  " .. string.upper(title) tl.TextColor3 = Color3.fromRGB(200, 200, 210) tl.TextSize = 11 tl.Font = Enum.Font.GothamBold tl.TextXAlignment = Enum.TextXAlignment.Left tl.ZIndex = 21 tl.LayoutOrder = 1
+    
+    local c = Instance.new("Frame", cf) 
+    c.Size = UDim2.new(1, 0, 0, 0) 
+    c.AutomaticSize = Enum.AutomaticSize.Y 
+    c.BackgroundTransparency = 1 
+    c.ZIndex = 21 
+    c.LayoutOrder = 2
+    Instance.new("UIListLayout", c).Padding = UDim.new(0, 8) 
+    Instance.new("UIListLayout", c).SortOrder = Enum.SortOrder.LayoutOrder
     
     return c
 end
 
 local function yoxToggle(parent, text, callback)
-    local f = Instance.new("Frame", parent) f.Size = UDim2.new(1, 0, 0, 30) f.BackgroundTransparency = 1 f.ZIndex = 22
+    local f = Instance.new("Frame", parent) 
+    f.Size = UDim2.new(1, 0, 0, 30) f.BackgroundTransparency = 1 f.ZIndex = 22
+    f.LayoutOrder = #parent:GetChildren() + 1
     local l = Instance.new("TextLabel", f) l.Size = UDim2.new(1, -50, 1, 0) l.BackgroundTransparency = 1 l.Text = text l.TextColor3 = Color3.fromRGB(220, 220, 220) l.TextSize = 11 l.Font = Enum.Font.Gotham l.TextXAlignment = Enum.TextXAlignment.Left l.ZIndex = 23
     local s = Instance.new("Frame", f) s.Size = UDim2.new(0, 40, 0, 20) s.Position = UDim2.new(1, -40, 0.5, -10) s.BackgroundColor3 = Color3.fromRGB(35, 35, 40) s.ZIndex = 23 Instance.new("UICorner", s).CornerRadius = UDim.new(1, 0) Instance.new("UIStroke", s).Color = Color3.fromRGB(50, 50, 60)
     local c = Instance.new("Frame", s) c.Size = UDim2.new(0, 14, 0, 14) c.Position = UDim2.new(0, 3, 0.5, -7) c.BackgroundColor3 = Color3.fromRGB(120, 120, 130) c.ZIndex = 24 Instance.new("UICorner", c).CornerRadius = UDim.new(1, 0)
@@ -154,6 +132,7 @@ end
 
 local function yoxSlider(parent, text, min, max, default, callback)
     local f = Instance.new("Frame", parent) f.Size = UDim2.new(1, 0, 0, 35) f.BackgroundTransparency = 1 f.ZIndex = 22
+    f.LayoutOrder = #parent:GetChildren() + 1
     local l = Instance.new("TextLabel", f) l.Size = UDim2.new(1, -40, 0, 15) l.BackgroundTransparency = 1 l.Text = text l.TextColor3 = Color3.fromRGB(200, 200, 200) l.TextSize = 10 l.Font = Enum.Font.Gotham l.TextXAlignment = Enum.TextXAlignment.Left l.ZIndex = 23
     local v = Instance.new("TextLabel", f) v.Size = UDim2.new(0, 40, 0, 15) v.Position = UDim2.new(1, -40, 0, 0) v.BackgroundTransparency = 1 v.Text = tostring(default) v.TextColor3 = Color3.fromRGB(150, 150, 160) v.TextSize = 9 v.Font = Enum.Font.GothamBold v.TextXAlignment = Enum.TextXAlignment.Right v.ZIndex = 23
     local bg = Instance.new("Frame", f) bg.Size = UDim2.new(1, 0, 0, 4) bg.Position = UDim2.new(0, 0, 0, 25) bg.BackgroundColor3 = Color3.fromRGB(35, 35, 40) bg.ZIndex = 23 Instance.new("UICorner", bg).CornerRadius = UDim.new(1, 0)
@@ -175,7 +154,7 @@ for i, name in ipairs(tabs) do
     pages[name] = p btns[name] = b
     b.MouseButton1Click:Connect(function() for n, bt in pairs(btns) do bt.BackgroundTransparency = 1 bt.TextColor3 = Color3.fromRGB(150, 150, 160) pages[n].Visible = false end b.BackgroundTransparency = 0.2 b.BackgroundColor3 = Color3.fromRGB(80, 100, 255) b.TextColor3 = Color3.fromRGB(255, 255, 255) p.Visible = true end)
 end
-btns["⌂ Main"].BackgroundTransparency = 0.2 btns["⌂ Main"].BackgroundColor3 = Color3.fromRGB(80, 100, 255) btns["⌂ Main"].TextColor3 = Color3.fromRGB(255, 255, 255) pages["⌂ Main"].Visible = true--// ZEDUX HUB v42.0 - PARTE 2: MAIN, RAGE, AIMBOT E VISUALS
+btns["⌂ Main"].BackgroundTransparency = 0.2 btns["⌂ Main"].BackgroundColor3 = Color3.fromRGB(80, 100, 255) btns["⌂ Main"].TextColor3 = Color3.fromRGB(255, 255, 255) pages["⌂ Main"].Visible = true--// ZEDUX HUB v44.0 - BLOCO 2: FUNÇÕES E ABAS
 
 local mainCard = yoxCard(pages["⌂ Main"], "Dashboard", "⌂")
 local profileCard = Instance.new("Frame", mainCard) 
@@ -456,7 +435,7 @@ R.RenderStepped:Connect(function()
     end 
 end)
 
--- VISUALS (ESP, BONE ESP DE LINHAS, CHAMS E CORES)
+-- VISUALS
 local espCard = yoxCard(pages["▣ Visuals"], "ESP Visuals", "▣") 
 local espFolder = Instance.new("Folder", gui) 
 local espAtivo, espSkeletonAtivo, espNameAtivo, espDistAtivo, espTracerAtivo = false, false, false, false, false 
@@ -722,8 +701,9 @@ btnAbrirCor.TextSize = 10
 Instance.new("UICorner", btnAbrirCor).CornerRadius = UDim.new(0, 4) 
 btnAbrirCor.MouseButton1Click:Connect(function() pickerFrame.Visible = not pickerFrame.Visible end)
 
-R.RenderStepped:Connect(function() atualizarESP() end)--// ZEDUX HUB v42.0 - PARTE 3: PLAYERS, EXTRAS E SETTINGS
+R.RenderStepped:Connect(function() atualizarESP() end)
 
+-- PLAYERS
 local pCard = yoxCard(pages["◍ Players"], "Players List", "◍") 
 local pList = Instance.new("ScrollingFrame", pCard) 
 pList.Size = UDim2.new(1, 0, 0, 120) 
@@ -1176,4 +1156,4 @@ tL.TextSize = 9
 tL.Font = Enum.Font.Gotham 
 tL.TextXAlignment = Enum.TextXAlignment.Left
 
-print("[ZEDUX] v42.0 Carregado com Sucesso!")
+print("[ZEDUX] v44.0 Carregado com Sucesso!")
