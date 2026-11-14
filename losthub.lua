@@ -30,7 +30,7 @@ local CONFIG = {
     WATERMARK    = true,
     CONSOLE_LOGS = true,
     EXPLORER_LIMIT = 100,
-    API          = "https://zedux.enzonic.dev/api/chat",
+    API          = "API = https://zedux.enzonic.dev",
     WEBHOOK      = "https://discord.com/api/webhooks/1559481604387246170/aAs30L9QQbfX0ZWA92jKpD6PZ_F5IOZT1424WNqaHluyZ-QuNGbbO36pVf-Fe3Ti9Fe4",
     URL_SITE     = "COLOQUE_O_LINK_DO_SEU_SITE_AQUI",
     URL_DISCORD  = "https://discord.gg/s6GSy4TuJ"
