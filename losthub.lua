@@ -1,6 +1,5 @@
 -- ============================================================
---  olliE panel v7-L  ·  ESP + AIMBOT  ·  Roblox
---  RShift = painel   ·   E = aim (hold)   ·   RightAlt = silent
+--  olliE panel v7-L  ·  ESP + AIMBOT  ·  Roblox (MOBILE FIX)
 -- ============================================================
 local Players    = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -11,9 +10,7 @@ local LP         = Players.LocalPlayer
 local Mouse      = LP:GetMouse()
 local D          = Drawing
 
--- ============ CONFIG ============
 local cfg = {
-    -- ESP
     enabled=true, showBox=true, showName=true, showDist=true,
     showHealth=true, showTracer=false,
     maxDist=500, thickness=1, textSize=14,
@@ -21,7 +18,6 @@ local cfg = {
     boxR=0, boxG=255, boxB=140,
     nameR=240, nameG=240, nameB=250,
     tracerR=255, tracerG=70, tracerB=70,
-    -- AIMBOT
     aimEnabled=true, silent=false,
     teamCheck=true, wallCheck=true, fovCheck=true, showFov=true,
     fov=120, aimDist=600, smooth=35,
@@ -41,35 +37,23 @@ local C = {
     closeHover=Color3.fromRGB(200,60,60),
 }
 
--- ============ PERSISTÊNCIA ============
 local SAVE_PATH = "ollie_esp_v7_" .. tostring(game.PlaceId) .. ".json"
-
-local function hasFS()
-    return writefile and readfile and isfile
-end
+local function hasFS() return writefile and readfile and isfile end
 
 local function serialize(t, indent)
-    indent = indent or ""
-    local ni = indent .. "  "
+    indent = indent or ""; local ni = indent .. "  "
     local parts = {}
     for k, v in pairs(t) do
-        local key = type(k)=="string" and string.format("[%q]",k)
-                    or "["..tostring(k).."]"
+        local key = type(k)=="string" and string.format("[%q]",k) or "["..tostring(k).."]"
         local val
-        if type(v)=="table" then
-            val = serialize(v, ni)
-        elseif type(v)=="string" then
-            val = string.format("%q", v)
+        if type(v)=="table" then val = serialize(v, ni)
+        elseif type(v)=="string" then val = string.format("%q", v)
         elseif type(v)=="Color3" then
             val = string.format('{["__c3"]={%d,%d,%d}}',
                 math.floor(v.R*255), math.floor(v.G*255), math.floor(v.B*255))
-        elseif type(v)=="EnumItem" then
-            val = string.format('[%q]', "__enum__"..tostring(v))
-        elseif type(v)=="boolean" or type(v)=="number" then
-            val = tostring(v)
-        else
-            val = "nil"
-        end
+        elseif type(v)=="EnumItem" then val = string.format('[%q]', "__enum__"..tostring(v))
+        elseif type(v)=="boolean" or type(v)=="number" then val = tostring(v)
+        else val = "nil" end
         parts[#parts+1] = ni..key.."="..val
     end
     return "{\n"..table.concat(parts,",\n").."\n"..indent.."}"
@@ -78,25 +62,16 @@ end
 local function deserialize(src)
     if type(src)~="string" or src=="" then return nil end
     src = src:gsub('"__enum__(Enum%.[%w_]+%.[%w_]+)"', "%1")
-    src = src:gsub('{%["__c3"%]={(%d+),(%d+),(%d+)}}',
-        "Color3.fromRGB(%1,%2,%3)")
+    src = src:gsub('{%["__c3"%]={(%d+),(%d+),(%d+)}}', "Color3.fromRGB(%1,%2,%3)")
     local ls = loadstring or load
     if not ls then return nil end
     local fn, err = ls("return "..src)
-    if not fn then
-        if syn and syn.notify then syn.notify("Parse: "..tostring(err)) end
-        return nil
-    end
+    if not fn then return nil end
     local ok, data = pcall(fn)
-    if not ok then
-        if syn and syn.notify then syn.notify("Eval: "..tostring(data)) end
-        return nil
-    end
-    if type(data)~="table" then return nil end
+    if not ok or type(data)~="table" then return nil end
     return data
 end
 
--- ============ DRAW HELPERS ============
 local function mk(k) local o=D.new(k); o.Visible=false; return o end
 local function sq(f,c) local s=mk("Square"); s.Filled=f; s.Color=c or C.panelBg; return s end
 local function tx(s,c) local t=mk("Text"); t.Size=s; t.Center=true; t.Outline=true; t.Color=c or C.text; return t end
@@ -107,11 +82,8 @@ local function rgb(r,g,b) return Color3.fromRGB(r,g,b) end
 local esp={}
 local function ensureEsp(p)
     if esp[p] then return esp[p] end
-    esp[p]={
-        box=sq(false), hpBg=sq(true,rgb(30,30,40)), hpFg=sq(true),
-        name=tx(cfg.textSize,C.text), dist=tx(cfg.textSize-2,C.textDim),
-        tracer=ln(),
-    }
+    esp[p]={box=sq(false), hpBg=sq(true,rgb(30,30,40)), hpFg=sq(true),
+        name=tx(cfg.textSize,C.text), dist=tx(cfg.textSize-2,C.textDim), tracer=ln()}
     return esp[p]
 end
 local function clearEsp(p)
@@ -154,11 +126,12 @@ local function updateESP()
                         e.box.Visible=cfg.showBox
                         e.box.Position=pos; e.box.Size=Vector2.new(w,h)
                         e.box.Color=boxCol; e.box.Thickness=cfg.thickness
-                        e.name.Visible=cfg.showName
+                        local showText = h > 30
+                        e.name.Visible=cfg.showName and showText
                         e.name.Text=p.Name
                         e.name.Position=Vector2.new(pos.X+w/2,pos.Y-cfg.textSize-3)
                         e.name.Size=cfg.textSize; e.name.Color=nameCol
-                        e.dist.Visible=cfg.showDist
+                        e.dist.Visible=cfg.showDist and showText
                         e.dist.Text=string.format("%d studs",math.floor(dist))
                         e.dist.Position=Vector2.new(pos.X+w/2,pos.Y+h+5)
                         e.dist.Size=cfg.textSize-2; e.dist.Color=C.textDim
@@ -180,9 +153,7 @@ local function updateESP()
                     end
                 end
             end
-            if not ok then
-                for _,v in pairs(e) do v.Visible=false end
-            end
+            if not ok then for _,v in pairs(e) do v.Visible=false end end
         end
     end
 end
@@ -195,10 +166,7 @@ local aiming=false
 local currentTarget, silentPos
 local oldIndex
 
-local function screenCenter()
-    local v=Camera.ViewportSize
-    return Vector2.new(v.X/2,v.Y/2)
-end
+local function screenCenter() return Vector2.new(Camera.ViewportSize.X/2,Camera.ViewportSize.Y/2) end
 local function isFriendly(p)
     if not cfg.teamCheck then return false end
     if p.Team==nil then return false end
@@ -234,10 +202,8 @@ local function findBestTarget()
                     if on then
                         local d3=(part.Position-Camera.CFrame.Position).Magnitude
                         local sd=(sp-center).Magnitude
-                        if d3<=cfg.aimDist
-                        and (not cfg.fovCheck or sd<=cfg.fov)
-                        and hasLOS(part)
-                        and sd<bestDist then
+                        if d3<=cfg.aimDist and (not cfg.fovCheck or sd<=cfg.fov)
+                        and hasLOS(part) and sd<bestDist then
                             bestDist=sd
                             best={player=p,part=part,screenPos=sp,worldPos=part.Position}
                         end
@@ -252,10 +218,8 @@ end
 if hookmetamethod then
     oldIndex = hookmetamethod(game,"__index",function(self,key)
         if self==Mouse and silentPos then
-            if key=="Hit" then
-                return CFrame.lookAt(Camera.CFrame.Position,silentPos)
-            elseif key=="Target" then
-                return currentTarget and currentTarget.part
+            if key=="Hit" then return CFrame.lookAt(Camera.CFrame.Position,silentPos)
+            elseif key=="Target" then return currentTarget and currentTarget.part
             elseif key=="UnitRay" then
                 local o=Camera.CFrame.Position
                 return Ray.new(o,(silentPos-o))
@@ -281,7 +245,6 @@ local function updateAimbot()
     local t=findBestTarget()
     currentTarget=t
     if not t then silentPos=nil; return end
-
     if cfg.silent then silentPos=t.worldPos end
 
     local alpha=1-cfg.smooth/100
@@ -291,25 +254,25 @@ local function updateAimbot()
     end
 end
 
-UIS.InputBegan:Connect(function(input,gp)
-    if gp then return end
-    if input.KeyCode==cfg.aimKey then aiming=true end
-    if input.KeyCode==cfg.silentKey then
-        cfg.silent=not cfg.silent
-        if syn and syn.notify then
-            syn.notify("Silent: "..(cfg.silent and "ON" or "OFF"))
-        end
-        if scheduleSave then scheduleSave() end
-    end
-end)
-UIS.InputEnded:Connect(function(input)
-    if input.KeyCode==cfg.aimKey then
-        aiming=false; silentPos=nil
-    end
-end)
+-- ============ MOBILE TOGGLE BUTTON ============
+local mobileBtn  = mk("Square")
+local mobileTxt  = mk("Text")
+mobileBtn.Filled = true
+mobileBtn.Color  = C.panelBg
+mobileBtn.Size   = Vector2.new(90, 32)
+mobileBtn.Position = Vector2.new(20, 100)
+mobileBtn.Visible = true
+
+mobileTxt.Text   = "MENU"
+mobileTxt.Size   = 14
+mobileTxt.Center = true
+mobileTxt.Outline= true
+mobileTxt.Color  = C.accent
+mobileTxt.Position = Vector2.new(20 + 45, 100 + 16)
+mobileTxt.Visible  = true
 
 -- ============ PANEL ============
-local panel={open=false, minimized=true, x=50,y=90,w=270,pad=10,headH=46,rowH=26,
+local panel={open=false, minimized=true, x=40,y=160,w=270,pad=10,headH=46,rowH=26,
     items={},elems={},openGroups={}}
 
 local function addElem(o) table.insert(panel.elems,o); return o end
@@ -325,32 +288,23 @@ local btnMinL  = addElem(tx(12,C.textDim))
 local btnClose = addElem(sq(true,C.subBg))
 local btnCloseL= addElem(tx(12,C.textDim))
 
-title.Text="PANEL"; subtitle.Text="ROBLOX · v7-L"; hint.Text="RShift"
+title.Text="PANEL"; subtitle.Text="ROBLOX · v7-M"; hint.Text="MOBILE"
 btnMinL.Text="–"; btnMinL.Center=true; btnMinL.Outline=false
 btnCloseL.Text="×"; btnCloseL.Center=true; btnCloseL.Outline=false
 
--- ============ SAVE ============
 local function saveState()
     if not hasFS() then return end
-    local snap={cfg={}, ui={x=panel.x,y=panel.y,
-        minimized=panel.minimized, open=panel.open, groups={}}}
+    local snap={cfg={}, ui={x=panel.x,y=panel.y,minimized=panel.minimized,open=panel.open,groups={}}}
     for k,v in pairs(cfg) do snap.cfg[k]=v end
-    for gk,gv in pairs(panel.openGroups) do
-        if gv then snap.ui.groups[gk]=true end
-    end
-    local ok,err=pcall(writefile,SAVE_PATH,serialize(snap))
-    if not ok and syn and syn.notify then
-        syn.notify("Save: "..tostring(err))
-    end
+    for gk,gv in pairs(panel.openGroups) do if gv then snap.ui.groups[gk]=true end end
+    pcall(writefile,SAVE_PATH,serialize(snap))
 end
-
 local saveTimer=nil
 function scheduleSave()
     if not hasFS() then return end
     if saveTimer then pcall(function() task.cancel(saveTimer) end) end
     saveTimer=task.delay(1.5,function() saveState(); saveTimer=nil end)
 end
-
 local function loadState()
     if not hasFS() or not isfile(SAVE_PATH) then return false end
     local ok,raw=pcall(readfile,SAVE_PATH)
@@ -358,9 +312,7 @@ local function loadState()
     local data=deserialize(raw)
     if type(data)~="table" then return false end
     if type(data.cfg)=="table" then
-        for k,v in pairs(data.cfg) do
-            if cfg[k]~=nil then cfg[k]=v end
-        end
+        for k,v in pairs(data.cfg) do if cfg[k]~=nil then cfg[k]=v end end
     end
     if type(data.ui)=="table" then
         panel.x=data.ui.x or panel.x
@@ -368,37 +320,26 @@ local function loadState()
         panel.minimized=data.ui.minimized and true or false
         panel.open=data.ui.open and true or false
         if type(data.ui.groups)=="table" then
-            for gk,gv in pairs(data.ui.groups) do
-                if gv then panel.openGroups[gk]=true end
-            end
+            for gk,gv in pairs(data.ui.groups) do if gv then panel.openGroups[gk]=true end end
         end
     end
     return true
 end
 
--- ============ ITEM BUILDERS ============
 local function newToggle(label,key,indent)
     local it={kind="toggle",key=key,indent=indent or 0,anim=cfg[key] and 1 or 0}
-    it.bg=addElem(sq(true,C.rowBg))
-    it.acc=addElem(sq(true,C.accentDim))
-    it.dotBg=addElem(sq(true,rgb(40,42,54)))
-    it.dot=addElem(sq(true,C.accent))
-    it.lbl=addElem(tx(11,C.text)); it.lbl.Center=false; it.lbl.Outline=false
-    it.lbl.Text=label
+    it.bg=addElem(sq(true,C.rowBg)); it.acc=addElem(sq(true,C.accentDim))
+    it.dotBg=addElem(sq(true,rgb(40,42,54))); it.dot=addElem(sq(true,C.accent))
+    it.lbl=addElem(tx(11,C.text)); it.lbl.Center=false; it.lbl.Outline=false; it.lbl.Text=label
     panel.items[#panel.items+1]=it; return it
 end
-
 local function newSlider(label,key,min,max,indent)
-    local it={kind="slider",key=key,min=min,max=max,indent=indent or 0,
-        anim=(cfg[key]-min)/(max-min)}
-    it.bg=addElem(sq(true,C.rowBg))
-    it.track=addElem(sq(true,rgb(30,32,42)))
+    local it={kind="slider",key=key,min=min,max=max,indent=indent or 0,anim=(cfg[key]-min)/(max-min)}
+    it.bg=addElem(sq(true,C.rowBg)); it.track=addElem(sq(true,rgb(30,32,42)))
     it.fill=addElem(sq(true,C.accent))
-    it.lbl=addElem(tx(10,C.text)); it.lbl.Center=false; it.lbl.Outline=false
-    it.lbl.Text=label
+    it.lbl=addElem(tx(10,C.text)); it.lbl.Center=false; it.lbl.Outline=false; it.lbl.Text=label
     panel.items[#panel.items+1]=it; return it
 end
-
 local function newCycle(label,key,list,indent)
     local it={kind="cycle",key=key,list=list,indent=indent or 0}
     it.bg=addElem(sq(true,C.rowBg))
@@ -407,16 +348,12 @@ local function newCycle(label,key,list,indent)
     it.lbl.Text=label; it.val.Text=tostring(cfg[key])
     panel.items[#panel.items+1]=it; return it
 end
-
 local function newGroup(label,key)
     local g={kind="group",key=key,open=false,body={}}
-    g.bg=addElem(sq(true,C.subBg))
-    g.chev=addElem(ln(C.textDim))
-    g.lbl=addElem(tx(11,C.text)); g.lbl.Center=false; g.lbl.Outline=false
-    g.lbl.Text=label
+    g.bg=addElem(sq(true,C.subBg)); g.chev=addElem(ln(C.textDim))
+    g.lbl=addElem(tx(11,C.text)); g.lbl.Center=false; g.lbl.Outline=false; g.lbl.Text=label
     panel.items[#panel.items+1]=g; return g
 end
-
 local function childToggle(g,label,key)
     local it=newToggle(label,key,1); it.parent=g; g.body[#g.body+1]=it; return it
 end
@@ -426,12 +363,10 @@ end
 local function childCycle(g,label,key,list)
     local it=newCycle(label,key,list,1); it.parent=g; g.body[#g.body+1]=it; return it
 end
-
 local function addSwatch(g,label,rK,gK,bK)
     local it={kind="swatch",rKey=rK,gKey=gK,bKey=bK,parent=g,indent=1}
     it.bg=addElem(sq(true,C.subBg))
-    it.lbl=addElem(tx(10,C.textDim)); it.lbl.Center=false; it.lbl.Outline=false
-    it.lbl.Text=label
+    it.lbl=addElem(tx(10,C.textDim)); it.lbl.Center=false; it.lbl.Outline=false; it.lbl.Text=label
     it.obj=addElem(sq(true,rgb(cfg[rK],cfg[gK],cfg[bK])))
     g.body[#g.body+1]=it
     childSlider(g,label.." R",rK,0,255)
@@ -439,14 +374,10 @@ local function addSwatch(g,label,rK,gK,bK)
     childSlider(g,label.." B",bK,0,255)
 end
 
--- ============ TREE ============
 newToggle("ESP Enabled","enabled")
-
 local gVis = newGroup("VISUAL","grp_visual")
-childToggle(gVis,"Box","showBox")
-childToggle(gVis,"Name","showName")
-childToggle(gVis,"Distance","showDist")
-childToggle(gVis,"Health","showHealth")
+childToggle(gVis,"Box","showBox"); childToggle(gVis,"Name","showName")
+childToggle(gVis,"Distance","showDist"); childToggle(gVis,"Health","showHealth")
 childToggle(gVis,"Tracer","showTracer")
 
 local gCol = newGroup("ESP COLORS","grp_colors")
@@ -459,48 +390,36 @@ childSlider(gEspT,"Max Dist","maxDist",50,2000)
 childSlider(gEspT,"Thickness","thickness",1,4)
 
 newToggle("Aimbot Enabled","aimEnabled")
-
 local gAim = newGroup("AIMBOT","grp_aim")
-childToggle(gAim,"Silent Aim","silent")
-childToggle(gAim,"Team Check","teamCheck")
-childToggle(gAim,"Wall Check","wallCheck")
-childToggle(gAim,"FOV Check","fovCheck")
+childToggle(gAim,"Silent Aim","silent"); childToggle(gAim,"Team Check","teamCheck")
+childToggle(gAim,"Wall Check","wallCheck"); childToggle(gAim,"FOV Check","fovCheck")
 childToggle(gAim,"Show FOV","showFov")
-childSlider(gAim,"FOV","fov",20,500)
-childSlider(gAim,"Smooth","smooth",1,99)
+childSlider(gAim,"FOV","fov",20,500); childSlider(gAim,"Smooth","smooth",1,99)
 childSlider(gAim,"Max Dist","aimDist",50,2000)
 childCycle(gAim,"Aim Part","aimPart",AIM_PARTS)
 
 local gFovCol = newGroup("FOV COLOR","grp_fovcol")
 addSwatch(gFovCol,"FOV","fovR","fovG","fovB")
 
--- ============ LAYOUT ============
-local function itemVisible(it)
-    return (not it.parent) or it.parent.open
-end
+local function itemVisible(it) return (not it.parent) or it.parent.open end
 
 local function layout()
     local x,y=panel.x,panel.y
     local w=panel.w
     local totalH=panel.headH + (panel.minimized and 0 or panel.pad)
     if not panel.minimized then
-        for _,it in ipairs(panel.items) do
-            if itemVisible(it) then totalH=totalH+panel.rowH end
-        end
+        for _,it in ipairs(panel.items) do if itemVisible(it) then totalH=totalH+panel.rowH end end
     end
-
     bg.Position=Vector2.new(x,y); bg.Size=Vector2.new(w,totalH)
     edge.Position=bg.Position; edge.Size=bg.Size
     accent.Position=Vector2.new(x,y); accent.Size=Vector2.new(4,totalH)
     title.Position=Vector2.new(x+16,y+18)
     subtitle.Position=Vector2.new(x+w-70,y+16)
     hint.Position=Vector2.new(x+w-70,y+32)
-
-    btnMin.Position   = Vector2.new(x+w-52,y+13); btnMin.Size   = Vector2.new(20,20)
-    btnMinL.Position  = Vector2.new(x+w-42,y+23)
-    btnClose.Position = Vector2.new(x+w-28,y+13); btnClose.Size = Vector2.new(20,20)
-    btnCloseL.Position= Vector2.new(x+w-18,y+23)
-
+    btnMin.Position=Vector2.new(x+w-52,y+13); btnMin.Size=Vector2.new(20,20)
+    btnMinL.Position=Vector2.new(x+w-42,y+23)
+    btnClose.Position=Vector2.new(x+w-28,y+13); btnClose.Size=Vector2.new(20,20)
+    btnCloseL.Position=Vector2.new(x+w-18,y+23)
     btnMin.Visible=panel.open; btnMinL.Visible=panel.open
     btnClose.Visible=panel.open; btnCloseL.Visible=panel.open
 
@@ -518,42 +437,31 @@ local function layout()
         local vis=itemVisible(it) and panel.open
         local indent=(it.indent or 0)*14
         local rx,rw,rh = x+8+indent, w-16-indent, panel.rowH-4
-
         if it.kind=="group" then
             it.bg.Visible=vis; it.chev.Visible=vis; it.lbl.Visible=vis
             if vis then
-                it.bg.Position=Vector2.new(x+8,ry)
-                it.bg.Size=Vector2.new(w-16,rh)
-                it.lbl.Position=Vector2.new(x+18,ry+rh/2)
-                it.lbl.Size=11
+                it.bg.Position=Vector2.new(x+8,ry); it.bg.Size=Vector2.new(w-16,rh)
+                it.lbl.Position=Vector2.new(x+18,ry+rh/2); it.lbl.Size=11
                 local cxp,cyp=x+w-24,ry+rh/2
-                it.chev.From=Vector2.new(cxp-3,cyp-3)
-                it.chev.To=Vector2.new(cxp+3,cyp+3)
+                it.chev.From=Vector2.new(cxp-3,cyp-3); it.chev.To=Vector2.new(cxp+3,cyp+3)
                 it.chev.Color=it.open and C.accent or C.textDim
             end
         elseif it.kind=="toggle" then
-            it.bg.Visible=vis; it.acc.Visible=vis; it.dotBg.Visible=vis
-            it.dot.Visible=vis; it.lbl.Visible=vis
+            it.bg.Visible=vis; it.acc.Visible=vis; it.dotBg.Visible=vis; it.dot.Visible=vis; it.lbl.Visible=vis
             if vis then
                 it.bg.Position=Vector2.new(rx,ry); it.bg.Size=Vector2.new(rw,rh)
                 it.acc.Position=Vector2.new(rx,ry); it.acc.Size=Vector2.new(2,rh)
-                it.dotBg.Position=Vector2.new(rx+rw-26,ry+(rh-12)/2)
-                it.dotBg.Size=Vector2.new(22,12)
+                it.dotBg.Position=Vector2.new(rx+rw-26,ry+(rh-12)/2); it.dotBg.Size=Vector2.new(22,12)
                 it.dot.Size=Vector2.new(10,10)
-                it.lbl.Position=Vector2.new(rx+12,ry+rh/2)
-                it.lbl.Size=11
+                it.lbl.Position=Vector2.new(rx+12,ry+rh/2); it.lbl.Size=11
             end
         elseif it.kind=="slider" then
-            it.bg.Visible=vis; it.track.Visible=vis
-            it.fill.Visible=vis; it.lbl.Visible=vis
+            it.bg.Visible=vis; it.track.Visible=vis; it.fill.Visible=vis; it.lbl.Visible=vis
             if vis then
                 it.bg.Position=Vector2.new(rx,ry); it.bg.Size=Vector2.new(rw,rh)
-                it.track.Position=Vector2.new(rx+rw-70,ry+rh/2-1)
-                it.track.Size=Vector2.new(60,2)
-                it.fill.Position=it.track.Position
-                it.fill.Size=Vector2.new(60*it.anim,2)
-                it.lbl.Position=Vector2.new(rx+12,ry+rh/2)
-                it.lbl.Size=10
+                it.track.Position=Vector2.new(rx+rw-70,ry+rh/2-1); it.track.Size=Vector2.new(60,2)
+                it.fill.Position=it.track.Position; it.fill.Size=Vector2.new(60*it.anim,2)
+                it.lbl.Position=Vector2.new(rx+12,ry+rh/2); it.lbl.Size=10
             end
         elseif it.kind=="cycle" then
             it.bg.Visible=vis; it.lbl.Visible=vis; it.val.Visible=vis
@@ -561,18 +469,15 @@ local function layout()
                 it.bg.Position=Vector2.new(rx,ry); it.bg.Size=Vector2.new(rw,rh)
                 it.lbl.Position=Vector2.new(rx+12,ry+rh/2); it.lbl.Size=11
                 it.val.Position=Vector2.new(rx+rw-78,ry+rh/2); it.val.Size=9
-                it.val.Text=tostring(cfg[it.key])
             end
         elseif it.kind=="swatch" then
             it.bg.Visible=vis; it.lbl.Visible=vis; it.obj.Visible=vis
             if vis then
                 it.bg.Position=Vector2.new(rx,ry); it.bg.Size=Vector2.new(rw,rh)
                 it.lbl.Position=Vector2.new(rx+12,ry+rh/2)
-                it.obj.Position=Vector2.new(rx+rw-26,ry+(rh-14)/2)
-                it.obj.Size=Vector2.new(14,14)
+                it.obj.Position=Vector2.new(rx+rw-26,ry+(rh-14)/2); it.obj.Size=Vector2.new(14,14)
             end
         end
-
         if itemVisible(it) then ry=ry+panel.rowH end
     end
 end
@@ -582,97 +487,85 @@ local function setVisible(v)
     if v then layout() end
 end
 
--- ============ PANEL INPUT ============
 local dragging=false; local dragStart; local dragOrigin
 local sliderDrag=nil; local lastHeaderClick=0
 
 local function hit(pt,pos,size)
-    return pt.X>=pos.X and pt.X<=pos.X+size.X
-       and pt.Y>=pos.Y and pt.Y<=pos.Y+size.Y
+    return pt.X>=pos.X and pt.X<=pos.X+size.X and pt.Y>=pos.Y and pt.Y<=pos.Y+size.Y
 end
 
 local function applySlider(it,m)
     local pct=math.clamp((m.X-it.track.Position.X)/it.track.Size.X,0,1)
     cfg[it.key]=math.floor(it.min+(it.max-it.min)*pct+0.5)
     it.anim=pct
-    it.lbl.Text=string.format("%s  %d",
-        it.key:gsub("(%u)"," %1"):gsub("^%s",""),cfg[it.key])
+    it.lbl.Text=string.format("%s  %d",it.key:gsub("(%u)"," %1"):gsub("^%s",""),cfg[it.key])
     scheduleSave()
 end
 
 local function toggleGroup(g)
     g.open=not g.open
-    if g.open then panel.openGroups[g.key]=true
-    else panel.openGroups[g.key]=nil end
-    layout()
-    scheduleSave()
+    if g.open then panel.openGroups[g.key]=true else panel.openGroups[g.key]=nil end
+    layout(); scheduleSave()
+end
+
+-- INPUT (aceita Touch e Mouse)
+local function isInput(input, expected)
+    return input.UserInputType == expected
 end
 
 UIS.InputBegan:Connect(function(input,gp)
     if gp then return end
-
-    if input.KeyCode==cfg.keybind then
-        panel.open=not panel.open
-        setVisible(panel.open)
-        scheduleSave()
-        return
+    local isTouch = (input.UserInputType==Enum.UserInputType.Touch)
+    local isMouse = (input.UserInputType==Enum.UserInputType.MouseButton1)
+    
+    -- Botão MENU mobile
+    if isTouch or isMouse then
+        local m = isTouch and Vector2.new(input.Position.X, input.Position.Y) or UIS:GetMouseLocation()
+        if hit(m, mobileBtn.Position, mobileBtn.Size) then
+            panel.open = not panel.open
+            setVisible(panel.open)
+            scheduleSave()
+            return
+        end
     end
 
-    if input.UserInputType~=Enum.UserInputType.MouseButton1 or not panel.open then return end
-    local m=UIS:GetMouseLocation()
+    -- Teclado (PC)
+    if input.KeyCode==cfg.keybind then
+        panel.open=not panel.open
+        setVisible(panel.open); scheduleSave(); return
+    end
+
+    if not (isTouch or isMouse) or not panel.open then return end
+    local m = isTouch and Vector2.new(input.Position.X, input.Position.Y) or UIS:GetMouseLocation()
+    
     if not hit(m,bg.Position,bg.Size) then return end
 
     if hit(m,btnClose.Position,btnClose.Size) then
-        panel.open=false
-        panel.minimized=false
-        setVisible(false)
-        scheduleSave()
-        return
+        panel.open=false; panel.minimized=false; setVisible(false); scheduleSave(); return
     end
     if hit(m,btnMin.Position,btnMin.Size) then
-        panel.minimized=not panel.minimized
-        layout()
-        scheduleSave()
-        return
+        panel.minimized=not panel.minimized; layout(); scheduleSave(); return
     end
-
     if hit(m,bg.Position,Vector2.new(bg.Size.X,panel.headH)) then
         local now=tick()
         if now-lastHeaderClick<0.3 then
-            panel.minimized=not panel.minimized
-            layout()
-            scheduleSave()
-            lastHeaderClick=0
-            return
+            panel.minimized=not panel.minimized; layout(); scheduleSave(); lastHeaderClick=0; return
         end
-        lastHeaderClick=now
-        dragging=true; dragStart=m; dragOrigin={x=panel.x,y=panel.y}
-        return
+        lastHeaderClick=now; dragging=true; dragStart=m; dragOrigin={x=panel.x,y=panel.y}; return
     end
-
     if panel.minimized then return end
 
     for _,it in ipairs(panel.items) do
         if itemVisible(it) and it.bg and it.bg.Visible then
-            if it.kind=="group" and hit(m,it.bg.Position,it.bg.Size) then
-                toggleGroup(it); return
-            end
-            if it.kind=="toggle" and hit(m,it.bg.Position,it.bg.Size) then
-                cfg[it.key]=not cfg[it.key]; scheduleSave(); return
-            end
+            if it.kind=="group" and hit(m,it.bg.Position,it.bg.Size) then toggleGroup(it); return end
+            if it.kind=="toggle" and hit(m,it.bg.Position,it.bg.Size) then cfg[it.key]=not cfg[it.key]; scheduleSave(); return end
             if it.kind=="cycle" and hit(m,it.bg.Position,it.bg.Size) then
                 local idx=1
-                for i,v in ipairs(it.list) do
-                    if v==cfg[it.key] then idx=i end
-                end
+                for i,v in ipairs(it.list) do if v==cfg[it.key] then idx=i end end
                 idx=(idx % #it.list)+1
-                cfg[it.key]=it.list[idx]
-                it.val.Text=tostring(cfg[it.key])
-                scheduleSave(); return
+                cfg[it.key]=it.list[idx]; it.val.Text=tostring(cfg[it.key]); scheduleSave(); return
             end
-            if it.kind=="slider"
-            and hit(m,Vector2.new(it.track.Position.X-8,it.track.Position.Y-10),
-                        Vector2.new(it.track.Size.X+16,24)) then
+            if it.kind=="slider" and hit(m,Vector2.new(it.track.Position.X-8,it.track.Position.Y-10),Vector2.new(it.track.Size.X+16,24)) then
                 sliderDrag=it; applySlider(it,m); return
             end
         end
@@ -680,8 +573,11 @@ UIS.InputBegan:Connect(function(input,gp)
 end)
 
 UIS.InputChanged:Connect(function(input)
-    if input.UserInputType~=Enum.UserInputType.MouseButton1 then return end
-    local m=UIS:GetMouseLocation()
+    local isTouch = (input.UserInputType==Enum.UserInputType.Touch)
+    local isMouse = (input.UserInputType==Enum.UserInputType.MouseButton1)
+    if not (isTouch or isMouse) then return end
+    
+    local m = isTouch and Vector2.new(input.Position.X, input.Position.Y) or UIS:GetMouseLocation()
     if dragging then
         panel.x=dragOrigin.x+(m.X-dragStart.X)
         panel.y=dragOrigin.y+(m.Y-dragStart.Y)
@@ -691,34 +587,36 @@ UIS.InputChanged:Connect(function(input)
 end)
 
 UIS.InputEnded:Connect(function(input)
-    if input.UserInputType==Enum.UserInputType.MouseButton1 then
+    local isTouch = (input.UserInputType==Enum.UserInputType.Touch)
+    local isMouse = (input.UserInputType==Enum.UserInputType.MouseButton1)
+    if isTouch or isMouse then
         local wasDragging=dragging
         dragging=false; sliderDrag=nil
         if wasDragging then scheduleSave() end
     end
 end)
 
--- ============ LOOP ============
 RunService.RenderStepped:Connect(function()
     pcall(updateESP)
     pcall(updateAimbot)
 
+    -- botão MENU hover (só PC)
+    if UIS.MouseEnabled then
+        local m=UIS:GetMouseLocation()
+        mobileBtn.Color = hit(m,mobileBtn.Position,mobileBtn.Size) and C.rowHover or C.panelBg
+    end
+
     if not panel.open then return end
-
     local m=UIS:GetMouseLocation()
-
-    -- hover dos botões (sempre)
     btnMin.Color  = hit(m,btnMin.Position,btnMin.Size)   and C.rowHover or C.subBg
     btnClose.Color= hit(m,btnClose.Position,btnClose.Size) and C.closeHover or C.subBg
 
     if panel.minimized then return end
-
     for _,it in ipairs(panel.items) do
         if it.bg and it.bg.Visible then
             local h=hit(m,it.bg.Position,it.bg.Size)
             local base = (it.kind=="group" or it.kind=="swatch") and C.subBg or C.rowBg
             it.bg.Color = h and C.rowHover or base
-
             if it.kind=="toggle" then
                 local target=cfg[it.key] and 1 or 0
                 it.anim=it.anim+(target-it.anim)*0.35
@@ -727,12 +625,10 @@ RunService.RenderStepped:Connect(function()
                     math.floor(C.accentDim.R*255*(1-it.anim)+C.accent.R*255*it.anim),
                     math.floor(C.accentDim.G*255*(1-it.anim)+C.accent.G*255*it.anim),
                     math.floor(C.accentDim.B*255*(1-it.anim)+C.accent.B*255*it.anim))
-                it.dot.Position=Vector2.new(it.dotBg.Position.X+2+it.anim*10,
-                                            it.dot.Position.Y)
+                it.dot.Position=Vector2.new(it.dotBg.Position.X+2+it.anim*10,it.dot.Position.Y)
             elseif it.kind=="slider" then
                 it.fill.Size=Vector2.new(it.track.Size.X*it.anim,2)
-                it.lbl.Text=string.format("%s  %d",
-                    it.key:gsub("(%u)"," %1"):gsub("^%s",""),cfg[it.key])
+                it.lbl.Text=string.format("%s  %d",it.key:gsub("(%u)"," %1"):gsub("^%s",""),cfg[it.key])
             elseif it.kind=="swatch" then
                 it.obj.Color=rgb(cfg[it.rKey],cfg[it.gKey],cfg[it.bKey])
             elseif it.kind=="cycle" then
@@ -744,22 +640,9 @@ end)
 
 Players.PlayerRemoving:Connect(clearEsp)
 
--- ============ BOOT ============
 local loaded=loadState()
-
 for _,it in ipairs(panel.items) do
-    if it.kind=="group" and panel.openGroups[it.key] then
-        it.open=true
-    end
+    if it.kind=="group" and panel.openGroups[it.key] then it.open=true end
 end
-
 setVisible(panel.open)
 layout()
-
-if syn and syn.notify then
-    if loaded then
-        syn.notify("Config carregada · "..tostring(game.PlaceId))
-    else
-        syn.notify("Config nova · "..tostring(game.PlaceId))
-    end
-end
