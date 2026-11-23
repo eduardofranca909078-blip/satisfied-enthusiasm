@@ -686,6 +686,8 @@ for a, b in pairs({MOVIMENTO = "Mov", COMBATE = "Combate", TELECINESE = "Tele", 
     CC[a] = CC[b]
     IC[a] = IC[b]
 end
+CC["PLAYERS"] = CC.Main
+IC["PLAYERS"] = "👥"
 local mB = {}
 local cs = {}
 
@@ -728,6 +730,7 @@ cat("Main")
 sp(mnu, "MOVIMENTO", Color3.fromRGB(200, 200, 200))
 cat("MOVIMENTO")
 cat("ESP")
+cat("PLAYERS")
 sp(mnu, "AÇÕES", Color3.fromRGB(200, 200, 200))
 cat("COMBATE")
 cat("TELECINESE")
@@ -1937,23 +1940,84 @@ do
         tracers = false, tracerFrom = 1, teamCheck = false, teamColor = false, visCheck = false,
         rainbow = false, aliveOnly = true, maxDist = 1000, textSize = 12, fill = 0.6, thick = 1.5,
         color = 1, colorHidden = 2, displayName = false, objs = {},
+        boxStyle = 1, skel = false, skelThick = 1.5, skelDist = 300, headDot = false,
+        look = false, lookLen = 8, arrows = false, arrowR = 220, teamTag = false, speed = false,
+        hlSel = false, selColor = 6,
     }
 
     local cE = card("ESP — GERAL", sec["ESP"], Color3.fromRGB(220, 220, 220))
     local cE2 = card("ESP — ELEMENTOS", sec["ESP"], Color3.fromRGB(220, 220, 220))
     local cE3 = card("ESP — CORES E FILTROS", sec["ESP"], Color3.fromRGB(220, 220, 220))
+    local cE4 = card("ESP — SKELETON E EXTRAS", sec["ESP"], Color3.fromRGB(220, 220, 220))
 
     local rp = RaycastParams.new()
     rp.FilterType = Enum.RaycastFilterType.Exclude
     rp.IgnoreWater = true
 
+    -- Skeleton: cada osso liga um ponto de uma peça a um ponto de outra (offset no espaço local da peça).
+    -- R15 usa o centro das peças. R6 assume as medidas padrão do avatar (torso 2x2x1, braços e pernas 1x2x1);
+    -- personagens com escala customizada ficam com os ossos deslocados.
+    local ZERO = Vector3.zero
+    local TOP, BOT = Vector3.new(0, 1, 0), Vector3.new(0, -1, 0)
+    local function bone(a, ao, b, bo) return {a = a, ao = ao or ZERO, b = b, bo = bo or ZERO} end
+    local R15_SPEC = {
+        bone("Head", nil, "UpperTorso"), bone("UpperTorso", nil, "LowerTorso"),
+        bone("UpperTorso", nil, "LeftUpperArm"), bone("LeftUpperArm", nil, "LeftLowerArm"), bone("LeftLowerArm", nil, "LeftHand"),
+        bone("UpperTorso", nil, "RightUpperArm"), bone("RightUpperArm", nil, "RightLowerArm"), bone("RightLowerArm", nil, "RightHand"),
+        bone("LowerTorso", nil, "LeftUpperLeg"), bone("LeftUpperLeg", nil, "LeftLowerLeg"), bone("LeftLowerLeg", nil, "LeftFoot"),
+        bone("LowerTorso", nil, "RightUpperLeg"), bone("RightUpperLeg", nil, "RightLowerLeg"), bone("RightLowerLeg", nil, "RightFoot"),
+    }
+    local R6_SPEC = {
+        bone("Head", nil, "Torso", TOP), bone("Torso", TOP, "Torso", BOT),
+        bone("Torso", TOP, "Left Arm", TOP), bone("Left Arm", TOP, "Left Arm", BOT),
+        bone("Torso", TOP, "Right Arm", TOP), bone("Right Arm", TOP, "Right Arm", BOT),
+        bone("Torso", BOT, "Left Leg", TOP), bone("Left Leg", TOP, "Left Leg", BOT),
+        bone("Torso", BOT, "Right Leg", TOP), bone("Right Leg", TOP, "Right Leg", BOT),
+    }
+    local MAX_BONES = 14
+
+    local function newLine()
+        local f = Instance.new("Frame")
+        f.AnchorPoint = Vector2.new(0.5, 0.5)
+        f.BorderSizePixel = 0
+        f.Visible = false
+        f.Parent = espGui
+        return f
+    end
+
+    -- Coordenadas de viewport (espGui usa IgnoreGuiInset, igual ao WorldToViewportPoint).
+    local function placeLine(f, a, b, col, th)
+        local d = b - a
+        local len = d.Magnitude
+        if len < 0.5 then f.Visible = false return end
+        f.Position = UDim2.fromOffset((a.X + b.X) / 2, (a.Y + b.Y) / 2)
+        f.Size = UDim2.fromOffset(len, th)
+        f.Rotation = math.deg(math.atan2(d.Y, d.X))
+        f.BackgroundColor3 = col
+        f.Visible = true
+    end
+
+    -- Devolve a posição em pixels e a profundidade; profundidade <= 0 significa atrás da câmera.
+    local function project(cam, pos)
+        local v = cam:WorldToViewportPoint(pos)
+        return Vector2.new(v.X, v.Y), v.Z
+    end
+
+    -- Pixels por stud na profundidade dada (FieldOfView da câmera é vertical).
+    local function pxPerStud(cam, depth)
+        return cam.ViewportSize.Y / (2 * math.max(depth, 0.1) * math.tan(math.rad(cam.FieldOfView) / 2))
+    end
+
     local function destroyOne(p)
         local o = E.objs[p]
         if not o then return end
         E.objs[p] = nil
-        for _, k in ipairs({"box", "info", "hl", "line"}) do
+        for _, k in ipairs({"box", "info", "hl", "line", "dot", "look", "arrow"}) do
             local inst = o[k]
             if inst then pcall(function() inst:Destroy() end) end
+        end
+        if o.bones then
+            for _, f in ipairs(o.bones) do pcall(function() f:Destroy() end) end
         end
     end
 
@@ -1991,7 +2055,7 @@ do
         local info = Instance.new("BillboardGui")
         info.Name = "ZI_" .. p.UserId
         info.AlwaysOnTop = true
-        info.Size = UDim2.new(0, 220, 0, 44)
+        info.Size = UDim2.new(0, 300, 0, 44)
         info.StudsOffset = Vector3.new(0, 3.9, 0)
         info.Adornee = hrp
         info.Parent = espGui
@@ -2020,9 +2084,77 @@ do
         line.Size = UDim2.new(0, 0, 0, 1.5)
         line.Visible = false
 
-        o.box, o.stroke, o.hpBack, o.hpFill = box, stroke, hpBack, hpFill
+        o.box, o.frame, o.stroke, o.hpBack, o.hpFill = box, frame, stroke, hpBack, hpFill
         o.info, o.nameL, o.subL, o.hl, o.line = info, nameL, subL, hl, line
         E.objs[p] = o
+    end
+
+    -- Elementos extras são criados só na primeira vez que a opção é usada.
+    local function ensureCorners(o)
+        if o.corners then return o.corners end
+        local list = {}
+        for _, anchor in ipairs({Vector2.new(0, 0), Vector2.new(1, 0), Vector2.new(0, 1), Vector2.new(1, 1)}) do
+            for k = 1, 2 do
+                local f = Instance.new("Frame")
+                f.AnchorPoint = anchor
+                f.Position = UDim2.new(anchor.X, 0, anchor.Y, 0)
+                f.BorderSizePixel = 0
+                f.Visible = false
+                f.Parent = o.frame
+                list[#list + 1] = f -- índice ímpar = traço horizontal, par = vertical
+            end
+        end
+        o.corners = list
+        return list
+    end
+
+    local function ensureBones(o)
+        if o.bones then return end
+        o.bones, o.bl, o.blT = {}, {}, 0
+        for i = 1, MAX_BONES do o.bones[i] = newLine() end
+    end
+
+    local function resolveBones(o)
+        o.blT = tick()
+        local char = o.char
+        local spec = char:FindFirstChild("UpperTorso") and R15_SPEC or R6_SPEC
+        local out = {}
+        for _, e in ipairs(spec) do
+            local a, b = char:FindFirstChild(e.a), char:FindFirstChild(e.b)
+            if a and b and a:IsA("BasePart") and b:IsA("BasePart") then
+                out[#out + 1] = {a = a, ao = e.ao, b = b, bo = e.bo}
+            end
+        end
+        o.bl = out
+    end
+
+    local function ensureDot(o)
+        if o.dot then return end
+        local d = Instance.new("Frame")
+        d.AnchorPoint = Vector2.new(0.5, 0.5)
+        d.BackgroundTransparency = 1
+        d.BorderSizePixel = 0
+        d.Visible = false
+        Instance.new("UICorner", d).CornerRadius = UDim.new(1, 0)
+        o.dotStroke = Instance.new("UIStroke", d)
+        o.dotStroke.Thickness = 1.5
+        d.Parent = espGui
+        o.dot = d
+    end
+
+    local function ensureArrow(o)
+        if o.arrow then return end
+        local a = Instance.new("TextLabel")
+        a.AnchorPoint = Vector2.new(0.5, 0.5)
+        a.Size = UDim2.fromOffset(24, 24)
+        a.BackgroundTransparency = 1
+        a.Text = "▲"
+        a.TextSize = 22
+        a.Font = Enum.Font.GothamBold
+        a.TextStrokeTransparency = 0.4
+        a.Visible = false
+        a.Parent = espGui
+        o.arrow = a
     end
 
     local function rebuildAll()
@@ -2031,11 +2163,19 @@ do
         for _, p in ipairs(P:GetPlayers()) do buildOne(p) end
     end
 
+    local function hideExtras(o)
+        if o.bones then for _, f in ipairs(o.bones) do f.Visible = false end end
+        if o.dot then o.dot.Visible = false end
+        if o.look then o.look.Visible = false end
+        if o.arrow then o.arrow.Visible = false end
+    end
+
     local function hide(o)
         o.box.Enabled = false
         o.info.Enabled = false
         o.hl.Enabled = false
         o.line.Visible = false
+        hideExtras(o)
     end
 
     local function isVisible(o, camPos)
@@ -2061,6 +2201,7 @@ do
         if not cam then return end
         local camPos = cam.CFrame.Position
         local vp = cam.ViewportSize
+        local now = tick()
         for p, o in pairs(E.objs) do
             local char = p.Character
             if char ~= o.char or not o.hrp.Parent then
@@ -2079,11 +2220,26 @@ do
                     local vis = true
                     if E.visCheck then vis = isVisible(o, camPos) end
                     local col = pickColor(p, vis)
+                    if E.hlSel and S.sel == p then col = COLORS[E.selColor].c end
 
                     o.box.Enabled = E.box or E.hp
-                    o.stroke.Enabled = E.box
+                    o.stroke.Enabled = E.box and E.boxStyle == 1
                     o.stroke.Color = col
                     o.stroke.Thickness = E.thick
+                    if E.box and E.boxStyle == 2 then
+                        local th = math.max(1, math.floor(E.thick + 0.5))
+                        for i, f in ipairs(ensureCorners(o)) do
+                            if i % 2 == 1 then
+                                f.Size = UDim2.new(0.28, 0, 0, th)
+                            else
+                                f.Size = UDim2.new(0, th, 0.18, 0)
+                            end
+                            f.BackgroundColor3 = col
+                            f.Visible = true
+                        end
+                    elseif o.corners then
+                        for _, f in ipairs(o.corners) do f.Visible = false end
+                    end
                     o.hpBack.Visible = E.hp and hum ~= nil
                     if E.hp and hum then
                         local f = clamp(hum.Health / math.max(hum.MaxHealth, 1), 0, 1)
@@ -2091,7 +2247,7 @@ do
                         o.hpFill.BackgroundColor3 = Color3.fromHSV(f * 0.33, 1, 1)
                     end
 
-                    o.info.Enabled = E.name or E.dist or E.tool or E.hp
+                    o.info.Enabled = E.name or E.dist or E.tool or E.hp or E.teamTag or E.speed
                     o.nameL.Visible = E.name
                     o.nameL.Text = E.displayName and p.DisplayName or p.Name
                     o.nameL.TextColor3 = col
@@ -2099,6 +2255,11 @@ do
                     local parts = {}
                     if E.hp and hum then parts[#parts + 1] = "❤ " .. math.floor(hum.Health) end
                     if E.dist then parts[#parts + 1] = math.floor(dist) .. "m" end
+                    if E.teamTag and p.Team then parts[#parts + 1] = "[" .. p.Team.Name .. "]" end
+                    if E.speed then
+                        local vel = o.hrp.AssemblyLinearVelocity
+                        parts[#parts + 1] = math.floor(Vector3.new(vel.X, 0, vel.Z).Magnitude) .. " st/s"
+                    end
                     if E.tool then
                         local t = char:FindFirstChildOfClass("Tool")
                         if t then parts[#parts + 1] = "🗡 " .. t.Name end
@@ -2133,6 +2294,83 @@ do
                         end
                     else
                         o.line.Visible = false
+                    end
+
+                    -- Skeleton
+                    if E.skel and dist <= E.skelDist then
+                        ensureBones(o)
+                        if now - o.blT > 2 then resolveBones(o) end
+                        local used = 0
+                        for i, bn in ipairs(o.bl) do
+                            local f = o.bones[i]
+                            if bn.a.Parent and bn.b.Parent then
+                                local pa, za = project(cam, bn.a.CFrame:PointToWorldSpace(bn.ao))
+                                local pb, zb = project(cam, bn.b.CFrame:PointToWorldSpace(bn.bo))
+                                if za > 0 and zb > 0 then
+                                    placeLine(f, pa, pb, col, E.skelThick)
+                                else
+                                    f.Visible = false
+                                end
+                            else
+                                f.Visible = false
+                            end
+                            used = i
+                        end
+                        for i = used + 1, #o.bones do o.bones[i].Visible = false end
+                    elseif o.bones then
+                        for _, f in ipairs(o.bones) do f.Visible = false end
+                    end
+
+                    -- Ponto na cabeça e linha de direção (orientação da peça Head, não a mira exata)
+                    local head = char:FindFirstChild("Head")
+                    if E.headDot and head and head:IsA("BasePart") then
+                        ensureDot(o)
+                        local hp2, hz = project(cam, head.Position)
+                        if hz > 0 then
+                            local dia = clamp(pxPerStud(cam, hz) * head.Size.Y * 0.9, 4, 90)
+                            o.dot.Size = UDim2.fromOffset(dia, dia)
+                            o.dot.Position = UDim2.fromOffset(hp2.X, hp2.Y)
+                            o.dotStroke.Color = col
+                            o.dot.Visible = true
+                        else
+                            o.dot.Visible = false
+                        end
+                    elseif o.dot then
+                        o.dot.Visible = false
+                    end
+
+                    if E.look and head and head:IsA("BasePart") then
+                        if not o.look then o.look = newLine() end
+                        local a2, za = project(cam, head.Position)
+                        local b2, zb = project(cam, head.Position + head.CFrame.LookVector * E.lookLen)
+                        if za > 0 and zb > 0 then
+                            placeLine(o.look, a2, b2, col, 1.5)
+                        else
+                            o.look.Visible = false
+                        end
+                    elseif o.look then
+                        o.look.Visible = false
+                    end
+
+                    -- Seta apontando para jogadores fora da tela (usa o espaço da câmera, funciona atrás de você)
+                    if E.arrows then
+                        local _, onScreen = cam:WorldToViewportPoint(o.hrp.Position)
+                        if onScreen then
+                            if o.arrow then o.arrow.Visible = false end
+                        else
+                            ensureArrow(o)
+                            local rel = cam.CFrame:PointToObjectSpace(o.hrp.Position)
+                            local s = Vector2.new(rel.X, -rel.Y)
+                            if s.Magnitude < 1e-3 then s = Vector2.new(0, 1) end
+                            s = s.Unit
+                            local radius = math.min(E.arrowR, math.min(vp.X, vp.Y) / 2 - 24)
+                            o.arrow.Position = UDim2.fromOffset(vp.X / 2 + s.X * radius, vp.Y / 2 + s.Y * radius)
+                            o.arrow.Rotation = math.deg(math.atan2(s.X, -s.Y))
+                            o.arrow.TextColor3 = col
+                            o.arrow.Visible = true
+                        end
+                    elseif o.arrow then
+                        o.arrow.Visible = false
                     end
                 end
             end
@@ -2176,6 +2414,7 @@ do
     tg2(cE2, "🧊 Chams (limite do jogo: 31)", "esp_chams", false, function(v) E.chams = v end)
     tg2(cE2, "📐 Tracers", "esp_tracers", false, function(v) E.tracers = v end)
     dd(cE2, "📐 Origem do tracer", "esp_tfrom", {"Baixo", "Centro", "Topo"}, 1, function(i) E.tracerFrom = i end)
+    dd(cE2, "▭ Estilo da caixa", "esp_boxstyle", {"Completa", "Cantos"}, 1, function(i) E.boxStyle = i end)
 
     dd(cE3, "🎨 Cor", "esp_color", COLORNAMES, 1, function(i) E.color = i end)
     tg2(cE3, "🧱 Cor diferente atrás de parede", "esp_vis", false, function(v) E.visCheck = v end)
@@ -2185,6 +2424,288 @@ do
     sl(cE3, "🔠 Tamanho do texto", "esp_txt", 9, 20, 12, 1, function(v) E.textSize = v end)
     sl(cE3, "▭ Espessura da caixa", "esp_thick", 1, 4, 1.5, 0.5, function(v) E.thick = v end)
     sl(cE3, "🧊 Transparência do chams", "esp_fill", 0, 1, 0.6, 0.05, function(v) E.fill = v end)
+
+    tg2(cE4, "🦴 Skeleton", "esp_skel", false, function(v) E.skel = v end)
+    sl(cE4, "🦴 Espessura do skeleton", "esp_skel_thick", 1, 4, 1.5, 0.5, function(v) E.skelThick = v end)
+    sl(cE4, "🦴 Distância do skeleton", "esp_skel_dist", 50, 1000, 300, 25, function(v)
+        E.skelDist = (v >= 1000) and math.huge or v
+    end, function(v) return v >= 1000 and "∞" or (v .. "m") end)
+    tg2(cE4, "⚪ Ponto na cabeça", "esp_headdot", false, function(v) E.headDot = v end)
+    tg2(cE4, "👁 Linha de direção da cabeça", "esp_look", false, function(v) E.look = v end)
+    sl(cE4, "👁 Comprimento da linha", "esp_looklen", 2, 20, 8, 1, function(v) E.lookLen = v end, function(v) return v .. " st" end)
+    tg2(cE4, "🧭 Setas para jogadores fora da tela", "esp_arrows", false, function(v) E.arrows = v end)
+    sl(cE4, "🧭 Raio das setas", "esp_arrowr", 80, 450, 220, 10, function(v) E.arrowR = v end, function(v) return v .. "px" end)
+    tg2(cE4, "🏳 Nome do time", "esp_teamtag", false, function(v) E.teamTag = v end)
+    tg2(cE4, "💨 Velocidade (st/s)", "esp_speed", false, function(v) E.speed = v end)
+    tg2(cE4, "🎯 Destacar jogador selecionado", "esp_hlsel", false, function(v) E.hlSel = v end)
+    dd(cE4, "🎨 Cor do selecionado", "esp_selcolor", COLORNAMES, 6, function(i) E.selColor = i end)
+end
+
+-- =======================================================
+-- 6.1 PLAYERS (todos os jogadores do servidor, com a foto do avatar)
+-- =======================================================
+do
+    local clamp = Z.clamp
+    local tab = sec["PLAYERS"]
+    local entries = {}
+    local spectating = nil
+
+    local hdr = card("JOGADORES NO SERVIDOR", tab, Color3.fromRGB(220, 220, 220))
+    local countL = Instance.new("TextLabel", hdr)
+    countL.Name = "A1_count"
+    countL.Size = UDim2.new(1, 0, 0, 16)
+    countL.BackgroundTransparency = 1
+    countL.Text = "Total: 0"
+    countL.TextColor3 = Color3.fromRGB(200, 200, 200)
+    countL.TextSize = 10
+    countL.Font = Enum.Font.GothamBold
+    countL.TextXAlignment = Enum.TextXAlignment.Left
+    countL.ZIndex = 5
+
+    local search = Instance.new("TextBox", hdr)
+    search.Name = "A2_search"
+    search.Size = UDim2.new(1, 0, 0, 30)
+    search.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    search.TextColor3 = Color3.fromRGB(255, 255, 255)
+    search.PlaceholderText = "🔎 filtrar por nome..."
+    search.PlaceholderColor3 = Color3.fromRGB(100, 100, 100)
+    search.Text = ""
+    search.TextSize = 11
+    search.Font = Enum.Font.GothamBold
+    search.ClearTextOnFocus = false
+    search.ZIndex = 5
+    Instance.new("UICorner", search).CornerRadius = UDim.new(0, 6)
+
+    local listHolder = Instance.new("Frame", tab)
+    listHolder.Name = "PlayersList"
+    listHolder.Size = UDim2.new(1, 0, 0, 0)
+    listHolder.AutomaticSize = Enum.AutomaticSize.Y
+    listHolder.BackgroundTransparency = 1
+    listHolder.ZIndex = 3
+    local ll = Instance.new("UIListLayout", listHolder)
+    ll.Padding = UDim.new(0, 6)
+    ll.SortOrder = Enum.SortOrder.LayoutOrder
+
+    local function stopSpectate(quiet)
+        local was = spectating
+        spectating = nil
+        local cam = workspace.CurrentCamera
+        local hum = LP.Character and LP.Character:FindFirstChildOfClass("Humanoid")
+        if cam and hum then cam.CameraSubject = hum end
+        if was and not quiet then reg("Observar OFF") end
+    end
+
+    local function setSpectate(p)
+        local cam = workspace.CurrentCamera
+        local hum = p.Character and p.Character:FindFirstChildOfClass("Humanoid")
+        if not cam or not hum then reg("❌ Observar: jogador sem personagem") return end
+        spectating = p
+        cam.CameraSubject = hum
+        reg("👁 Observando: " .. p.Name)
+    end
+
+    local function keepSpectate()
+        local p = spectating
+        if not p then return end
+        if not p.Parent then stopSpectate() return end
+        local hum = p.Character and p.Character:FindFirstChildOfClass("Humanoid")
+        local cam = workspace.CurrentCamera
+        if hum and cam and cam.CameraSubject ~= hum then cam.CameraSubject = hum end
+    end
+    Z.onUnload(function() stopSpectate(true) end)
+
+    local function relayout()
+        local list = {}
+        for p in pairs(entries) do list[#list + 1] = p end
+        table.sort(list, function(a, b)
+            if (a == LP) ~= (b == LP) then return a == LP end
+            return a.Name:lower() < b.Name:lower()
+        end)
+        for i, p in ipairs(list) do entries[p].card.LayoutOrder = i end
+    end
+
+    local function applyFilter()
+        local q = search.Text:lower()
+        local shown, total = 0, 0
+        for p, e in pairs(entries) do
+            total = total + 1
+            local ok = q == "" or p.Name:lower():find(q, 1, true) ~= nil or p.DisplayName:lower():find(q, 1, true) ~= nil
+            e.card.Visible = ok
+            if ok then shown = shown + 1 end
+        end
+        countL.Text = (q == "") and ("Total: " .. total) or ("Mostrando " .. shown .. " de " .. total)
+    end
+    search:GetPropertyChangedSignal("Text"):Connect(applyFilter)
+
+    local function refreshEntry(p, e, myHrp)
+        local char = p.Character
+        local hum = char and char:FindFirstChildOfClass("Humanoid")
+        local hrp = char and char:FindFirstChild("HumanoidRootPart")
+        local l3 = {}
+        if p.Team then l3[#l3 + 1] = p.Team.Name end
+        if hum then
+            l3[#l3 + 1] = "❤ " .. math.floor(hum.Health) .. "/" .. math.floor(hum.MaxHealth)
+        else
+            l3[#l3 + 1] = "sem personagem"
+        end
+        if p ~= LP and hrp and myHrp then
+            l3[#l3 + 1] = math.floor((hrp.Position - myHrp.Position).Magnitude) .. "m"
+        end
+        e.infoL.Text = table.concat(l3, " · ")
+        local l4 = {}
+        local tool = char and char:FindFirstChildOfClass("Tool")
+        if tool then l4[#l4 + 1] = "🗡 " .. tool.Name end
+        l4[#l4 + 1] = "conta " .. p.AccountAge .. "d"
+        e.infoL2.Text = table.concat(l4, " · ")
+        local f = hum and clamp(hum.Health / math.max(hum.MaxHealth, 1), 0, 1) or 0
+        e.hpFill.Size = UDim2.new(f, 0, 1, 0)
+        e.hpFill.BackgroundColor3 = Color3.fromHSV(f * 0.33, 1, 1)
+        local selected = S.sel == p
+        e.stroke.Color = selected and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(70, 70, 70)
+        e.stroke.Thickness = selected and 2 or 1
+        if e.btnSel then e.btnSel.Text = selected and "✔ Selecionado" or "🎯 Selecionar" end
+        if e.btnSpec then e.btnSpec.Text = (spectating == p) and "⏹ Parar" or "👁 Observar" end
+    end
+
+    local function refreshAll()
+        local myHrp = LP.Character and LP.Character:FindFirstChild("HumanoidRootPart")
+        for p, e in pairs(entries) do
+            pcall(refreshEntry, p, e, myHrp)
+        end
+    end
+
+    local function mkButton(parent, text, y)
+        local b = Instance.new("TextButton", parent)
+        b.Size = UDim2.new(0, 100, 0, 20)
+        b.Position = UDim2.new(1, -108, 0, y)
+        b.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+        b.Text = text
+        b.TextColor3 = Color3.fromRGB(220, 220, 220)
+        b.TextSize = 9
+        b.Font = Enum.Font.GothamBold
+        b.ZIndex = 6
+        Instance.new("UICorner", b).CornerRadius = UDim.new(0, 5)
+        return b
+    end
+
+    local function mkLabel(parent, y, h, size, font, color)
+        local l = Instance.new("TextLabel", parent)
+        l.Size = UDim2.new(1, -196, 0, h)
+        l.Position = UDim2.new(0, 76, 0, y)
+        l.BackgroundTransparency = 1
+        l.TextColor3 = color
+        l.TextSize = size
+        l.Font = font
+        l.TextXAlignment = Enum.TextXAlignment.Left
+        l.TextTruncate = Enum.TextTruncate.AtEnd
+        l.ZIndex = 5
+        return l
+    end
+
+    local function addEntry(p)
+        if entries[p] then return end
+        local c = Instance.new("Frame")
+        c.Name = "PlayerCard"
+        c.Size = UDim2.new(1, 0, 0, 80)
+        c.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        c.ZIndex = 4
+        c.Parent = listHolder
+        Instance.new("UICorner", c).CornerRadius = UDim.new(0, 8)
+        local stroke = Instance.new("UIStroke", c)
+        stroke.Color = Color3.fromRGB(70, 70, 70)
+        stroke.Thickness = 1
+        stroke.Transparency = 0.4
+
+        local img = Instance.new("ImageLabel", c)
+        img.Size = UDim2.new(0, 58, 0, 58)
+        img.Position = UDim2.new(0, 10, 0.5, -29)
+        img.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+        img.BorderSizePixel = 0
+        img.Image = "rbxthumb://type=AvatarHeadShot&id=" .. p.UserId .. "&w=150&h=150"
+        img.ZIndex = 5
+        Instance.new("UICorner", img).CornerRadius = UDim.new(1, 0)
+        local imgStroke = Instance.new("UIStroke", img)
+        imgStroke.Color = Color3.fromRGB(150, 150, 150)
+        imgStroke.Thickness = 2
+
+        local nameL = mkLabel(c, 6, 16, 12, Enum.Font.GothamBold, Color3.fromRGB(255, 255, 255))
+        nameL.Text = p.DisplayName .. (p == LP and "  (você)" or "")
+        local userL = mkLabel(c, 22, 14, 9, Enum.Font.Gotham, Color3.fromRGB(150, 150, 150))
+        userL.Text = "@" .. p.Name .. " · ID " .. p.UserId
+        local infoL = mkLabel(c, 37, 13, 9, Enum.Font.GothamBold, Color3.fromRGB(210, 210, 210))
+        local infoL2 = mkLabel(c, 50, 13, 9, Enum.Font.Gotham, Color3.fromRGB(170, 170, 170))
+
+        local hpBack = Instance.new("Frame", c)
+        hpBack.Size = UDim2.new(1, -196, 0, 6)
+        hpBack.Position = UDim2.new(0, 76, 0, 67)
+        hpBack.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+        hpBack.BorderSizePixel = 0
+        hpBack.ZIndex = 5
+        Instance.new("UICorner", hpBack).CornerRadius = UDim.new(1, 0)
+        local hpFill = Instance.new("Frame", hpBack)
+        hpFill.Size = UDim2.new(1, 0, 1, 0)
+        hpFill.BorderSizePixel = 0
+        hpFill.ZIndex = 6
+        Instance.new("UICorner", hpFill).CornerRadius = UDim.new(1, 0)
+
+        local e = {card = c, stroke = stroke, infoL = infoL, infoL2 = infoL2, hpFill = hpFill}
+        entries[p] = e
+
+        if p ~= LP then
+            e.btnSel = mkButton(c, "🎯 Selecionar", 6)
+            e.btnSel.MouseButton1Click:Connect(function()
+                S.sel = p
+                reg("Sel: " .. p.Name)
+                if Z.rf then Z.rf() end
+                refreshAll()
+            end)
+            e.btnSpec = mkButton(c, "👁 Observar", 30)
+            e.btnSpec.MouseButton1Click:Connect(function()
+                if spectating == p then stopSpectate() else setSpectate(p) end
+                refreshAll()
+            end)
+        end
+        local btnId = mkButton(c, "📋 Copiar ID", 54)
+        btnId.MouseButton1Click:Connect(function()
+            local copy = getgenv().setclipboard
+            if type(copy) == "function" then
+                pcall(copy, tostring(p.UserId))
+                reg("ID copiado: " .. p.UserId)
+            else
+                reg("❌ Executor sem setclipboard")
+            end
+        end)
+    end
+
+    local function removeEntry(p)
+        local e = entries[p]
+        if e then
+            entries[p] = nil
+            e.card:Destroy()
+        end
+        if spectating == p then stopSpectate() end
+        relayout()
+        applyFilter()
+    end
+
+    for _, p in ipairs(P:GetPlayers()) do addEntry(p) end
+    Z.track(P.PlayerAdded:Connect(function(p)
+        addEntry(p)
+        relayout()
+        applyFilter()
+    end))
+    Z.track(P.PlayerRemoving:Connect(removeEntry))
+    relayout()
+    applyFilter()
+    refreshAll()
+
+    task.spawn(function()
+        while Z.ALIVE and tab.Parent do
+            task.wait(0.5)
+            pcall(keepSpectate)
+            if tab.Visible then pcall(refreshAll) end
+        end
+    end)
 end
 
 -- =======================================================
@@ -3649,6 +4170,7 @@ local function rf()
     upC()
 end
 
+Z.rf = rf
 rf()
 Z.track(P.PlayerAdded:Connect(rf))
 Z.track(P.PlayerRemoving:Connect(function()
