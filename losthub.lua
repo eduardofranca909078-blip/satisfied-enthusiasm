@@ -10,6 +10,8 @@ local S = {sel = nil}
 local lg = {}
 -- Estado global do hub (uma tabela só para não estourar o limite de 200 locals do Luau)
 local Z = {ALIVE = true, Conns = {}, Hooks = {}, TOASTS = true, autosave = true}
+function Z.track(c) Z.Conns[#Z.Conns + 1] = c return c end
+function Z.onUnload(f) Z.Hooks[#Z.Hooks + 1] = f end
 local LOGFILE = "zedux_logs.txt"
 local KEYFILE = "zedux_keys.txt"
 local TEMPOFILE = "zedux_tempo.txt" 
@@ -119,12 +121,39 @@ end
 -- =======================================================
 local function IniciarIntro()
     local executor = "Unknown"
-    pcall(function() executor = getexecutorname() or identifyexecutor() end)
-    if type(executor) == "table" then executor = executor[1] end
-    
-    local hwid = "Not Available"
-    pcall(function() hwid = gethwid() end)
-    if hwid == "Not Available" then hwid = LP.UserId .. "-" .. math.random(1000, 9999) end
+    -- cada função em seu próprio pcall: se uma não existir, a outra ainda é tentada
+    for _, getter in ipairs({"identifyexecutor", "getexecutorname"}) do
+        local fn = getgenv()[getter]
+        if type(fn) == "function" then
+            local ok, name = pcall(fn)
+            if ok and name then
+                if type(name) == "table" then name = name[1] end
+                executor = tostring(name)
+                break
+            end
+        end
+    end
+
+    -- HWID: usa gethwid se existir; senão gera um id aleatório uma única vez e guarda em arquivo,
+    -- para não mudar a cada execução
+    local hwid
+    do
+        local fn = getgenv().gethwid
+        if type(fn) == "function" then
+            local ok, v = pcall(fn)
+            if ok and type(v) == "string" and v ~= "" then hwid = v end
+        end
+        if not hwid then
+            local ok, saved = pcall(readfile, "zedux_hwid.txt")
+            saved = ok and type(saved) == "string" and saved:gsub("%s+", "") or ""
+            if saved ~= "" then
+                hwid = saved
+            else
+                hwid = LP.UserId .. "-" .. string.format("%08x%08x", math.random(0, 0x7fffffff), math.random(0, 0x7fffffff))
+                pcall(writefile, "zedux_hwid.txt", hwid)
+            end
+        end
+    end
     
     local device = "PC"
     if U.TouchEnabled and not U.KeyboardEnabled then device = "Mobile" end
@@ -740,8 +769,8 @@ local function upC()
     jC.Text = tostring(t)
 end
 upC()
-P.PlayerAdded:Connect(function() task.wait(0.1) upC() end)
-P.PlayerRemoving:Connect(function() task.wait(0.1) upC() end)
+Z.track(P.PlayerAdded:Connect(function() task.wait(0.1) upC() end))
+Z.track(P.PlayerRemoving:Connect(function() task.wait(0.1) upC() end))
 
 local pl = Instance.new("ScrollingFrame", sb)
 pl.Size = UDim2.new(1, -24, 0, 120)
@@ -1037,8 +1066,6 @@ do
     Z.clamp = clamp
     Z.CONFIGFILE = "zedux_config.json"
 
-    function Z.track(c) Z.Conns[#Z.Conns + 1] = c return c end
-    function Z.onUnload(f) Z.Hooks[#Z.Hooks + 1] = f end
 
     local function cfgReg(key, get, set)
         if not CFG[key] then CFG[key] = {get = get, set = set} end
@@ -1607,46 +1634,44 @@ local visualCard = card("HEADLESS & KORBLOX HUB", cCustom, Color3.fromRGB(0, 255
 local isHeadless = false
 local isKorblox = false
 local isNoHair = false
-local originalParts = {} -- Guarda as cores originais
+local originalParts = setmetatable({}, {__mode = "k"}) -- cor e material originais por peça
 
 local function updateCharacter()
     local char = LP.Character
     if not char then return end
-    
+
+    -- 1. Headless: esconde a cabeça e o decal do rosto
     local head = char:FindFirstChild("Head")
-    local humanoid = char:FindFirstChildOfClass("Humanoid")
-    
-    -- 1. Headless (Remove os olhos, boca e o mesh da cabeça)
     if head then
+        pcall(function() head.Transparency = isHeadless and 1 or 0 end)
         for _, v in ipairs(head:GetChildren()) do
-            if v:IsA("Mesh") or v:IsA("Decal") or v:IsA("SpecialMesh") or v.Name == "face" then
-                if v.Name == "face" or v.Name == "Mesh" or v.Name == "SpecialMesh" then
-                    v.Transparency = isHeadless and 1 or 0
+            if v:IsA("Decal") then
+                pcall(function() v.Transparency = isHeadless and 1 or 0 end)
+            end
+        end
+    end
+
+    -- 2. Korblox: escurece pernas e braços e restaura cor e material ao desligar
+    for _, part in ipairs(char:GetDescendants()) do
+        if part:IsA("BasePart") and (part.Name:find("Leg") or part.Name:find("Arm") or part.Name:find("Hand") or part.Name:find("Foot")) then
+            if isKorblox then
+                if not originalParts[part] then
+                    originalParts[part] = {color = part.Color, material = part.Material}
+                end
+                part.Color = Color3.fromRGB(20, 20, 20)
+                part.Material = Enum.Material.SmoothPlastic
+            else
+                local o = originalParts[part]
+                if o then
+                    part.Color = o.color
+                    part.Material = o.material
+                    originalParts[part] = nil
                 end
             end
         end
     end
-    
-    -- 2. Korblox (Altera a cor e textura das pernas e braços)
-    if humanoid then
-        for _, part in ipairs(char:GetDescendants()) do
-            if part:IsA("BasePart") and (part.Name:find("Leg") or part.Name:find("Arm") or part.Name:find("Hand") or part.Name:find("Foot")) then
-                if isKorblox then
-                    if not originalParts[part] then
-                        originalParts[part] = part.Color
-                    end
-                    part.Color = Color3.fromRGB(20, 20, 20) -- Cor escura do Korblox
-                    part.Material = Enum.Material.SmoothPlastic
-                else
-                    if originalParts[part] then
-                        part.Color = originalParts[part]
-                    end
-                end
-            end
-        end
-    end
-    
-    -- 3. Remover Cabelo
+
+    -- 3. Remover cabelo
     for _, v in ipairs(char:GetChildren()) do
         if v:IsA("Accessory") and v.AccessoryType == Enum.AccessoryType.Hair then
             local hd = v:FindFirstChild("Handle")
@@ -1655,46 +1680,33 @@ local function updateCharacter()
     end
 end
 
--- Recria a customização quando o jogador respawna
-LP.CharacterAdded:Connect(function()
+-- Reaplica a customização quando o jogador respawna
+Z.track(LP.CharacterAdded:Connect(function()
     task.wait(1.5)
-    if isHeadless or isKorblox or isNoHair then
-        updateCharacter()
+    if Z.ALIVE and (isHeadless or isKorblox or isNoHair) then
+        pcall(updateCharacter)
     end
+end))
+
+-- Toggles com estado próprio (o texto e a cor refletem o estado real, e entram na config salva)
+Z.tg2(visualCard, "HEADLESS", "cust_headless", false, function(v)
+    isHeadless = v
+    pcall(updateCharacter)
+end)
+Z.tg2(visualCard, "KORBLOX", "cust_korblox", false, function(v)
+    isKorblox = v
+    pcall(updateCharacter)
+end)
+Z.tg2(visualCard, "WITHOUT HAIR", "cust_nohair", false, function(v)
+    isNoHair = v
+    pcall(updateCharacter)
 end)
 
--- Botão: Headless (Igual da Foto)
-local btnHeadless = bt(visualCard, "HEADLESS: OFF", function()
-    isHeadless = not isHeadless
-    btnHeadless.Text = "HEADLESS: " .. (isHeadless and "ON" or "OFF")
-    btnHeadless.BackgroundColor3 = isHeadless and Color3.fromRGB(0, 200, 100) or Color3.fromRGB(25, 25, 25)
-    updateCharacter()
-    reg("Headless: " .. (isHeadless and "ON" or "OFF"))
+-- Ao descarregar, devolve o personagem ao normal
+Z.onUnload(function()
+    isHeadless, isKorblox, isNoHair = false, false, false
+    pcall(updateCharacter)
 end)
-btnHeadless.Size = UDim2.new(1, 0, 0, 40)
-btnHeadless.TextSize = 12
-
--- Botão: Korblox (Pernas e Braços)
-local btnKorblox = bt(visualCard, "KORBLOX: OFF", function()
-    isKorblox = not isKorblox
-    btnKorblox.Text = "KORBLOX: " .. (isKorblox and "ON" or "OFF")
-    btnKorblox.BackgroundColor3 = isKorblox and Color3.fromRGB(0, 200, 100) or Color3.fromRGB(25, 25, 25)
-    updateCharacter()
-    reg("Korblox: " .. (isKorblox and "ON" or "OFF"))
-end)
-btnKorblox.Size = UDim2.new(1, 0, 0, 40)
-btnKorblox.TextSize = 12
-
--- Botão: Sem Cabelo
-local btnNoHair = bt(visualCard, "WITHOUT HAIR: OFF", function()
-    isNoHair = not isNoHair
-    btnNoHair.Text = "WITHOUT HAIR: " .. (isNoHair and "ON" or "OFF")
-    btnNoHair.BackgroundColor3 = isNoHair and Color3.fromRGB(0, 200, 100) or Color3.fromRGB(25, 25, 25)
-    updateCharacter()
-    reg("Sem Cabelo: " .. (isNoHair and "ON" or "OFF"))
-end)
-btnNoHair.Size = UDim2.new(1, 0, 0, 40)
-btnNoHair.TextSize = 12
 
 -- =======================================================
 -- 4. ADMINISTRAÇÃO
@@ -2213,7 +2225,7 @@ btT(cM, "👻 Noclip", function(v)
     if v then
         reg("Noclip ON")
         aplN()
-        task.spawn(function() while ncA do task.wait(0.15) if ncA then aplN() end end end)
+        task.spawn(function() while ncA and Z.ALIVE do task.wait(0.15) if ncA then aplN() end end end)
     else
         reg("Noclip OFF")
         if LP.Character then
@@ -2231,7 +2243,7 @@ btT(cM, "⚡ Speed Hack", function(v)
     if v then
         reg("Speed ON")
         task.spawn(function()
-            while spdAtivo do
+            while spdAtivo and Z.ALIVE do
                 if LP.Character then
                     local hum = LP.Character:FindFirstChildOfClass("Humanoid")
                     if hum then hum.WalkSpeed = spdValor end
@@ -2265,7 +2277,7 @@ btT(cM, "🦘 Jump Power", function(v)
     if v then
         reg("Jump ON")
         task.spawn(function()
-            while jmpAtivo do
+            while jmpAtivo and Z.ALIVE do
                 if LP.Character then
                     local hum = LP.Character:FindFirstChildOfClass("Humanoid")
                     if hum then hum.JumpPower = jmpValor end
@@ -2285,12 +2297,12 @@ end, Color3.fromRGB(60, 90, 60))
 local infJump = false
 btT(cM, "🦘 Infinite Jump", function(v) infJump = v reg("Inf Jump " .. (v and "ON" or "OFF")) end, Color3.fromRGB(60, 90, 60))
 
-U.JumpRequest:Connect(function()
-    if infJump and LP.Character then
+Z.track(U.JumpRequest:Connect(function()
+    if Z.ALIVE and infJump and LP.Character then
         local hum = LP.Character:FindFirstChildOfClass("Humanoid")
         if hum then hum:ChangeState(Enum.HumanoidStateType.Jumping) end
     end
-end)
+end))
 
 local flyAtivo = false
 local flyBV = nil
@@ -2309,9 +2321,9 @@ btT(cM, "🕊️ Fly", function(v)
                 flyBG.MaxTorque = Vector3.new(1e5, 1e5, 1e5)
                 flyBG.P = 1000
                 task.spawn(function()
-                    while flyAtivo do
-                        if not hrp or not hrp.Parent then break end
-                        local cam = C.CFrame
+                    while flyAtivo and Z.ALIVE do
+                        if not hrp or not hrp.Parent or not flyBV or not flyBG then break end
+                        local cam = workspace.CurrentCamera.CFrame
                         local move = Vector3.zero
                         if U:IsKeyDown(Enum.KeyCode.W) then move = move + cam.LookVector end
                         if U:IsKeyDown(Enum.KeyCode.S) then move = move - cam.LookVector end
@@ -2335,6 +2347,24 @@ btT(cM, "🕊️ Fly", function(v)
         if flyBG then flyBG:Destroy() flyBG = nil end
     end
 end, Color3.fromRGB(90, 90, 140))
+
+-- Descarregar: para os loops de movimento e devolve os valores padrão do personagem
+Z.onUnload(function()
+    local wasNc, wasSpd, wasJmp = ncA, spdAtivo, jmpAtivo
+    ncA, spdAtivo, jmpAtivo, infJump, flyAtivo = false, false, false, false, false
+    if flyBV then pcall(function() flyBV:Destroy() end) flyBV = nil end
+    if flyBG then pcall(function() flyBG:Destroy() end) flyBG = nil end
+    local char = LP.Character
+    if not char then return end
+    local hum = char:FindFirstChildOfClass("Humanoid")
+    if hum and wasSpd then pcall(function() hum.WalkSpeed = 16 end) end
+    if hum and wasJmp then pcall(function() hum.JumpPower = 50 end) end
+    if wasNc then
+        for _, o in ipairs(char:GetDescendants()) do
+            if o:IsA("BasePart") then pcall(function() o.CanCollide = true end) end
+        end
+    end
+end)
 
 -- =======================================================
 -- 8. COMBATE
@@ -3555,9 +3585,9 @@ mh.InputChanged:Connect(function(input)
     end
 end)
 
-U.InputChanged:Connect(function(input)
+Z.track(U.InputChanged:Connect(function(input)
     if input == dragInput and dragging then updateDrag(input) end
-end)
+end))
 
 cB2.MouseButton1Click:Connect(function()
     reg("❌ Painel FECHADO (X) por " .. LP.Name)
@@ -3620,11 +3650,11 @@ local function rf()
 end
 
 rf()
-P.PlayerAdded:Connect(rf)
-P.PlayerRemoving:Connect(function()
+Z.track(P.PlayerAdded:Connect(rf))
+Z.track(P.PlayerRemoving:Connect(function()
     task.wait(0.1)
     rf()
-end)
+end))
 
 pcall(Z.loadConfig)
 sel("Main")
